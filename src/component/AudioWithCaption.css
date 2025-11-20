@@ -1,0 +1,357 @@
+.audio-popup {
+  background: #2c78b4; /* الأزرق الغامق الخارجي */
+  padding: 16px;
+  border-radius: 8px;
+  width: auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.audio-inner {
+  background: #e2f1ff; /* الأزرق الفاتح الداخلي */
+  padding: 12px 18px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.audio-inner-vocab{
+    background: #e2f1ff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+    height: 35px;
+    align-items: center;
+}
+
+
+
+/* زر التشغيل */
+.audio-play-btn {
+  background: #2c78b4;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* السلايدر */
+.audio-slider {
+  flex: 1;
+  height: 6px;
+  background: #cbd9ef;
+}
+
+/* الوقت */
+.audio-time {
+  color: #1d4f7b;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* أيقونات */
+.audio-icon {
+  color: #1d4f7b;
+}
+
+/* زر الفقاعة */
+.audio-bubble-btn {
+
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1d4f7b;
+  cursor: pointer;
+}
+
+.caption-box {
+  margin-top: 8px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  width: fit-content;
+  max-width: 220px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.caption-bubble {
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 16px;
+  max-width: 260px;
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.caption-bubble::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+}
+
+.caption-word {
+  transition: 0.2s ease;
+}
+
+.caption-word.highlight {
+  background: yellow;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.bubble-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.caption-popup {
+  position: absolute;
+  top: -60px; /* ترتفع فوق الزر */
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  width: 200px;
+  height: inherit;
+  font-size: 13px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  animation: fadeIn 0.2s ease-out;
+  white-space: normal;
+}
+
+/* مثلث الببل */
+.caption-popup::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+/* الكلمة الهايلايت */
+.caption-word.highlight {
+  background: yellow;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.settings-wrapper {
+  position: relative;
+  margin-left: 6px;
+  display: inline-block;
+}
+
+.settings-btn {
+  background: #eee;
+  border: none;
+  font-size: 18px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.settings-popup {
+  position: absolute;
+  top: -180px;
+  right: 0;
+  background: white;
+  padding: 12px;
+  width: 140px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  z-index: 200;
+  animation: popupFade 0.2s ease-out;
+}
+
+.settings-popup label {
+  font-size: 12px;
+  color: #444;
+  margin-top: 6px;
+  display: block;
+}
+
+.settings-popup input[type="range"] {
+  width: 100%;
+}
+
+
+
+.mute-btn {
+  margin-top: 8px;
+  width: 100%;
+  padding: 6px;
+  border: none;
+  background: #ffdddd;
+  border-radius: 6px;
+}
+
+.mute-main-btn {
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  margin-left: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.mute-main-btn:hover {
+  background: #e0eeff;
+  transform: scale(1.05);
+}
+
+/*================ SPEED INDICATOR ANIMATION ================*/
+.speed-indicator {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2c5287;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  animation: speedPulse 0.9s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes speedPulse {
+  0% {
+    transform: translateX(-50%) scale(0.6);
+    opacity: 0;
+  }
+  40% {
+    transform: translateX(-50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/*================ BUBBLE POPUP ================*/
+.caption-popup {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 10px;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 180px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.caption-word {
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.caption-word.highlight {
+  color: #2c5287;
+  font-weight: bold;
+}
+
+/*================ SETTINGS POPUP ================*/
+.settings-popup {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  width: 150px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.speed-buttons button {
+  margin: 4px;
+  display: flex;
+  padding: 6px 10px;
+  background: #2c5287;
+  color: white;
+  width: 55px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  justify-content: center;
+}
+
+
+.settings-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* زر الببل */
+.audio-bubble-btn {
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.audio-bubble-btn.active {
+     background: rgba(29, 79, 123, 0.15);
+  box-shadow: 0 0 6px rgba(29, 79, 123, 0.4);
+}
+
+/* زر السيتنج */
+.settings-btn {
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: 0.2s ease;
+}
+
+.settings-btn.active {
+  background: rgba(29, 79, 123, 0.15);
+  box-shadow: 0 0 6px rgba(29, 79, 123, 0.4);
+}
+
+.speed-rate.active {
+  background-color: #71b2eb;
+  color: white;
+  border-radius: 6px;
+}
+
+/*================ MUTE BUTTON OUTSIDE ================*/
+.mute-btn-outside {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}

@@ -1,0 +1,28 @@
+.headset-icon-CD-unit4-page2-1,
+.click-icon-unit4-page2-1,
+.headset-icon-CD-unit4-page2-2 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  position: absolute;
+  background-color: #6bcff6;
+  border-radius: 20px;
+  border: rgb(255, 255, 255) solid 2px;
+  padding: 5px;
+}
+
+.headset-icon-CD-unit4-page2-1 {
+  top: 5%;
+  right: 2%;
+}
+
+.headset-icon-CD-unit4-page2-2 {
+  bottom: 29%;
+  right: 7%;
+}
+
+.click-icon-unit4-page2-1 {
+  bottom: 12.5%;
+
+  right: 38%;
+}

@@ -1,0 +1,32 @@
+.click-icon-unit2-page9-1 {
+  position: absolute;
+  background-color: #6bcff6;
+  border-radius: 20px;
+  border: rgb(255, 255, 255) solid 3px;
+  padding: 5px;
+  top: 11%;
+  left: 30%;
+  cursor: pointer;
+}
+
+.click-icon-unit2-page9-2 {
+  position: absolute;
+  background-color: #6bcff6;
+  border-radius: 20px;
+  border: rgb(255, 255, 255) solid 3px;
+  padding: 5px;
+  top: 31%;
+  left: 33%;
+  cursor: pointer;
+}
+
+.click-icon-unit2-page9-3 {
+  position: absolute;
+  background-color: #6bcff6;
+  border-radius: 20px;
+  border: rgb(255, 255, 255) solid 3px;
+  padding: 5px;
+  bottom: 45%;
+  left: 33%;
+  cursor: pointer;
+}

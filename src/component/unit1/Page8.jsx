@@ -1,0 +1,88 @@
+import React, { useState, useRef, useEffect } from "react";
+import page_8 from "../../assets/unit1/imgs/Pages/Right 1 Unit 01 Good Morning World 2_page-0008.jpg";
+import Page8_Q3 from "./Page8_Q3";
+import Page8_Q2 from "./Page8_Q2";
+import Page8_Q1 from "./Page8_Q1";
+import Page8_Q4 from "./Page8_Q4";
+import arrowBtn from "../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
+const Page8 = ({ openPopup }) => {
+  const captionsExample = [
+    { start: 0, end: 1, text: "Hello!" },
+    { start: 1, end: 2.2, text: "My name is Tom." },
+    { start: 2.2, end: 4, text: "I like apples." },
+  ];
+  return (
+    <div className="page_8-background">
+      <img src={page_8} />
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 60 60"
+        onClick={() =>
+          openPopup(
+            <>
+              <Page8_Q1 />
+            </>,
+            false
+          )
+        }
+        className="click-icon-page8-1 hover:scale-110 transition"
+      >
+        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+      </svg>
+
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 60 60"
+        onClick={() =>
+          openPopup(
+            <>
+              <Page8_Q2 />
+            </>,
+            false
+          )
+        }
+        className="click-icon-page8-2 hover:scale-110 transition"
+      >
+        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+      </svg>
+
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 60 60"
+        onClick={() =>
+          openPopup(
+            <>
+              <Page8_Q3 />
+            </>,
+            false
+          )
+        }
+        className="click-icon-page8-3 hover:scale-110 transition"
+      >
+        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+      </svg>
+
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 60 60"
+        onClick={() =>
+          openPopup(
+            <>
+              <Page8_Q4 />
+            </>,
+            false
+          )
+        }
+        className="click-icon-page8-4 hover:scale-110 transition"
+      >
+        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+      </svg>
+    </div>
+  );
+};
+
+export default Page8;
