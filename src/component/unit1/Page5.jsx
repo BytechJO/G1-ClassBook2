@@ -1,12 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import page_5 from "../../assets/unit1/imgs/Pages/Right 1 Unit 01 Good Morning World 2_page-0005.jpg";
 import page5_CD2 from "../../assets/unit1/sounds/page5all.mp3";
-import page5_CD3 from "../../assets/unit1/sounds/CD3.Pg5_Instruction1_Adult Lady.mp3";
 import Rabbit from "../../assets/img_unit2/imgs/Rabbit.svg";
-import Pg5_Instruction2_Adult from "../../assets/unit1/sounds/Pg5_Instruction2_Adult Lady.mp3";
-import page_5_1 from "../../assets/unit1/imgs/lolo_bebo1.jpg";
-import page_5_2 from "../../assets/unit1/imgs/page_5-2.png";
-import page_5_3 from "../../assets/unit1/imgs/page_5-3.jpg";
 import img1 from "../../assets/unit1/imgs/P2 listen and read 01.svg";
 import img2 from "../../assets/unit1/imgs/Table22.svg";
 import img3 from "../../assets/unit1/imgs/taxi22.svg";

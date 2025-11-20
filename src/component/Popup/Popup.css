@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: center;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* الشكل العام
@@ -37,6 +38,7 @@
    overflow-y: auto;
   flex-direction: column;
   justify-content: center;
+  overflow-x: hidden;
 }
 
 /* إذا مش Audio → fullscreen */

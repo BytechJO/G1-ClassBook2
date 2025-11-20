@@ -1,32 +1,23 @@
 .click-icon-unit2-page9-1 {
-  position: absolute;
-  background-color: #6bcff6;
-  border-radius: 20px;
-  border: rgb(255, 255, 255) solid 3px;
-  padding: 5px;
-  top: 11%;
-  left: 30%;
-  cursor: pointer;
+position: absolute;
+    padding: 5px;
+    top: 10.5%;
+    left: 29%;
+    cursor: pointer;
 }
 
 .click-icon-unit2-page9-2 {
   position: absolute;
-  background-color: #6bcff6;
-  border-radius: 20px;
-  border: rgb(255, 255, 255) solid 3px;
   padding: 5px;
-  top: 31%;
-  left: 33%;
+     top: 30.5%;
+    left: 32%;
   cursor: pointer;
 }
 
 .click-icon-unit2-page9-3 {
   position: absolute;
-  background-color: #6bcff6;
-  border-radius: 20px;
-  border: rgb(255, 255, 255) solid 3px;
   padding: 5px;
-  bottom: 45%;
-  left: 33%;
+     bottom: 44%;
+    left: 32%;
   cursor: pointer;
 }

@@ -5,7 +5,13 @@ body {
   overflow-x: hidden;
 overflow-y: hidden;
 }
-
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
 .content-wrapper {
   overflow: auto;
 }

@@ -79,85 +79,101 @@ const Unit2_Page5_Q1 = () => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "30px" }}>
-      <h5 className="header-title-page8">
-        <span className="ex-A">A</span>{" "}
-        <span style={{ color: "purple" }}>1</span> Which picture begins with the
-        letter? Write <span style={{ color: "red" }}>✓</span>.
-      </h5>
+    <div style={{ display: "flex", flexDirection: "column" ,justifyContent:"center" ,alignItems:"center"}}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "30px",width:"60%",justifyContent:"flex-start" }}>
+        <h5 className="header-title-page8">
+          <span className="ex-A">A</span>{" "}
+          <span style={{ color: "purple" }}>1</span> Which picture begins with
+          the letter? Write <span style={{ color: "red" }}>✓</span>.
+        </h5>
 
-      <div className="imgFeild" style={{ display: "flex", margin: "100px 0px", gap: "13px" ,justifyContent:"space-around"}}>
-        {exerciseData.map((item, rowIndex) => (
-          <div key={rowIndex} className="row1" style={{ display: "flex",position:"relative" }}>
-            <span className="letter-Q1-Pag5-Unit2">{item.letter}</span>
+        <div
+          className="imgFeild"
+          style={{
+            display: "flex",
+            margin: "100px 0px",
+            gap: "13px",
+            justifyContent: "space-around",
+          }}
+        >
+          {exerciseData.map((item, rowIndex) => (
+            <div
+              key={rowIndex}
+              className="row1"
+              style={{ display: "flex", position: "relative" }}
+            >
+              <span className="letter-Q1-Pag5-Unit2">{item.letter}</span>
 
-            {item.options.map((opt, optIndex) => (
-              <div
-                key={optIndex}
-                className="img-option"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-around",
-                }}
-                onClick={() =>
-                  setAnswers((prev) => {
-                    const updated = [...prev];
-                    updated[rowIndex] = optIndex;
-                    return updated;
-                  })
-                }
-              >
-                <img
-                  src={opt.src}
-                  className="exercise-image"
-                  style={{
-                    width: "130px",
-                    height: "130px",
-                    objectFit: "contain",
-                    cursor: "pointer",
-                  }}
-                />
-
+              {item.options.map((opt, optIndex) => (
                 <div
-                 className={`check-box1 ${answers[rowIndex] === optIndex ? "selected1" : ""}`}
+                  key={optIndex}
+                  className="img-option"
                   style={{
-                    border: "2px solid #38bdf8",
-                    borderRadius: "7px",
-                    height: "30px",
-                    width: "30px",
-                    fontSize: "25px",
-                    fontWeight: "500",
-                    marginTop: "10px",
-                    position: "relative", // ✅ مهم لظهور X فوقه
                     display: "flex",
+                    flexDirection: "column",
                     alignItems: "center",
-                    justifyContent: "center",
+                    justifyContent: "space-around",
                   }}
+                  onClick={() =>
+                    setAnswers((prev) => {
+                      const updated = [...prev];
+                      updated[rowIndex] = optIndex;
+                      return updated;
+                    })
+                  }
                 >
-                  {answers[rowIndex] === optIndex && (
-                    <span style={{ color: "red", fontWeight: "700" }}>✓</span>
-                  )}
+                  <img
+                    src={opt.src}
+                    className="exercise-image"
+                    style={{
+                      width: "130px",
+                      height: "130px",
+                      objectFit: "contain",
+                      cursor: "pointer",
+                    }}
+                  />
 
-                  {results[rowIndex] === false && answers[rowIndex] === optIndex && (
-                    <span className="wrong-x2">✕</span>
-                  )}
+                  <div
+                    className={`check-box1 ${
+                      answers[rowIndex] === optIndex ? "selected1" : ""
+                    }`}
+                    style={{
+                      border: "2px solid #38bdf8",
+                      borderRadius: "7px",
+                      height: "30px",
+                      width: "30px",
+                      fontSize: "25px",
+                      fontWeight: "500",
+                      marginTop: "10px",
+                      position: "relative", // ✅ مهم لظهور X فوقه
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {answers[rowIndex] === optIndex && (
+                      <span style={{ color: "red", fontWeight: "700" }}>✓</span>
+                    )}
+
+                    {results[rowIndex] === false &&
+                      answers[rowIndex] === optIndex && (
+                        <span className="wrong-x2">✕</span>
+                      )}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        ))}
-
-        
-      </div><div className="action-buttons-container">
-          <button onClick={resetAnswers} className="try-again-button">
-            Start Again ↻
-          </button>
-          <button onClick={checkAnswers} className="check-button2">
-            Check Answer ✓
-          </button>
+              ))}
+            </div>
+          ))}
         </div>
+      </div>
+      <div className="action-buttons-container">
+        <button onClick={resetAnswers} className="try-again-button">
+          Start Again ↻
+        </button>
+        <button onClick={checkAnswers} className="check-button2">
+          Check Answer ✓
+        </button>
+      </div>
     </div>
   );
 };

@@ -6,11 +6,6 @@ import Page8_Q1 from "./Page8_Q1";
 import Page8_Q4 from "./Page8_Q4";
 import arrowBtn from "../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
 const Page8 = ({ openPopup }) => {
-  const captionsExample = [
-    { start: 0, end: 1, text: "Hello!" },
-    { start: 1, end: 2.2, text: "My name is Tom." },
-    { start: 2.2, end: 4, text: "I like apples." },
-  ];
   return (
     <div className="page_8-background">
       <img src={page_8} />

@@ -8,7 +8,6 @@ import arrowBtn from "../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
 import AudioWithCaption from "../AudioWithCaption";
 const Page9 = ({ openPopup }) => {
   const audioRef = useRef(null);
-  const [activePopup, setActivePopup] = useState(null);
   const captionsExample = [
     { start: 0, end: 1, text: "Hello!" },
     { start: 1, end: 2.2, text: "My name is Tom." },

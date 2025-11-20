@@ -1,102 +1,81 @@
 import React, { useState, useEffect, useRef } from "react";
 import page_5 from "../../assets/img_unit2/imgs/Right 1 Unit 02 Stell Birthday5.jpg";
-import { FaHeadphones } from "react-icons/fa";
-import { PiCursorClickBold } from "react-icons/pi";
-import CD13_Pg14_Instruction1_AdultLady from "../../assets/img_unit2/sounds-unit2/CD13.Pg14_Instruction1_Adult Lady.mp3";
 import "./Unit2_Page5.css";
 import Unit2_Page5_Q1 from "./Unit2_Page5_Q1";
-import Popup from "../Popup/Popup";
+import arrowBtn from "../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
 import Unit2_Page5_Q2 from "./Unit2_Page5_Q2";
 import Unit2_Page5_Q3 from "./Unit2_Page5_Q3";
 import Unit2_Page5_Q4 from "./Unit2_Page5_Q4";
-const Unit2_Page5 = () => {
-  const [activePopup, setActivePopup] = useState(null);
+const Unit2_Page5 = ({ openPopup }) => {
   return (
     <div className="unit2-page-background">
       <img src={page_5} />
-      <span className="click-icon-unit2-page5-1 shadow-md hover:scale-110 transition">
-        <PiCursorClickBold
-          size={12}
-          color="rgb(255, 255, 255)"
-          onClick={() => setActivePopup(2)}
-        />
-      </span>
-      <Popup
-        isOpen={activePopup === 2}
-        onClose={() => setActivePopup(null)}
-        children={
-          <>
-            <Unit2_Page5_Q1 />
-          </>
-        }
-      />
-      <span
-        className="headset-icon-CD-unit2-page5 shadow-md hover:scale-110 transition"
-        onClick={() => setActivePopup(1)}
-      >
-        <FaHeadphones size={12} color="rgba(255, 255, 255, 1)" />
-      </span>
 
-      <Popup
-        isOpen={activePopup === 1}
-        isAudio={true}
-        onClose={() => setActivePopup(null)}
-        children={
-          <div style={{display:"flex" ,justifyContent:"center",alignContent:"center" }}>
-            <audio controls>
-              <source src={CD13_Pg14_Instruction1_AdultLady} type="audio/mp3" />
-            </audio>
-          </div>
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 60 60"
+        onClick={() =>
+          openPopup(
+            <>
+              <Unit2_Page5_Q1 />
+            </>,
+            false
+          )
         }
-      />
-      <span className="click-icon-unit2-page5-2 shadow-md hover:scale-110 transition">
-        <PiCursorClickBold
-          size={12}
-          color="rgb(255, 255, 255)"
-          onClick={() => setActivePopup(3)}
-        />
-      </span>
-      <Popup
-        isOpen={activePopup === 3}
-        onClose={() => setActivePopup(null)}
-        children={
-          <>
-            <Unit2_Page5_Q2 />
-          </>
+        className="click-icon-unit2-page5-1 hover:scale-110 transition"
+      >
+        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+      </svg>
+
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 60 60"
+        onClick={() =>
+          openPopup(
+            <>
+              <Unit2_Page5_Q2 />
+            </>,
+            false
+          )
         }
-      />
-      <span className="click-icon-unit2-page5-3 shadow-md hover:scale-110 transition">
-        <PiCursorClickBold
-          size={12}
-          color="rgb(255, 255, 255)"
-          onClick={() => setActivePopup(4)}
-        />
-      </span>
-      <Popup
-        isOpen={activePopup === 4}
-        onClose={() => setActivePopup(null)}
-        children={
-          <>
-            <Unit2_Page5_Q3 />
-          </>
+        className="click-icon-unit2-page5-2 hover:scale-110 transition"
+      >
+        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+      </svg>
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 60 60"
+        onClick={() =>
+          openPopup(
+            <>
+              <Unit2_Page5_Q3 />
+            </>,
+            false
+          )
         }
-      />
-      <span className="click-icon-unit2-page5-4 shadow-md hover:scale-110 transition">
-        <PiCursorClickBold
-          size={12}
-          color="rgb(255, 255, 255)"
-          onClick={() => setActivePopup(5)}
-        />
-      </span>
-      <Popup
-        isOpen={activePopup === 5}
-        onClose={() => setActivePopup(null)}
-        children={
-          <>
-            <Unit2_Page5_Q4 />
-          </>
+        className="click-icon-unit2-page5-3 hover:scale-110 transition"
+      >
+        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+      </svg>
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 60 60"
+        onClick={() =>
+          openPopup(
+            <>
+              <Unit2_Page5_Q4 />
+            </>,
+            false
+          )
         }
-      />
+        className="click-icon-unit2-page5-4 hover:scale-110 transition"
+      >
+        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+      </svg>
     </div>
   );
 };

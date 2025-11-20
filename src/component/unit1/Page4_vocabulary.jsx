@@ -9,7 +9,7 @@ import num5 from "../../assets/unit1/imgs/Page 01/Num5.svg";
 import { IoMdSettings } from "react-icons/io";
 import { CgPlayPauseO } from "react-icons/cg";
 import vocabulary from "../../assets/unit1/sounds/Pg4_Vocabulary_Adult Lady.mp3";
-import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg"
+import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import "../../index.css"; // ✅ نضيف ملف CSS خارجي
 
@@ -129,7 +129,11 @@ const Page4_vocabulary = () => {
         <div className="audio-popup-vocab">
           <div className="audio-inner-vocab">
             {/* Play / Pause */}
-            <button className="audio-play-btn" style={{height:"30px",width:"30px"}} onClick={togglePlay}>
+            <button
+              className="audio-play-btn"
+              style={{ height: "30px", width: "30px" }}
+              onClick={togglePlay}
+            >
               {paused ? <FaPlay size={18} /> : <FaPause size={18} />}
             </button>
 
@@ -278,7 +282,7 @@ const Page4_vocabulary = () => {
             <img
               src={backgroundImage}
               alt="interactive"
-              style={{height:"76vh"}}
+              style={{ height: "76vh" }}
             />
           </div>
         </div>
@@ -289,7 +293,7 @@ const Page4_vocabulary = () => {
             {paused ? (
               <>
                 Continue
-              <svg width="20" height="20" viewBox="0 0 30 30">
+                <svg width="20" height="20" viewBox="0 0 30 30">
                   <image href={pauseBtn} x="0" y="0" width="30" height="30" />
                 </svg>
               </>

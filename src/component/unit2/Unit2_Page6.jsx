@@ -1,86 +1,81 @@
 import React, { useState } from "react";
 import page_6 from "../../assets/img_unit2/imgs/Right 1 Unit 02 Stell Birthday6.jpg";
 import { FaHeadphones } from "react-icons/fa";
-import { PiCursorClickBold } from "react-icons/pi";
 import Popup from "../Popup/Popup";
 import CD14_Pg15_Intruction1_AdultLady from "../../assets/img_unit2/sounds-unit2/CD14.Pg15_Intruction1_Adult Lady.mp3";
-import song from "../../assets/img_unit2/sounds-unit2/Pg15.Sing_Adult Lady.mp3"
+import song from "../../assets/img_unit2/sounds-unit2/Pg15.Sing_Adult Lady.mp3";
 import "./Unit2_Page6.css";
 import Unit2_Page6_Q1 from "./Unit2_Page6_Q1";
 import Unit2_Page6_Q2 from "./Unit2_Page6_Q2";
-const Unit2_Page6 = () => {
-  const [activePopup, setActivePopup] = useState(null);
+import arrowBtn from "../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
+import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
+import AudioWithCaption from "../AudioWithCaption";
+
+const Unit2_Page6 = ({ openPopup }) => {
+   const captionsExample = [
+    { start: 0, end: 1, text: "Hello!" },
+    { start: 1, end: 2.2, text: "My name is Tom." },
+    { start: 2.2, end: 4, text: "I like apples." },
+  ];
   return (
     <div className="unit2-page-background">
       <img src={page_6} />
-      <span className="click-icon-unit2-page6-1 shadow-md hover:scale-110 transition">
-        <PiCursorClickBold
-          size={12}
-          color="rgb(255, 255, 255)"
-          onClick={() => setActivePopup(1)}
-        />
-      </span>
-      <Popup
-        isOpen={activePopup === 1}
-        onClose={() => setActivePopup(null)}
-        children={
-          <>
-            <Unit2_Page6_Q1 />
-          </>
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 60 60"
+        onClick={() =>
+          openPopup(
+            <>
+              <Unit2_Page6_Q1 />
+            </>,
+            false
+          )
         }
-      />
-      <span
-        className="headset-icon-CD-unit2-page6-1 shadow-md hover:scale-110 transition"
-        onClick={() => setActivePopup(2)}
+        className="click-icon-unit2-page6-1 hover:scale-110 transition"
       >
-        <FaHeadphones size={12} color="rgba(255, 255, 255, 1)" />
-      </span>
-      <Popup
-        isOpen={activePopup === 2}
-        isAudio={true}
-        onClose={() => setActivePopup(null)}
-        children={
-          <div style={{display:"flex" ,justifyContent:"center",alignContent:"center" }}>
-            <audio controls>
-              <source src={CD14_Pg15_Intruction1_AdultLady} type="audio/mp3" />
-            </audio>
-          </div>
+        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+      </svg>
+
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 90 90"
+        onClick={() =>
+          openPopup(
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignContent: "center",
+              }}
+            >
+              <AudioWithCaption src={song} captions={captionsExample} />
+            </div>,
+            true
+          )
         }
-      />
-      <span
-        className="headset-icon-CD-unit2-page6-2 shadow-md hover:scale-110 transition"
-        onClick={() => setActivePopup(3)}
+        className="headset-icon-CD-unit2-page6-2 hover:scale-110 transition"
       >
-        <FaHeadphones size={12} color="rgba(255, 255, 255, 1)" />
-      </span>
-      <Popup
-        isOpen={activePopup === 3}
-        isAudio={true}
-        onClose={() => setActivePopup(null)}
-        children={
-          <div style={{display:"flex" ,justifyContent:"center",alignContent:"center" }}>
-            <audio controls>
-              <source src={song} type="audio/mp3" />
-            </audio>
-          </div>
+        <image href={audioBtn} x="0" y="0" width="90" height="90" />
+      </svg>
+
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 60 60"
+        onClick={() =>
+          openPopup(
+            <>
+              <Unit2_Page6_Q2 />
+            </>,
+            false
+          )
         }
-      />
-      <span className="click-icon-unit2-page6-2 shadow-md hover:scale-110 transition">
-        <PiCursorClickBold
-          size={12}
-          color="rgb(255, 255, 255)"
-          onClick={() => setActivePopup(4)}
-        />
-      </span>
-      <Popup
-        isOpen={activePopup === 4}
-        onClose={() => setActivePopup(null)}
-        children={
-          <>
-            <Unit2_Page6_Q2 />
-          </>
-        }
-      />
+        className="click-icon-unit2-page6-2 hover:scale-110 transition"
+      >
+        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+      </svg>
     </div>
   );
 };

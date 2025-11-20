@@ -17,10 +17,17 @@ import Pg13_5_2_Sarah from "../../assets/img_unit2/sounds-unit2/Pg13.5.2_Sarah.m
 import Pg13_6_1_Helen from "../../assets/img_unit2/sounds-unit2/Pg13.6.1_Helen.mp3";
 import Pg13_6_2_Sarah from "../../assets/img_unit2/sounds-unit2/Pg13.6.2_Sarah.mp3";
 import Popup from "../Popup/Popup";
-const Unit2_Page4 = () => {
+import AudioWithCaption from "../AudioWithCaption";
+import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
+
+const Unit2_Page4 = ({ openPopup }) => {
   const [activePopup, setActivePopup] = useState(null);
   const audioRef = useRef(null);
-
+  const captionsExample = [
+    { start: 0, end: 1, text: "Hello!" },
+    { start: 1, end: 2.2, text: "My name is Tom." },
+    { start: 2.2, end: 4, text: "I like apples." },
+  ];
   const handleImageClick = (e) => {
     const rect = e.target.getBoundingClientRect();
     const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
@@ -33,13 +40,13 @@ const Unit2_Page4 = () => {
   const clickableAreas = [
     { x1: 6.53, y1: 10.4, x2: 23.43, y2: 14.2, sound: Pg13_2_1_AdultLady },
     { x1: 54.19, y1: 10.4, x2: 71.5, y2: 14.5, sound: Pg13_2_2_AdultLady },
-    { x1: 6.53, y1: 15.27, x2:30.7, y2: 19.4, sound: Pg13_2_3_AdultLady },
+    { x1: 6.53, y1: 15.27, x2: 30.7, y2: 19.4, sound: Pg13_2_3_AdultLady },
     { x1: 54.2, y1: 15.27, x2: 78.3, y2: 19.5, sound: Pg13_2_4_AdultLady },
-    { x1: 6.7, y1:32.3, x2: 21.8, y2: 36.2, sound: Pg13_3_1_Hansel },
+    { x1: 6.7, y1: 32.3, x2: 21.8, y2: 36.2, sound: Pg13_3_1_Hansel },
     { x1: 23.3, y1: 25.5, x2: 39.8, y2: 30.7, sound: Pg13_3_2_Harley },
     { x1: 55.0, y1: 30.7, x2: 74.1, y2: 33.9, sound: Pg13_4_1_Hansel },
     { x1: 81.6, y1: 26.7, x2: 93.3, y2: 31.6, sound: Pg13_4_2_Harley },
-    { x1: 9.20, y1: 59.18, x2: 23.7, y2: 62.8, sound: Pg13_5_1_Tom },
+    { x1: 9.2, y1: 59.18, x2: 23.7, y2: 62.8, sound: Pg13_5_1_Tom },
     { x1: 33.3, y1: 60.2, x2: 44.6, y2: 63.5, sound: Pg13_5_2_Sarah },
     { x1: 55.0, y1: 55.0, x2: 70.1, y2: 58.27, sound: Pg13_6_1_Helen },
     { x1: 77.1, y1: 60.69, x2: 91.4, y2: 63.7, sound: Pg13_6_2_Sarah },
@@ -84,25 +91,32 @@ const Unit2_Page4 = () => {
           onMouseEnter={(e) => (e.target.style.cursor = "pointer")}
         ></div>
       ))}
-      <span className="headset-icon-CD-unit2-page4-1 shadow-md hover:scale-110 transition">
-        <FaHeadphones
-          size={12}
-          color="rgba(255, 255, 255, 1)"
-          onClick={() => setActivePopup(1)}
-        />
-      </span>
-      <Popup
-        isOpen={activePopup === 1}
-        isAudio={true}
-        onClose={() => setActivePopup(null)}
-        children={
-          <div style={{display:"flex" ,justifyContent:"center",alignContent:"center" }}>
-            <audio controls>
-              <source src={CD12_Pg13_Grammar2_AdultLady} type="audio/mp3" />
-            </audio>
-          </div>
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 60 60"
+        onClick={() =>
+          openPopup(
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignContent: "center",
+              }}
+            >
+              <AudioWithCaption
+                src={CD12_Pg13_Grammar2_AdultLady}
+                captions={captionsExample}
+              />
+            </div>,
+            true
+          )
         }
-      />
+        className="headset-icon-CD-unit2-page4-1 hover:scale-110 transition"
+      >
+        <image href={audioBtn} x="0" y="0" width="60" height="60" />
+      </svg>
+
       <audio ref={audioRef} style={{ display: "none" }} />
     </div>
   );
