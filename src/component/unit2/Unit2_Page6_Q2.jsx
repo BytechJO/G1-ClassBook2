@@ -61,7 +61,7 @@ const Unit2_Page6_Q2 = () => {
       if (droppedLetters[dropId] === correctAnswers[dropId]) correctCount++;
       else wrongTemp.push(dropId); // ✅ خزنا الـ drop الخطأ
     });
-setWrongDrops(wrongTemp);
+    setWrongDrops(wrongTemp);
     const color =
       correctCount === total ? "green" : correctCount === 0 ? "red" : "orange";
 
@@ -78,108 +78,133 @@ setWrongDrops(wrongTemp);
 
   const handleReset = () => {
     setDroppedLetters(initialDroppedState);
-    setWrongDrops([])
+    setWrongDrops([]);
   };
 
   return (
-    <div className="u2-container2">
-      <h5 className="header-title-page8">
-        <span className="ex-A">E</span> Look, read, and choose.
-      </h5>
+    <>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "30px",
+            width: "60%",
+            justifyContent: "flex-start",
+          }}
+        >
+          <div className="u2-container2">
+            <h5 className="header-title-page8">
+              <span className="ex-A">E</span> Look, read, and choose.
+            </h5>
 
-      <DragDropContext onDragEnd={handleOnDragEnd}>
-        <div className="layout2">
-          <audio ref={clickAudioRef} style={{ display: "none" }} />
+            <DragDropContext onDragEnd={handleOnDragEnd}>
+              <div className="layout2">
+                <audio ref={clickAudioRef} style={{ display: "none" }} />
 
-          {/* LEFT IMAGES + DROP ZONES */}
-          <div className="left-side2">
-            {exerciseData.images.map((img, index) => {
-              const dropId = `drop-${index + 1}`;
-              const droppedId = droppedLetters[dropId];
-              const droppedPair = exerciseData.pairs.find(
-                (p) => p.id === droppedId
-              );
+                {/* LEFT IMAGES + DROP ZONES */}
+                <div className="left-side2">
+                  {exerciseData.images.map((img, index) => {
+                    const dropId = `drop-${index + 1}`;
+                    const droppedId = droppedLetters[dropId];
+                    const droppedPair = exerciseData.pairs.find(
+                      (p) => p.id === droppedId
+                    );
 
-              return (
-                <Droppable key={dropId} droppableId={dropId}>
-                  {(provided, snapshot) => (
-                    <div className="image-row2">
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.droppableProps}
-                        className={`drop-circle2 ${
-                          snapshot.isDraggingOver ? "drop2-hover" : ""
-                        }`}
-                        style={{ position: "relative" }}
-                      >
-                        {/* ✅ إشارة الخطأ - تظهر فقط إذا كانت هذه الـ drop من ضمن الأخطاء */}
-                        {wrongDrops.includes(`drop-${index + 1}`) && (
-                          <div className="wrong-x3">✕</div>
-                        )}
-                        {droppedPair && (
-                          <div className="circle-number2">
-                            {droppedPair.letter}
+                    return (
+                      <Droppable key={dropId} droppableId={dropId}>
+                        {(provided, snapshot) => (
+                          <div className="image-row2">
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.droppableProps}
+                              className={`drop-circle2 ${
+                                snapshot.isDraggingOver ? "drop2-hover" : ""
+                              }`}
+                              style={{ position: "relative" }}
+                            >
+                              {/* ✅ إشارة الخطأ - تظهر فقط إذا كانت هذه الـ drop من ضمن الأخطاء */}
+                              {wrongDrops.includes(`drop-${index + 1}`) && (
+                                <div className="wrong-x3">✕</div>
+                              )}
+                              {droppedPair && (
+                                <div className="circle-number2">
+                                  {droppedPair.letter}
+                                </div>
+                              )}
+                              {provided.placeholder}
+                            </div>
+                            <img src={img} alt="" className="person-img2" />
                           </div>
                         )}
-                        {provided.placeholder}
-                      </div>
-                      <img src={img} alt="" className="person-img2" />
+                      </Droppable>
+                    );
+                  })}
+                </div>
+
+                {/* RIGHT SIDE OPTIONS */}
+                <Droppable droppableId="letters2">
+                  {(provided) => (
+                    <div
+                      className="right-side2"
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                    >
+                      {exerciseData.pairs
+                        .filter(
+                          (p) => !Object.values(droppedLetters).includes(p.id)
+                        )
+                        .map((pair, index) => (
+                          <Draggable
+                            key={pair.id}
+                            draggableId={pair.id}
+                            index={index}
+                          >
+                            {(providedDraggable) => (
+                              <div className="option-box2">
+                                <span
+                                  ref={providedDraggable.innerRef}
+                                  {...providedDraggable.draggableProps}
+                                  {...providedDraggable.dragHandleProps}
+                                  className="number-tag2 draggable-number"
+                                >
+                                  {pair.letter}
+                                </span>
+                                <span className="option-text2">
+                                  {pair.content}
+                                </span>
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
+
+                      {provided.placeholder}
                     </div>
                   )}
                 </Droppable>
-              );
-            })}
-          </div>
-
-          {/* RIGHT SIDE OPTIONS */}
-          <Droppable droppableId="letters2">
-            {(provided) => (
-              <div
-                className="right-side2"
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-              >
-                {exerciseData.pairs
-                  .filter((p) => !Object.values(droppedLetters).includes(p.id))
-                  .map((pair, index) => (
-                    <Draggable
-                      key={pair.id}
-                      draggableId={pair.id}
-                      index={index}
-                    >
-                      {(providedDraggable) => (
-                        <div className="option-box2">
-                          <span
-                            ref={providedDraggable.innerRef}
-                            {...providedDraggable.draggableProps}
-                            {...providedDraggable.dragHandleProps}
-                            className="number-tag2 draggable-number"
-                          >
-                            {pair.letter}
-                          </span>
-                          <span className="option-text2">{pair.content}</span>
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-
-                {provided.placeholder}
               </div>
-            )}
-          </Droppable>
+            </DragDropContext>
+          </div>
         </div>
-      </DragDropContext>
-
-      <div className="action-buttons-container">
-        <button onClick={handleReset} className="try-again-button">
-          Start Again ↻
-        </button>
-
-        <button onClick={handleCheckAnswers} className="check-button2">
-          Check Answer ✓
-        </button>
+        
       </div>
-    </div>
+      <div className="action-buttons-container">
+          <button onClick={handleReset} className="try-again-button">
+            Start Again ↻
+          </button>
+
+          <button onClick={handleCheckAnswers} className="check-button2">
+            Check Answer ✓
+          </button>
+        </div>
+    </>
   );
 };
 

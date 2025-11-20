@@ -112,6 +112,23 @@ const Unit2_Page10_Q2 = () => {
   };
 
   return (
+    <div   style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        className="div-forall"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          width: "60%",
+          justifyContent: "flex-start",
+        }}
+      >
     <div className="page8-q1-container">
       <h5 className="header-title-page8">E Look, read, and match.</h5>
 
@@ -124,7 +141,7 @@ const Unit2_Page10_Q2 = () => {
               src={bird}
               className="matched-img2"
               alt=""
-              style={{ height: "auto", width: "100px" }}
+              style={{ height: "auto", width: "120px" }}
             />
             {wrongWords.includes("bird") && ( // ⭐ تم التعديل هون
               <span className="error-mark">✕</span>
@@ -154,7 +171,7 @@ const Unit2_Page10_Q2 = () => {
               src={boy}
               className="matched-img2"
               alt=""
-               style={{ height: "100px", width: "95px" }}
+               style={{ height: "auto", width: "120px" }}
             />
             {wrongWords.includes("boy") && ( // ⭐ تم التعديل هون
               <span className="error-mark">✕</span>
@@ -183,7 +200,7 @@ const Unit2_Page10_Q2 = () => {
               src={pizza2}
               className="matched-img2"
               alt=""
-             style={{ height: "auto", width: "100px" }}
+             style={{ height: "auto", width: "120px" }}
             />
             {wrongWords.includes("pizza") && ( // ⭐ تم التعديل هون
               <span className="error-mark">✕</span>
@@ -213,7 +230,7 @@ const Unit2_Page10_Q2 = () => {
               src={fotball}
               className="matched-img2"
               alt=""
-              style={{ height: "auto", width: "100px" }}
+              style={{ height: "auto", width: "120px" }}
             />
             {wrongWords.includes("ball") && ( // ⭐ تم التعديل هون
               <span className="error-mark">✕</span>
@@ -242,7 +259,10 @@ const Unit2_Page10_Q2 = () => {
         </svg>
       </div>
 
-      <div className="action-buttons-container">
+      
+    </div>
+    </div>
+    <div className="action-buttons-container">
         <button
           onClick={() => {
             setLines([]);

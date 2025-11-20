@@ -11,6 +11,7 @@ import { RiBookOpenLine } from "react-icons/ri";
 import { AiOutlineBook } from "react-icons/ai";
 import { IoMdMenu } from "react-icons/io";
 import Popup from "./Popup/Popup";
+import logo from "../assets/unit1/imgs/PreissMurphy Logo.svg";
 //===================== unit 1 pages
 import Page1 from "./unit1/Page1";
 import Page2 from "./unit1/Page2";
@@ -202,9 +203,12 @@ export default function Book() {
         <nav className="w-full bg-[#2c5287] text-white border-b shadow px-6 py-2 flex items-center justify-between">
           {/* LEFT SECTION: LOGO + TABS */}
           <div className="flex items-center gap-10">
-            <h1 className="text-2xl font-serif tracking-wide text-gray-200">
-              Interactive Book
-            </h1>
+            {/* 🔵 LOGO بدل النص */}
+            <img
+              src={logo}
+              alt="J1 Logo"
+            style={{height:"40px" ,width:"100px"}}
+            />
 
             {/* TABS */}
             <div className="flex items-center gap-3">
@@ -241,182 +245,182 @@ export default function Book() {
 
         {/* MAIN CONTENT */}
         <div className="content-wrapper overflow-auto lg:overflow-hidden">
-        <div
-          className="w-full  h-[88vh] flex items-center justify-center relative"
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-        >
-          {/* MOBILE VIEW */}
-          {isMobile ? (
-            <>
-              {!hideArrows && (
-                <>
-                  {/* Back Button — يظهر فقط إذا الصفحة > 0 */}
-                  {pageIndex > 0 && (
-                    <svg
-                      width="30"
-                      height="30"
-                      viewBox="0 0 90 90"
-                      onClick={prevPage}
-                      className="nav-btn absolute left-10 w-14 h-14 rounded-full flex items-center justify-center z-[9999]  transition"
-                    >
-                      <image href={back} x="0" y="0" width="90" height="90" />
-                    </svg>
-                  )}
-                </>
-              )}
+          <div
+            className="w-full  h-[88vh] flex items-center justify-center relative"
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+          >
+            {/* MOBILE VIEW */}
+            {isMobile ? (
+              <>
+                {!hideArrows && (
+                  <>
+                    {/* Back Button — يظهر فقط إذا الصفحة > 0 */}
+                    {pageIndex > 0 && (
+                      <svg
+                        width="30"
+                        height="30"
+                        viewBox="0 0 90 90"
+                        onClick={prevPage}
+                        className="nav-btn absolute left-10 w-14 h-14 rounded-full flex items-center justify-center z-[9999]  transition"
+                      >
+                        <image href={back} x="0" y="0" width="90" height="90" />
+                      </svg>
+                    )}
+                  </>
+                )}
 
-              <div
-                className="bg-white sm:w-auto h-[85vh] rounded-2xl shadow-2xl border flex items-center justify-center overflow-hidden"
-                style={{
-                  transform: `scale(${zoom})`,
-                  transformOrigin: "center top",
-                }}
-              >
-                {pages[pageIndex]}
-              </div>
-              {!hideArrows && (
-                <svg
-                  width="30"
-                  height="30"
-                  viewBox="0 0 90 90"
-                  onClick={nextPage}
-                  className="nav-btn absolute right-10 w-14 h-14 rounded-full  flex items-center justify-center transition"
+                <div
+                  className="bg-white sm:w-auto h-[85vh] rounded-2xl shadow-2xl border flex items-center justify-center overflow-hidden"
+                  style={{
+                    transform: `scale(${zoom})`,
+                    transformOrigin: "center top",
+                  }}
                 >
-                  <image href={next} x="0" y="0" width="90" height="90" />
-                </svg>
-              )}
-            </>
-          ) : (
-            <>
-              {/* DESKTOP */}
-              {pageIndex === 0 || viewMode === "single" ? (
-                // SINGLE PAGE
-                <>
-                  {!hideArrows && (
-                    <>
-                      {/* Back Button — يظهر فقط إذا الصفحة > 0 */}
-                      {pageIndex > 0 && (
-                        <svg
-                          width="30"
-                          height="30"
-                          viewBox="0 0 90 90"
-                          onClick={prevPage}
-                          className="nav-btn absolute left-10 w-14 h-14 rounded-full flex items-center justify-center z-[9999]  transition"
-                        >
-                          <image
-                            href={back}
-                            x="0"
-                            y="0"
-                            width="90"
-                            height="90"
-                          />
-                        </svg>
-                      )}
-                    </>
-                  )}
-
-                  {/* PANNING WRAPPER */}
-                  <div
-                    className="bg-white sm:w-auto h-[85vh] rounded-2xl shadow-2xl border flex items-center justify-center overflow-hidden"
-                    style={{
-                      transform: `translate(${offset.x}px, ${offset.y}px) scale(${zoom})`,
-                      transformOrigin: "center top",
-                      cursor:
-                        zoom === 1
-                          ? "default"
-                          : isDragging
-                          ? "grabbing"
-                          : "grab",
-                    }}
+                  {pages[pageIndex]}
+                </div>
+                {!hideArrows && (
+                  <svg
+                    width="30"
+                    height="30"
+                    viewBox="0 0 90 90"
+                    onClick={nextPage}
+                    className="nav-btn absolute right-10 w-14 h-14 rounded-full  flex items-center justify-center transition"
                   >
-                    <div className="max-w-full max-h-full flex justify-center items-center">
-                      {pages[pageIndex]}
-                    </div>
-                  </div>
-                  {!hideArrows && (
-                    <svg
-                      width="30"
-                      height="30"
-                      viewBox="0 0 90 90"
-                      onClick={nextPage}
-                      className="nav-btn absolute right-10 w-14 h-14 rounded-full  flex items-center justify-center transition"
-                    >
-                      <image href={next} x="0" y="0" width="90" height="90" />
-                    </svg>
-                  )}
-                </>
-              ) : (
-                // SPREAD 2 PAGES
-                <>
-                  {!hideArrows && (
-                    <>
-                      {/* Back Button — يظهر فقط إذا الصفحة > 0 */}
-                      {pageIndex > 0 && (
-                        <svg
-                          width="30"
-                          height="30"
-                          viewBox="0 0 90 90"
-                          onClick={prevPage}
-                          className="nav-btn absolute left-10 w-14 h-14 rounded-full flex items-center justify-center z-[9999]  transition"
-                        >
-                          <image
-                            href={back}
-                            x="0"
-                            y="0"
-                            width="90"
-                            height="90"
-                          />
-                        </svg>
-                      )}
-                    </>
-                  )}
+                    <image href={next} x="0" y="0" width="90" height="90" />
+                  </svg>
+                )}
+              </>
+            ) : (
+              <>
+                {/* DESKTOP */}
+                {pageIndex === 0 || viewMode === "single" ? (
+                  // SINGLE PAGE
+                  <>
+                    {!hideArrows && (
+                      <>
+                        {/* Back Button — يظهر فقط إذا الصفحة > 0 */}
+                        {pageIndex > 0 && (
+                          <svg
+                            width="30"
+                            height="30"
+                            viewBox="0 0 90 90"
+                            onClick={prevPage}
+                            className="nav-btn absolute left-10 w-14 h-14 rounded-full flex items-center justify-center z-[9999]  transition"
+                          >
+                            <image
+                              href={back}
+                              x="0"
+                              y="0"
+                              width="90"
+                              height="90"
+                            />
+                          </svg>
+                        )}
+                      </>
+                    )}
 
-                  {/* PANNING WRAPPER */}
-                  <div
-                    className="bg-white sm:w-auto h-[85vh] rounded-2xl shadow-2xl border grid grid-cols-2 overflow-hidden"
-                    onMouseDown={handleMouseDown}
-                    onMouseMove={handleMouseMove}
-                    onMouseUp={handleMouseUp}
-                    onMouseLeave={handleMouseUp}
-                    style={{
-                      transform: `translate(${offset.x}px, ${offset.y}px) scale(${zoom})`,
-                      transformOrigin: "center top",
-                      cursor:
-                        zoom === 1
-                          ? "default"
-                          : isDragging
-                          ? "grabbing"
-                          : "grab",
-                    }}
-                  >
-                    <div className="flex justify-center items-center border-r">
-                      {pages[pageIndex]}
-                    </div>
-
-                    <div className="flex justify-center items-center border-l">
-                      {pages[pageIndex + 1]}
-                    </div>
-                  </div>
-                  {!hideArrows && (
-                    <svg
-                      width="30"
-                      height="30"
-                      viewBox="0 0 90 90"
-                      onClick={nextPage}
-                      className="nav-btn absolute right-10 w-14 h-14 rounded-full  flex items-center justify-center  transition"
+                    {/* PANNING WRAPPER */}
+                    <div
+                      className="bg-white sm:w-auto h-[85vh] rounded-2xl shadow-2xl border flex items-center justify-center overflow-hidden"
+                      style={{
+                        transform: `translate(${offset.x}px, ${offset.y}px) scale(${zoom})`,
+                        transformOrigin: "center top",
+                        cursor:
+                          zoom === 1
+                            ? "default"
+                            : isDragging
+                            ? "grabbing"
+                            : "grab",
+                      }}
                     >
-                      <image href={next} x="0" y="0" width="90" height="90" />
-                    </svg>
-                  )}
-                </>
-              )}
-            </>
-          )}
+                      <div className="max-w-full max-h-full flex justify-center items-center">
+                        {pages[pageIndex]}
+                      </div>
+                    </div>
+                    {!hideArrows && (
+                      <svg
+                        width="30"
+                        height="30"
+                        viewBox="0 0 90 90"
+                        onClick={nextPage}
+                        className="nav-btn absolute right-10 w-14 h-14 rounded-full  flex items-center justify-center transition"
+                      >
+                        <image href={next} x="0" y="0" width="90" height="90" />
+                      </svg>
+                    )}
+                  </>
+                ) : (
+                  // SPREAD 2 PAGES
+                  <>
+                    {!hideArrows && (
+                      <>
+                        {/* Back Button — يظهر فقط إذا الصفحة > 0 */}
+                        {pageIndex > 0 && (
+                          <svg
+                            width="30"
+                            height="30"
+                            viewBox="0 0 90 90"
+                            onClick={prevPage}
+                            className="nav-btn absolute left-10 w-14 h-14 rounded-full flex items-center justify-center z-[9999]  transition"
+                          >
+                            <image
+                              href={back}
+                              x="0"
+                              y="0"
+                              width="90"
+                              height="90"
+                            />
+                          </svg>
+                        )}
+                      </>
+                    )}
+
+                    {/* PANNING WRAPPER */}
+                    <div
+                      className="bg-white sm:w-auto h-[85vh] rounded-2xl shadow-2xl border grid grid-cols-2 overflow-hidden"
+                      onMouseDown={handleMouseDown}
+                      onMouseMove={handleMouseMove}
+                      onMouseUp={handleMouseUp}
+                      onMouseLeave={handleMouseUp}
+                      style={{
+                        transform: `translate(${offset.x}px, ${offset.y}px) scale(${zoom})`,
+                        transformOrigin: "center top",
+                        cursor:
+                          zoom === 1
+                            ? "default"
+                            : isDragging
+                            ? "grabbing"
+                            : "grab",
+                      }}
+                    >
+                      <div className="flex justify-center items-center border-r">
+                        {pages[pageIndex]}
+                      </div>
+
+                      <div className="flex justify-center items-center border-l">
+                        {pages[pageIndex + 1]}
+                      </div>
+                    </div>
+                    {!hideArrows && (
+                      <svg
+                        width="30"
+                        height="30"
+                        viewBox="0 0 90 90"
+                        onClick={nextPage}
+                        className="nav-btn absolute right-10 w-14 h-14 rounded-full  flex items-center justify-center  transition"
+                      >
+                        <image href={next} x="0" y="0" width="90" height="90" />
+                      </svg>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+          </div>
         </div>
-</div>
         {/* FOOTER */}
         <footer
           className="w-full bg-white border-t border-gray-300 shadow

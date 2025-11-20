@@ -11,7 +11,8 @@ export default function Unit2_Page9_Q2() {
   const handleDotDown = (e) => {
     startPointRef.current = e.target;
     const rect = containerRef.current.getBoundingClientRect();
-    const x = startPointRef.current.getBoundingClientRect().left - rect.left + 8;
+    const x =
+      startPointRef.current.getBoundingClientRect().left - rect.left + 8;
     const y = startPointRef.current.getBoundingClientRect().top - rect.top + 8;
     setLines((prev) => [...prev, { x1: x, y1: y, x2: x, y2: y }]);
     window.addEventListener("mousemove", followMouse);
@@ -71,7 +72,10 @@ export default function Unit2_Page9_Q2() {
 
   const checkAnswers = () => {
     if (lines.length < correctMatches.length) {
-      ValidationAlert.info("Oops!", "Please connect all pairs before checking.");
+      ValidationAlert.info(
+        "Oops!",
+        "Please connect all pairs before checking."
+      );
       return;
     }
 
@@ -106,56 +110,68 @@ export default function Unit2_Page9_Q2() {
   };
 
   return (
-    <>
-      <h5 className="header-title-page8">B Read and match.</h5>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        className="div-forall"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          width: "60%",
+          justifyContent: "flex-start",
+        }}
+      >
+        <h5 className="header-title-page8">B Read and match.</h5>
 
-      <div className="matching-wrapper2" ref={containerRef}>
-        <div className="column2 left-column">
-          {["Happy", "I’m seven", "How old", "Thank"].map((word, i) => (
-            <div className="word-row2" key={i}>
-              <span className="num2">{i + 1}</span>
-              <span className="word-text3">{word}</span>
-              <div
-                className="dot5 start-dot5"
-                data-letter={word}
-                onMouseDown={handleDotDown}
-               
-              ></div>
-              {wrongWords.includes(word) && (
-                <span className="error-mark4">X</span>
-              )}
-            </div>
-          ))}
+        <div className="matching-wrapper2" ref={containerRef}>
+          <div className="column2 left-column">
+            {["Happy", "I’m seven", "How old", "Thank"].map((word, i) => (
+              <div className="word-row2" key={i}>
+                <span className="num2">{i + 1}</span>
+                <span className="word-text3">{word}</span>
+                <div
+                  className="dot5 start-dot5"
+                  data-letter={word}
+                  onMouseDown={handleDotDown}
+                ></div>
+                {wrongWords.includes(word) && (
+                  <span className="error-mark4">X</span>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="column2 right-column">
+            {["are you?", "you!", "birthday!", "years old."].map((word, i) => (
+              <div className="word-row2" key={i}>
+                <div className="dot5 end-dot5" data-image={word}></div>
+                <span className="word-text3">{word}</span>
+              </div>
+            ))}
+          </div>
+
+          <svg className="lines-layer5">
+            {lines.map((line, i) => (
+              <line
+                key={i}
+                x1={line.x1}
+                y1={line.y1}
+                x2={line.x2}
+                y2={line.y2}
+                stroke="red"
+                strokeWidth="3"
+              />
+            ))}
+          </svg>
         </div>
-
-        <div className="column2 right-column">
-          {["are you?", "you!", "birthday!", "years old."].map((word, i) => (
-            <div className="word-row2" key={i}>
-              <div
-                className="dot5 end-dot5"
-                data-image={word}
-               
-              ></div>
-              <span className="word-text">{word}</span>
-            </div>
-          ))}
-        </div>
-
-        <svg className="lines-layer5">
-          {lines.map((line, i) => (
-            <line
-              key={i}
-              x1={line.x1}
-              y1={line.y1}
-              x2={line.x2}
-              y2={line.y2}
-              stroke="red"
-              strokeWidth="3"
-            />
-          ))}
-        </svg>
       </div>
-
       <div className="action-buttons-container">
         <button
           onClick={() => {
@@ -170,6 +186,6 @@ export default function Unit2_Page9_Q2() {
           Check Answer ✓
         </button>
       </div>
-    </>
+    </div>
   );
 }

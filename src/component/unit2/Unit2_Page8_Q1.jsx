@@ -111,152 +111,171 @@ const Unit2_Page8_Q1 = () => {
   };
 
   return (
-    <div className="page8-q1-container">
-      <h5 className="header-title-page8">
-        <span className="ex-A">B</span>Read and match.
-      </h5>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        className="div-forall"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          width: "60%",
+          justifyContent: "flex-start",
+        }}
+      >
+        <div className="page8-q1-container">
+          <h5 className="header-title-page8">
+            <span className="ex-A">B</span>Read and match.
+          </h5>
 
-      <div className="container12" ref={containerRef}>
-        {/* الصف الأول */}
-        <div className="matching-row2">
-          <div className="word-with-dot2">
-            <span className="span-num2">1</span>
-            <span className="word-text2">duck</span>
-            {wrongWords.includes("duck") && ( // ⭐ تم التعديل هون
-              <span className="error-mark">✕</span>
-            )}
-            <div className="dot-wrapper2">
-              <div
-                className="dot2 start-dot2"
-                data-letter="duck"
-                onMouseDown={handleDotDown}
-              ></div>
-            </div>
-          </div>
+          <div className="container12" ref={containerRef}>
+            {/* الصف الأول */}
+            <div className="matching-row2">
+              <div className="word-with-dot2">
+                <span className="span-num2">1</span>
+                <span className="word-text2">duck</span>
+                {wrongWords.includes("duck") && ( // ⭐ تم التعديل هون
+                  <span className="error-mark">✕</span>
+                )}
+                <div className="dot-wrapper2">
+                  <div
+                    className="dot2 start-dot2"
+                    data-letter="duck"
+                    onMouseDown={handleDotDown}
+                  ></div>
+                </div>
+              </div>
 
-          <div className="img-with-dot2">
-            <div className="dot-wrapper2">
-              <div className="dot2 end-dot2" data-image="img1"></div>
+              <div className="img-with-dot2">
+                <div className="dot-wrapper2">
+                  <div className="dot2 end-dot2" data-image="img1"></div>
+                </div>
+                <img
+                  src={table}
+                  className="matched-img2"
+                  alt=""
+                  style={{ height: "90px", width: "auto" }}
+                />
+              </div>
             </div>
-            <img
-              src={table}
-              className="matched-img2"
-              alt=""
-              style={{ height: "90px", width: "auto" }}
-            />
+
+            {/* الصف الثاني */}
+            <div className="matching-row2">
+              <div className="word-with-dot2">
+                <span className="span-num2">2</span>
+                <span className="word-text2">tiger</span>
+                {wrongWords.includes("tiger") && ( // ⭐ تم التعديل هون
+                  <span className="error-mark">✕</span>
+                )}
+                <div className="dot-wrapper2">
+                  <div
+                    className="dot2 start-dot2"
+                    data-letter="tiger"
+                    onMouseDown={handleDotDown}
+                  ></div>
+                </div>
+              </div>
+
+              <div className="img-with-dot2">
+                <div className="dot-wrapper2">
+                  <div className="dot2 end-dot2" data-image="img2"></div>
+                </div>
+                <img
+                  src={dish}
+                  className="matched-img2"
+                  alt=""
+                  style={{ height: "100px", width: "135px" }}
+                />
+              </div>
+            </div>
+
+            {/* الصف الثالث */}
+            <div className="matching-row2">
+              <div className="word-with-dot2">
+                <span className="span-num2">3</span>
+                <span className="word-text2">dish</span>
+                {wrongWords.includes("dish") && ( // ⭐ تم التعديل هون
+                  <span className="error-mark">✕</span>
+                )}
+                <div className="dot-wrapper2">
+                  <div
+                    className="dot2 start-dot2"
+                    data-letter="dish"
+                    onMouseDown={handleDotDown}
+                  ></div>
+                </div>
+              </div>
+
+              <div className="img-with-dot2">
+                <div className="dot-wrapper2">
+                  <div className="dot2 end-dot2" data-image="img3"></div>
+                </div>
+                <img
+                  src={duck}
+                  className="matched-img2"
+                  alt=""
+                  style={{ height: "100px", width: "auto" }}
+                />
+              </div>
+            </div>
+
+            {/* الصف الرابع */}
+            <div className="matching-row2">
+              <div className="word-with-dot2">
+                <span className="span-num2">4</span>
+                <span className="word-text2">table</span>
+                {wrongWords.includes("table") && ( // ⭐ تم التعديل هون
+                  <span className="error-mark">✕</span>
+                )}
+                <div className="dot-wrapper2">
+                  <div
+                    className="dot2 start-dot2"
+                    data-letter="table"
+                    onMouseDown={handleDotDown}
+                  ></div>
+                </div>
+              </div>
+
+              <div className="img-with-dot2">
+                <div className="dot-wrapper2">
+                  <div className="dot2 end-dot2" data-image="img4"></div>
+                </div>
+                <img
+                  src={tiger}
+                  className="matched-img2"
+                  alt=""
+                  style={{ height: "100px", width: "auto" }}
+                />
+              </div>
+            </div>
+
+            <svg className="lines-layer2">
+              {lines.map((line, i) => (
+                <line key={i} {...line} stroke="red" strokeWidth="3" />
+              ))}
+            </svg>
           </div>
         </div>
-
-        {/* الصف الثاني */}
-        <div className="matching-row2">
-          <div className="word-with-dot2">
-            <span className="span-num2">2</span>
-            <span className="word-text2">tiger</span>
-            {wrongWords.includes("tiger") && ( // ⭐ تم التعديل هون
-              <span className="error-mark">✕</span>
-            )}
-            <div className="dot-wrapper2">
-              <div
-                className="dot2 start-dot2"
-                data-letter="tiger"
-                onMouseDown={handleDotDown}
-              ></div>
-            </div>
-          </div>
-
-          <div className="img-with-dot2">
-            <div className="dot-wrapper2">
-              <div className="dot2 end-dot2" data-image="img2"></div>
-            </div>
-            <img
-              src={dish}
-              className="matched-img2"
-              alt=""
-              style={{ height: "100px", width: "135px" }}
-            />
-          </div>
+        <div className="action-buttons-container">
+          <button
+            onClick={() => {
+              setLines([]);
+              setWrongWords([]);
+            }}
+            className="try-again-button"
+          >
+            Start Again ↻
+          </button>
+          <button onClick={checkAnswers} className="check-button2">
+            Check Answer ✓
+          </button>
         </div>
-
-        {/* الصف الثالث */}
-        <div className="matching-row2">
-          <div className="word-with-dot2">
-            <span className="span-num2">3</span>
-            <span className="word-text2">dish</span>
-            {wrongWords.includes("dish") && ( // ⭐ تم التعديل هون
-              <span className="error-mark">✕</span>
-            )}
-            <div className="dot-wrapper2">
-              <div
-                className="dot2 start-dot2"
-                data-letter="dish"
-                onMouseDown={handleDotDown}
-              ></div>
-            </div>
-          </div>
-
-          <div className="img-with-dot2">
-            <div className="dot-wrapper2">
-              <div className="dot2 end-dot2" data-image="img3"></div>
-            </div>
-            <img
-              src={duck}
-              className="matched-img2"
-              alt=""
-              style={{ height: "100px", width: "auto" }}
-            />
-          </div>
-        </div>
-
-        {/* الصف الرابع */}
-        <div className="matching-row2">
-          <div className="word-with-dot2">
-            <span className="span-num2">4</span>
-            <span className="word-text2">table</span>
-            {wrongWords.includes("table") && ( // ⭐ تم التعديل هون
-              <span className="error-mark">✕</span>
-            )}
-            <div className="dot-wrapper2">
-              <div
-                className="dot2 start-dot2"
-                data-letter="table"
-                onMouseDown={handleDotDown}
-              ></div>
-            </div>
-          </div>
-
-          <div className="img-with-dot2">
-            <div className="dot-wrapper2">
-              <div className="dot2 end-dot2" data-image="img4"></div>
-            </div>
-            <img
-              src={tiger}
-              className="matched-img2"
-              alt=""
-              style={{ height: "100px", width: "auto" }}
-            />
-          </div>
-        </div>
-
-        <svg className="lines-layer2">
-          {lines.map((line, i) => (
-            <line key={i} {...line} stroke="red" strokeWidth="3" />
-          ))}
-        </svg>
-      </div>
-
-      <div className="action-buttons-container">
-        <button
-          onClick={() => {
-            setLines([]);
-            setWrongWords([]);
-          }}
-          className="try-again-button"
-        >
-          Start Again ↻
-        </button>
-        <button onClick={checkAnswers} className="check-button2">
-          Check Answer ✓
-        </button>
       </div>
     </div>
   );

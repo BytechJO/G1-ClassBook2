@@ -82,6 +82,22 @@ const Unit2_Page9_Q1 = () => {
   };
 
   return (
+    <div  style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div className="div-forall"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "30px",
+            width: "60%",
+            justifyContent: "flex-start",
+          }}
+        >
     <div className="unit2-page9-q1-container">
       <h5 className="header-title-page8">A Look and write.</h5>
 
@@ -161,7 +177,7 @@ const Unit2_Page9_Q1 = () => {
           </div>
         </div>
       </div>
-
+</div>
       <div className="action-buttons-container">
         <button
           onClick={() => {
@@ -176,6 +192,7 @@ const Unit2_Page9_Q1 = () => {
           Check Answer ✓
         </button>
       </div>
+    </div>
     </div>
   );
 };

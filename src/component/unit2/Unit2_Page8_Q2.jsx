@@ -69,93 +69,112 @@ const Unit2_Page8_Q2 = () => {
   };
 
   return (
-    <div className="question-wrapper">
-      <h5 className="header-title-page8">E Read, look, and write.</h5>
-      <div className="row-content">
-        <div className="row2">
-          <span style={{ position: "relative" }}>
-            <span className="num-span">1</span> The{" "}
-            <div className="input-wrapper">
-              <input
-                type="text"
-                className="q-input"
-                onChange={(e) => handleChange(e.target.value, 0)}
-                value={answers[0]}
-              />
-              {wrongInput.includes(answers[0]) && (
-                <span className="error-mark-input">✕</span>
-              )}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        className="div-forall"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          width: "50%",
+          justifyContent: "flex-start",
+        }}
+      >
+        <div className="question-wrapper">
+          <h5 className="header-title-page8">E Read, look, and write.</h5>
+          <div className="row-content22">
+            <div className="row2">
+              <span style={{ position: "relative" }}>
+                <span className="num-span">1</span> The{" "}
+                <div className="input-wrapper">
+                  <input
+                    type="text"
+                    className="q-input"
+                    onChange={(e) => handleChange(e.target.value, 0)}
+                    value={answers[0]}
+                  />
+                  {wrongInput.includes(answers[0]) && (
+                    <span className="error-mark-input">✕</span>
+                  )}
+                </div>
+                is brown.
+              </span>{" "}
+              <img src={deer} alt="" className="q-img" />
             </div>
-            is brown.
-          </span>{" "}
-          <img src={deer} alt="" className="q-img" />
-        </div>
 
-        <div className="row2">
-          <span style={{ position: "relative" }}>
-            <span className="num-span">2</span> My brother takes a{" "}
-            <div className="input-wrapper">
-              <input
-                type="text"
-                className="q-input"
-                onChange={(e) => handleChange(e.target.value, 1)}
-                value={answers[1]}
-              />{" "}
-              {wrongInput.includes(answers[1]) && (
-                <span className="error-mark-input">✕</span>
-              )}
+            <div className="row2">
+              <span style={{ position: "relative" }}>
+                <span className="num-span">2</span> My brother takes a{" "}
+                <div className="input-wrapper">
+                  <input
+                    type="text"
+                    className="q-input"
+                    onChange={(e) => handleChange(e.target.value, 1)}
+                    value={answers[1]}
+                  />{" "}
+                  {wrongInput.includes(answers[1]) && (
+                    <span className="error-mark-input">✕</span>
+                  )}
+                </div>
+                .
+              </span>
+              <img src={taxi} alt="" className="q-img" />
             </div>
-            .
-          </span>
-          <img src={taxi} alt="" className="q-img" />
-        </div>
 
-        <div className="row2">
-          <span style={{ position: "relative" }}>
-            <span className="num-span">3</span> The{" "}
-            <div className="input-wrapper">
-              <input
-                type="text"
-                className="q-input"
-                onChange={(e) => handleChange(e.target.value, 2)}
-                value={answers[2]}
-              />{" "}
-              {wrongInput.includes(answers[2]) && (
-                <span className="error-mark-input">✕</span>
-              )}
+            <div className="row2">
+              <span style={{ position: "relative" }}>
+                <span className="num-span">3</span> The{" "}
+                <div className="input-wrapper">
+                  <input
+                    type="text"
+                    className="q-input"
+                    onChange={(e) => handleChange(e.target.value, 2)}
+                    value={answers[2]}
+                  />{" "}
+                  {wrongInput.includes(answers[2]) && (
+                    <span className="error-mark-input">✕</span>
+                  )}
+                </div>
+                is round.
+              </span>
+              <img src={table} alt="" className="q-img" />
             </div>
-            is round.
-          </span>
-          <img src={table} alt="" className="q-img" />
-        </div>
 
-        <div className="row2">
-          <span style={{ position: "relative" }}>
-            <span className="num-span">4</span> The
-            <div className="input-wrapper">
-              <input
-                type="text"
-                className="q-input"
-                onChange={(e) => handleChange(e.target.value, 3)}
-                value={answers[3]}
-              />{" "}
-              {wrongInput.includes(answers[3]) && (
-                <span className="error-mark-input">✕</span>
-              )}
+            <div className="row2">
+              <span style={{ position: "relative" }}>
+                <span className="num-span">4</span> The
+                <div className="input-wrapper">
+                  <input
+                    type="text"
+                    className="q-input"
+                    onChange={(e) => handleChange(e.target.value, 3)}
+                    value={answers[3]}
+                  />{" "}
+                  {wrongInput.includes(answers[3]) && (
+                    <span className="error-mark-input">✕</span>
+                  )}
+                </div>
+                is white.
+              </span>{" "}
+              <img src={dish} alt="" className="q-img" />
             </div>
-            is white.
-          </span>{" "}
-          <img src={dish} alt="" className="q-img" />
+          </div>
         </div>
-      </div>
-
-      <div className="action-buttons-container">
-        <button onClick={reset} className="try-again-button">
-          Start Again ↻
-        </button>
-        <button onClick={checkAnswers} className="check-button2">
-          Check Answer ✓
-        </button>
+        <div className="action-buttons-container">
+          <button onClick={reset} className="try-again-button">
+            Start Again ↻
+          </button>
+          <button onClick={checkAnswers} className="check-button2">
+            Check Answer ✓
+          </button>
+        </div>
       </div>
     </div>
   );

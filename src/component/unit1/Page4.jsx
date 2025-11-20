@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import page4 from "../../assets/unit1/imgs/Pages/Right 1 Unit 01 Good Morning World 2_page-0004.jpg";
-import allUnitSound from "../../assets/unit1/sounds/U1 P4-5.mp3"
+import allUnitSound from "../../assets/unit1/sounds/U1 P4-5.mp3";
 import Rabbit from "../../assets/img_unit2/imgs/Rabbit.svg";
 import img1 from "../../assets/unit1/imgs/P1 listen and read 01.svg";
 import img2 from "../../assets/unit1/imgs/deer33.svg";
@@ -28,10 +28,29 @@ const Page4 = ({ openPopup }) => {
     new Audio(duck),
   ];
   const captionsExample = [
-    { start: 0, end: 1, text: "Hello!" },
-    { start: 1, end: 2.2, text: "My name is Tom." },
-    { start: 2.2, end: 4, text: "I like apples." },
+    { start: 0, end: 1, text: "Page 4, Unit 1. Good morning, world." },
+    { start: 1, end: 2.2, text: "Vocabulary." },
+    { start: 2.2, end: 4, text: "1. Goodbye." },
+    { start: 0, end: 1, text: " 2. How are you? " },
+    { start: 1, end: 2.2, text: "3. Fine, thank you." },
+    { start: 2.2, end: 4, text: "4. Hello. " },
+    { start: 0, end: 1, text: "5. Good morning." },
+    { start: 1, end: 2.2, text: "Page 4. Listen and read along." },
+    { start: 2.2, end: 4, text: " D. Dear. Dish. Duck. " },
+    { start: 0, end: 1, text: "Page 5. " },
+    {
+      start: 1,
+      end: 2.2,
+      text: "Meet my cat. Hello. How are you? I'm Stella. This is my cat. Her name is Lolo. She is one year old. She likes people.",
+    },
+    { start: 2.2, end: 4, text: " Page 5. Listen, read, and repeat. " },
+    { start: 0, end: 1, text: "Hello. How are you? " },
+    { start: 1, end: 2.2, text: "Fine, thank you. " },
+    { start: 2.2, end: 4, text: " Page 5. Listen and read along. " },
+    { start: 0, end: 1, text: "T. Table. Taxi. Tiger." },
   ];
+
+
   return (
     <>
       <div className="page_4-background">

@@ -13,7 +13,8 @@ import Pg6_3_1_Harley from "../../assets/unit1/sounds/Pg6_3.1_Harley.mp3";
 import Pg6_3_2_ModifiedHarley from "../../assets/unit1/sounds/Pg6_3.2_Modified Harley.mp3";
 import AudioWithCaption from "../AudioWithCaption";
 import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
-
+import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
+import video from "../../assets/unit1/sounds/Grammer P6 Video.mp4";
 const Page6 = ({ openPopup }) => {
   const audioRef = useRef(null);
   const [hoveredAreaIndex, setHoveredAreaIndex] = useState(null);
@@ -99,6 +100,39 @@ const Page6 = ({ openPopup }) => {
         className="headset-icon-CD-page6 hover:scale-110 transition"
       >
         <image href={audioBtn} x="0" y="0" width="60" height="60" />
+      </svg>
+
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 60 60"
+        onClick={() =>
+          openPopup(
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignContent: "center",
+                height: "100%",
+                width: "100%",
+              }}
+            >
+              <video
+                style={{
+                  height: "auto",
+                  width: "85%",
+                  borderRadius:"5%"
+                }}
+                controls
+              >
+                <source src={video} type="video/mp4" />
+              </video>
+            </div>
+          )
+        }
+        className="pauseBtn-icon-CD-page6 hover:scale-110 transition"
+      >
+        <image href={pauseBtn} x="0" y="0" width="60" height="60" />
       </svg>
       <audio ref={audioRef} style={{ display: "none" }} />
     </div>

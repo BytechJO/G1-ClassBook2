@@ -12,7 +12,6 @@ import ValidationAlert from "../Popup/ValidationAlert";
 import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
-import { FaRegCirclePlay } from "react-icons/fa6";
 import { CgPlayPauseO } from "react-icons/cg";
 const Page8_Q1 = () => {
   const audioRef = useRef(null);

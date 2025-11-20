@@ -13,8 +13,9 @@ import Pg7_5_1_Dad from "../../assets/unit1/sounds/Pg7_5.1_Dad.mp3";
 import Pg7_5_2_Mom from "../../assets/unit1/sounds/Pg7_5.2_Mom.mp3";
 import Pg7_6_1_Mom from "../../assets/unit1/sounds/Pg7_6.1_Mom and Dad.mp3";
 import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
-
+import video2 from "../../assets/unit1/sounds/p7 1920.mp4"
 import AudioWithCaption from "../AudioWithCaption";
+import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 const Page7 = ({ openPopup }) => {
   const audioRef = useRef(null);
   const handleImageClick = (e) => {
@@ -107,7 +108,38 @@ const Page7 = ({ openPopup }) => {
       >
         <image href={audioBtn} x="0" y="0" width="60" height="60" />
       </svg>
-
+       <svg
+              width="30"
+              height="30"
+              viewBox="0 0 60 60"
+              onClick={() =>
+                openPopup(
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignContent: "center",
+                      height: "100%",
+                      width: "100%",
+                    }}
+                  >
+                    <video
+                      style={{
+                        height: "auto",
+                        width: "85%",
+                        borderRadius:"5%"
+                      }}
+                      controls
+                    >
+                      <source src={video2} type="video/mp4" />
+                    </video>
+                  </div>
+                )
+              }
+              className="pauseBtn-icon-CD-page7 hover:scale-110 transition"
+            >
+              <image href={pauseBtn} x="0" y="0" width="60" height="60" />
+            </svg>
       <audio ref={audioRef} style={{ display: "none" }} />
     </div>
   );

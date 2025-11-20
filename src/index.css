@@ -3,7 +3,7 @@
 body {
   background: rgb(233, 233, 233);
   overflow-x: hidden;
-overflow-y: hidden;
+  overflow-y: hidden;
 }
 img {
   -webkit-user-drag: none;
@@ -19,9 +19,8 @@ img {
 /* من 1024px وفوق → ديسكتوب */
 @media (max-width: 780px) {
   body {
-  
-overflow-y: auto;
-}
+    overflow-y: auto;
+  }
 }
 input:focus {
   border-color: gray !important ; /* هنا يصير اللون رمادي */
@@ -125,7 +124,7 @@ img {
 }
 .headset-icon-CD-page4-1 {
   top: 7.5%;
-    right: 7.5%;
+  right: 7.5%;
 }
 
 #num-4-page4 {
@@ -305,7 +304,7 @@ img {
   border: rgb(255, 255, 255) solid 3px; */
   padding: 5px;
   bottom: 14%;
-     left: 52%;
+  left: 52%;
   cursor: pointer;
 }
 #t {
@@ -362,6 +361,13 @@ img {
   position: absolute;
   cursor: pointer;
 }
+.pauseBtn-icon-CD-page6 {
+  position: absolute;
+  padding: 5px;
+  top: 4%;
+  left: 40%;
+  cursor: pointer;
+}
 /*=========page7===========*/
 .headset-icon-CD-page7 {
   position: absolute;
@@ -374,6 +380,13 @@ img {
   cursor: pointer;
 }
 
+.pauseBtn-icon-CD-page7 {
+  position: absolute;
+  padding: 5px;
+  top: 4%;
+  right: 54%;
+  cursor: pointer;
+}
 /*===========page8==================*/
 .headset-icon-CD-page8 {
   position: absolute;
@@ -393,7 +406,7 @@ img {
   border: rgb(255, 255, 255) solid 3px; */
   padding: 5px;
   top: 8%;
- right: 4%;
+  right: 4%;
   cursor: pointer;
 }
 .click-icon-page8-2 {
@@ -412,7 +425,7 @@ img {
   border-radius: 20px;
   border: rgb(255, 255, 255) solid 3px; */
   padding: 5px;
-top: 47%;
+  top: 47%;
   left: 33.5%;
   cursor: pointer;
 }
@@ -423,7 +436,7 @@ top: 47%;
   border-radius: 20px;
   border: rgb(255, 255, 255) solid 3px; */
   padding: 5px;
-      bottom: 23%;
+  bottom: 23%;
   left: 50.7%;
   cursor: pointer;
 }
@@ -458,14 +471,14 @@ top: 47%;
 }
 
 .exercise-container {
-    display: flex;
-    margin-bottom: 80px;
-    width: -webkit-fill-available;
-    flex-direction: row;
-    align-items: flex-start;
+  display: flex;
+  margin-bottom: 80px;
+  width: -webkit-fill-available;
+  flex-direction: row;
+  align-items: flex-start;
   gap: 20px;
-    justify-content: space-evenly;
-  }
+  justify-content: space-evenly;
+}
 
 .exercise-item {
   display: flex;
@@ -474,8 +487,8 @@ top: 47%;
 }
 
 .exercise-image {
-      height: 150px;
-    width: auto;
+  height: 150px;
+  width: auto;
   cursor: pointer;
   transition: 0.2s;
   border: solid 2px #6ec1ff;
@@ -507,7 +520,6 @@ top: 47%;
   width: 90%;
   max-width: 900px;
 }
-
 
 /* لما يصير فيه حرف */
 .missing-input.filled {
@@ -639,7 +651,6 @@ top: 47%;
   box-shadow: 0 6px 12px rgba(255, 193, 7, 0.3);
 }
 
-
 /*===========page9==================*/
 .headset-icon-CD-page9 {
   position: absolute;
@@ -682,7 +693,7 @@ top: 47%;
 }
 
 .nav-btn {
-width: auto;
+  width: auto;
   cursor: pointer;
   border-radius: 50%;
   transition: 0.2s ease;
@@ -700,7 +711,6 @@ width: auto;
   transform: scale(0.9);
   background: rgba(0, 0, 0, 0.15);
 }
-
 
 @media (max-width: 768px) {
   .page_1-background,

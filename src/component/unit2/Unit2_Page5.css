@@ -179,10 +179,10 @@
 .q3-content {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  gap: 2rem;
+  /* gap: 2rem; */
   flex-wrap: nowrap;
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
+  flex-direction: column;
 }
 
 /* الصورة الرئيسية */
@@ -195,8 +195,7 @@
 /* الخيارات */
 .q3-options {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.2rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .q3-option-item {

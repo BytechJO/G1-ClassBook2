@@ -10,7 +10,7 @@
 }
 
 .q-img {
-  width: 150px;
+  width: 160px;
      height: auto;
 }
 
@@ -41,11 +41,11 @@
   margin-top: 10px;
 }
 
-.row-content {
+.row-content22 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 10px 40px;
+
 }
 
 .num-span {

@@ -5,7 +5,7 @@
 
 .u2-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .layout {
   display: flex;
@@ -16,7 +16,7 @@
   border-radius: 10px;
   margin-bottom: 35px;
   align-items: center;
-  width: 80%;
+  width: 100%;
   flex-direction: row;
 }
 
@@ -123,11 +123,15 @@
     flex-direction: column;
     /* gap: 30px; */
     align-items: center;
+    padding-bottom: 0px;
   }
-
+  .person-img {
+    width: 60px;
+    height: auto;
+  }
   .left-side {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 50px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
   }
 
   .image-row {
@@ -135,13 +139,14 @@
   }
 
   .right-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     width: 100%;
-    align-items: center;
+    gap: 0px;
   }
 
   .option-box {
-    width: 50%;
-
+    width: 100%;
     text-align: center;
   }
 }

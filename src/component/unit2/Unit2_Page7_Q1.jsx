@@ -139,74 +139,97 @@ const Unit2_Page7_Q1 = () => {
   };
 
   return (
-    <div className="unit7-container">
-      <h5 className="header-title-page8">A Read and write.</h5>
+    <>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div className="div-forall"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "30px",
+            width: "60%",
+            justifyContent: "flex-start",
+          }}
+        >
+          <div className="unit7-container">
+            <h5 className="header-title-page8">A Read and write.</h5>
 
-      <div className="number-word-section">
-        {words.map((item) => (
-          <div className="word-number" key={item.num}>
-            <span className="num-word">{item.num}</span>
-            <span className="word-num">{item.word}</span>
-          </div>
-        ))}
-      </div>
-
-      <div className="num-input-section">
-        {Object.entries(sentences).map(([key, correctArray], sentenceIndex) => (
-          <div key={key} className="sentence-row">
-            <span className="sentence-label">{key}</span>
-            <div className="num-container">
-              {correctArray.map((num, i) => (
-                <span key={i} className="sentence-preview">
-                  {num}
-                </span>
+            <div className="number-word-section">
+              {words.map((item) => (
+                <div className="word-number" key={item.num}>
+                  <span className="num-word">{item.num}</span>
+                  <span className="word-num">{item.word}</span>
+                </div>
               ))}
             </div>
-            <div className="sentence-line">
-              {correctArray.map((num, index) => {
-                const correctWord =
-                  words.find((w) => w.num === num)?.word || "";
 
-                return (
-                  <div className="input-wrapper1" key={index}>
-                    <input
-                      className={`input-sentence ${
-                        checked && wrongInputs[key]?.[index]
-                          ? "wrong-input1"
-                          : ""
-                      }`}
-                      value={
-                        sentenceIndex === 0
-                          ? correctWord // ✅ الجملة الأولى تظهر الكلمات الصحيحة
-                          : userAnswers[key]?.[index] || ""
-                      }
-                      onChange={(e) =>
-                        sentenceIndex === 0
-                          ? null
-                          : handleChange(key, index, e.target.value)
-                      }
-                      readOnly={sentenceIndex === 0} // ✅ الجملة الأولى غير قابلة للتعديل
-                    />
+            <div className="num-input-section">
+              {Object.entries(sentences).map(
+                ([key, correctArray], sentenceIndex) => (
+                  <div key={key} className="sentence-row">
+                    <span className="sentence-label">{key}</span>
+                    <div className="num-container">
+                      {correctArray.map((num, i) => (
+                        <span key={i} className="sentence-preview">
+                          {num}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="sentence-line">
+                      {correctArray.map((num, index) => {
+                        const correctWord =
+                          words.find((w) => w.num === num)?.word || "";
 
-                    {checked && wrongInputs[key]?.[index] && (
-                      <span className="wrong-icon">X</span>
-                    )}
+                        return (
+                          <div className="input-wrapper1" key={index}>
+                            <input
+                              className={`input-sentence ${
+                                checked && wrongInputs[key]?.[index]
+                                  ? "wrong-input1"
+                                  : ""
+                              }`}
+                              value={
+                                sentenceIndex === 0
+                                  ? correctWord // ✅ الجملة الأولى تظهر الكلمات الصحيحة
+                                  : userAnswers[key]?.[index] || ""
+                              }
+                              onChange={(e) =>
+                                sentenceIndex === 0
+                                  ? null
+                                  : handleChange(key, index, e.target.value)
+                              }
+                              readOnly={sentenceIndex === 0} // ✅ الجملة الأولى غير قابلة للتعديل
+                            />
+
+                            {checked && wrongInputs[key]?.[index] && (
+                              <span className="wrong-icon">X</span>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
-                );
-              })}
+                )
+              )}
             </div>
           </div>
-        ))}
+        </div>
+        <div className="action-buttons-container">
+          <button onClick={reset} className="try-again-button">
+            Start Again ↻
+          </button>
+          <button onClick={checkAnswers} className="check-button2">
+            Check Answer ✓
+          </button>
+        </div>
       </div>
-      <div className="action-buttons-container">
-        <button onClick={reset} className="try-again-button">
-          Start Again ↻
-        </button>
-        <button onClick={checkAnswers} className="check-button2">
-          Check Answer ✓
-        </button>
-      </div>
-    </div>
+    </>
   );
 };
 

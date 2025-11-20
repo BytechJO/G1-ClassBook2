@@ -114,99 +114,123 @@ const Unit2_Page7_Q2 = () => {
   };
 
   return (
-    <div className="page7-q2-container2">
-      <h5 className="header-title-page8">
-        <span className="ex-A">B</span> Read, look, and match.
-      </h5>
+    <div  style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div className="div-forall"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "30px",
+            width: "60%",
+            justifyContent: "flex-start",
+          }}
+        >
+      <div className="page7-q2-container2">
+        <h5 className="header-title-page8">
+          <span className="ex-A">B</span> Read, look, and match.
+        </h5>
 
-      <div className="match-wrapper2" ref={containerRef}>
-        {/* الصور */}
-        <div className="match-images-row2">
-          <div className="img-box2">
-            <img src={img1} alt="" />
-            {wrongImages.includes("img1") && (
-              <span className="error-mark-img">✕</span>
-            )}
+        <div className="match-wrapper2" ref={containerRef}>
+          {/* الصور */}
+          <div className="match-images-row2">
+            <div className="img-box2">
+              <img src={img1} alt="" />
+              {wrongImages.includes("img1") && (
+                <span className="error-mark-img">✕</span>
+              )}
 
-            <div
-              className="dot2 start-dot2"
-              data-image="img1"
-              onMouseDown={handleDotDown2}
-            ></div>
+              <div
+                className="dot2 start-dot2"
+                data-image="img1"
+                onMouseDown={handleDotDown2}
+              ></div>
+            </div>
+
+            <div className="img-box2">
+              <img src={img2} alt="" />{" "}
+              {wrongImages.includes("img2") && (
+                <span className="error-mark-img">✕</span>
+              )}
+              <div
+                className="dot2 start-dot2"
+                data-image="img2"
+                onMouseDown={handleDotDown2}
+              ></div>
+            </div>
+
+            <div className="img-box2">
+              <img src={img3} alt="" />{" "}
+              {wrongImages.includes("img3") && (
+                <span className="error-mark-img">✕</span>
+              )}
+              <div
+                className="dot2 start-dot2"
+                data-image="img3"
+                onMouseDown={handleDotDown2}
+              ></div>
+            </div>
           </div>
 
-          <div className="img-box2">
-            <img src={img2} alt="" />{" "}
-            {wrongImages.includes("img2") && (
-              <span className="error-mark-img">✕</span>
-            )}
-            <div
-              className="dot2 start-dot2"
-              data-image="img2"
-              onMouseDown={handleDotDown2}
-            ></div>
+          {/* الجمل */}
+          <div className="match-words-row2">
+            <div className="word-box2">
+              <h5>
+                <span style={{ color: "darkblue", fontWeight: "700" }}>1 </span>
+                Hello! I’m Hansel.
+              </h5>
+              <div
+                className="dot2 end-dot2"
+                data-word="Hello! I’m Hansel."
+              ></div>
+            </div>
+
+            <div className="word-box2">
+              <h5>
+                <span style={{ color: "darkblue", fontWeight: "700" }}>2 </span>
+                Good morning!
+              </h5>
+              <div className="dot2 end-dot2" data-word="Good morning!"></div>
+            </div>
+
+            <div className="word-box2">
+              <h5>
+                <span style={{ color: "darkblue", fontWeight: "700" }}>3 </span>
+                Goodbye!
+              </h5>
+              <div className="dot2 end-dot2" data-word="Goodbye!"></div>
+            </div>
           </div>
 
-          <div className="img-box2">
-            <img src={img3} alt="" />{" "}
-            {wrongImages.includes("img3") && (
-              <span className="error-mark-img">✕</span>
-            )}
-            <div
-              className="dot2 start-dot2"
-              data-image="img3"
-              onMouseDown={handleDotDown2}
-            ></div>
-          </div>
+          {/* الخطوط */}
+          <svg className="lines-layer2">
+            {lines.map((l, i) => (
+              <line
+                key={i}
+                x1={l.x1}
+                y1={l.y1}
+                x2={l.x2}
+                y2={l.y2}
+                stroke="red"
+                strokeWidth="3"
+              />
+            ))}
+          </svg>
         </div>
-
-        {/* الجمل */}
-        <div className="match-words-row2">
-          <div className="word-box2">
-            <h5>
-              <span style={{ color: "darkblue", fontWeight: "700" }}>1 </span>
-              Hello! I’m Hansel.
-            </h5>
-            <div className="dot2 end-dot2" data-word="Hello! I’m Hansel."></div>
-          </div>
-
-          <div className="word-box2">
-            <h5>
-              <span style={{ color: "darkblue", fontWeight: "700" }}>2 </span>
-              Good morning!
-            </h5>
-            <div className="dot2 end-dot2" data-word="Good morning!"></div>
-          </div>
-
-          <div className="word-box2">
-            <h5>
-              <span style={{ color: "darkblue", fontWeight: "700" }}>3 </span>
-              Goodbye!
-            </h5>
-            <div className="dot2 end-dot2" data-word="Goodbye!"></div>
-          </div>
-        </div>
-
-        {/* الخطوط */}
-        <svg className="lines-layer2">
-          {lines.map((l, i) => (
-            <line
-              key={i}
-              x1={l.x1}
-              y1={l.y1}
-              x2={l.x2}
-              y2={l.y2}
-              stroke="red"
-              strokeWidth="3"
-            />
-          ))}
-        </svg>
       </div>
-
+      </div>
       <div className="action-buttons-container">
-        <button onClick={() =>{ setLines([])
-          setWrongImages([])
-        }} className="try-again-button">
+        <button
+          onClick={() => {
+            setLines([]);
+            setWrongImages([]);
+          }}
+          className="try-again-button"
+        >
           Start Again ↻
         </button>
         <button onClick={checkAnswers2} className="check-button2">

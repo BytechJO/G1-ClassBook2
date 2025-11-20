@@ -82,137 +82,156 @@ const Unit2_Page9_Q3 = () => {
   };
 
   return (
-    <div className="unit2-page9-q3-container">
-      <h5 className="header-title-page8">C Look and answer.</h5>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        className="div-forall"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          width: "60%",
+          justifyContent: "flex-start",
+        }}
+      >
+        <div className="unit2-page9-q3-container">
+          <h5 className="header-title-page8">C Look and answer.</h5>
 
-      <div className="content-container-P9-Q3">
-        <div className="section-one1">
-          <div style={{display:"flex"}}>
-            <span
-              style={{
-                color: "#2c5287",
-                fontSize: "25px",
-                fontWeight: "500",
-                display: "flex",
-                gap: "10px",
-              }}
-            >
-              1
-            </span>{" "}
-            <img src={jello} className="p9-q1-img" />
-          </div>
-          <div className="content-input">
-            <input
-              type="text"
-              value={"What is it?"}
-              readOnly
-              style={{ pointerEvents: "none" }}
-            />
-            <div style={{ position: "relative" }}>
-              <input
-                type="text"
-                className="answer-input"
-                value={answers.find((a) => a.num === "input1")?.input || ""}
-                id="input1"
-                onChange={handleChange}
-              />
-              {wrongWords.includes(answers[0]?.num) && (
-                <span className="error-mark-input1">✕</span>
-              )}
+          <div className="content-container-P9-Q3">
+            <div className="section-one11">
+              <div style={{ display: "flex" }}>
+                <span
+                  style={{
+                    color: "#2c5287",
+                    fontSize: "25px",
+                    fontWeight: "500",
+                    display: "flex",
+                    gap: "10px",
+                  }}
+                >
+                  1
+                </span>{" "}
+                <img src={jello} className="p9-q1-img2" />
+              </div>
+              <div className="content-input">
+                <input
+                  type="text"
+                  value={"What is it?"}
+                  readOnly
+                  style={{ pointerEvents: "none" }}
+                />
+                <div style={{ position: "relative" }}>
+                  <input
+                    type="text"
+                    className="answer-input33"
+                    value={answers.find((a) => a.num === "input1")?.input || ""}
+                    id="input1"
+                    onChange={handleChange}
+                  />
+                  {wrongWords.includes(answers[0]?.num) && (
+                    <span className="error-mark-input1">✕</span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="section-two22">
+              <div style={{ display: "flex" }}>
+                <span
+                  style={{
+                    color: "#2c5287",
+                    fontSize: "25px",
+                    fontWeight: "500",
+                    display: "flex",
+                    gap: "10px",
+                  }}
+                >
+                  2
+                </span>{" "}
+                <img src={present} className="p9-q1-img2" />
+              </div>
+              <div className="content-input">
+                <input
+                  type="text"
+                  value={"What is it?"}
+                  readOnly
+                  style={{ pointerEvents: "none" }}
+                />
+
+                <div style={{ position: "relative" }}>
+                  <input
+                    type="text"
+                    className="answer-input33"
+                    value={answers.find((a) => a.num === "input2")?.input || ""}
+                    id="input2"
+                    onChange={handleChange}
+                  />
+                  {wrongWords.includes(answers[1]?.num) && (
+                    <span className="error-mark-input1">✕</span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="section-three33">
+              <div style={{ display: "flex" }}>
+                <span
+                  style={{
+                    color: "#2c5287",
+                    fontSize: "25px",
+                    fontWeight: "500",
+                    display: "flex",
+                    gap: "10px",
+                  }}
+                >
+                  3
+                </span>{" "}
+                <img src={balloons} className="p9-q1-img2" />
+              </div>
+              <div className="content-input">
+                <input
+                  type="text"
+                  value={"What are these?"}
+                  readOnly
+                  style={{ pointerEvents: "none" }}
+                />
+                <div style={{ position: "relative" }}>
+                  <input
+                    type="text"
+                    className="answer-input33"
+                    value={answers.find((a) => a.num === "input3")?.input || ""}
+                    id="input3"
+                    onChange={handleChange}
+                  />
+                  {wrongWords.includes(answers[2]?.num) && (
+                    <span className="error-mark-input1">✕</span>
+                  )}
+                  ?
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-        <div className="section-two2">
-          <div style={{display:"flex"}}>
-            <span
-              style={{
-                color: "#2c5287",
-                fontSize: "25px",
-                fontWeight: "500",
-                display: "flex",
-                gap: "10px",
-              }}
-            >
-              2
-            </span>{" "}
-            <img src={present} className="p9-q1-img" />
-          </div>
-          <div className="content-input">
-            <input
-              type="text"
-              value={"What is it?"}
-              readOnly
-              style={{ pointerEvents: "none" }}
-            />
-
-            <div style={{ position: "relative" }}>
-              <input
-                type="text"
-                className="answer-input"
-                value={answers.find((a) => a.num === "input2")?.input || ""}
-                id="input2"
-                onChange={handleChange}
-              />
-              {wrongWords.includes(answers[1]?.num) && (
-                <span className="error-mark-input1">✕</span>
-              )}
-            </div>
-          </div>
+        <div className="action-buttons-container">
+          <button
+            onClick={() => {
+              setAnswers([]);
+              setWrongWords([]);
+            }}
+            className="try-again-button"
+          >
+            Start Again ↻
+          </button>
+          <button onClick={checkAnswers} className="check-button2">
+            Check Answer ✓
+          </button>
         </div>
-
-        <div className="section-three3">
-          <div style={{display:"flex"}}>
-            <span
-              style={{
-                color: "#2c5287",
-                fontSize: "25px",
-                fontWeight: "500",
-                display: "flex",
-                gap: "10px",
-              }}
-            >
-              3
-            </span>{" "}
-            <img src={balloons} className="p9-q1-img" />
-          </div>
-          <div className="content-input">
-            <input
-              type="text"
-              value={"What are these?"}
-              readOnly
-              style={{ pointerEvents: "none" }}
-            />
-            <div style={{ position: "relative" }}>
-              <input
-                type="text"
-                className="answer-input"
-                value={answers.find((a) => a.num === "input3")?.input || ""}
-                id="input3"
-                onChange={handleChange}
-              />
-              {wrongWords.includes(answers[2]?.num) && (
-                <span className="error-mark-input1">✕</span>
-              )}
-              ?
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="action-buttons-container">
-        <button
-          onClick={() => {
-            setAnswers([]);
-            setWrongWords([]);
-          }}
-          className="try-again-button"
-        >
-          Start Again ↻
-        </button>
-        <button onClick={checkAnswers} className="check-button2">
-          Check Answer ✓
-        </button>
       </div>
     </div>
   );

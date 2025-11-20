@@ -15,7 +15,6 @@ const Unit2_Page5_Q3 = () => {
     { img: pencil, num: 4 },
   ];
 
-
   // ✅ نسمح فقط باختيار إجابة واحدة
   const [selected, setSelected] = useState(null);
 
@@ -23,7 +22,7 @@ const Unit2_Page5_Q3 = () => {
     setSelected(index); // اختيار إجابة واحدة فقط
   };
 
-   const scoreMessage = `
+  const scoreMessage = `
     <div style="font-size: 20px; text-align:center; margin-top: 8px;">
       <span style="color:green; font-weight:bold;">
          Score: 1 /1
@@ -48,35 +47,54 @@ const Unit2_Page5_Q3 = () => {
   };
 
   return (
-    <div className="unit2-q3-wrapper">
+    <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          className="unit2-q3-wrapper"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "60%",
+            justifyContent: "flex-start",
+          }}
+        >
+          <h5 className="header-title-page8">
+            <span className="ex-A">B</span> Ask and answer.
+          </h5>
 
-      <h5 className="header-title-page8">
-        <span className="ex-A">B</span> Ask and answer.
-      </h5>
-
-      <div className="q3-content">
-
-        {/* الصورة الرئيسية */}
-        <div className="q3-main-img-box">
-          <img src={presentImg} alt="main" className="q3-main-img" />
-        </div>
-
-        {/* الخيارات */}
-        <div className="q3-options">
-          {options.map((item, index) => (
-            <div
-              key={item.num}
-            className={`q3-option-item ${selected === index ? "active" : ""}`}
-              onClick={() => handleSelect(index)}
-            >
-              <di><span className="q3-number">{item.num}</span></di>
-              <img src={item.img} className="q3-option-img" alt="" />
+          <div className="q3-content">
+            {/* الصورة الرئيسية */}
+            <div className="q3-main-img-box">
+              <img src={presentImg} alt="main" className="q3-main-img" />
             </div>
-          ))}
+
+            {/* الخيارات */}
+            <div className="q3-options">
+              {options.map((item, index) => (
+                <div
+                  key={item.num}
+                  className={`q3-option-item ${
+                    selected === index ? "active" : ""
+                  }`}
+                  onClick={() => handleSelect(index)}
+                >
+                  <di>
+                    <span className="q3-number">{item.num}</span>
+                  </di>
+                  <img src={item.img} className="q3-option-img" alt="" />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-
       </div>
-
       <div className="action-buttons-container">
         <button onClick={resetAnswers} className="try-again-button">
           Start Again ↻
@@ -85,7 +103,6 @@ const Unit2_Page5_Q3 = () => {
           Check Answer ✓
         </button>
       </div>
-
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import CD13_Pg14_Instruction1_AdultLady from "../../assets/img_unit2/sounds-unit2/CD13.Pg14_Instruction1_Adult Lady.mp3";
 import ValidationAlert from "../Popup/ValidationAlert";
 import "./Unit2_Page5.css";
+import sound1 from "../../assets/unit1/sounds/P14Q2.mp3"
 import bat from "../../assets/img_unit2/imgs/bat.jpg";
 import box from "../../assets/img_unit2/imgs/box.jpg";
 import bucket from "../../assets/img_unit2/imgs/bucket.jpg";
@@ -23,7 +24,7 @@ const Unit2_Page5_Q2 = () => {
   const [showContinue, setShowContinue] = useState(false);
   // زر الكابشن
   const [isMuted, setIsMuted] = useState(false);
-  const stopAtSecond = 4;
+  const stopAtSecond =11;
   const [paused, setPaused] = useState(false);
   const changeSpeed = (rate) => {
     if (!audioRef.current) return;
@@ -135,135 +136,150 @@ const Unit2_Page5_Q2 = () => {
     }
   };
   return (
-    <div style={{ display: "flex", flexDirection: "column" ,justifyContent:"center" ,alignItems:"center"}}>
-      <div style={{ display: "flex", flexDirection: "column", gap: "30px",width:"60%",justifyContent:"flex-start" }}>
-      <div>
-      <h5 className="header-title-page8">
-        <span style={{ color: "purple" }}>2</span> Does it begin with{" "}
-        <span style={{ color: "red" }}>b</span> or{" "}
-        <span style={{ color: "red" }}>p</span>? Listen and circle.
-      </h5>
-      </div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          width: "60%",
           justifyContent: "flex-start",
         }}
       >
-        <div className="audio-popup-vocab">
-          <div className="audio-inner-vocab">
-            {/* Play / Pause */}
-            <button
-              className="audio-play-btn"
-              style={{ height: "30px", width: "30px" }}
-              onClick={togglePlay}
-            >
-              {paused ? <FaPlay size={22} /> : <FaPause size={22} />}
-            </button>
-
-            {/* Slider */}
-            <input
-              type="range"
-              min="0"
-              max={audioRef.current?.duration || 0}
-              value={audioRef.current?.currentTime || 0}
-              className="audio-slider"
-              onChange={(e) => {
-                if (!audioRef.current) return;
-                audioRef.current.currentTime = e.target.value;
-              }}
-            />
-
-            {/* Current Time */}
-            <span className="audio-time">
-              {new Date((audioRef.current?.currentTime || 0) * 1000)
-                .toISOString()
-                .substring(14, 19)}
-            </span>
-
-            {/* Total Time */}
-            <span className="audio-time">
-              {new Date((audioRef.current?.duration || 0) * 1000)
-                .toISOString()
-                .substring(14, 19)}
-            </span>
-
-            {/* Mute */}
-            <button
-              className="mute-btn-outside"
-              onClick={() => {
-                audioRef.current.muted = !audioRef.current.muted;
-                setIsMuted(!isMuted);
-              }}
-            >
-              {audioRef.current?.muted ? (
-                <FaVolumeMute size={22} color="#1d4f7b" />
-              ) : (
-                <FaVolumeUp size={22} color="#1d4f7b" />
-              )}
-            </button>
-            <div className="settings-wrapper" ref={settingsRef}>
+        <div>
+          <h5 className="header-title-page8">
+            <span style={{ color: "purple" }}>2</span> Does it begin with{" "}
+            <span style={{ color: "red" }}>b</span> or{" "}
+            <span style={{ color: "red" }}>p</span>? Listen and circle.
+          </h5>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-start",
+          }}
+        >
+          <div className="audio-popup-vocab">
+            <div className="audio-inner-vocab">
+              {/* Play / Pause */}
               <button
-                className={`settings-btn ${showSettings ? "active" : ""}`}
-                onClick={() => setShowSettings(!showSettings)}
+                className="audio-play-btn"
+                style={{ height: "30px", width: "30px" }}
+                onClick={togglePlay}
               >
-                <IoMdSettings size={22} color="#1d4f7b" />
+                {paused ? <FaPlay size={22} /> : <FaPause size={22} />}
               </button>
 
-              {showSettings && (
-                <div className="settings-popup">
-                  <label>Volume</label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.05"
-                    value={volume}
-                    onChange={(e) => {
-                      setVolume(e.target.value);
-                      audioRef.current.volume = e.target.value;
-                    }}
-                  />
+              {/* Slider */}
+              <input
+                type="range"
+                min="0"
+                max={audioRef.current?.duration || 0}
+                value={audioRef.current?.currentTime || 0}
+                className="audio-slider"
+                onChange={(e) => {
+                  if (!audioRef.current) return;
+                  audioRef.current.currentTime = e.target.value;
+                }}
+              />
 
-                  <label>Speed</label>
-                  <div className="speed-buttons">
-                    {[0.75, 1, 1.25, 1.5].map((rate) => (
-                      <button
-                        key={rate}
-                        className={`speed-rate ${
-                          activeSpeed === rate ? "active" : ""
-                        }`}
-                        onClick={() => changeSpeed(rate)}
-                      >
-                        {rate}x
-                      </button>
-                    ))}
+              {/* Current Time */}
+              <span className="audio-time">
+                {new Date((audioRef.current?.currentTime || 0) * 1000)
+                  .toISOString()
+                  .substring(14, 19)}
+              </span>
+
+              {/* Total Time */}
+              <span className="audio-time">
+                {new Date((audioRef.current?.duration || 0) * 1000)
+                  .toISOString()
+                  .substring(14, 19)}
+              </span>
+
+              {/* Mute */}
+              <button
+                className="mute-btn-outside"
+                onClick={() => {
+                  audioRef.current.muted = !audioRef.current.muted;
+                  setIsMuted(!isMuted);
+                }}
+              >
+                {audioRef.current?.muted ? (
+                  <FaVolumeMute size={22} color="#1d4f7b" />
+                ) : (
+                  <FaVolumeUp size={22} color="#1d4f7b" />
+                )}
+              </button>
+              <div className="settings-wrapper" ref={settingsRef}>
+                <button
+                  className={`settings-btn ${showSettings ? "active" : ""}`}
+                  onClick={() => setShowSettings(!showSettings)}
+                >
+                  <IoMdSettings size={22} color="#1d4f7b" />
+                </button>
+
+                {showSettings && (
+                  <div className="settings-popup">
+                    <label>Volume</label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.05"
+                      value={volume}
+                      onChange={(e) => {
+                        setVolume(e.target.value);
+                        audioRef.current.volume = e.target.value;
+                      }}
+                    />
+
+                    <label>Speed</label>
+                    <div className="speed-buttons">
+                      {[0.75, 1, 1.25, 1.5].map((rate) => (
+                        <button
+                          key={rate}
+                          className={`speed-rate ${
+                            activeSpeed === rate ? "active" : ""
+                          }`}
+                          onClick={() => changeSpeed(rate)}
+                        >
+                          {rate}x
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
+          <audio ref={audioRef}>
+            <source src={sound1} type="audio/mp3" />
+          </audio>
         </div>
-        <audio ref={audioRef}>
-          <source src={CD13_Pg14_Instruction1_AdultLady} type="audio/mp3" />
-        </audio>
-      </div>
-      <div
-        className="imgFeild"
-        style={{
-          display: "flex",
-          gap: "13px",
-          flexDirection: "column",
-        }}
-      >
-        <div className="bp-container">
-          {items.map((item, index) => (
-            <div className="bp-item" key={index}>
-              <img src={item.img} className="bp-image" />
-              <div className="bp-options">
-                {/* B OPTION */}
-                <span
-                  className={`bp-option 
+        <div
+          className="imgFeild"
+          style={{
+            display: "flex",
+            gap: "13px",
+            flexDirection: "column",
+          }}
+        >
+          <div className="bp-container">
+            {items.map((item, index) => (
+              <div className="bp-item" key={index}>
+                <img src={item.img} className="bp-image" />
+                <div className="bp-options">
+                  {/* B OPTION */}
+                  <span
+                    className={`bp-option 
                     ${answers[index] === "b" ? "selected" : ""}
                     ${
                       showResult &&
@@ -272,19 +288,19 @@ const Unit2_Page5_Q2 = () => {
                         ? "wrong-answer"
                         : ""
                     }`}
-                  onClick={() => handleSelect(index, "b")}
-                >
-                  b
-                  {showResult &&
-                    answers[index] === "b" &&
-                    answers[index] !== item.correct && (
-                      <span className="wrong-x">X</span>
-                    )}
-                </span>
+                    onClick={() => handleSelect(index, "b")}
+                  >
+                    b
+                    {showResult &&
+                      answers[index] === "b" &&
+                      answers[index] !== item.correct && (
+                        <span className="wrong-x">X</span>
+                      )}
+                  </span>
 
-                {/* P OPTION */}
-                <span
-                  className={`bp-option 
+                  {/* P OPTION */}
+                  <span
+                    className={`bp-option 
                     ${answers[index] === "p" ? "selected" : ""}
                     ${
                       showResult &&
@@ -293,20 +309,20 @@ const Unit2_Page5_Q2 = () => {
                         ? "wrong-answer"
                         : ""
                     }`}
-                  onClick={() => handleSelect(index, "p")}
-                >
-                  p
-                  {showResult &&
-                    answers[index] === "p" &&
-                    answers[index] !== item.correct && (
-                      <span className="wrong-x">X</span>
-                    )}
-                </span>
+                    onClick={() => handleSelect(index, "p")}
+                  >
+                    p
+                    {showResult &&
+                      answers[index] === "p" &&
+                      answers[index] !== item.correct && (
+                        <span className="wrong-x">X</span>
+                      )}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
       </div>
       <div className="action-buttons-container">
         <button onClick={resetAnswers} className="try-again-button">

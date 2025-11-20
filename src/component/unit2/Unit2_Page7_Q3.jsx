@@ -71,44 +71,71 @@ const Unit2_Page7_Q3 = () => {
 
   //   console.log(result.status); // "all-correct" | "all-wrong" | "partial"
   return (
-    <div className="content-container1">
-      <div className="header-container">
-        <h5 className="header-title-page8">C Read and circle the mistakes.</h5>
-      </div>
-      <div className="sentence-container">
-        {sentences.map((sentence, sIndex) => (
-          <div key={sIndex} style={{ marginBottom: "14px", fontSize: "20px" }}>
-            <span style={{ color: "#2c5287", fontWeight: "700" }}>
-              {sIndex + 1}
-            </span>{" "}
-            {sentence.split("").map((char, wIndex) => {
-              const isCircled = circledWords[sIndex]?.includes(wIndex);
-              const isCorrect =
-                checked && correct[sIndex]?.includes(wIndex) && isCircled;
-              const isWrong =
-                checked && isCircled && !correct[sIndex]?.includes(wIndex);
-
-              return (
-                <span
-                  key={wIndex}
-                  onClick={() => !checked && handleWordClick(sIndex, wIndex)} // 🔒 يمنع التعديل بعد الفحص
-                  className={`char-container ${isCircled ? "circled" : ""} ${
-                    isCorrect ? "correct" : ""
-                  }`}
-                >
-                  {char}
-                  {isWrong && <span className="wrong-x-unit2-q3">×</span>}
-                </span>
-              );
-            })}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        className="div-forall"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          width: "30%",
+          justifyContent: "flex-start",
+        }}
+      >
+        <div className="content-container1">
+          <div className="header-container">
+            <h5 className="header-title-page8">
+              C Read and circle the mistakes.
+            </h5>
           </div>
-        ))}
+          <div className="sentence-container">
+            {sentences.map((sentence, sIndex) => (
+              <div
+                key={sIndex}
+                style={{ marginBottom: "14px", fontSize: "25px" ,fontWeight: "500"}}
+              >
+                <span style={{ color: "#2c5287", fontWeight: "700" }}>
+                  {sIndex + 1}
+                </span>{" "}
+                {sentence.split("").map((char, wIndex) => {
+                  const isCircled = circledWords[sIndex]?.includes(wIndex);
+                  const isCorrect =
+                    checked && correct[sIndex]?.includes(wIndex) && isCircled;
+                  const isWrong =
+                    checked && isCircled && !correct[sIndex]?.includes(wIndex);
+
+                  return (
+                    <span
+                      key={wIndex}
+                      onClick={() =>
+                        !checked && handleWordClick(sIndex, wIndex)
+                      } // 🔒 يمنع التعديل بعد الفحص
+                      className={`char-container ${
+                        isCircled ? "circled" : ""
+                      } ${isCorrect ? "correct" : ""}`}
+                    >
+                      {char}
+                      {isWrong && <span className="wrong-x-unit2-q3">×</span>}
+                    </span>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
       <div className="action-buttons-container">
         <button
           onClick={() => {
             setCircledWords({});
-            setChecked(false)
+            setChecked(false);
           }}
           className="try-again-button"
         >

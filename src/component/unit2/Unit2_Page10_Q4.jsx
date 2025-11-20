@@ -61,6 +61,23 @@ setWrongInputs(wrong);
   };
 
   return (
+    <div   style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        className="div-forall"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          width: "60%",
+          justifyContent: "flex-start",
+        }}
+      >
     <div className="question-wrapper10">
       <h5 className="header-title-page8">G Look and write.</h5>
       <div className="row-content10-1">
@@ -136,8 +153,10 @@ setWrongInputs(wrong);
           <img src={pincle} alt="" className="q-img10" />
         </div>
       </div>
-
-      <div className="action-buttons-container">
+   </div>
+     
+    </div>
+     <div className="action-buttons-container">
         <button onClick={reset} className="try-again-button">
           Start Again ↻
         </button>

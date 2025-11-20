@@ -11,7 +11,9 @@ import sound4 from "../../assets/img_unit2/sounds-unit2/Pg20_1.3_Adult Lady.mp3"
 import sound5 from "../../assets/img_unit2/sounds-unit2/Pg20_1.4_Adult Lady.mp3";
 import AudioWithCaption from "../AudioWithCaption";
 import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
+import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 
+import video3 from "../../assets/unit1/sounds/STORY (1).mp4"
 const Unit2_Page11 = ({ openPopup }) => {
   const audioRef = useRef(null);
   const captionsExample = [
@@ -97,7 +99,38 @@ const Unit2_Page11 = ({ openPopup }) => {
       >
         <image href={audioBtn} x="0" y="0" width="60" height="60" />
       </svg>
-
+          <svg
+              width="30"
+              height="30"
+              viewBox="0 0 60 60"
+              onClick={() =>
+                openPopup(
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignContent: "center",
+                      height: "100%",
+                      width: "100%",
+                    }}
+                  >
+                    <video
+                      style={{
+                        height: "auto",
+                        width: "85%",
+                        borderRadius:"5%"
+                      }}
+                      controls
+                    >
+                      <source src={video3} type="video/mp4" />
+                    </video>
+                  </div>
+                )
+              }
+              className="pauseBtn-icon-CD-page21 hover:scale-110 transition"
+            >
+              <image href={pauseBtn} x="0" y="0" width="60" height="60" />
+            </svg>
       <audio ref={audioRef} style={{ display: "none" }} />
     </div>
   );
