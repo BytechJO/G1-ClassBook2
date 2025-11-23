@@ -116,7 +116,7 @@ const Unit2_Page1_find = () => {
           )}
         </div>
       </div>
-      <div className="action-buttons-container ">
+      <div className="action-buttons-container " >
         <button className="try-again-button" onClick={handleStartAgain}>
           Start Again ↻
         </button>

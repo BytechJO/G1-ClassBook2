@@ -36,7 +36,7 @@ const Unit3_Page1 = ({ openPopup }) => {
     { start: 46.3, end: 50.14, text: "Page 11. Listen and read along. " },
     { start: 50.18, end: 53.25, text: "P, pencil, pink, pizza. " },
   ];
-  const [activePopup, setActivePopup] = useState(null);
+
   return (
     <div className="unit2-page-background">
       <img src={page_1} />

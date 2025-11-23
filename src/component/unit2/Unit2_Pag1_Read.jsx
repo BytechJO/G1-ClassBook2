@@ -8,7 +8,7 @@ import img2 from "../../assets/img_unit2/imgs/bird.svg";
 import img3 from "../../assets/img_unit2/imgs/ball.svg";
 import img4 from "../../assets/img_unit2/imgs/boy.svg";
 import FourImagesWithAudio from "../FourImagesWithAudio";
-import longAudio from "../../assets/unit1/sounds/pg4-instruction1-adult-lady_9KnGFLcl.mp3";
+import longAudio from "../../assets/img_unit2/sounds-unit2/pg10-instruction1-adult-lady_869fcbJa.mp3";
 
 const Unit2_Page1_Read = () => {
   const imageSounds = [

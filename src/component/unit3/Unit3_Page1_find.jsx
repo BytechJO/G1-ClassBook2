@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import find_img from "../../assets/unit3/imgs3/G1_U3_Pg_22-23 copy.jpg";
-import find_title from "../../assets/unit3/imgs3/findimg_unit3_P1.jpg";
 import ValidationAlert from "../Popup/ValidationAlert";
 import Rabbit from "../../assets/img_unit2/imgs/Rabbit.svg";
 const Unit3_Page1_find = () => {
@@ -57,7 +56,15 @@ const Unit3_Page1_find = () => {
 
   return (
     <div style={{ textAlign: "center" }}>
-      <div style={{ display: "flex" }}>
+       <div
+        style={{
+          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+      <div style={{ display: "flex" ,justifyContent: "center",width:"100%"}}>
         <img src={Rabbit} style={{ height: "50px", width: "auto" }} />
         <h5 className="header-title-page8">
           I need your help. Can you help me find the boy shutting the window in
@@ -68,7 +75,12 @@ const Unit3_Page1_find = () => {
         <img
           src={find_img}
           alt="interactive"
-          style={{ cursor: "pointer", height: "460px", width: "auto" }}
+          style={{
+            width: "auto",
+            height: "75vh",
+            cursor: "pointer",
+            display: "block",
+          }}
           onClick={handleImageClick}
         />
 
@@ -105,13 +117,10 @@ const Unit3_Page1_find = () => {
           ></div>
         )}
       </div>
-
+</div>
       <div
-        style={{
-          marginTop: "18px",
-          display: "flex",
-          justifyContent: "space-around",
-        }}
+      className="action-buttons-container "
+
       >
         <button className="try-again-button" onClick={handleStartAgain}>
           Start Again ↻

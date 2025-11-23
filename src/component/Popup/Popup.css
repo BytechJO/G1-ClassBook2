@@ -1,7 +1,7 @@
 /* يغطي الشاشة */
 .popup-overlay {
   position: fixed;
-  top: 48px; /* ارتفاع النافبار */
+  top: 55px; /* ارتفاع النافبار */
   left: 0;
   width: 100%;
   height: calc(100vh - 45px); /* يغطي باقي الشاشة */
