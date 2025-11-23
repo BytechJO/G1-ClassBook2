@@ -44,7 +44,7 @@ const Unit2_Page1 = ({ openPopup }) => {
       <svg
         width="30"
         height="30"
-        viewBox="0 0 60 60"
+        viewBox="0 0 90 90"
         onClick={() =>
           openPopup(
             <div
@@ -61,7 +61,7 @@ const Unit2_Page1 = ({ openPopup }) => {
         }
         className="headset-icon-CD-unit2-page1-1 hover:scale-110 transition"
       >
-        <image href={audioBtn} x="0" y="0" width="60" height="60" />
+        <image href={audioBtn} x="0" y="0" width="90" height="90" />
       </svg>
       <svg
         width="30"

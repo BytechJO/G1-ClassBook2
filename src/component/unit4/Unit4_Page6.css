@@ -1,19 +1,19 @@
 .click-icon-unit4-page6-2 {
   position: absolute;
-  background-color: #6bcff6;
+  /* background-color: #6bcff6;
   border-radius: 20px;
-  border: rgb(255, 255, 255) solid 3px;
+  border: rgb(255, 255, 255) solid 3px; */
   padding: 5px;
-     top: 28%;
-    left: 34%;
+  top: 3%;
+  left: 32.5%;
   cursor: pointer;
 }
 
 .click-icon-unit4-page6-1 {
   position: absolute;
-  background-color: #6bcff6;
+  /* background-color: #6bcff6;
   border-radius: 20px;
-  border: rgb(255, 255, 255) solid 3px;
+  border: rgb(255, 255, 255) solid 3px; */
   padding: 5px;
   top: 6%;
   left: 35%;
@@ -21,22 +21,21 @@
 }
 .click-icon-unit4-page6-3 {
   position: absolute;
-  background-color: #6bcff6;
+  /* background-color: #6bcff6;
   border-radius: 20px;
-  border: rgb(255, 255, 255) solid 3px;
+  border: rgb(255, 255, 255) solid 3px; */
   padding: 5px;
-  top: 38%;
-  left: 43%;
-
+  top: 26.5%;
+  left: 32%;
   cursor: pointer;
 }
 .headset-icon-CD-unit4-page6-1 {
   position: absolute;
-  background-color: #6bcff6;
+  /* background-color: #6bcff6;
   border-radius: 20px;
-  border: rgb(255, 255, 255) solid 3px;
+  border: rgb(255, 255, 255) solid 3px; */
   padding: 5px;
-    bottom: 28%;
-    left: 26.5%;
+  bottom: 28%;
+  left: 26.5%;
   cursor: pointer;
 }

@@ -2,18 +2,27 @@ import page_6 from "../../assets/unit3/imgs3/Right 1 Unit 03 Let's Go to School6
 import "./Unit3_Page6.css";
 import Unit3_Page6_Q2 from "./Unit3_Page6_Q2";
 import Unit3_Page6_Q3 from "./Unit3_Page6_Q3";
-import CD25_Pg27_Song_AdultLady from "../../assets/unit3/sound3/CD25.Pg27_Song_Adult Lady.mp3";
+import CD25_Pg27_Song_AdultLady from "../../assets/unit3/sound3/U3P27LetsSing.mp3";
 import arrowBtn from "../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
 import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
 import AudioWithCaption from "../AudioWithCaption";
 
 const Unit3_Page6 = ({ openPopup }) => {
-
   const captionsExample = [
-    { start: 0, end: 1, text: "Hello!" },
-    { start: 1, end: 2.2, text: "My name is Tom." },
-    { start: 2.2, end: 4, text: "I like apples." },
+    { start: 0, end: 4.24, text: "Page 27, exercise G. Let's sing! " },
+    {
+      start: 4.27,
+      end: 13.09,
+      text: "One, two, open your book. Three, four, close your book. ",
+    },
+    { start: 13.12, end: 16.0, text: " Five, six, take out your pencil." },
+    {
+      start: 16.04,
+      end: 21.26,
+      text: " Seven, eight, make a line. Nine, ten, listen, let's play.",
+    },
   ];
+
   return (
     <div className="unit2-page-background">
       <img src={page_6} />

@@ -258,7 +258,7 @@ const Unit4_Page1_Vocab = () => {
             {/* النصوص */}
             <div
               className="vocab_container"
-              style={{ bottom: "2%", right: "9.5%" }}
+              style={{ bottom: "2%", right: "8.5%" }}
             >
               {[
                 "brown",
