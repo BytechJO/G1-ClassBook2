@@ -1,7 +1,10 @@
 import "./Unit3_Page5_Q3.css";
 import React, { useState } from "react";
 import ValidationAlert from "../Popup/ValidationAlert";
-
+import img1 from "../../assets/unit3/imgs3/P26exeB-01.svg";
+import img2 from "../../assets/unit3/imgs3/P26exeB-02.svg";
+import img3 from "../../assets/unit3/imgs3/P26exeB-03.svg";
+import img4 from "../../assets/unit3/imgs3/P26exeB-04.svg";
 const Unit3_Page5_Q3 = () => {
   // الإجابات المدخلة من الطالب
   const [answers, setAnswers] = useState(["5", "", "", ""]);
@@ -13,12 +16,7 @@ const Unit3_Page5_Q3 = () => {
   const correctData = ["5", "3", "2", "8"];
 
   // البيانات
-  const options = [
-    { img: "/assets/bat.png" },
-    { img: "/assets/bucket.png" },
-    { img: "/assets/box.png" },
-    { img: "/assets/boat.png" },
-  ];
+  const options = [{ img: img1 }, { img: img2 }, { img: img3 }, { img: img4 }];
 
   // تحديث خانة الإدخال
   const handleChange = (index, value) => {
@@ -66,37 +64,57 @@ const Unit3_Page5_Q3 = () => {
   };
 
   return (
-    <div className="unit3-q3-wrapper">
-      <h5 className="header-title-page8">
-        <span className="ex-A">B</span> Count and write.
-      </h5>
+    <div
+      className="unit3-q3-wrapper"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        className="div-forall"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          width: "60%",
+          justifyContent: "flex-start",
+        }}
+      >
+        <h5 className="header-title-page8">
+          <span className="ex-A">B</span> Count and write.
+        </h5>
 
-      {/* الصور */}
-      <div className="unit3-q3-grid">
-        {options.map((item, index) => (
-          <div key={index} className="unit3-q3-box">
-            <img src={item.img} className="unit3-q3-image" alt="" />
+        {/* الصور */}
+        <div className="unit3-q3-grid">
+          {options.map((item, index) => (
+            <div key={index} className="unit3-q3-box">
+              <img src={item.img} className="unit3-q3-image" alt="" />
 
-            {/* إدخال الإجابة */}
-            <div className="unit3-q3-input-wrapper">
-              <input
-                type="text"
-                maxLength="1"
-                value={answers[index]}
-                onChange={(e) => handleChange(index, e.target.value)}
-                className={`unit3-q3-input ${index === 0 ? "first-input" : ""}`}
-                readOnly={index === 0} // ❗ ممنوع تتغير
-              />
+              {/* إدخال الإجابة */}
+              <div className="unit3-q3-input-wrapper">
+                <input
+                  type="text"
+                  maxLength="1"
+                  value={answers[index]}
+                  onChange={(e) => handleChange(index, e.target.value)}
+                  className={`unit3-q3-input ${
+                    index === 0 ? "first-input" : ""
+                  }`}
+                  readOnly={index === 0} // ❗ ممنوع تتغير
+                />
 
-              {/* إشارة X */}
-              {showResult[index] === "wrong" && (
-                <div className="unit3-q3-wrong">X</div>
-              )}
+                {/* إشارة X */}
+                {showResult[index] === "wrong" && (
+                  <div className="unit3-q3-wrong">X</div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-
       <div className="action-buttons-container">
         <button onClick={resetAnswers} className="try-again-button">
           Start Again ↻

@@ -17,13 +17,13 @@
   gap: 12px;
   padding: 10px;
   border-radius: 10px;
-  
 }
 
 /* الصورة */
 .unit3-q5-question-img {
-  height: 100px;
-  width: 100px;
+  height: 120px;
+  width: auto;
+
   object-fit: cover;
 }
 
@@ -88,23 +88,16 @@
 
 /* الموبايل الصغير */
 @media (max-width: 950px) {
-
   .unit3-q5-container {
-    
     gap: 0px;
   }
 }
 @media (max-width: 850px) {
-
   .unit3-q5-container {
     grid-template-columns: 1fr 1fr; /* عمود واحد */
-    gap: 10px;
+    /* gap: 10px; */
   }
-.unit3-q5-question-img {
-  height: 60px;
-  width: 60px;
- 
-}
+
   .unit3-q5-question-box {
     flex-direction: column;
     text-align: center;
@@ -118,7 +111,7 @@
 
   .unit3-q5-question-img {
     width: 80px;
-    height: 80px;
+    height: auto;
   }
 
   .option-btn {

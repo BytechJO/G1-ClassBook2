@@ -30,8 +30,8 @@
 
 /* الصور */
 .unit3-q3-image {
-  width: 100px;
-  height: 100px;
+ width: auto;
+    height: 150px;
   object-fit: contain;
 }
 

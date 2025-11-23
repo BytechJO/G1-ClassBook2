@@ -1,19 +1,36 @@
 import React, { useState, useRef } from "react";
 import page_3 from "../../assets/unit3/imgs3/Right 1 Unit 03 Let's Go to School3.jpg";
 import "./Unit3_Page3.css";
-import { FaHeadphones } from "react-icons/fa";
-import { PiCursorClickBold } from "react-icons/pi";
-import Popup from "../Popup/Popup";
-import CD22_pg24_Grammar1_AdultLady from "../../assets/unit3/sound3/CD22.Pg24_Grammar1_Adult Lady.mp3"
-import sound1 from "../../assets/unit3/sound3/Pg24_1.1_Adult Lady.mp3"
-import sound2 from "../../assets/unit3/sound3/Pg24_1.2_Adult Lady.mp3"
-import sound3 from "../../assets/unit3/sound3/Pg24_1.3_Adult Lady.mp3"
-import sound4 from "../../assets/unit3/sound3/Pg24_2.1_Female Teacher.mp3"
-import sound5 from "../../assets/unit3/sound3/Pg24_3.1_Female Teacher.mp3"
-import sound6 from "../../assets/unit3/sound3/Pg24_4.1_Male Teacher.mp3"
-const Unit3_Page3 = () => {
-  const [activePopup, setActivePopup] = useState(null);
+import CD22_pg24_Grammar1_AdultLady from "../../assets/unit3/sound3/U3P24RG1.mp3";
+import sound1 from "../../assets/unit3/sound3/Pg24_1.1_Adult Lady.mp3";
+import sound2 from "../../assets/unit3/sound3/Pg24_1.2_Adult Lady.mp3";
+import sound3 from "../../assets/unit3/sound3/Pg24_1.3_Adult Lady.mp3";
+import sound4 from "../../assets/unit3/sound3/Pg24_2.1_Female Teacher.mp3";
+import sound5 from "../../assets/unit3/sound3/Pg24_3.1_Female Teacher.mp3";
+import sound6 from "../../assets/unit3/sound3/Pg24_4.1_Male Teacher.mp3";
+import AudioWithCaption from "../AudioWithCaption";
+import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
+import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
+import video from "../../assets/img_unit2/sounds-unit2/p12 1920.mp4";
+const Unit3_Page3 = ({ openPopup }) => {
   const audioRef = useRef(null);
+  const captionsExample = [
+    { start: 0, end: 4.1, text: "Page 24, Exercise 1. Right Grammar." },
+    { start: 4.13, end: 5.01, text: " Listen," },
+    {
+      start: 5.03,
+      end: 6.02,
+      text: "quiet,",
+    },
+    {
+      start: 6.05,
+      end: 7.22,
+      text: "make a line.",
+    },
+    { start: 7.25, end: 9.02, text: "Listen," },
+    { start: 9.06, end: 10.04, text: "quiet, " },
+    { start: 10.07, end: 11.26, text: "make a line." },
+  ];
 
   const handleImageClick = (e) => {
     const rect = e.target.getBoundingClientRect();
@@ -25,13 +42,12 @@ const Unit3_Page3 = () => {
     checkAreaAndPlaySound(xPercent, yPercent);
   };
   const clickableAreas = [
-    { x1: 13.0, y1: 9.8, x2: 24.0, y2: 13.9, sound:sound1},
-    { x1: 13.0, y1: 15.2, x2: 24.0, y2: 19.0, sound: sound2},
+    { x1: 13.0, y1: 9.8, x2: 24.0, y2: 13.9, sound: sound1 },
+    { x1: 13.0, y1: 15.2, x2: 24.0, y2: 19.0, sound: sound2 },
     { x1: 71.2, y1: 12.5, x2: 85.22, y2: 16.7, sound: sound3 },
-    { x1: 16.9, y1: 22.6, x2: 26.7, y2: 25.5, sound:  sound4  },
-    { x1:58.0, y1: 22.8, x2: 68.5, y2: 26.0, sound:sound5 },
+    { x1: 16.9, y1: 22.6, x2: 26.7, y2: 25.5, sound: sound4 },
+    { x1: 58.0, y1: 22.8, x2: 68.5, y2: 26.0, sound: sound5 },
     { x1: 27.9, y1: 59.0, x2: 42.9, y2: 63.4, sound: sound6 },
-
   ];
 
   const checkAreaAndPlaySound = (x, y) => {
@@ -52,42 +68,85 @@ const Unit3_Page3 = () => {
   };
   return (
     <div className="unit3-page-background" style={{ position: "relative" }}>
-      
-      <img src={page_3} style={{display:"block"}} onClick={handleImageClick}  />
- {clickableAreas.map((area, index) => (
+      <img
+        src={page_3}
+        style={{ display: "block" }}
+        onClick={handleImageClick}
+      />
+      {clickableAreas.map((area, index) => (
         <div
           key={index}
           className="clickable-area"
           style={{
-            position:"absolute",
+            position: "absolute",
             left: `${area.x1}%`,
             top: `${area.y1}%`,
             width: `${area.x2 - area.x1}%`,
             height: `${area.y2 - area.y1}%`,
           }}
-           onClick={() => playSound(area.sound)} 
+          onClick={() => playSound(area.sound)}
           onMouseEnter={(e) => (e.target.style.cursor = "pointer")}
         ></div>
       ))}
-      <span className="headset-icon-CD-unit3-page3-1 shadow-md hover:scale-110 transition">
-        <FaHeadphones
-          size={12}
-          color="rgba(255, 255, 255, 1)"
-          onClick={() => setActivePopup(1)}
-        />
-      </span>
-      <Popup
-        isOpen={activePopup === 1}
-        onClose={() => setActivePopup(null)}
-        children={
-          <div style={{display:"flex" ,justifyContent:"center",alignContent:"center" }}>
-            <audio controls>
-              <source src={CD22_pg24_Grammar1_AdultLady} type="audio/mp3" />
-            </audio>
-          </div>
+
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 60 60"
+        onClick={() =>
+          openPopup(
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignContent: "center",
+              }}
+            >
+              <AudioWithCaption
+                src={CD22_pg24_Grammar1_AdultLady}
+                captions={captionsExample}
+              />
+            </div>,
+            true
+          )
         }
-      />
-      <audio ref={audioRef} style={{ display: "none"}} />
+        className="headset-icon-CD-unit3-page3-1 hover:scale-110 transition"
+      >
+        <image href={audioBtn} x="0" y="0" width="60" height="60" />
+      </svg>
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 60 60"
+        onClick={() =>
+          openPopup(
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignContent: "center",
+                height: "100%",
+                width: "100%",
+              }}
+            >
+              <video
+                style={{
+                  height: "auto",
+                  width: "85%",
+                  borderRadius: "5%",
+                }}
+                controls
+              >
+                <source src={video} type="video/mp4" />
+              </video>
+            </div>
+          )
+        }
+        className="pauseBtn-icon-CD-unit3-page3-1 hover:scale-110 transition"
+      >
+        <image href={pauseBtn} x="0" y="0" width="60" height="60" />
+      </svg>
+      <audio ref={audioRef} style={{ display: "none" }} />
     </div>
   );
 };

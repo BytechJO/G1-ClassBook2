@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 import "./Unit3_Page6_Q2.css";
 import ValidationAlert from "../Popup/ValidationAlert";
-
+import img1 from "../../assets/unit3/imgs3/P27exeE-01.svg"
+import img2 from "../../assets/unit3/imgs3/P27exeE-02.svg"
+import img3 from "../../assets/unit3/imgs3/P27exeE-03.svg"
+import img4 from "../../assets/unit3/imgs3/P27exeE-04.svg"
 const Unit3_Page6_Q2 = () => {
   const questions = [
     {
       id: 1,
       text: "Close your book.",
-      image: "../../assets/imgs/q1.jpg",
+      image: img1,
       correct: "✓",
     },
-    { id: 2, text: "Quiet!", image: "../../assets/imgs/q2.jpg", correct: "✓" },
+    { id: 2, text: "Quiet!", image: img2, correct: "✓" },
     {
       id: 3,
       text: "Take out your pencil.",
-      image: "../../assets/imgs/q3.jpg",
+      image: img3,
       correct: "✗",
     },
     {
       id: 4,
       text: "Make a line.",
-      image: "../../assets/imgs/q4.jpg",
+      image: img4,
       correct: "✓",
     },
   ];
@@ -74,63 +77,83 @@ const Unit3_Page6_Q2 = () => {
   };
 
   return (
-    <div>
-      <h5 className="header-title-page8">
-        <span className="letter-of-Q">E</span> Read, look, and choose
-        <span style={{ color: "red" }}> ✓ </span> or
-        <span style={{ color: "red" }}> ✗</span>.
-      </h5>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        className="div-forall"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          width: "60%",
+          justifyContent: "flex-start",
+        }}
+      >
+        <h5 className="header-title-page8">
+          <span className="letter-of-Q">E</span> Read, look, and choose
+          <span style={{ color: "red" }}> ✓ </span> or
+          <span style={{ color: "red" }}> ✗</span>.
+        </h5>
 
-      <div className="unit3-q5-container">
-        {questions.map((q, index) => (
-          <div key={q.id} className="unit3-q5-question-box">
-            <p className="unit3-q5-question-text" style={{fontSize:"20px"}}>
-              <span style={{ color: "darkblue", fontWeight: "700" }}>
-                {q.id}.
-              </span>
-              {q.text}
-            </p>
+        <div className="unit3-q5-container">
+          {questions.map((q, index) => (
+            <div key={q.id} className="unit3-q5-question-box">
+              <p
+                className="unit3-q5-question-text"
+                style={{ fontSize: "20px" }}
+              >
+                <span style={{ color: "darkblue", fontWeight: "700" }}>
+                  {q.id}.
+                </span>
+                {q.text}
+              </p>
 
-            <div className="unit3-q5-flex">
-              <img src={q.image} alt="" className="unit3-q5-question-img" />
+              <div className="unit3-q5-flex">
+                <img src={q.image} alt="" className="unit3-q5-question-img" />
 
-              <div className="unit3-q5-options-box">
-                {/* خيار الصح */}
-                <div className="option-wrapper">
-                  <div
-                    className={`option-btn ${
-                      answers[q.id] === "✓" ? "selected" : ""
-                    }`}
-                    onClick={() => selectAnswer(q.id, "✓")}
-                  >
-                    ✓
+                <div className="unit3-q5-options-box">
+                  {/* خيار الصح */}
+                  <div className="option-wrapper">
+                    <div
+                      className={`option-btn ${
+                        answers[q.id] === "✓" ? "selected" : ""
+                      }`}
+                      onClick={() => selectAnswer(q.id, "✓")}
+                    >
+                      ✓
+                    </div>
+
+                    {showResult[index] === "wrong" && answers[q.id] === "✓" && (
+                      <div className="unit3-q5-wrong-icon">X</div>
+                    )}
                   </div>
 
-                  {showResult[index] === "wrong" && answers[q.id] === "✓" && (
-                    <div className="unit3-q5-wrong-icon">X</div>
-                  )}
-                </div>
+                  {/* خيار الخطأ */}
+                  <div className="option-wrapper">
+                    <div
+                      className={`option-btn ${
+                        answers[q.id] === "✗" ? "selected" : ""
+                      }`}
+                      onClick={() => selectAnswer(q.id, "✗")}
+                    >
+                      ✗
+                    </div>
 
-                {/* خيار الخطأ */}
-                <div className="option-wrapper">
-                  <div
-                    className={`option-btn ${
-                      answers[q.id] === "✗" ? "selected" : ""
-                    }`}
-                    onClick={() => selectAnswer(q.id, "✗")}
-                  >
-                    ✗
+                    {showResult[index] === "wrong" && answers[q.id] === "✗" && (
+                      <div className="unit3-q5-wrong-icon">X</div>
+                    )}
                   </div>
-
-                  {showResult[index] === "wrong" && answers[q.id] === "✗" && (
-                    <div className="unit3-q5-wrong-icon">X</div>
-                  )}
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-
+          ))}
+        </div>
         <div className="action-buttons-container">
           <button onClick={resetAnswers} className="try-again-button">
             Start Again ↻

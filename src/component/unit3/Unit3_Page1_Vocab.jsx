@@ -3,7 +3,6 @@ import backgroundImage from "../../assets/unit3/imgs3/G1_U3_Pg_22-23 copy.jpg";
 import page2_2 from "../../assets/img_unit2/imgs/unit2 vocab-3CQVwmCm.jpg";
 import vocabulary from "../../assets/unit3/sound3/Pg22_Vocabulary_Adult Lady.mp3";
 import { CgPlayPauseO } from "react-icons/cg";
-import { FaRegCirclePlay } from "react-icons/fa6";
 import num1 from "../../assets/unit3/imgs3/Num1.svg";
 import num2 from "../../assets/unit3/imgs3/Num2.svg";
 import num3 from "../../assets/unit3/imgs3/Num3.svg";

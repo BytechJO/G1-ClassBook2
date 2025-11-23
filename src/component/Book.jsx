@@ -140,12 +140,12 @@ export default function Book() {
     <Unit3_Page4 openPopup={openPopup}/>,
     <Unit3_Page5 openPopup={openPopup}/>,
     <Unit3_Page6 openPopup={openPopup}/>,
-    // <Unit4_Page1 />,
-    // <Unit4_Page2 />,
-    // <Unit4_Page3 />,
-    // <Unit4_Page4 />,
-    // <Unit4_Page5 />,
-    // <Unit4_Page6 />,
+    <Unit4_Page1 openPopup={openPopup} />,
+    <Unit4_Page2 openPopup={openPopup} />,
+    <Unit4_Page3 openPopup={openPopup} />,
+    <Unit4_Page4 openPopup={openPopup} />,
+    <Unit4_Page5 openPopup={openPopup} />,
+    <Unit4_Page6 openPopup={openPopup} />,
   ];
   const hideArrows = zoom > 1;
   const [isDragging, setIsDragging] = useState(false);

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-// import pizza2 from "../../assets/img_unit2/imgs/Pixxzza (2).jpg";
-// import boy from "../../assets/img_unit2/imgs/boyxx2.jpg";
-// import paint from "../../assets/img_unit2/imgs/xxaint.jpg";
-// import pincle from "../../assets/img_unit2/imgs/xxPencel.jpg";
+import bat from "../../assets/unit3/imgs3/P26exeA1-01.svg";
+import cap from "../../assets/unit3/imgs3/P26exeA1-02.svg";
+import ant from "../../assets/unit3/imgs3/P26exeA1-03.svg";
+import dad from "../../assets/unit3/imgs3/P26exeA1-04.svg";
 import ValidationAlert from "../Popup/ValidationAlert";
 import "./Unit3_Page5_Q1.css";
 const Unit3_Page5_Q1 = () => {
@@ -59,7 +59,25 @@ const Unit3_Page5_Q1 = () => {
     setWrongInputs([]);
   };
   return (
-    <div className="question-wrapper-unit3-page6-q1">
+    <div
+      className="question-wrapper-unit3-page6-q1"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          width: "60%",
+          justifyContent: "flex-start",
+        }}
+      >
+
       <h5 className="header-title-page8">
         <span className="ex-A">A</span>
         <span style={{ color: "purple" }}>1</span> Look and write.
@@ -68,7 +86,7 @@ const Unit3_Page5_Q1 = () => {
         <div className="row2-unit3-page6-q1">
           <div style={{ display: "flex", gap: "15px" }}>
             <span className="num-span">1</span>{" "}
-            <img src={"dddddddddd"} alt="" className="q-img-unit3-page6-q1" />
+            <img src={bat} alt="" className="q-img-unit3-page6-q1" />
           </div>
           <span style={{ position: "relative", display: "flex" }}>
             <div className="input-wrapper-unit3-page6-q1">
@@ -86,9 +104,9 @@ const Unit3_Page5_Q1 = () => {
         </div>
 
         <div className="row2-unit3-page6-q1">
-          <div  style={{ display: "flex", gap: "15px" }}>
+          <div style={{ display: "flex", gap: "15px" }}>
             <span className="num-span">2</span>{" "}
-            <img src={"dddddddddd"} alt="" className="q-img-unit3-page6-q1" />
+            <img src={cap} alt="" className="q-img-unit3-page6-q1" />
           </div>
           <span style={{ position: "relative", display: "flex" }}>
             <div className="input-wrapper-unit3-page6-q1">
@@ -106,9 +124,9 @@ const Unit3_Page5_Q1 = () => {
         </div>
 
         <div className="row2-unit3-page6-q1">
-          <div  style={{ display: "flex", gap: "15px" }}>
+          <div style={{ display: "flex", gap: "15px" }}>
             <span className="num-span">3</span>{" "}
-            <img src={"dddddddddd"} alt="" className="q-img-unit3-page6-q1" />
+            <img src={ant} alt="" className="q-img-unit3-page6-q1" />
           </div>
           <span style={{ position: "relative", display: "flex" }}>
             <div className="input-wrapper-unit3-page6-q1">
@@ -126,9 +144,9 @@ const Unit3_Page5_Q1 = () => {
         </div>
 
         <div className="row2-unit3-page6-q1">
-          <div  style={{ display: "flex", gap: "15px" }}>
+          <div style={{ display: "flex", gap: "15px" }}>
             <span className="num-span">4</span>{" "}
-            <img src={"dddddddddd"} alt="" className="q-img-unit3-page6-q1" />
+            <img src={dad} alt="" className="q-img-unit3-page6-q1" />
           </div>
           <span style={{ position: "relative", display: "flex" }}>
             <div className="input-wrapper-unit3-page6-q1">
@@ -145,7 +163,7 @@ const Unit3_Page5_Q1 = () => {
           </span>
         </div>
       </div>
-
+</div>
       <div className="action-buttons-container">
         <button onClick={reset} className="try-again-button">
           Start Again ↻

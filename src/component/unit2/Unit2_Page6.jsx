@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import page_6 from "../../assets/img_unit2/imgs/Right 1 Unit 02 Stell Birthday6.jpg";
-import { FaHeadphones } from "react-icons/fa";
-import Popup from "../Popup/Popup";
-import CD14_Pg15_Intruction1_AdultLady from "../../assets/img_unit2/sounds-unit2/CD14.Pg15_Intruction1_Adult Lady.mp3";
 import song from "../../assets/img_unit2/sounds-unit2/Pg15.Sing_Adult Lady.mp3";
 import "./Unit2_Page6.css";
 import Unit2_Page6_Q1 from "./Unit2_Page6_Q1";

@@ -13,27 +13,56 @@ import Pg29_2_2_AdultLady from "../../assets/unit4/sounds/Pg29_2.2_Adult Lady.mp
 import Pg29_2_3_AdultLady from "../../assets/unit4/sounds/Pg29_2.3_Adult Lady.mp3";
 import Pg29_2_4_AdultLady from "../../assets/unit4/sounds/Pg29_2.4_Adult Lady.mp3";
 import CD28Pg29_Instruction1_AdultLady from "../../assets/unit4/sounds/CD28Pg29_Instruction1_Adult Lady.mp3";
-// import readImg from "../../assets/img_unit2/imgs/read_page2.jpg";
-// import Lolo_bebo from "../../assets/img_unit2/imgs/Lolo&Bebo.jpg";
+import repeat1 from "../../assets/img_unit2/imgs/listen and repeat 02.svg";
+import repeat2 from "../../assets/img_unit2/imgs/listen and repeat 03.svg";
+import read from "../../assets/unit1/imgs/P1 listen and repeat 01.svg";
+import Rabbit from "../../assets/img_unit2/imgs/Rabbit.svg";
+import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
+import arrowBtn from "../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
+import AudioWithCaption from "../AudioWithCaption";
+import FourImagesWithAudio from "../FourImagesWithAudio";
 import "./Unit4_Page2.css";
-const Unit4_Page2 = () => {
+const Unit4_Page2 = ({ openPopup }) => {
   const [activePopup, setActivePopup] = useState(null);
   const activeData = [
-    { page: "1", title: "Birthdays Are Fun", sound: soundMyPicture, imgSrc: "" },
+    {
+      page: "1",
+      title: "Birthdays Are Fun",
+      sound: soundMyPicture,
+      imgSrc: "",
+    },
     {
       page: "2",
       title: "Lesiten, Read and repeat",
-      sound:soundListen,
-      imgSrc: 'Lolo_bebo',
+      sound: soundListen,
+      imgSrc: "Lolo_bebo",
     },
     {
       page: "3",
       title: "Lestine and read along",
       sound: CD28Pg29_Instruction1_AdultLady,
-      imgSrc: 'readImg',
+      imgSrc: "readImg",
     },
   ];
-
+  // أصوات الصور
+  const imageSounds = [
+    null, // الصورة الأولى الكبيرة (إن ما بدك صوت إلها)
+    new Audio(sound3),
+    new Audio(sound4),
+    new Audio(sound5),
+    new Audio(sound6),
+  ];
+  const imageSounds2 = [
+    null, // الصورة الأولى الكبيرة (إن ما بدك صوت إلها)
+    new Audio(sound1),
+    new Audio(sound2_2),
+  ];
+  const captionsExample = [
+    { start: 0, end: 2.0, text: "Page11. Birthdays Are Fun" },
+    { start: 2.05, end: 5.2, text: "Hi, everyone. Today is my birthday." },
+    { start: 5.24, end: 7.2, text: " I'm seven years old." },
+    { start: 7.24, end: 9.0, text: "  My friends are here. It's fun." },
+  ];
   const audioRef = useRef(null);
   const introRef = useRef(null);
   const handleImageClick = (e, clickable) => {
@@ -55,8 +84,8 @@ const Unit4_Page2 = () => {
   ];
 
   const clickableAreas2 = [
-    { x1: 12.0, y1:41.0, x2: 50.0, y2: 46.0, sound:Pg29_1_1_Bebo  },
-    { x1: 56.0, y1: 45.0, x2: 83.0, y2: 43.0, sound:Pg29_1_2_Lolo },
+    { x1: 12.0, y1: 41.0, x2: 50.0, y2: 46.0, sound: Pg29_1_1_Bebo },
+    { x1: 56.0, y1: 45.0, x2: 83.0, y2: 43.0, sound: Pg29_1_2_Lolo },
     ,
   ];
   const checkAreaAndPlaySound = (x, y, clickable) => {
@@ -87,26 +116,23 @@ const Unit4_Page2 = () => {
   }, [activePopup]);
 
   return (
-    <div className="unit4-page-background"  style={{position:"relative"}}>
+    <div className="unit4-page-background" style={{ position: "relative" }}>
       <img src={page_2} />
-      <span className="headset-icon-CD-unit4-page2-1 shadow-md hover:scale-110 transition">
-        <FaHeadphones
-          size={12}
-          color="rgba(255, 255, 255, 1)"
-          onClick={() => setActivePopup(1)}
-        />
-      </span>
-      <Popup
-        isOpen={activePopup === 1}
-        onClose={() => setActivePopup(null)}
-        children={
-          <>
-            <audio controls>
-              <source src={activeData[0].sound} type="audio/mp3" />
-            </audio>
-          </>
+       <svg
+        width="30"
+        height="30"
+        viewBox="0 0 90 90"
+        onClick={() =>
+          openPopup(
+            <AudioWithCaption src={soundMyPicture} captions={captionsExample} />,
+            true
+          )
         }
-      />
+        className="headset-icon-CD-unit4-page2-1 hover:scale-110 transition"
+      >
+        <image href={audioBtn} x="0" y="0" width="90" height="90" />
+      </svg>
+     
       <span className="headset-icon-CD-unit4-page2-2 shadow-md hover:scale-110 transition">
         <FaHeadphones
           size={12}
@@ -127,7 +153,7 @@ const Unit4_Page2 = () => {
               // src={Lolo_bebo}
               style={{ height: "auto" }}
               onClick={(e) => {
-                handleImageClick(e,clickableAreas2);
+                handleImageClick(e, clickableAreas2);
               }}
             />
             <audio ref={audioRef} style={{ display: "none" }} />
@@ -156,11 +182,11 @@ const Unit4_Page2 = () => {
           onClick={() => setActivePopup(3)}
         />
       </span>
-       <Popup
+      <Popup
         isOpen={activePopup === 3}
         onClose={() => setActivePopup(null)}
         children={
-          <div style={{position:"relative"}}>
+          <div style={{ position: "relative" }}>
             <audio ref={introRef} autoPlay style={{ display: "none" }}>
               <source src={activeData[2].sound} type="audio/mp3" />
             </audio>
@@ -168,25 +194,25 @@ const Unit4_Page2 = () => {
               src={activeData[2].imgSrc}
               style={{ height: "auto", width: "600px" }}
               onClick={(e) => {
-                handleImageClick(e,clickableAreas);
+                handleImageClick(e, clickableAreas);
               }}
             />
-             <audio ref={audioRef} style={{ display: "none" }} />
+            <audio ref={audioRef} style={{ display: "none" }} />
 
-              {clickableAreas.map((area, index) => (
-                <div
-                  key={index}
-                  className="clickable-area"
-                  style={{
-                    left: `${area.x1}%`,
-                    top: `${area.y1}%`,
-                    width: `${area.x2 - area.x1}%`,
-                    height: `${area.y2 - area.y1}%`,
-                  }}
-                  onMouseEnter={(e) => (e.target.style.cursor = "pointer")}
-                  onClick={() => playSound(area.sound)}
-                ></div>
-              ))}
+            {clickableAreas.map((area, index) => (
+              <div
+                key={index}
+                className="clickable-area"
+                style={{
+                  left: `${area.x1}%`,
+                  top: `${area.y1}%`,
+                  width: `${area.x2 - area.x1}%`,
+                  height: `${area.y2 - area.y1}%`,
+                }}
+                onMouseEnter={(e) => (e.target.style.cursor = "pointer")}
+                onClick={() => playSound(area.sound)}
+              ></div>
+            ))}
           </div>
         }
       />

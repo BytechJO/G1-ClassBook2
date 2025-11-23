@@ -6,29 +6,29 @@
   transform: translate(-50%, -50%);
   cursor: pointer;
   position: absolute;
-  background-color: #6bcff6;
+  /* background-color: #6bcff6;
   border-radius: 20px;
-  border: rgb(255, 255, 255) solid 2px;
+  border: rgb(255, 255, 255) solid 2px; */
   padding: 5px;
 }
 
 .headset-icon-CD-unit4-page1-1 {
   top: 7%;
-  right: 8%;
+  right: 7.5%;
 }
 
 .click-icon-unit4-page1-1 {
-  left: 7%;
+  left: 20%;
   top: 42%;
 }
 
 .headset-icon-CD-unit4-page1-2 {
-  bottom: 39%;
-  left: 4%;
+  bottom: 37.5%;
+  left: 26%;
 }
 
 .click-icon-unit4-page1-2 {
-  bottom: 12.5%;
+  bottom: 11.5%;
   right: 39%;
 }
 

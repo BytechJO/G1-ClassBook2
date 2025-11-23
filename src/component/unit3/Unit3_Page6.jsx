@@ -1,73 +1,80 @@
-import React, { useState } from "react";
 import page_6 from "../../assets/unit3/imgs3/Right 1 Unit 03 Let's Go to School6.jpg";
-import { FaHeadphones } from "react-icons/fa";
-import { PiCursorClickBold } from "react-icons/pi";
-import Popup from "../Popup/Popup";
 import "./Unit3_Page6.css";
-import Unit3_Page6_Q1 from "./Unit3_Page5_Q1";
 import Unit3_Page6_Q2 from "./Unit3_Page6_Q2";
 import Unit3_Page6_Q3 from "./Unit3_Page6_Q3";
 import CD25_Pg27_Song_AdultLady from "../../assets/unit3/sound3/CD25.Pg27_Song_Adult Lady.mp3";
+import arrowBtn from "../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
+import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
+import AudioWithCaption from "../AudioWithCaption";
 
-const Unit3_Page6 = () => {
-  const [activePopup, setActivePopup] = useState(null);
+const Unit3_Page6 = ({ openPopup }) => {
+
+  const captionsExample = [
+    { start: 0, end: 1, text: "Hello!" },
+    { start: 1, end: 2.2, text: "My name is Tom." },
+    { start: 2.2, end: 4, text: "I like apples." },
+  ];
   return (
     <div className="unit2-page-background">
       <img src={page_6} />
-      <span
-        className="click-icon-unit3-page6-2 shadow-md hover:scale-110 transition"
-        onClick={() => setActivePopup(2)}
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 60 60"
+        onClick={() =>
+          openPopup(
+            <>
+              <Unit3_Page6_Q2 />
+            </>,
+            false
+          )
+        }
+        className="click-icon-unit3-page6-2 hover:scale-110 transition"
       >
-        <PiCursorClickBold size={12} color="rgb(255, 255, 255)" />
-      </span>
-      <Popup
-        isOpen={activePopup === 2}
-        onClose={() => setActivePopup(null)}
-        children={
-          <>
-            <Unit3_Page6_Q2 />
-          </>
+        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+      </svg>
+
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 60 60"
+        onClick={() =>
+          openPopup(
+            <>
+              <Unit3_Page6_Q3 />
+            </>,
+            false
+          )
         }
-      />
-      <span
-        className="click-icon-unit3-page6-3 shadow-md hover:scale-110 transition"
-        onClick={() => setActivePopup(3)}
+        className="click-icon-unit3-page6-3  hover:scale-110 transition"
       >
-        <PiCursorClickBold size={12} color="rgb(255, 255, 255)" />
-      </span>
-      <Popup
-        isOpen={activePopup === 3}
-        onClose={() => setActivePopup(null)}
-        children={
-          <>
-            <Unit3_Page6_Q3 />
-          </>
+        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+      </svg>
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 90 90"
+        onClick={() =>
+          openPopup(
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignContent: "center",
+              }}
+            >
+              <AudioWithCaption
+                src={CD25_Pg27_Song_AdultLady}
+                captions={captionsExample}
+              />
+            </div>,
+            true
+          )
         }
-      />
-      <span className="headset-icon-CD-unit3-page6-1 shadow-md hover:scale-110 transition">
-        <FaHeadphones
-          size={12}
-          color="rgb(255, 255, 255)"
-          onClick={() => setActivePopup(4)}
-        />
-      </span>
-      <Popup
-        isOpen={activePopup === 4}
-        onClose={() => setActivePopup(null)}
-        children={
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignContent: "center",
-            }}
-          >
-            <audio controls>
-              <source src={CD25_Pg27_Song_AdultLady} type="audio/mp3" />
-            </audio>
-          </div>
-        }
-      />
+        className="headset-icon-CD-unit3-page6-1 hover:scale-110 transition"
+      >
+        <image href={audioBtn} x="0" y="0" width="90" height="90" />
+      </svg>
     </div>
   );
 };

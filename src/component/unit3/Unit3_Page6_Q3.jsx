@@ -61,39 +61,57 @@ const Unit3_Page6_Q3 = () => {
   };
 
   return (
-    <div className="unit3-q6-container">
-      <h5 className="header-title-page8">
-        <span className="letter-of-Q">F</span>Read and draw.
-      </h5>
+    <div
+      className="unit3-q6-container"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        className="div-forall"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          width: "60%",
+          justifyContent: "flex-start",
+        }}
+      >
+        <h5 className="header-title-page8">
+          <span className="letter-of-Q">F</span>Read and draw.
+        </h5>
 
-      <div className="unit3-q6-table">
-        {questions.map((q) => (
-          <div key={q.id} className="unit3-q6-row">
-            <div className="unit3-q6-text">
-              <span style={{ color:"darkblue", fontWeight: "700" }}>
-                {q.id}
-              </span>{" "}
-              {q.text}
+        <div className="unit3-q6-table">
+          {questions.map((q) => (
+            <div key={q.id} className="unit3-q6-row">
+              <div className="unit3-q6-text">
+                <span style={{ color: "darkblue", fontWeight: "700" }}>
+                  {q.id}
+                </span>{" "}
+                {q.text}
+              </div>
+
+              {/* Canvas Area */}
+              <canvas
+                ref={(el) => (canvasRefs.current[q.id] = el)}
+                width={270}
+                height={80}
+                className="unit3-q6-canvas"
+                onMouseDown={(e) => startDrawing(e, q.id)}
+                onMouseMove={(e) => draw(e, q.id)}
+                onMouseUp={() => stopDrawing(q.id)}
+                onMouseLeave={() => stopDrawing(q.id)}
+                onTouchStart={(e) => startDrawing(e, q.id)}
+                onTouchMove={(e) => draw(e, q.id)}
+                onTouchEnd={() => stopDrawing(q.id)}
+              />
             </div>
-
-            {/* Canvas Area */}
-            <canvas
-              ref={(el) => (canvasRefs.current[q.id] = el)}
-              width={270}
-              height={80}
-              className="unit3-q6-canvas"
-              onMouseDown={(e) => startDrawing(e, q.id)}
-              onMouseMove={(e) => draw(e, q.id)}
-              onMouseUp={() => stopDrawing(q.id)}
-              onMouseLeave={() => stopDrawing(q.id)}
-              onTouchStart={(e) => startDrawing(e, q.id)}
-              onTouchMove={(e) => draw(e, q.id)}
-              onTouchEnd={() => stopDrawing(q.id)}
-            />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-
       <div className="action-buttons-container">
         <button onClick={resetCanvas} className="try-again-button">
           Clear Drawings ↻

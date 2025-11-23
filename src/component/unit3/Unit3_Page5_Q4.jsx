@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Unit3_Page5_Q4.css";
 import ValidationAlert from "../Popup/ValidationAlert";
+
 const Unit3_Page5_Q4 = () => {
   const data = [
     { letter: "a", number: 1 },
@@ -103,7 +104,23 @@ const Unit3_Page5_Q4 = () => {
   };
 
   return (
-    <div className="unit3-q4-container3">
+    <div className="unit3-q4-container3"   style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        className="div-forall"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          width: "60%",
+          justifyContent: "flex-start",
+        }}
+      >
       <h5 className="header-title-page8">
         <span className="letter-of-Q"> C</span>Write the sentence.
       </h5>
@@ -168,6 +185,7 @@ const Unit3_Page5_Q4 = () => {
             </span>
           ))}
         </div>
+      </div>
       </div>
       <div className="action-buttons-container">
         <button

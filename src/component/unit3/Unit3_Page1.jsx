@@ -1,42 +1,42 @@
-import React, { useState, useRef, useEffect } from "react";
 import page_1 from "../../assets/unit3/imgs3/Right 1 Unit 03 Let's Go to School.jpg";
 import "./Unit3_Page1.css";
-import Pg22_U3_Intro_AdultLady from "../../assets/unit3/sound3/CD19.Pg22_U3.Intro_Adult Lady.mp3";
+import Pg22_U3_Intro_AdultLady from "../../assets/unit3/sound3/U3 Page 22-23.mp3";
 import AudioWithCaption from "../AudioWithCaption";
 import Unit3_Page1_find from "./Unit3_Page1_find";
 import Unit3_Page1_Vocab from "./Unit3_Page1_Vocab";
 import Unit3_Page1_Read from "./Unit3_Pag1_Read";
 import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
+
 import arrowBtn from "../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
 const Unit3_Page1 = ({ openPopup }) => {
   const captionsExample = [
-    { start: 0, end: 4.0, text: " Page 10, Unit 2, Stella's Birthday. " },
-    { start: 4.05, end: 7.09, text: "Page 10, Unit 2, Vocabulary." },
-    { start: 7.12, end: 9.19, text: " 1. Party Hat. " },
-    { start: 9.22, end: 11.16, text: "2. Jello." },
-    { start: 11.2, end: 14.0, text: "3. Cake. " },
-    { start: 14.04, end: 16.23, text: "4. Happy Birthday." },
-    { start: 16.26, end: 19.1, text: " 5. Balloons." },
-    { start: 19.14, end: 21.17, text: " 6. Present. " },
-    { start: 21.2, end: 24.04, text: "7.card" },
-    { start: 24.08, end: 26.29, text: "Page 10. Listen and read along. " },
-    { start: 26.33, end: 30.12, text: "B, bird, ball, boy " },
-    { start: 30.16, end: 32.28, text: "Page 11. Birthday is fun" },
+    { start: 0, end: 4.02, text: "Page 22, unit 3. Let's go to school. " },
+    { start: 4.05, end: 7.11, text: "Page 22, unit 3 vocabulary. " },
+    { start: 7.14, end: 9.24, text: "1.	numbers." },
+    { start: 9.27, end: 12.16, text: "2.	close your book." },
+    { start: 12.2, end: 15.12, text: "3.	open your book. " },
+    { start: 15.15, end: 18.12, text: "4.	make a line. " },
+    { start: 18.15, end: 21.06, text: "5.	listen. " },
+    { start: 21.1, end: 23.25, text: "6.	quiet." },
+    { start: 23.29, end: 27.16, text: "7.	take out your pencil. " },
+    { start: 27.2, end: 31.15, text: "Page 22. Listen and read along." },
+    { start: 31.19, end: 35.18, text: "Short A. Ant, pan, rat. " },
+    { start: 35.21, end: 38.11, text: "Page 23, come and sing. " },
     {
-      start: 32.32,
-      end: 40.09,
-      text: "Hi, everyone. Today is my birthday. I'm seven years old. My friends are here. It's fun. ",
+      start: 38.15,
+      end: 49.8,
+      text: "I love school. We open our books. We make a line. We do many things. My teacher plays songs. We listen. ",
     },
-    { start: 40.12, end: 43.18, text: "Page 11. Listen, read & repeat. " },
+    { start: 49.82, end: 53.01, text: "Page 23. Listen, read, and repeat. " },
     {
-      start: 43.22,
-      end: 46.26,
-      text: "What's your name? My name is Lolo. ",
+      start: 53.05,
+      end: 56.26,
+      text: "My favorite subject is science. ",
     },
-    { start: 46.3, end: 50.14, text: "Page 11. Listen and read along. " },
-    { start: 50.18, end: 53.25, text: "P, pencil, pink, pizza. " },
+    { start: 56.3, end: 59.18, text: "My favorite subject is art. " },
+    { start: 59.21, end: 63.21, text: "Page 23. Listen and read along." },
+    { start: 63.24, end: 67.26, text: "Short A. Bat, cap, dad." },
   ];
-
   return (
     <div className="unit2-page-background">
       <img src={page_1} />
