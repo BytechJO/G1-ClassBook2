@@ -1,16 +1,56 @@
-# React + Vite
+# Right-G1
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Description
 
-Currently, two official plugins are available:
+Right-G1 is a web application built using **React** with **Vite**.  
+It provides an interactive and responsive user interface designed for educational content and smooth user experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Fast and interactive user interface
+- Built with modern frontend tools (**React + Vite**)
+- Organized and scalable component structure
+- Hot Module Replacement (HMR) for instant updates
+- Easy to extend and maintain
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Requirements
+
+Before running the project, make sure you have:
+
+- **Node.js** installed
+- **npm** or **yarn** (included with Node.js)
+
+---
+
+## Opening the Project
+
+1. Open your **terminal**
+2. Navigate to the project folder:
+
+   ```bash
+   cd Right-G1
+   ```
+
+3. Make sure you are inside the folder that contains the src directory.
+
+---
+
+## How to Run the Project
+
+```bash
+1. Install Dependencies
+
+npm install
+
+2. Run the Development Server
+
+npm run dev
+
+3. Open the Application
+
+After running the project, open the link displayed in the terminal in your browser to view the application.
+```
