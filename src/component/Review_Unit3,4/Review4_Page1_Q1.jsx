@@ -74,7 +74,7 @@ const Review4_Page1_Q1 = () => {
     <div
       style={{
         display: "flex",
-        marginTop: "30px",
+        
         justifyContent: "center",
       }}
     >
