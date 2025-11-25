@@ -46,7 +46,7 @@
   align-items: center;
 }
 
-.dot22 {
+.dot22-unit2-q7 {
   width: 14px;
   height: 14px;
   background: red;
@@ -55,31 +55,31 @@
   pointer-events: auto !important;
 }
 
-.end-dot22 {
+.end-dot22-unit2-q7 {
 
   transform: translateX(-50%);
 
   position: absolute !important;
   top: -30px; /* عدّلي الرقم حسب مكان الجمل */
 }
-.word-box2:nth-child(1) .end-dot22 { left: 5%; }
-.word-box2:nth-child(2) .end-dot22 { left: 27%; }
-.word-box2:nth-child(3) .end-dot22 { left: 91%; }
-.start-dot22 {
+.word-box2:nth-child(1) .end-dot22-unit2-q7 { left: 50%; }
+.word-box2:nth-child(2) .end-dot22-unit2-q7 { left: 27%; }
+.word-box2:nth-child(3) .end-dot22-unit2-q7 { left: 46%; }
+.start-dot22-unit2-q7 {
   position: absolute !important;
   top: 135px; /* عدّلي الرقم حسب موقعك */
   left: 50%;
   transform: translateX(-50%);
 }
 
-.img-box2:nth-child(1) .start-dot22 {
-  left: 15%;
+.img-box2:nth-child(1) .start-dot22-unit2-q7 {
+  left: 54%;
 }
-.img-box2:nth-child(2) .start-dot22 {
+.img-box2:nth-child(2) .start-dot22-unit2-q7 {
   left: 50%;
 }
-.img-box2:nth-child(3) .start-dot22 {
-  left: 85%;
+.img-box2:nth-child(3) .start-dot22-unit2-q7 {
+  left: 56%;
 }
 .lines-layer2 {
   position: absolute;

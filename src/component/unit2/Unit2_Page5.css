@@ -145,14 +145,7 @@
   transform: scale(1.2);
 }
 
-.selected {
-  border: 2px solid #2c5287;
-  background: #2c5287;
-  color: white;
-  height: 50px;
-  width: 50px;
-  border-radius: 30px;
-}
+
 
 .unit2-q3-wrapper {
   width: 100%;

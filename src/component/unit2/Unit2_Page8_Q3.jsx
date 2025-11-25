@@ -10,7 +10,7 @@ import sound3 from "../../assets/img_unit2/sounds-unit2/Pg17_1.3_Adult Lady.mp3"
 import sound4 from "../../assets/img_unit2/sounds-unit2/Pg17_1.4_Adult Lady.mp3";
 import sound5 from "../../assets/img_unit2/sounds-unit2/Pg17_1.5_Adult Lady.mp3";
 import ValidationAlert from "../Popup/ValidationAlert";
-import "./Unit2_Page7_Q2.css";
+import "./Unit2_Page8_Q3.css";
 import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
@@ -124,7 +124,7 @@ const Unit2_Page8_Q3 = () => {
     const endDot = document.elementFromPoint(e.clientX, e.clientY);
 
     // ✅ تصحيح اسم الكلاس
-    if (!endDot || !endDot.classList.contains("end-dot2")) {
+    if (!endDot || !endDot.classList.contains("end-dot2-unit2")) {
       setLines((prev) => prev.slice(0, -1));
       return;
     }
@@ -335,7 +335,7 @@ const Unit2_Page8_Q3 = () => {
                 )}
 
                 <div
-                  className="dot2 start-dot2"
+                  className="dot2-unit2 start-dot2-unit2"
                   data-image="img1"
                   onMouseDown={handleDotDown2}
                 ></div>
@@ -347,7 +347,7 @@ const Unit2_Page8_Q3 = () => {
                   <span className="error-mark-img">✕</span>
                 )}
                 <div
-                  className="dot2 start-dot2"
+                  className="dot2-unit2 start-dot2-unit2"
                   data-image="img2"
                   onMouseDown={handleDotDown2}
                 ></div>
@@ -359,7 +359,7 @@ const Unit2_Page8_Q3 = () => {
                   <span className="error-mark-img">✕</span>
                 )}
                 <div
-                  className="dot2 start-dot2"
+                  className="dot2-unit2 start-dot2-unit2"
                   data-image="img3"
                   onMouseDown={handleDotDown2}
                 ></div>
@@ -370,7 +370,7 @@ const Unit2_Page8_Q3 = () => {
                   <span className="error-mark-img">✕</span>
                 )}
                 <div
-                  className="dot2 start-dot2"
+                  className="dot2-unit2 start-dot2-unit2"
                   data-image="img4"
                   onMouseDown={handleDotDown2}
                 ></div>
@@ -381,7 +381,7 @@ const Unit2_Page8_Q3 = () => {
                   <span className="error-mark-img">✕</span>
                 )}
                 <div
-                  className="dot2 start-dot2"
+                  className="dot2-unit2 start-dot2-unit2"
                   data-image="img5"
                   onMouseDown={handleDotDown2}
                 ></div>
@@ -406,7 +406,7 @@ const Unit2_Page8_Q3 = () => {
                 >
                   d
                 </h5>
-                <div className="dot2 end-dot2" data-word="d"></div>
+                <div className="dot2-unit2 end-dot2-unit2" data-word="d"></div>
               </div>
 
               <div className="word-box2">
@@ -425,7 +425,7 @@ const Unit2_Page8_Q3 = () => {
                 >
                   t
                 </h5>
-                <div className="dot2 end-dot2" data-word="t"></div>
+                <div className="dot2-unit2 end-dot2-unit2" data-word="t"></div>
               </div>
             </div>
 

@@ -37,7 +37,7 @@ const Page2 = ({ goToUnit }) => {
     },
     {
       title: "Unit 5",
-      startIndex: 28,
+      startIndex: 40,
       top: "77%",
       left: "13%",
       width: "20%",

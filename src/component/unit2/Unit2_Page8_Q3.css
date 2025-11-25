@@ -46,7 +46,7 @@
   align-items: center;
 }
 
-.dot2 {
+.dot2-unit2 {
   width: 14px;
   height: 14px;
   background: red;
@@ -55,13 +55,13 @@
   pointer-events: auto !important;
 }
 
-.end-dot2 {
+.end-dot2-unit2 {
   bottom: -15px;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.start-dot2 {
+.start-dot2-unit2 {
   top: 50%;
   right: -20px;
   transform: translateY(-50%);
