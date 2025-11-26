@@ -1,79 +1,95 @@
 import React, { useState } from "react";
-import "./Unit6_Page6_Q2.css";
+import bat from "../../assets/unit4/imgs/U4P32ExeA1-01.svg";
+import cap from "../../assets/unit4/imgs/U4P32ExeA1-02.svg";
 import ValidationAlert from "../Popup/ValidationAlert";
-import img1 from "../../assets/unit3/imgs3/P27exeE-01.svg"
-import img2 from "../../assets/unit3/imgs3/P27exeE-02.svg"
-import img3 from "../../assets/unit3/imgs3/P27exeE-03.svg"
-import img4 from "../../assets/unit3/imgs3/P27exeE-04.svg"
-const Unit3_Page6_Q2 = () => {
-  const questions = [
+import "./Unit6_Page6_Q2.css";
+const Unit6_Page6_Q2 = () => {
+  const items = [
+    { img: bat, correct: "can", correctInput: "can swim.", input: "She" },
     {
-      id: 1,
-      text: "Close your book.",
-      image: img1,
-      correct: "✓",
-    },
-    { id: 2, text: "Quiet!", image: img2, correct: "✓" },
-    {
-      id: 3,
-      text: "Take out your pencil.",
-      image: img3,
-      correct: "✗",
-    },
-    {
-      id: 4,
-      text: "Make a line.",
-      image: img4,
-      correct: "✓",
+      img: cap,
+      correct: "can't",
+      correctInput: "He can’t fly a kite.",
+      input: "",
     },
   ];
 
-  const [answers, setAnswers] = useState({});
-  const [showResult, setShowResult] = useState([]);
+  const [selected, setSelected] = useState(["", ""]);
+  const [answers, setAnswers] = useState(["", ""]);
+  const [wrongInputs, setWrongInputs] = useState([]);
+  const [showResult, setShowResult] = useState(false);
+  const handleSelect = (value, index) => {
+    const newSel = [...selected];
+    newSel[index] = value;
+    setSelected(newSel);
+    setShowResult(false);
+  };
 
-  const selectAnswer = (id, value) => {
-    setAnswers({ ...answers, [id]: value });
+  const handleInput = (value, index) => {
+    const newAns = [...answers];
+    newAns[index] = value;
+    setAnswers(newAns);
+    setShowResult(false);
+  };
+
+  const resetAll = () => {
+    setSelected(["", ""]);
+    setAnswers(["", ""]);
+    setWrongInputs([]);
+    setShowResult(false);
   };
 
   const checkAnswers = () => {
-    // 1) فحص الخانات الفارغة
-    const isEmpty = questions.some((q) => !answers[q.id]);
-    if (isEmpty) {
-      ValidationAlert.info("Please choose ✓ or ✗ for all questions!");
+    // 1) التشييك إذا في دائرة مش مختارة
+    if (selected.some((s) => s === "")) {
+      ValidationAlert.info("Please choose a circle (f or v) for all items!");
       return;
     }
 
-    // 2) مقارنة الإجابات
-    const results = questions.map((q) =>
-      answers[q.id] === q.correct ? "correct" : "wrong"
-    );
+    // 2) التشييك إذا في input فاضي
+    if (answers.some((a) => a.trim() === "")) {
+      ValidationAlert.info("Please fill in all the writing boxes!");
+      return;
+    }
 
-    setShowResult(results);
+    let wrong = [];
+    let score = 0;
 
-    // 3) حساب السكور
-    const correctCount = results.filter((r) => r === "correct").length;
-    const total = questions.length;
-    const scoreMsg = `${correctCount} / ${total}`;
+    items.forEach((item, i) => {
+      const circleCorrect = selected[i] === item.correct;
+      const inputCorrect =
+        answers[i].trim().toLowerCase() === item.correctInput.toLowerCase();
 
-    let color =
-      correctCount === total ? "green" : correctCount === 0 ? "red" : "orange";
+      // نقطة للدائرة + نقطة للكتابة
+      if (circleCorrect) score++;
+      if (inputCorrect) score++;
 
-    const resultHTML = `
-      <div style="font-size: 20px; text-align:center; margin-top: 8px;">
-        <span style="color:${color}; font-weight:bold;">
-          Score: ${scoreMsg}
-        </span>
-      </div>
-    `;
+      if (!circleCorrect || !inputCorrect) {
+        wrong.push(i);
+      }
+    });
 
-    if (correctCount === total) ValidationAlert.success(resultHTML);
-    else if (correctCount === 0) ValidationAlert.error(resultHTML);
-    else ValidationAlert.warning(resultHTML);
-  };
+    setWrongInputs(wrong);
+    setShowResult(true);
 
-  const resetAnswers = () => {
-    setAnswers({});
-    setShowResult([]);
+    const total = items.length * 2; // 8 نقاط
+    const color = score === total ? "green" : score === 0 ? "red" : "orange";
+
+    const scoreMessage = `
+    <div style="font-size: 20px; margin-top: 10px; text-align:center;">
+      <span style="color:${color}; font-weight:bold;">
+        Score: ${score} / ${total}
+      </span>
+    </div>
+  `;
+
+    if (score === total) {
+      ValidationAlert.success(scoreMessage);
+    } else if (score === 0) {
+      ValidationAlert.error(scoreMessage);
+    } else {
+      ValidationAlert.warning(scoreMessage);
+    }
   };
 
   return (
@@ -96,75 +112,88 @@ const Unit3_Page6_Q2 = () => {
         }}
       >
         <h5 className="header-title-page8">
-          <span className="letter-of-Q">E</span> Read, look, and choose
-          <span style={{ color: "red" }}> ✓ </span> or
-          <span style={{ color: "red" }}> ✗</span>.
+          <span className="letter-of-Q">E</span> Look, circle, and write.
         </h5>
 
-        <div className="unit3-q5-container">
-          {questions.map((q, index) => (
-            <div key={q.id} className="unit3-q5-question-box">
-              <p
-                className="unit3-q5-question-text"
-                style={{ fontSize: "20px" }}
-              >
-                <span style={{ color: "darkblue", fontWeight: "700" }}>
-                  {q.id}.
-                </span>
-                {q.text}
-              </p>
+        <div className="question-grid-unit6-page6-q2">
+          {items.map((item, i) => (
+            <div className="question-box-unit4-page5-q1" key={i}>
+              <span style={{fontSize:"22px" ,fontWeight:"600" ,color:"#1d4f7b"}}>{i+1}</span>
+              <div className="img-option-unit6-p6-q2">
+                <img src={item.img} className="q-img-unit4-page5-q1" />
 
-              <div className="unit3-q5-flex">
-                <img src={q.image} alt="" className="unit3-q5-question-img" />
-
-                <div className="unit3-q5-options-box">
-                  {/* خيار الصح */}
-                  <div className="option-wrapper">
+                {/* f / v choices */}
+                <div className="choices-unit6-page6-q2 ">
+                  <div className="circle-wrapper">
                     <div
-                      className={`option-btn ${
-                        answers[q.id] === "✓" ? "selected" : ""
+                      className={`circle-choice-unit6-page6-q2  ${
+                        selected[i] === "can" ? "active" : ""
                       }`}
-                      onClick={() => selectAnswer(q.id, "✓")}
+                      onClick={() => handleSelect("can", i)}
                     >
-                      ✓
+                      can
                     </div>
 
-                    {showResult[index] === "wrong" && answers[q.id] === "✓" && (
-                      <div className="unit3-q5-wrong-icon">X</div>
-                    )}
+                    {/* X فوق دائرة f إذا كانت غلط */}
+                    {showResult &&
+                      selected[i] === "can" &&
+                      selected[i] !== item.correct && (
+                        <div className="wrong-mark">✕</div>
+                      )}
+                  </div>
+               
+                <div className="circle-wrapper">
+                  <div
+                    className={`circle-choice-unit6-page6-q2 ${
+                      selected[i] === "can't" ? "active" : ""
+                    }`}
+                    onClick={() => handleSelect("can't", i)}
+                  >
+                    can't
                   </div>
 
-                  {/* خيار الخطأ */}
-                  <div className="option-wrapper">
-                    <div
-                      className={`option-btn ${
-                        answers[q.id] === "✗" ? "selected" : ""
-                      }`}
-                      onClick={() => selectAnswer(q.id, "✗")}
-                    >
-                      ✗
-                    </div>
-
-                    {showResult[index] === "wrong" && answers[q.id] === "✗" && (
-                      <div className="unit3-q5-wrong-icon">X</div>
+                  {/* X فوق دائرة v إذا كانت غلط */}
+                  {showResult &&
+                    selected[i] === "can't" &&
+                    selected[i] !== item.correct && (
+                      <div className="wrong-mark">✕</div>
                     )}
-                  </div>
                 </div>
+              </div>
+ </div>
+              {/* writing input */}
+              <div className="input-wrapper-unit6-p6-q2">
+                {item.input}
+                <input
+                  type="text"
+                  className="write-input-unit4-page5-q1"
+                  value={answers[i]}
+                  onChange={(e) => handleInput(e.target.value, i)}
+                />
+
+                {/* X فوق الإنبت إذا كانت الكلمة غلط */}
+                {showResult &&
+                  answers[i].trim() !== "" &&
+                  answers[i].trim().toLowerCase() !==
+                    item.correctInput.toLowerCase() &&
+                  wrongInputs.includes(i) && (
+                    <div className="wrong-mark">✕</div>
+                  )}
               </div>
             </div>
           ))}
         </div>
-        <div className="action-buttons-container">
-          <button onClick={resetAnswers} className="try-again-button">
-            Start Again ↻
-          </button>
-          <button onClick={checkAnswers} className="check-button2">
-            Check Answer ✓
-          </button>
-        </div>
+      </div>{" "}
+      <div className="action-buttons-container">
+        <button onClick={resetAll} className="try-again-button">
+          Start Again ↻
+        </button>
+        <button onClick={checkAnswers} className="check-button2">
+          Check Answer ✓
+        </button>
       </div>
     </div>
   );
 };
 
-export default Unit3_Page6_Q2;
+export default Unit6_Page6_Q2;

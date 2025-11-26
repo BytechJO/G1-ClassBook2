@@ -33,8 +33,11 @@ const Unit6_Page5_Q4 = () => {
   ];
 
   const questionGroups = [
-    [23, 8, 1, 20, 19], // __what's_____
-    [20, 8, 9, 19], // this
+    [3, 1, 14], // __what's_____
+    [25, 15, 21], // this
+    [18, 9, 4, 5], // this
+    [1], // this
+    [2, 9, 11, 5], // this
   ];
   const [bigInput, setBigInput] = useState("");
   const [bigInputWrong, setBigInputWrong] = useState(false);
@@ -49,47 +52,54 @@ const Unit6_Page5_Q4 = () => {
   };
 
   const formedWords = letters.map((group) => group.join(""));
-  const fullSentence = "This is a ruler";
+  // const fullSentence = "This is a ruler";
 
   const handleCheckAnswers = () => {
-    // 1️⃣ التحقق من وجود فراغات
-    const hasEmpty = letters.some((group) =>
-      group.some((letter) => letter === "")
-    );
-    if (hasEmpty) {
-      ValidationAlert.info(
-        "Oops!",
-        "Please complete all fields before checking."
-      );
-      return;
+ // 1️⃣ check empty fields
+const hasEmpty = letters.some((group) =>
+  group.some((letter) => letter === "")
+);
+if (hasEmpty) {
+  ValidationAlert.info(
+    "Oops!",
+    "Please complete all fields before checking."
+  );
+  return;
+}
+
+// 2️⃣ count correct inputs
+let correctCount = 0;
+let total = letters.flat().length + 1; // +1 for big input
+let wrong = [];
+
+// --- check big input ---
+let isBigCorrect = true;
+
+if (bigInput.trim() === "") {
+  isBigCorrect = false;
+  setBigInputWrong(true);
+} else {
+  isBigCorrect = true;
+  setBigInputWrong(false);
+  correctCount++; // big input is correct if not empty
+}
+
+// --- check small inputs ---
+for (let g = 0; g < letters.length; g++) {
+  for (let l = 0; l < letters[g].length; l++) {
+    const letter = letters[g][l];
+    const correctNum = data.find((d) => d.letter === letter)?.number;
+
+    if (correctNum === questionGroups[g][l]) {
+      correctCount++;
+    } else {
+      wrong.push(`${g}-${l}`);
     }
+  }
+}
 
-    // 2️⃣ حساب عدد الصحيحة
-    let correctCount = 0;
-    let total = letters.flat().length + 1; // +1 for big input
-    let wrong = []; // ⭐ تم التعديل هون
-    const isBigCorrect =
-      bigInput.trim().toLowerCase() === fullSentence.trim().toLowerCase();
+setWrongInputs(wrong);
 
-    setBigInputWrong(!isBigCorrect);
-
-    // 🔥 أضيفي هاي
-    if (isBigCorrect) {
-      correctCount++; // add point for the big sentence
-    }
-    for (let g = 0; g < letters.length; g++) {
-      for (let l = 0; l < letters[g].length; l++) {
-        const letter = letters[g][l];
-        const correctNum = data.find((d) => d.letter === letter)?.number;
-
-        if (correctNum === questionGroups[g][l]) {
-          correctCount++;
-        } else {
-          wrong.push(`${g}-${l}`); // ⭐ تم التعديل هون
-        }
-      }
-    }
-    setWrongInputs(wrong); // ⭐ تم التعديل هون
     // 3️⃣ تحديد اللون حسب السكور
     const color =
       correctCount === total ? "green" : correctCount === 0 ? "red" : "orange";
@@ -104,7 +114,7 @@ const Unit6_Page5_Q4 = () => {
   `;
 
     // 🔹 3) التحقق من الجملة الكبيرة
-    const correctSentence = fullSentence.trim().toLowerCase(); // from small inputs
+    // const correctSentence = fullSentence.trim().toLowerCase(); // from small inputs
 
     // الآن الشرط رح يكون صحيح
     if (correctCount === total) {
@@ -187,10 +197,6 @@ const Unit6_Page5_Q4 = () => {
                 ))}
               </div>
             ))}
-            <img
-              src="/ddddddd/dddddd"
-              style={{ height: "100px", width: "130px" }}
-            />
           </div>
 
           <div className="unit3-q4-sentence">

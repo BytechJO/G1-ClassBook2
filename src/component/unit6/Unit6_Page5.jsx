@@ -4,8 +4,8 @@ import "./Unit6_Page5.css";
 import Unit6_Page5_Q1 from "./Unit6_Page5_Q1";
 import Unit6_Page5_Q2 from "./Unit6_Page5_Q2";
 import CD24_Pg26_Instructions1_AdultLady from "../../assets/unit3/sound3/CD24.Pg26_Instructions1_Adult Lady.mp3";
-import Unit5_Page5_Q3 from "./Unit6_Page5_Q3";
-import Unit5_Page5_Q4 from "./Unit6_Page5_Q4";
+import Unit6_Page5_Q3 from "./Unit6_Page5_Q3";
+import Unit6_Page5_Q4 from "./Unit6_Page5_Q4";
 const Unit6_Page5 = ({ openPopup }) => {
   return (
     <div className="unit5-page-background">
@@ -18,7 +18,7 @@ const Unit6_Page5 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              {/* <Unit6_Page5_Q1 /> */}
+              <Unit6_Page5_Q1 />
             </>,
             false
           )
@@ -34,7 +34,7 @@ const Unit6_Page5 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              {/* <Unit6_Page5_Q2 /> */}
+              <Unit6_Page5_Q2 />
             </>,
             false
           )
@@ -50,7 +50,7 @@ const Unit6_Page5 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              {/* <Unit5_Page5_Q3 /> */}
+              <Unit6_Page5_Q3 />
             </>,
             false
           )
@@ -67,7 +67,7 @@ const Unit6_Page5 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              {/* <Unit5_Page5_Q4 /> */}
+              <Unit6_Page5_Q4 />
             </>,
             false
           )

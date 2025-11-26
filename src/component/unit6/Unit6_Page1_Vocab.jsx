@@ -10,6 +10,7 @@ import num4 from "../../assets/unit3/imgs3/Num4.svg";
 import num5 from "../../assets/unit3/imgs3/Num5.svg";
 import num6 from "../../assets/unit3/imgs3/Num6.svg";
 import num7 from "../../assets/unit3/imgs3/Num7.svg";
+import num8 from "../../assets/unit5/imgs/Num8.svg"
 import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import { IoMdSettings } from "react-icons/io";
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
@@ -113,7 +114,7 @@ const Unit6_Page1_Vocab = () => {
     }
   };
 
-  const nums = [num1, num2, num3, num4, num5, num6, num7];
+  const nums = [num1, num2, num3, num4, num5, num6, num7,num8];
 
   return (
     <>

@@ -78,6 +78,7 @@ const Unit5_Page5_Q3 = () => {
   const reset = () => {
     setAnswers(Array(data.length).fill(""));
     setScore(null);
+     setWrongInputs([])
   };
 
   return (
@@ -140,7 +141,7 @@ const Unit5_Page5_Q3 = () => {
                     />
                     {/* ❌ علامة الخطأ */}
                     {wrongInputs.includes(index) && (
-                      <span className="wrong-icon">✕</span>
+                      <span className="wrong-icon-review6-p1-q3">✕</span>
                     )}
                   </div>
                 </div>

@@ -1,107 +1,117 @@
-import React, { useState } from "react";
-import "./Unit6_Page5_Q2.css";
+import React, { useState, useRef } from "react";
+import img1 from "../../assets/img_unit2/imgs/morning.jpg";
+import img2 from "../../assets/img_unit2/imgs/hey.jpg";
+import img3 from "../../assets/img_unit2/imgs/bey.jpg";
 import ValidationAlert from "../Popup/ValidationAlert";
-const data = [
-  {
-    id: 1,
-    images: [
-      { id: 1, src: "/img/kite.png", value: "kite" },
-      { id: 2, src: "/img/girl.png", value: "girl" },
-      { id: 3, src: "/img/key.png", value: "key" },
-    ],
-    correct: ["kite", "key"],
-  },
-  {
-    id: 2,
-    images: [
-      { id: 1, src: "/img/grass.png", value: "grass" },
-      { id: 2, src: "/img/kitchen.png", value: "kitchen" },
-      { id: 3, src: "/img/garden.png", value: "garden" },
-    ],
-    correct: ["grass", "garden"],
-  },
-];
+import "./Unit6_Page5_Q2.css";
 
-export default function Unit6_Page5_Q2() {
-  const [answers, setAnswers] = useState({});
-  const [score, setScore] = useState(null);
-  const [submitted, setSubmitted] = useState(false);
+const Unit6_Page5_Q2 = () => {
+  const [lines, setLines] = useState([]);
+  const containerRef = useRef(null);
+  let startPoint = null;
+  const [wrongImages, setWrongImages] = useState([]);
 
-  const handleSelect = (qId, value) => {
-    setAnswers((prev) => {
-      const current = prev[qId] || [];
+  const correctMatches = [
+    { word: "hill", image: "img4" },
+    { word: "pin", image: "img3" },
+    { word: "mitt", image: "img1" },
+    { word: "wig", image: "img2" },
+  ];
 
-      // 1️⃣ إذا كانت الصورة مختارة → نشيلها (Toggle)
-      if (current.includes(value)) {
-        return { ...prev, [qId]: current.filter((v) => v !== value) };
-      }
+  const handleDotDown2 = (e) => {
+    startPoint = e.target;
 
-      // 2️⃣ إذا حاول يختار أكثر من 2 → نمنعه
-      if (current.length >= 2) {
-        return prev;
-      }
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = startPoint.getBoundingClientRect().left - rect.left + 8;
+    const y = startPoint.getBoundingClientRect().top - rect.top + 8;
 
-      // 3️⃣ إضافة اختيار جديد
-      return { ...prev, [qId]: [...current, value] };
-    });
+    setLines((prev) => [...prev, { x1: x, y1: y, x2: x, y2: y }]);
+
+    window.addEventListener("mousemove", followMouse2);
+    window.addEventListener("mouseup", stopDrawingLine2);
   };
 
-  const handleCheck = () => {
-    // فحص إذا الطالب مختار على الأقل إجابة من السؤال الأول
-    if (!answers[data[0].id] || answers[data[0].id].length === 0) {
-      ValidationAlert.info("Please select at least one picture in question 1.");
+  const followMouse2 = (e) => {
+    const rect = containerRef.current.getBoundingClientRect();
+
+    setLines((prev) => [
+      ...prev.slice(0, -1),
+      {
+        x1: startPoint.getBoundingClientRect().left - rect.left + 8,
+        y1: startPoint.getBoundingClientRect().top - rect.top + 8,
+        x2: e.clientX - rect.left,
+        y2: e.clientY - rect.top,
+      },
+    ]);
+  };
+
+  const stopDrawingLine2 = (e) => {
+    window.removeEventListener("mousemove", followMouse2);
+    window.removeEventListener("mouseup", stopDrawingLine2);
+
+    const endDot = document.elementFromPoint(e.clientX, e.clientY);
+
+    // ✅ تصحيح اسم الكلاس
+    if (!endDot || !endDot.classList.contains("end-dot22-unit6-q2")) {
+      setLines((prev) => prev.slice(0, -1));
       return;
     }
 
-    // فحص إذا الطالب مختار على الأقل إجابة من السؤال الثاني
-    if (!answers[data[1].id] || answers[data[1].id].length === 0) {
-      ValidationAlert.info("Please select at least one picture in question 2.");
+    const rect = containerRef.current.getBoundingClientRect();
+
+    const newLine = {
+      x1: startPoint.getBoundingClientRect().left - rect.left + 8,
+      y1: startPoint.getBoundingClientRect().top - rect.top + 8,
+      x2: endDot.getBoundingClientRect().left - rect.left + 8,
+      y2: endDot.getBoundingClientRect().top - rect.top + 8,
+
+      // ✅ تصحيح تخزين البيانات
+      word: startPoint.dataset.word,
+      image: endDot.dataset.image,
+    };
+
+    setLines((prev) => [...prev.slice(0, -1), newLine]);
+  };
+  const checkAnswers2 = () => {
+    if (lines.length < correctMatches.length) {
+      ValidationAlert.info(
+        "Oops!",
+        "Please connect all the pairs before checking."
+      );
       return;
     }
 
     let correctCount = 0;
+    let wrong = [];
 
-    // نحسب total = مجموع كل الإجابات الصحيحة
-    const total = data.reduce((sum, q) => sum + q.correct.length, 0);
+    lines.forEach((line) => {
+      const isCorrect = correctMatches.some(
+        (pair) => pair.word === line.word && pair.image === line.image
+      );
 
-    // حساب عدد الصح
-    data.forEach((q) => {
-      const studentAnswers = answers[q.id] || [];
-
-      q.correct.forEach((correctValue) => {
-        if (studentAnswers.includes(correctValue)) {
-          correctCount++;
-        }
-      });
+      if (isCorrect) {
+        correctCount++;
+      } else {
+        wrong.push(line.word); // ✅ خزّني اسم صورة الخطأ فقط
+      }
     });
 
-    // اختيار اللون حسب النتيجة
+    setWrongImages(wrong); // ✅ حفظ الصور الغلط
+
+    const total = correctMatches.length;
     const color =
       correctCount === total ? "green" : correctCount === 0 ? "red" : "orange";
-
     const scoreMessage = `
-    <div style="font-size: 20px; text-align:center; margin-top: 8px;">
+    <div style="font-size: 20px; margin-top: 10px; text-align:center;">
       <span style="color:${color}; font-weight:bold;">
-        Score: ${correctCount} / ${total}
+      Score: ${correctCount} / ${total}
       </span>
     </div>
   `;
 
-    // إظهار نوع النتيجة
-    if (correctCount === total) {
-      ValidationAlert.success(scoreMessage);
-    } else if (correctCount === 0) {
-      ValidationAlert.error(scoreMessage);
-    } else {
-      ValidationAlert.warning(scoreMessage);
-    }
-    setSubmitted(true);
-  };
-
-  const handleReset = () => {
-    setAnswers({});
-    setSubmitted(false);
-    setScore(null);
+    if (correctCount === total) ValidationAlert.success(scoreMessage);
+    else if (correctCount === 0) ValidationAlert.error(scoreMessage);
+    else ValidationAlert.warning(scoreMessage);
   };
 
   return (
@@ -114,6 +124,7 @@ export default function Unit6_Page5_Q2() {
       }}
     >
       <div
+        className="div-forall"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -122,52 +133,180 @@ export default function Unit6_Page5_Q2() {
           justifyContent: "flex-start",
         }}
       >
-        <div className="circle-wrapper-Unit5_Page5_Q2">
-          <h5 className="header-title-page8">
-            <span style={{ color: "purple" }}>2</span> Which pictures begin with
-            the same sound? Circle.
-          </h5>
+        <div className="page7-q2-container2">
+          <h5 className="header-title-page8">B Read, look, and match.</h5>
 
-          {data.map((q) => (
-            <div key={q.id} className="question-row-Unit5_Page5_Q2">
-              <span className="q-number">{q.id}.</span>
+          <div className="match-wrapper2" ref={containerRef}>
+            {/* الجمل */}
+            <div className="match-words-row2">
+              <div
+                className="word-box2"
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  flexDirection: "row",
+                  alignItems: "flex-start",
+                }}
+              >
+                <span style={{ color: "darkblue", fontWeight: "700" }}>1 </span>
+                <div>
+                  <h5 className="h5-unit6-p5-q2">
+                    hill
+                    {wrongImages.includes("hill") && (
+                      <span className="error-mark-img-unit6-p5-q2">✕</span>
+                    )}
+                  </h5>
+                  <div
+                    className="dot22-unit6-q2 start-dot22-unit6-q2"
+                    data-word="hill"
+                    onMouseDown={handleDotDown2}
+                  ></div>
+                </div>
+              </div>
 
-              <div className="images-row-Unit5_Page5_Q2">
-                {q.images.map((img) => {
-                  const isSelected = answers[q.id]?.includes(img.value);
-                  const isWrong =
-                    submitted && isSelected && !q.correct.includes(img.value);
+              <div
+                className="word-box2"
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  flexDirection: "row",
+                  alignItems: "flex-start",
+                }}
+              >
+                {" "}
+                <span style={{ color: "darkblue", fontWeight: "700" }}>2 </span>
+                <div>
+                  <h5 className="h5-unit6-p5-q2">
+                    pin
+                    {wrongImages.includes("pin") && (
+                      <span className="error-mark-img-unit6-p5-q2">✕</span>
+                    )}
+                  </h5>
+                  <div
+                    className="dot22-unit6-q2 start-dot22-unit6-q2"
+                    data-word="pin"
+                    onMouseDown={handleDotDown2}
+                  ></div>
+                </div>
+              </div>
 
-                  return (
-                    <div
-                      key={img.id}
-                      className={`img-box-Unit5_Page5_Q2 
-                    ${isSelected ? "selected" : ""} 
-                
-                    ${isWrong ? "wrong" : ""}`}
-                      onClick={() => handleSelect(q.id, img.value)}
-                    >
-                      <img src={img.src} alt="" />
-                      {/* علامة X تظهر فقط عند الغلط */}
-                      {isWrong && (
-                        <div className="wrong-mark-Unit5_Page5_Q2 ">✕</div>
-                      )}
-                    </div>
-                  );
-                })}
+              <div
+                className="word-box2"
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  flexDirection: "row",
+                  alignItems: "flex-start",
+                }}
+              >
+                {" "}
+                <span style={{ color: "darkblue", fontWeight: "700" }}>3 </span>
+                <div>
+                  <h5 className="h5-unit6-p5-q2">
+                    mitt
+                    {wrongImages.includes("mitt") && (
+                      <span className="error-mark-img-unit6-p5-q2">✕</span>
+                    )}
+                  </h5>
+                  <div
+                    className="dot22-unit6-q2 start-dot22-unit6-q2"
+                    data-word="mitt"
+                    onMouseDown={handleDotDown2}
+                  ></div>
+                </div>
+              </div>
+              <div
+                className="word-box2"
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  flexDirection: "row",
+                  alignItems: "flex-start",
+                }}
+              >
+                <span style={{ color: "darkblue", fontWeight: "700" }}>4 </span>
+                <div>
+                  <h5 className="h5-unit6-p5-q2">
+                    wig
+                    {wrongImages.includes("wig") && (
+                      <span className="error-mark-img-unit6-p5-q2">✕</span>
+                    )}
+                  </h5>
+                  <div
+                    className="dot22-unit6-q2 start-dot22-unit6-q2"
+                    data-word="wig"
+                    onMouseDown={handleDotDown2}
+                  ></div>
+                </div>
               </div>
             </div>
-          ))}
+            {/* الصور */}
+            <div className="match-images-row2">
+              <div className="img-box2">
+                <img src={img1} alt="" />
+
+                <div
+                  className="dot22-unit6-q2 end-dot22-unit6-q2"
+                  data-image="img1"
+                ></div>
+              </div>
+
+              <div className="img-box2">
+                <img src={img2} alt="" />{" "}
+                <div
+                  className="dot22-unit6-q2 end-dot22-unit6-q2"
+                  data-image="img2"
+                ></div>
+              </div>
+
+              <div className="img-box2">
+                <img src={img3} alt="" />{" "}
+                <div
+                  className="dot22-unit6-q2 end-dot22-unit6-q2"
+                  data-image="img3"
+                ></div>
+              </div>
+              <div className="img-box2">
+                <img src={img3} alt="" />{" "}
+                <div
+                  className="dot22-unit6-q2 end-dot22-unit6-q2"
+                  data-image="img4"
+                ></div>
+              </div>
+            </div>
+            {/* الخطوط */}
+            <svg className="lines-layer2">
+              {lines.map((l, i) => (
+                <line
+                  key={i}
+                  x1={l.x1}
+                  y1={l.y1}
+                  x2={l.x2}
+                  y2={l.y2}
+                  stroke="red"
+                  strokeWidth="3"
+                />
+              ))}
+            </svg>
+          </div>
         </div>
       </div>
       <div className="action-buttons-container">
-        <button className="try-again-button" onClick={handleReset}>
+        <button
+          onClick={() => {
+            setLines([]);
+            setWrongImages([]);
+          }}
+          className="try-again-button"
+        >
           Start Again ↻
         </button>
-        <button onClick={handleCheck} className="check-button2">
+        <button onClick={checkAnswers2} className="check-button2">
           Check Answer ✓
         </button>
       </div>
     </div>
   );
-}
+};
+
+export default Unit6_Page5_Q2;

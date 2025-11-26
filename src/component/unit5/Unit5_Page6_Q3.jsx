@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import img1 from "../../assets/unit5/imgs/U5P45EXED-04.svg";
-import img2 from "../../assets/unit4/imgs/U4P36EXEB-02.svg";
+import img1 from "../../assets/unit5/imgs/U5P45EXEF-01.svg";
+import img2 from "../../assets/unit5/imgs/U5P45EXEF-02.svg";
 import img3 from "../../assets/unit3/imgs3/P27exeE-03.svg";
 import ValidationAlert from "../Popup/ValidationAlert";
 import "./Unit5_Page6_Q3.css";
@@ -114,7 +114,17 @@ const Unit5_Page6_Q3 = () => {
           <div className="Unit5-P6-Q3-grid">
             {questions.map((q) => (
               <div key={q.id} className="Unit5-P6-Q3-box">
-                <img src={q.image} alt="" className="Unit5-P6-Q3-img" />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                   <span className="Unit5-P6-Q3-text">{q.id}</span>
+                  <img src={q.image} alt="" className="Unit5-P6-Q3-img" />
+                  <span className="Unit5-P6-Q3-text">{q.text}</span>
+                </div>
                 <div>
                   {q.items.map((item, idx) => {
                     const isSelected = answers[q.id] === idx;

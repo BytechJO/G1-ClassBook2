@@ -3,6 +3,8 @@
   width: 100%;
   justify-content: space-between;
   margin-top: 50px;
+      flex-direction: column;
+
 }
 
 .Unit5-P6-Q3-box {
@@ -11,7 +13,7 @@
     align-items: center;
     gap: 10px;
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .Unit5-P6-Q3-img {
@@ -21,7 +23,9 @@
   margin-bottom: 12px;
 }
 
-
+.Unit5-P6-Q3-text{
+  font-size: 22px;
+}
 
 @media (max-width: 991px) {
 .Unit5-P6-Q3-grid {

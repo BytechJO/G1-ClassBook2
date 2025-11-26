@@ -7,7 +7,7 @@ import img2 from "../../assets/unit5/imgs/girl.svg";
 import img3 from "../../assets/unit5/imgs/green.svg";
 import img4 from "../../assets/unit5/imgs/garden.svg";
 import FourImagesWithAudio from "../FourImagesWithAudio";
-import longAudio from "../../assets/unit5/sounds/Pg40_1.1_Adult Lady.mp3";
+import longAudio from "../../assets/unit5/sounds/U5P40 Listen and read along.mp3";
 import Rabbit from "../../assets/img_unit2/imgs/Rabbit.svg";
 const Unit5_Page1_Read = () => {
   const imageSounds = [
@@ -23,7 +23,7 @@ const Unit5_Page1_Read = () => {
          <FourImagesWithAudio
         images={[Rabbit, img1, img2, img3, img4]}
         audioSrc={longAudio}
-        checkpoints={[0, 3.95, 5.11,6.05, 7.00]}
+        checkpoints={[0, 3.23, 4.11,5.11,6.20]}
         popupOpen={true}
         titleQ={"Listen and read along."}
         audioArr={imageSounds}

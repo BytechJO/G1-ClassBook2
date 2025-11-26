@@ -5,10 +5,6 @@ import img3 from "../../assets/img_unit2/imgs/35.jpg";
 import img4 from "../../assets/img_unit2/imgs/36.jpg";
 import img5 from "../../assets/img_unit2/imgs/37.jpg";
 import sound1 from "../../assets/unit1/sounds/P17QF.mp3";
-import sound2 from "../../assets/img_unit2/sounds-unit2/Pg17_1.2_Adult Lady.mp3";
-import sound3 from "../../assets/img_unit2/sounds-unit2/Pg17_1.3_Adult Lady.mp3";
-import sound4 from "../../assets/img_unit2/sounds-unit2/Pg17_1.4_Adult Lady.mp3";
-import sound5 from "../../assets/img_unit2/sounds-unit2/Pg17_1.5_Adult Lady.mp3";
 import ValidationAlert from "../Popup/ValidationAlert";
 import "./Unit2_Page8_Q3.css";
 import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
@@ -32,11 +28,7 @@ const Unit2_Page8_Q3 = () => {
   const [isMuted, setIsMuted] = useState(false);
   const stopAtSecond =7.3;
   const [paused, setPaused] = useState(false);
-  const changeSpeed = (rate) => {
-    if (!audioRef.current) return;
-    audioRef.current.playbackRate = rate;
-    setActiveSpeed(rate);
-  };
+
   const correctMatches = [
     { word: "d", image: ["img1", "img2", "img5"] },
     { word: "t", image: ["img3", "img4"] },

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import page_4 from "../../assets/unit5/imgs/Right 1 Unit 05 Welcome to My Class4.jpg";
 import "./Unit5_Page4.css";
-import CD23_pg25_Grammar2_AdultLady from "../../assets/unit3/sound3/U3P25RG2.mp3";
+import CD23_pg25_Grammar2_AdultLady from "../../assets/unit5/sounds/U5P43Grammar.mp3";
 import sound1 from "../../assets/unit5/sounds/Pg43_2.1_Adult Lady.mp3";
 import sound2 from "../../assets/unit5/sounds/Pg43_2.2_Adult Lady.mp3";
 import sound3 from "../../assets/unit5/sounds/Pg43_2.3_Adult Lady.mp3";
@@ -12,7 +12,7 @@ import sound7 from "../../assets/unit5/sounds/Pg43_4.1_Tom.mp3";
 import sound8 from "../../assets/unit5/sounds/Pg43_4.2_Harley.mp3";
 import sound9 from "../../assets/unit5/sounds/Pg43_5.1_Tom.mp3";
 import sound10 from "../../assets/unit5/sounds/Pg43_5.2_Helen_Take 2.mp3";
-import video from "../../assets/unit3/sound3/p25.mp4";
+import video from "../../assets/unit5/sounds/P43.mp4";
 import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import AudioWithCaption from "../AudioWithCaption";
 import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
@@ -20,15 +20,18 @@ import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
 const Unit5_Page4 = ({ openPopup }) => {
   const audioRef = useRef(null);
   const captionsExample = [
-    { start: 0, end: 4.13, text: "Page 25, Exercise 2: Right Grammar." },
-    { start: 4.16, end: 5.21, text: "Open your book." },
-    { start: 5.24, end: 7.02, text: "Close your book. " },
-    { start: 7.05, end: 8.29, text: "Take out your pencil." },
-    { start: 8.31, end: 10.11, text: "Open your book. " },
-    { start: 10.14, end: 11.24, text: "Close your book." },
-    { start: 11.27, end: 13.12, text: "Take out your pencil." },
+    { start: 0, end: 5.04, text: "Page 43. Exercise 2: Right Grammar. " },
+    { start: 5.07, end: 6.20, text: "Is this a ruler? " },
+    { start: 6.23, end: 8.04, text: "Yes, it is. " },
+    { start: 8.07, end: 10.07, text: "Is this your pen? " },
+    { start: 10.10, end: 12.12, text: "No, it isn't. " },
+    { start: 12.15, end: 14.04, text: "Is this a ruler? " },
+    { start: 14.07, end: 15.29, text: "Yes, it is. " },
+     { start: 15.32, end: 18.15, text: "Is this a book? " },
+    { start:18.18, end: 21.12, text: "No, it isn't. It's an eraser. " },
+    { start: 21.15, end: 23.15, text: "Is this your pen? " },
+    { start: 23.18, end: 25.05, text: "Yes, it is. " },
   ];
-
  
   const handleImageClick = (e) => {
     const rect = e.target.getBoundingClientRect();

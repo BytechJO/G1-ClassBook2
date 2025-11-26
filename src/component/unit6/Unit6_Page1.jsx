@@ -1,6 +1,6 @@
 import page_1 from "../../assets/unit6/imgs/Right G1- Class Book_00046.jpg";
 import "./Unit6_Page1.css";
-import Pg22_U3_Intro_AdultLady from "../../assets/unit3/sound3/U3 Page 22-23.mp3";
+import Pg22_U3_Intro_AdultLady from "../../assets/unit6/sounds/CD3.Pg56_Reading1_Adult Lady.mp3";
 import AudioWithCaption from "../AudioWithCaption";
 import Unit6_Page1_find from "./Unit6_Page1_find";
 import Unit6_Page1_Vocab from "./Unit6_Page1_Vocab";
@@ -52,10 +52,10 @@ const Unit6_Page1 = ({ openPopup }) => {
                 alignContent: "center",
               }}
             >
-              {/* <AudioWithCaption
+              <AudioWithCaption
                 src={Pg22_U3_Intro_AdultLady}
                 captions={captionsExample}
-              /> */}
+              />
             </div>,
             true
           )
@@ -72,7 +72,7 @@ const Unit6_Page1 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              {/* <Unit5_Page1_find /> */}
+              <Unit6_Page1_find />
             </>,
             false
           )
@@ -88,7 +88,7 @@ const Unit6_Page1 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              {/* <Unit5_Page1_Vocab /> */}
+              <Unit6_Page1_Vocab />
             </>,
             false
           )
@@ -104,7 +104,7 @@ const Unit6_Page1 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              {/* <Unit5_Page1_Read /> */}
+              <Unit6_Page1_Read />
             </>,
             false
           )

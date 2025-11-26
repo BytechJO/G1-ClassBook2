@@ -144,6 +144,7 @@ const AudioWithCaption = ({ src, captions, onCaptionChange }) => {
           {showCaption && (
             <div className="caption-popup" ref={captionRef}>
               {captions.map((cap, index) => (
+                <>
                 <span
                   key={index}
                   id={`caption-${index}`}
@@ -152,7 +153,9 @@ const AudioWithCaption = ({ src, captions, onCaptionChange }) => {
                   }`}
                 >
                   {cap.text + " "}
+                  
                 </span>
+                <br/></>
               ))}
             </div>
           )}

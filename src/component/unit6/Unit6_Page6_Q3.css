@@ -1,31 +1,24 @@
-.Unit5-P6-Q3-grid {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  margin-top: 50px;
+
+.dot22-unit6-q7 {
+  width: 14px;
+  height: 14px;
+  background: red;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto !important;
 }
 
-.Unit5-P6-Q3-box {
-     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    justify-content: space-between;
+.end-dot22-unit6-q7 {
+
+  transform: translateX(-50%);
+
+  position: absolute !important;
+  top: -30px; /* عدّلي الرقم حسب مكان الجمل */
 }
 
-.Unit5-P6-Q3-img {
-  width: 150px;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 12px;
-}
-
-
-
-@media (max-width: 991px) {
-.Unit5-P6-Q3-grid {
-  flex-direction: row;
-  flex-wrap: wrap;
-}
+.start-dot22-unit6-q7 {
+  position: absolute !important;
+  top: 70px; /* عدّلي الرقم حسب موقعك */
+  left: 50%;
+  transform: translateX(-50%);
 }

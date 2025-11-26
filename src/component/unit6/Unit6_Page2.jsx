@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import page_2 from "../../assets/unit6/imgs/Right G1- Class Book_00047.jpg";
 import soundSong from "../../assets/unit3/sound3/come and sing.mp3";
-import sound1 from "../../assets/unit3/sound3/Pg23_1.1_Bebo.mp3";
-import sound2_2 from "../../assets/unit3/sound3/Pg23_1.2_Lolo_Take 2.mp3";
-import sound3 from "../../assets/unit3/sound3/Pg23_2.1_Adult Lady.mp3";
-import sound4 from "../../assets/unit3/sound3/Pg23_2.2_Adult Lady.mp3";
-import sound5 from "../../assets/unit3/sound3/Pg23_2.3_Adult Lady.mp3";
-import sound6 from "../../assets/unit3/sound3/Pg23_2.4_Adult Lady.mp3";
+import sound1 from "../../assets/unit6/sounds/Pg47_1.1_Bebo.mp3";
+import sound2_2 from "../../assets/unit6/sounds/Pg47_1.2_Lolo.mp3";
+import sound3 from "../../assets/unit6/sounds/Pg47_2.1_Adult Lady.mp3";
+import sound4 from "../../assets/unit6/sounds/Pg47_2.2_Adult Lady.mp3";
+import sound5 from "../../assets/unit6/sounds/Pg47_2.3_Adult Lady.mp3";
+import sound6 from "../../assets/unit6/sounds/Pg47_2.4_Adult Lady.mp3";
 import sound7 from "../../assets/unit3/sound3/U3P23-listen and read along.mp3";
 import img1 from "../../assets/unit3/imgs3/Short a.svg";
 import img2 from "../../assets/unit3/imgs3/bat.svg";
