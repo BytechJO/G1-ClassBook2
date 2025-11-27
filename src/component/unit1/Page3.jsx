@@ -12,7 +12,7 @@ const Page3 = ({ goToUnit }) => {
     },
     {
       title: "Unit 7",
-      startIndex: 10,
+      startIndex: 58,
       top: "25%",
       left: "14%",
       width: "20%",
@@ -20,7 +20,7 @@ const Page3 = ({ goToUnit }) => {
     },
     {
       title: "Unit 8",
-      startIndex: 22,
+      startIndex:64,
       top: "46%",
       left: "14%",
       width: "20%",
@@ -28,7 +28,7 @@ const Page3 = ({ goToUnit }) => {
     },
     {
       title: "Unit 9",
-      startIndex: 28,
+      startIndex: 76,
       top: "62%",
       left: "14%",
       width: "20%",
@@ -36,7 +36,7 @@ const Page3 = ({ goToUnit }) => {
     },
     {
       title: "Unit 10",
-      startIndex: 28,
+      startIndex: 83,
       top: "77%",
       left: "14%",
       width: "20%",

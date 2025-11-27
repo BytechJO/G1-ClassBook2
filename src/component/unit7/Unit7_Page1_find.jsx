@@ -10,7 +10,7 @@ const Unit5_Page1_find = () => {
   const targetArea = {
     x1: 44.25,
     y1: 28.76,
-    x2:55.99,
+    x2: 55.99,
     y2: 40.27,
   };
 
@@ -69,7 +69,8 @@ const Unit5_Page1_find = () => {
         >
           <img src={Rabbit} style={{ height: "50px", width: "auto" }} />
           <h5 className="header-title-page8">
-            I need your help. Can you help me find the bookshelf in the picture?
+            I need your help. Can you help me find the thirsty cat in the
+            picture?
           </h5>
         </div>
         <div style={{ position: "relative", display: "inline-block" }}>

@@ -49,6 +49,7 @@ const Review6_Page2_Q3 = () => {
         [sIndex]: [...existing, wIndex],
       };
     });
+    setChecked(false)
   };
 
   const checkAnswers = () => {

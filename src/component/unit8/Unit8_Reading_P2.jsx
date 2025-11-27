@@ -1,12 +1,12 @@
 import React, {  useRef } from "react";
-import page25 from "../../assets/unit6/imgs/Right G1- Class Book_00057.jpg";
+import page25 from "../../assets/unit8/imgs/Right G1- Class Book_00075.jpg";
 // import "./Unit2_Page11.css";/
 import { FaHeadphones } from "react-icons/fa";
 import sound1 from "../../assets/unit4/sounds/Pg39_1.5_Adult Lady.mp3"
 import sound2 from "../../assets/unit4/sounds/Pg39_1.6_Adult Lady.mp3"
 import sound3 from "../../assets/unit4/sounds/Pg39_1.7_Adult Lady.mp3"
 import sound4 from "../../assets/unit4/sounds/Pg39_1.8_Adult Lady.mp3"
-const Unit6_Reading_P2 = () => {
+const Unit8_Reading_P2 = () => {
 
   const audioRef = useRef(null);
 
@@ -70,4 +70,4 @@ const Unit6_Reading_P2 = () => {
   );
 };
 
-export default Unit6_Reading_P2;
+export default Unit8_Reading_P2;

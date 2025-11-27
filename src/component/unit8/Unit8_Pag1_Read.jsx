@@ -1,7 +1,7 @@
-import Pg22_1_1_AdultLady from "../../assets/unit6/sounds/Pg46_1.1_Adult Lady.mp3";
-import Pg22_1_2_AdultLady from "../../assets/unit6/sounds/Pg46_1.2_Adult Lady.mp3";
-import Pg22_1_3_AdultLady from "../../assets/unit6/sounds/Pg46_1.3_Adult Lady.mp3";
-import Pg22_1_4_AdultLady from "../../assets/unit6/sounds/Pg46_1.4_Adult Lady.mp3";
+import Pg22_1_1_AdultLady from "../../assets/unit8/sound/Pg64_1.1_Adult Lady.mp3";
+import Pg22_1_2_AdultLady from "../../assets/unit8/sound/Pg64_1.2_Adult Lady.mp3";
+import Pg22_1_3_AdultLady from "../../assets/unit8/sound/Pg64_1.3_Adult Lady.mp3";
+import Pg22_1_4_AdultLady from "../../assets/unit8/sound/Pg64_1.4_Adult Lady.mp3";
 import img1 from "../../assets/unit3/imgs3/Short a.svg";
 import img2 from "../../assets/unit3/imgs3/ant.svg";
 import img3 from "../../assets/unit3/imgs3/pan.svg";
@@ -9,7 +9,7 @@ import img4 from "../../assets/unit3/imgs3/rat.svg";
 import FourImagesWithAudio from "../FourImagesWithAudio";
 import longAudio from "../../assets/unit3/sound3/U3P22-listen and read along.mp3";
 import Rabbit from "../../assets/img_unit2/imgs/Rabbit.svg";
-const Unit6_Page1_Read = () => {
+const Unit8_Page1_Read = () => {
   const imageSounds = [
     null, // الصورة الأولى الكبيرة (إن ما بدك صوت إلها)
     new Audio(Pg22_1_1_AdultLady),
@@ -32,4 +32,4 @@ const Unit6_Page1_Read = () => {
   );
 };
 
-export default Unit6_Page1_Read;
+export default Unit8_Page1_Read;

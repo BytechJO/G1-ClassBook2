@@ -15,7 +15,7 @@ import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import { IoMdSettings } from "react-icons/io";
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 
-const Unit5_Page1_Vocab = () => {
+const Unit7_Page1_Vocab = () => {
   const audioRef = useRef(null);
 
   const mainAudioRef = useRef(null); // ✅ الأوديو الرئيسي
@@ -245,14 +245,16 @@ const Unit5_Page1_Vocab = () => {
               style={{ bottom: "2%", right: "8.5%" }}
             >
               {[
-                "board",
-                " map",
-                " book",
-                "globe",
-                "poster",
-                "trash bin",
-                "desk",
-                "chair",
+                "cold",
+                "shiver",
+                "hungry",
+                "bored",
+                "scared",
+                "crawl",
+                "listen",
+                "sad",
+                "broken",
+                "happy",
               ].map((text, i) => (
                 <h6 key={i} className={activeIndex === i ? "active" : ""}>
                   {i + 1} {text}
@@ -311,4 +313,4 @@ const Unit5_Page1_Vocab = () => {
   );
 };
 
-export default Unit5_Page1_Vocab;
+export default Unit7_Page1_Vocab;

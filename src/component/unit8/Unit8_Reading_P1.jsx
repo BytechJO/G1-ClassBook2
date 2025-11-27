@@ -1,4 +1,4 @@
-import page24 from "../../assets/unit6/imgs/Right G1- Class Book_00056.jpg";
+import page24 from "../../assets/unit8/imgs/Right G1- Class Book_00074.jpg";
 import React, { useState, useRef } from "react";
 // import "./Unit2_Page11.css";
 import sound1 from "../../assets/unit4/sounds/U4ReadingP38-39.mp3";
@@ -10,7 +10,7 @@ import AudioWithCaption from "../AudioWithCaption";
 import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
 import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import video3 from "../../assets/unit4/sounds/STORY ( 2 ).mp4";
-const Unit6_Reading_P1 = ({ openPopup }) => {
+const Unit8_Reading_P1 = ({ openPopup }) => {
   const audioRef = useRef(null);
   const captionsExample = [
     { start: 0, end: 5.04, text: "Page 38 Reading. Hey, that's my pen! " },
@@ -171,4 +171,4 @@ const Unit6_Reading_P1 = ({ openPopup }) => {
   );
 };
 
-export default Unit6_Reading_P1;
+export default Unit8_Reading_P1;

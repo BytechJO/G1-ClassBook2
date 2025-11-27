@@ -1,13 +1,13 @@
-import page_6 from "../../assets/unit6/imgs/Right G1- Class Book_00051.jpg";
-import "./Unit6_Page6.css";
-import Unit6_Page6_Q2 from "./Unit6_Page6_Q2";
-import Unit6_Page6_Q3 from "./Unit6_Page6_Q3";
-import CD25_Pg27_Song_AdultLady from "../../assets/unit3/sound3/U3P27LetsSing.mp3";
+import page_6 from "../../assets/unit10/imgs/Right G1- Class Book_00087.jpg";
+import "./Unit10_Page6.css";
+// import Unit6_Page6_Q2 from "./Unit6_Page6_Q2";
+// import Unit6_Page6_Q3 from "./Unit6_Page6_Q3";
+// import CD25_Pg27_Song_AdultLady from "../../assets/unit3/sound3/U3P27LetsSing.mp3";
 import arrowBtn from "../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
 import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
 import AudioWithCaption from "../AudioWithCaption";
 
-const Unit6_Page6 = ({ openPopup }) => {
+const Unit10_Page6 = ({ openPopup }) => {
   const captionsExample = [
     { start: 0, end: 4.24, text: "Page 27, exercise G. Let's sing! " },
     {
@@ -33,7 +33,7 @@ const Unit6_Page6 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              <Unit6_Page6_Q2 />
+              {/* <Unit10_Page6_Q2 /> */}
             </>,
             false
           )
@@ -50,7 +50,7 @@ const Unit6_Page6 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              <Unit6_Page6_Q3 />
+              {/* <Unit6_Page6_Q3 /> */}
             </>,
             false
           )
@@ -88,4 +88,4 @@ const Unit6_Page6 = ({ openPopup }) => {
   );
 };
 
-export default Unit6_Page6;
+export default Unit10_Page6;

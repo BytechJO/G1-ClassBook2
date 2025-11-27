@@ -1,19 +1,17 @@
 import React, { useState, useRef } from "react";
-import page_4 from "../../assets/unit6/imgs/Right G1- Class Book_00049.jpg";
-import "./Unit6_Page4.css";
+import page_4 from "../../assets/unit8/imgs/Right G1- Class Book_00067.jpg";
+import "./Unit8_Page4.css";
 import CD23_pg25_Grammar2_AdultLady from "../../assets/unit3/sound3/U3P25RG2.mp3";
-import sound1 from "../../assets/unit3/sound3/Pg25_2.1_Adult Lady.mp3";
-import sound2 from "../../assets/unit3/sound3/Pg25_2.2_Adult Lady.mp3";
-import sound3 from "../../assets/unit3/sound3/Pg25_2.3_Adult Lady.mp3";
-import sound4 from "../../assets/unit3/sound3/Pg25_3.1_Female Teacher.mp3";
-import sound5 from "../../assets/unit3/sound3/Pg25_4.1_Female Teacher.mp3";
-import sound6 from "../../assets/unit3/sound3/Pg25_5.1_Female Teacher.mp3";
+import sound1 from "../../assets/unit8/sound/Pg67_2.1_Adult Lady.mp3";
+import sound2 from "../../assets/unit8/sound/Pg67_2.2_Adult Lady.mp3";
+import sound3 from "../../assets/unit8/sound/Pg67_3.1_Modified Helen.mp3";
+import sound4 from "../../assets/unit8/sound/Pg67_4.1_Tom.mp3";
 import video from "../../assets/unit3/sound3/p25.mp4";
 import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import AudioWithCaption from "../AudioWithCaption";
 import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
 
-const Unit6_Page4 = ({ openPopup }) => {
+const Unit8_Page4 = ({ openPopup }) => {
   const audioRef = useRef(null);
   const captionsExample = [
     { start: 0, end: 4.13, text: "Page 25, Exercise 2: Right Grammar." },
@@ -40,8 +38,7 @@ const Unit6_Page4 = ({ openPopup }) => {
     { x1: 9.07, y1: 15.4, x2: 30.43, y2: 18.7, sound: sound2 },
     { x1: 66.4, y1: 13.4, x2: 89.9, y2: 17.0, sound: sound3 },
     { x1: 11.11, y1: 22.9, x2: 30.4, y2: 26.4, sound: sound4 },
-    { x1: 55.5, y1: 22.5, x2: 75.4, y2: 26.2, sound: sound5 },
-    { x1: 30.4, y1: 60.0, x2: 55.6, y2: 63.5, sound: sound6 },
+
   ];
 
   const checkAreaAndPlaySound = (x, y) => {
@@ -146,4 +143,4 @@ const Unit6_Page4 = ({ openPopup }) => {
   );
 };
 
-export default Unit6_Page4;
+export default Unit8_Page4;

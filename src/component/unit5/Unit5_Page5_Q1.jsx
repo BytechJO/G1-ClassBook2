@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import CD13_Pg14_Instruction1_AdultLady from "../../assets/img_unit2/sounds-unit2/CD13.Pg14_Instruction1_Adult Lady.mp3";
 import ValidationAlert from "../Popup/ValidationAlert";
 import "./Unit5_Page5_Q1.css";
-import sound1 from "../../assets/unit1/sounds/P14Q2.mp3";
+import sound1 from "../../assets/unit5/sounds/U5P44EXEA1.mp3";
 import bat from "../../assets/unit5/imgs/U5P44EXEA1-01.svg"
 import box from "../../assets/unit5/imgs/U5P44EXEA1-02.svg";
 import bucket from "../../assets/unit5/imgs/U5P44EXEA1-03.svg";
@@ -24,13 +24,9 @@ const Unit5_Page5_Q1 = () => {
   const [showContinue, setShowContinue] = useState(false);
   // زر الكابشن
   const [isMuted, setIsMuted] = useState(false);
-  const stopAtSecond = 11;
+  const stopAtSecond = 10.8;
   const [paused, setPaused] = useState(false);
-  const changeSpeed = (rate) => {
-    if (!audioRef.current) return;
-    audioRef.current.playbackRate = rate;
-    setActiveSpeed(rate);
-  };
+
   const items = [
     { img: bat, correct: "g" },
     { img: box, correct: "k" },

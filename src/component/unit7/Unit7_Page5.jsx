@@ -1,12 +1,11 @@
-import page_5 from "../../assets/unit5/imgs/Right 1 Unit 05 Welcome to My Class5.jpg";
+import page_5 from "../../assets/unit7/img/Right G1- Class Book_00062.jpg";
 import arrowBtn from "../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
-import "./Unit5_Page5.css";
-import Unit5_Page5_Q1 from "./Unit5_Page5_Q1";
-import Unit5_Page5_Q2 from "./Unit5_Page5_Q2";
-import CD24_Pg26_Instructions1_AdultLady from "../../assets/unit3/sound3/CD24.Pg26_Instructions1_Adult Lady.mp3";
-import Unit5_Page5_Q3 from "./Unit5_Page5_Q3";
-import Unit5_Page5_Q4 from "./Unit5_Page5_Q4";
-const Unit5_Page5 = ({ openPopup }) => {
+import "./Unit7_Page5.css";
+// import Unit5_Page5_Q1 from "./Unit5_Page5_Q1";
+// import Unit5_Page5_Q2 from "./Unit5_Page5_Q2";
+// import Unit7_Page5_Q3 from "./Unit5_Page5_Q3";
+// import Unit7_Page5_Q4 from "./Unit5_Page5_Q4";
+const Unit7_Page5 = ({ openPopup }) => {
   return (
     <div className="unit5-page-background">
       <img src={page_5} />
@@ -18,7 +17,7 @@ const Unit5_Page5 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              <Unit5_Page5_Q1 />
+              {/* <Unit5_Page5_Q1 /> */}
             </>,
             false
           )
@@ -34,7 +33,7 @@ const Unit5_Page5 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              <Unit5_Page5_Q2 />
+              {/* <Unit5_Page5_Q2 /> */}
             </>,
             false
           )
@@ -50,7 +49,7 @@ const Unit5_Page5 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              <Unit5_Page5_Q3 />
+              {/* <Unit5_Page5_Q3 /> */}
             </>,
             false
           )
@@ -67,7 +66,7 @@ const Unit5_Page5 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              <Unit5_Page5_Q4 />
+              {/* <Unit5_Page5_Q4 /> */}
             </>,
             false
           )
@@ -80,4 +79,4 @@ const Unit5_Page5 = ({ openPopup }) => {
   );
 };
 
-export default Unit5_Page5;
+export default Unit7_Page5;

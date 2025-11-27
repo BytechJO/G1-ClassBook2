@@ -1,13 +1,13 @@
-import page_1 from "../../assets/unit6/imgs/Right G1- Class Book_00046.jpg";
-import "./Unit6_Page1.css";
+import page_1 from "../../assets/unit8/imgs/Right G1- Class Book_00064.jpg";
+import "./Unit8_Page1.css";
 import Pg22_U3_Intro_AdultLady from "../../assets/unit6/sounds/CD3.Pg56_Reading1_Adult Lady.mp3";
 import AudioWithCaption from "../AudioWithCaption";
-import Unit6_Page1_find from "./Unit6_Page1_find";
-import Unit6_Page1_Vocab from "./Unit6_Page1_Vocab";
-import Unit6_Page1_Read from "./Unit6_Pag1_Read";
+import Unit8_Page1_find from "./Unit8_Page1_find";
+import Unit8_Page1_Vocab from "./Unit8_Page1_Vocab";
+import Unit8_Page1_Read from "./Unit8_Pag1_Read";
 import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
 import arrowBtn from "../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
-const Unit6_Page1 = ({ openPopup }) => {
+const Unit8_Page1 = ({ openPopup }) => {
   const captionsExample = [
     { start: 0, end: 4.02, text: "Page 22, unit 3. Let's go to school. " },
     { start: 4.05, end: 7.11, text: "Page 22, unit 3 vocabulary. " },
@@ -72,7 +72,7 @@ const Unit6_Page1 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              <Unit6_Page1_find />
+              <Unit8_Page1_find />
             </>,
             false
           )
@@ -88,7 +88,7 @@ const Unit6_Page1 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              <Unit6_Page1_Vocab />
+              <Unit8_Page1_Vocab />
             </>,
             false
           )
@@ -104,7 +104,7 @@ const Unit6_Page1 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              <Unit6_Page1_Read />
+              <Unit8_Page1_Read />
             </>,
             false
           )
@@ -117,4 +117,4 @@ const Unit6_Page1 = ({ openPopup }) => {
   );
 };
 
-export default Unit6_Page1;
+export default Unit8_Page1;

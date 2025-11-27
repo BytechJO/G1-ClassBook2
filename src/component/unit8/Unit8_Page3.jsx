@@ -1,18 +1,18 @@
 import React, { useState, useRef } from "react";
-import page_3 from "../../assets/unit6/imgs/Right G1- Class Book_00048.jpg";
-import "./Unit6_Page3.css";
+import page_3 from "../../assets/unit8/imgs/Right G1- Class Book_00066.jpg";
+import "./Unit8_Page3.css";
 import CD22_pg24_Grammar1_AdultLady from "../../assets/unit3/sound3/U3P24RG1.mp3";
-import sound1 from "../../assets/unit3/sound3/Pg24_1.1_Adult Lady.mp3";
-import sound2 from "../../assets/unit3/sound3/Pg24_1.2_Adult Lady.mp3";
-import sound3 from "../../assets/unit3/sound3/Pg24_1.3_Adult Lady.mp3";
-import sound4 from "../../assets/unit3/sound3/Pg24_2.1_Female Teacher.mp3";
-import sound5 from "../../assets/unit3/sound3/Pg24_3.1_Female Teacher.mp3";
-import sound6 from "../../assets/unit3/sound3/Pg24_4.1_Male Teacher.mp3";
+import sound1 from "../../assets/unit8/sound/Pg66_1.1_Adult Lady.mp3";
+import sound2 from "../../assets/unit8/sound/Pg66_1.2_Adult Lady.mp3";
+import sound3 from "../../assets/unit8/sound/Pg66_1.3_Adult Lady.mp3";
+import sound4 from "../../assets/unit8/sound/Pg66_2.1_Female Teacher.mp3";
+import sound5 from "../../assets/unit8/sound/Pg66_3.1_Modified Tom.mp3";
+import sound6 from "../../assets/unit8/sound/Pg66_4.1_Female Teacher.mp3";
 import AudioWithCaption from "../AudioWithCaption";
 import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
 import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import video from "../../assets/unit3/sound3/p24.mp4";
-const Unit6_Page3 = ({ openPopup }) => {
+const Unit8_Page3 = ({ openPopup }) => {
   const audioRef = useRef(null);
   const captionsExample = [
     { start: 0, end: 4.1, text: "Page 24, Exercise 1. Right Grammar." },
@@ -151,4 +151,4 @@ const Unit6_Page3 = ({ openPopup }) => {
   );
 };
 
-export default Unit6_Page3;
+export default Unit8_Page3;

@@ -10,12 +10,12 @@ import num4 from "../../assets/unit3/imgs3/Num4.svg";
 import num5 from "../../assets/unit3/imgs3/Num5.svg";
 import num6 from "../../assets/unit3/imgs3/Num6.svg";
 import num7 from "../../assets/unit3/imgs3/Num7.svg";
-import num8 from "../../assets/unit5/imgs/Num8.svg"
+import num8 from "../../assets/unit5/imgs/Num8.svg";
 import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import { IoMdSettings } from "react-icons/io";
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 
-const Unit6_Page1_Vocab = () => {
+const Unit10_Page1_Vocab = () => {
   const audioRef = useRef(null);
 
   const mainAudioRef = useRef(null); // ✅ الأوديو الرئيسي
@@ -114,7 +114,7 @@ const Unit6_Page1_Vocab = () => {
     }
   };
 
-  const nums = [num1, num2, num3, num4, num5, num6, num7,num8];
+  const nums = [num1, num2, num3, num4, num5, num6, num7, num8];
 
   return (
     <>
@@ -205,8 +205,6 @@ const Unit6_Page1_Vocab = () => {
                       mainAudioRef.current.volume = e.target.value;
                     }}
                   />
-
-              
                 </div>
               )}
             </div>
@@ -246,13 +244,16 @@ const Unit6_Page1_Vocab = () => {
               style={{ bottom: "2%", right: "0.5%" }}
             >
               {[
-                "numbers",
-                "Close your book.",
-                "Open your book",
-                "Make a line.",
-                "Listen! ",
-                "Quiet! ",
-                "Take out your pencil.",
+                "ice cream",
+                "milk",
+                "bread",
+                "sweet",
+                "apple",
+                "fruit",
+                "chicken",
+                "order",
+                "wait",
+                " cafeteria",
               ].map((text, i) => (
                 <h6 key={i} className={activeIndex === i ? "active" : ""}>
                   {i + 1} {text}
@@ -311,4 +312,4 @@ const Unit6_Page1_Vocab = () => {
   );
 };
 
-export default Unit6_Page1_Vocab;
+export default Unit10_Page1_Vocab;

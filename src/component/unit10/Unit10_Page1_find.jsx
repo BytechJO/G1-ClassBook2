@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import find_img from "../../assets/unit3/imgs3/G1_U3_Pg_22-23 copy.jpg";
 import ValidationAlert from "../Popup/ValidationAlert";
 import Rabbit from "../../assets/img_unit2/imgs/Rabbit.svg";
-const Unit6_Page1_find = () => {
+const Unit10_Page1_find = () => {
   const [clickedPoint, setClickedPoint] = useState(null);
   const [checkResult, setCheckResult] = useState(null);
 
@@ -133,4 +133,4 @@ const Unit6_Page1_find = () => {
   );
 };
 
-export default Unit6_Page1_find;
+export default Unit10_Page1_find;

@@ -1,21 +1,22 @@
 import React, { useState, useRef } from "react";
-import page_3 from "../../assets/unit5/imgs/Right 1 Unit 05 Welcome to My Class3.jpg";
-import "./Unit5_Page3.css";
+import page_3 from "../../assets/unit9/imgs/Right G1- Class Book_00078.jpg";
+import "./Unit9_Page3.css";
 import CD22_pg24_Grammar1_AdultLady from "../../assets/unit5/sounds/U5P42Grammar.mp3";
-import sound1 from "../../assets/unit5/sounds/Pg42_1.1_Adult Lady.mp3";
-import sound2 from "../../assets/unit5/sounds/Pg42_1.2_Adult Lady.mp3";
-import sound3 from "../../assets/unit5/sounds/Pg42_1.3_Adult Lady.mp3";
-import sound4 from "../../assets/unit5/sounds/Pg42_2.1_Harley.mp3";
-import sound5 from "../../assets/unit5/sounds/Pg42_2.2_Jack.mp3";
-import sound6 from "../../assets/unit5/sounds/Pg42_3.1_Modified Stella.mp3";
-import sound7 from "../../assets/unit5/sounds/Pg42_3.2_Jack.mp3";
-import sound8 from "../../assets/unit5/sounds/Pg42_4.1_Stella.mp3";
-import sound9 from "../../assets/unit5/sounds/Pg42_5.1_Stella.mp3";
+import sound1 from "../../assets/unit9/sound/Pg78_1.1_Adult Lady.mp3";
+import sound2 from "../../assets/unit9/sound/Pg78_1.2_Adult Lady.mp3";
+import sound3 from "../../assets/unit9/sound/Pg78_1.3_Adult Lady.mp3";
+import sound4 from "../../assets/unit9/sound/Pg78_1.4_Adult Lady.mp3";
+import sound5 from "../../assets/unit9/sound/Pg78_2.1_Harley.mp3";
+import sound6 from "../../assets/unit9/sound/Pg78_2.2_Hansel.mp3";
+import sound7 from "../../assets/unit9/sound/Pg78_3.1_Stella.mp3";
+import sound8 from "../../assets/unit9/sound/Pg78_3.2_Sarah.mp3";
+import sound9 from "../../assets/unit9/sound/Pg78_4.1_Tom.mp3";
+import sound10 from "../../assets/unit9/sound/Pg78_4.2_Helen.mp3";
 import AudioWithCaption from "../AudioWithCaption";
 import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
 import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import video from "../../assets/unit5/sounds/p42.mp4";
-const Unit5_Page3 = ({ openPopup }) => {
+const Unit9_Page3 = ({ openPopup }) => {
   const audioRef = useRef(null);
   const captionsExample = [
     { start: 0, end: 4.12, text: "Page 42. Exercise one. Right Grammar. " },
@@ -57,6 +58,7 @@ const Unit5_Page3 = ({ openPopup }) => {
     { x1: 76.33, y1: 31.1, x2: 93.86, y2: 34.62, sound: sound7 },
     { x1: 9.0, y1: 64.61, x2: 27.8, y2: 26.0, sound: sound8 },
     { x1: 54.68, y1: 65.45, x2: 75.46, y2: 68.46, sound: sound9 },
+        { x1: 54.68, y1: 65.45, x2: 75.46, y2: 68.46, sound: sound10 },
   ];
 
   const checkAreaAndPlaySound = (x, y) => {
@@ -160,4 +162,4 @@ const Unit5_Page3 = ({ openPopup }) => {
   );
 };
 
-export default Unit5_Page3;
+export default Unit9_Page3;

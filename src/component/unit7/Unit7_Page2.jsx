@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-import page_2 from "../../assets/unit5/imgs/Right 1 Unit 05 Welcome to My Class2.jpg";
+import page_2 from "../../assets/unit7/img/Right G1- Class Book_00059.jpg";
 import soundSong from "../../assets/unit5/sounds/U5P41 Welcome to my class.mp3";
-import sound1 from "../../assets/unit5/sounds/Pg41_1.1_Bebo.mp3";
-import sound2_2 from "../../assets/unit5/sounds/Pg41_1.2_Lolo.mp3";
-import sound3 from "../../assets/unit5/sounds/Pg41_2.2_Adult Lady.mp3";
-import sound4 from "../../assets/unit5/sounds/Pg41_2.3_Adult Lady.mp3";
-import sound5 from "../../assets/unit5/sounds/Pg41_2.4_Adult Lady.mp3";
-import sound6 from "../../assets/unit5/sounds/Pg41_2.5_Adult Lady.mp3";
-import sound7 from "../../assets/unit5/sounds/U5P41 Listen and read along.mp3";
+import sound1 from "../../assets/unit7/sound/Pg59_1.1_Bebo.mp3";
+import sound2_2 from "../../assets/unit7/sound/Pg59_1.2_Lolo_Take 2.mp3";
+import sound3 from "../../assets/unit7/sound/Pg59_2.1_Adult Lady.mp3";
+import sound4 from "../../assets/unit7/sound/Pg59_2.2_Adult Lady.mp3";
+import sound5 from "../../assets/unit7/sound/Pg59_2.3_Adult Lady.mp3";
+import sound6 from "../../assets/unit7/sound/Pg59_2.4_Adult Lady.mp3";
+import sound7 from "../../assets/unit7/sound/CD54.Pg59_Instruction1_Adult Lady.mp3";
 import img1 from "../../assets/unit5/imgs/K.svg";
 import img2 from "../../assets/unit5/imgs/Key.svg";
 import img3 from "../../assets/unit5/imgs/kite.svg";
@@ -21,8 +20,8 @@ import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
 import arrowBtn from "../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
 import AudioWithCaption from "../AudioWithCaption";
 import FourImagesWithAudio from "../FourImagesWithAudio";
-import "./Unit5_Page2.css";
-const Unit5_Page2 = ({ openPopup }) => {
+import "./Unit7_Page2.css";
+const Unit7_Page2 = ({ openPopup }) => {
   // أصوات الصور
   const imageSounds = [
     null, // الصورة الأولى الكبيرة (إن ما بدك صوت إلها)
@@ -117,4 +116,4 @@ const Unit5_Page2 = ({ openPopup }) => {
   );
 };
 
-export default Unit5_Page2;
+export default Unit7_Page2;

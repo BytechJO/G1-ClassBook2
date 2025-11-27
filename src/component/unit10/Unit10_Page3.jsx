@@ -1,18 +1,20 @@
 import React, { useState, useRef } from "react";
-import page_3 from "../../assets/unit6/imgs/Right G1- Class Book_00048.jpg";
-import "./Unit6_Page3.css";
+import page_3 from "../../assets/unit10/imgs/Right G1- Class Book_00084.jpg";
+import "./Unit10_Page3.css";
 import CD22_pg24_Grammar1_AdultLady from "../../assets/unit3/sound3/U3P24RG1.mp3";
-import sound1 from "../../assets/unit3/sound3/Pg24_1.1_Adult Lady.mp3";
-import sound2 from "../../assets/unit3/sound3/Pg24_1.2_Adult Lady.mp3";
-import sound3 from "../../assets/unit3/sound3/Pg24_1.3_Adult Lady.mp3";
-import sound4 from "../../assets/unit3/sound3/Pg24_2.1_Female Teacher.mp3";
-import sound5 from "../../assets/unit3/sound3/Pg24_3.1_Female Teacher.mp3";
-import sound6 from "../../assets/unit3/sound3/Pg24_4.1_Male Teacher.mp3";
+import sound1 from "../../assets/unit10/sound/Pg84_1.1_Adult Lady.mp3";
+import sound2 from "../../assets/unit10/sound/Pg84_1.2_Adult Lady.mp3";
+import sound3 from "../../assets/unit10/sound/Pg84_2.1_Jack .mp3";
+import sound4 from "../../assets/unit10/sound/Pg84_2.2_Modified Harley.mp3";
+import sound5 from "../../assets/unit10/sound/Pg84_3.1_Stella.mp3";
+import sound6 from "../../assets/unit10/sound/Pg84_3.2_Helen.mp3";
+import sound7 from "../../assets/unit10/sound/Pg84_4.1_Mom.mp3";
+import sound8 from "../../assets/unit10/sound/Pg84_4.2_Sarah.mp3";
 import AudioWithCaption from "../AudioWithCaption";
 import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
 import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import video from "../../assets/unit3/sound3/p24.mp4";
-const Unit6_Page3 = ({ openPopup }) => {
+const Unit10_Page3 = ({ openPopup }) => {
   const audioRef = useRef(null);
   const captionsExample = [
     { start: 0, end: 4.1, text: "Page 24, Exercise 1. Right Grammar." },
@@ -48,6 +50,8 @@ const Unit6_Page3 = ({ openPopup }) => {
     { x1: 16.9, y1: 22.6, x2: 26.7, y2: 25.5, sound: sound4 },
     { x1: 58.0, y1: 22.8, x2: 68.5, y2: 26.0, sound: sound5 },
     { x1: 27.9, y1: 59.0, x2: 42.9, y2: 63.4, sound: sound6 },
+        { x1: 58.0, y1: 22.8, x2: 68.5, y2: 26.0, sound: sound7 },
+    { x1: 27.9, y1: 59.0, x2: 42.9, y2: 63.4, sound: sound8 },
   ];
 
   const checkAreaAndPlaySound = (x, y) => {
@@ -151,4 +155,4 @@ const Unit6_Page3 = ({ openPopup }) => {
   );
 };
 
-export default Unit6_Page3;
+export default Unit10_Page3;

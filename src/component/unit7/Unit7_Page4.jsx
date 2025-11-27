@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
-import page_4 from "../../assets/unit5/imgs/Right 1 Unit 05 Welcome to My Class4.jpg";
-import "./Unit5_Page4.css";
+import page_4 from "../../assets/unit7/img/Right G1- Class Book_00061.jpg";
+import "./Unit7_Page4.css";
 import CD23_pg25_Grammar2_AdultLady from "../../assets/unit5/sounds/U5P43Grammar.mp3";
 import sound1 from "../../assets/unit5/sounds/Pg43_2.1_Adult Lady.mp3";
 import sound2 from "../../assets/unit5/sounds/Pg43_2.2_Adult Lady.mp3";
@@ -17,7 +17,7 @@ import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import AudioWithCaption from "../AudioWithCaption";
 import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
 
-const Unit5_Page4 = ({ openPopup }) => {
+const Unit7_Page4 = ({ openPopup }) => {
   const audioRef = useRef(null);
   const captionsExample = [
     { start: 0, end: 5.04, text: "Page 43. Exercise 2: Right Grammar. " },
@@ -157,4 +157,4 @@ const Unit5_Page4 = ({ openPopup }) => {
   );
 };
 
-export default Unit5_Page4;
+export default Unit7_Page4;
