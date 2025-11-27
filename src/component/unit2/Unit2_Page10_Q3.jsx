@@ -100,6 +100,7 @@ const Unit2_Page10_Q3 = () => {
   const [showResult, setShowResult] = useState(false);
   const handleSelect = (qId, option) => {
     setAnswers((prev) => ({ ...prev, [qId]: option }));
+    setShowResult(false)
   };
 
   const checkAnswers = () => {
@@ -272,7 +273,7 @@ const Unit2_Page10_Q3 = () => {
                       key={index}
                       src={img}
                       alt=""
-                      className="question-img"
+                      className="question-img-unit2-p10-q3"
                     />
                   ))}
                 </div>

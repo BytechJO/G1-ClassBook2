@@ -119,6 +119,7 @@ const Review3_Page2_Q3 = () => {
   const handleSelect = (index, value) => {
     const newAnswers = [...answers];
     newAnswers[index] = value;
+    setShowResult(false);
     setAnswers(newAnswers);
   };
 
@@ -269,8 +270,6 @@ const Review3_Page2_Q3 = () => {
                         audioRef.current.volume = e.target.value;
                       }}
                     />
-
-                  
                   </div>
                 )}
               </div>
@@ -317,7 +316,7 @@ const Review3_Page2_Q3 = () => {
                       {showResult &&
                       answers[index] === chIndex &&
                       !choice.isShortA ? (
-                        <span className="review3-p2-q3-wrong-x">X</span>
+                        <span className="review3-p2-q3-wrong-x">✕</span>
                       ) : (
                         ""
                       )}

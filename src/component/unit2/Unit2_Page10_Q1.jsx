@@ -24,12 +24,6 @@ const Unit2_Page10_Q1 = () => {
   const [isMuted, setIsMuted] = useState(false);
   const stopAtSecond = 4.5;
   const [paused, setPaused] = useState(false);
-  const changeSpeed = (rate) => {
-    if (!audioRef.current) return;
-    audioRef.current.playbackRate = rate;
-    setActiveSpeed(rate);
-  };
-
   const sentences = [
     { word1: "ball", word2: "pencil", num: 1 },
     { word1: "boy", word2: "pencil", num: 2 },
@@ -52,12 +46,11 @@ const Unit2_Page10_Q1 = () => {
   const [checked, setChecked] = useState(false);
 
   const handleWordClick = (sIndex, wIndex) => {
- 
-
     setCircledWords((prev) => ({
       ...prev,
       [sIndex]: [wIndex], // 🟢 كل جملة لها اختيار واحد فقط
     }));
+    setChecked(false);
   };
   useEffect(() => {
     const audio = audioRef.current;
@@ -244,8 +237,6 @@ const Unit2_Page10_Q1 = () => {
                           audioRef.current.volume = e.target.value;
                         }}
                       />
-
-                   
                     </div>
                   )}
                 </div>

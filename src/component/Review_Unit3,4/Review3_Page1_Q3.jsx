@@ -44,6 +44,7 @@ const Review3_Page1_Q3 = () => {
       ...answers,
       [qId]: idx, // نخزن رقم الخيار المختار
     });
+    setResults({})
   };
 
   const checkAnswers = () => {

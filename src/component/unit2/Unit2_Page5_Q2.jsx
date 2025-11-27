@@ -89,6 +89,7 @@ const Unit2_Page5_Q2 = () => {
     const newAnswers = [...answers];
     newAnswers[index] = value;
     setAnswers(newAnswers);
+    setShowResult(false)
   };
 
   const checkAnswers = () => {

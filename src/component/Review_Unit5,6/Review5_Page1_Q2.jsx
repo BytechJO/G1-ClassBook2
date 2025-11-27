@@ -43,6 +43,7 @@ const Review5_Page1_Q2 = () => {
         i === index ? { ...a, [field]: value.toLowerCase() } : a
       )
     );
+     setWrongNumbers(data.map(() => false));
   };
 
   const reset = () => {

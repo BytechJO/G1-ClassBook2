@@ -14,6 +14,7 @@ const Unit2_Page10_Q4 = () => {
     const newAnswers = [...answers];
     newAnswers[index] = value.toLowerCase();
     setAnswers(newAnswers);
+    setWrongInputs([])
   };
 
   const checkAnswers = () => {

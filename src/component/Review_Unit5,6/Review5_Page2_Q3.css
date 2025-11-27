@@ -30,7 +30,7 @@
   gap: 10px;
     font-size: 22px;  
     font-weight:700;
-  flex-direction: column;
+  flex-direction: column;position: relative;
 }
 
 .option-word-review5-p2-q3 {
@@ -38,11 +38,13 @@
   /* border: 2px solid #bbb; */
   border-radius: 25px;
   cursor: pointer;
-  transition: 0.2s;
+  /* transition: 0.2s; */
+  position: relative;
 }
 
 .option-word-review5-p2-q3.selected2 {
  border: 3px solid #2c5287;
+ position: relative;
 }
 
 .question-img-review5-p2-q3 {

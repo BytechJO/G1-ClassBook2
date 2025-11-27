@@ -125,9 +125,7 @@ const Review3_Page1_Q2 = () => {
     const userScore = sentenceCorrect + lineCorrect;
 
     // لتحديد العلامات الحمراء
-    setWrongWords([
-      ...wrongLines,
-    ]);
+    setWrongWords([...wrongLines]);
 
     let color =
       userScore === totalScore ? "green" : userScore === 0 ? "red" : "orange";
@@ -194,10 +192,10 @@ const Review3_Page1_Q2 = () => {
                   className="unscramble-input"
                   type="text"
                   value={userInputs[1]}
-                  onChange={(e) =>
-                    setUserInputs((prev) => ({ ...prev, 1: e.target.value }))
-                  }
-                  style={{color:"red"}}
+                  onChange={(e) => {
+                    setUserInputs((prev) => ({ ...prev, 1: e.target.value }));
+                  }}
+                  style={{ color: "red" }}
                   readOnly
                 />
               </div>
@@ -235,9 +233,10 @@ const Review3_Page1_Q2 = () => {
                   className="unscramble-input"
                   type="text"
                   value={userInputs[2]}
-                  onChange={(e) =>
-                    setUserInputs((prev) => ({ ...prev, 2: e.target.value }))
-                  }
+                  onChange={(e) => {
+                    setUserInputs((prev) => ({ ...prev, 2: e.target.value }));
+                    setWrongInputs([]);
+                  }}
                 />
                 {wrongInputs.includes("2") && (
                   <span className="input-error-x">✕</span>
@@ -251,7 +250,7 @@ const Review3_Page1_Q2 = () => {
                   src={dish}
                   className="matched-img2"
                   alt=""
-                  style={{ height: "100px",width: "auto" }}
+                  style={{ height: "100px", width: "auto" }}
                 />
               </div>
             </div>
@@ -279,9 +278,10 @@ const Review3_Page1_Q2 = () => {
                   className="unscramble-input"
                   type="text"
                   value={userInputs[3]}
-                  onChange={(e) =>
-                    setUserInputs((prev) => ({ ...prev, 3: e.target.value }))
-                  }
+                  onChange={(e) => {
+                    setUserInputs((prev) => ({ ...prev, 3: e.target.value }));
+                    setWrongInputs([]);
+                  }}
                 />
                 {wrongInputs.includes("3") && (
                   <span className="input-error-x">✕</span>
@@ -323,9 +323,10 @@ const Review3_Page1_Q2 = () => {
                   className="unscramble-input"
                   type="text"
                   value={userInputs[4]}
-                  onChange={(e) =>
-                    setUserInputs((prev) => ({ ...prev, 4: e.target.value }))
-                  }
+                  onChange={(e) => {
+                    setUserInputs((prev) => ({ ...prev, 4: e.target.value }));
+                    setWrongInputs([]);
+                  }}
                 />
                 {wrongInputs.includes("4") && (
                   <span className="input-error-x">✕</span>
@@ -355,6 +356,12 @@ const Review3_Page1_Q2 = () => {
           <button
             onClick={() => {
               setLines([]);
+              setUserInputs({
+                1: "Open your book.",
+                2: "",
+                3: "",
+                4: "",
+              });
               setWrongWords([]);
             }}
             className="try-again-button"

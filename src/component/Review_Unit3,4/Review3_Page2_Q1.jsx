@@ -9,13 +9,14 @@ import ValidationAlert from "../Popup/ValidationAlert";
 import "./Review3_Page2_Q1.css";
 const Review3_Page2_Q1 = () => {
   const correctAnswers = ["rat", "cap", "ant", "bat", "dad", "pan"];
-  const [answers, setAnswers] = useState(["", "", "", ""]);
+  const [answers, setAnswers] = useState(["", "", "", "","",""]);
   const [wrongInputs, setWrongInputs] = useState([]);
 
   const handleChange = (value, index) => {
     const newAnswers = [...answers];
     newAnswers[index] = value.toLowerCase();
     setAnswers(newAnswers);
+    setWrongInputs([])
   };
 
   const checkAnswers = () => {
@@ -57,7 +58,7 @@ const Review3_Page2_Q1 = () => {
   };
 
   const reset = () => {
-    setAnswers(["", "", "", ""]);
+    setAnswers(["", "", "", "","",""]);
     setWrongInputs([]);
   };
   return (
@@ -105,66 +106,6 @@ const Review3_Page2_Q1 = () => {
               </div>
             );
           })}
-
-          {/* <div className="row2-unit3-page6-q1">
-          <div style={{ display: "flex", gap: "15px" }}>
-            <span className="num-span">2</span>{" "}
-            <img src={cap} alt="" className="q-img-unit3-page6-q1" />
-          </div>
-          <span style={{ position: "relative", display: "flex" }}>
-            <div className="input-wrapper-unit3-page6-q1">
-              <input
-                type="text"
-                className="q-input-unit3-page6-q1"
-                onChange={(e) => handleChange(e.target.value, 1)}
-                value={answers[1]}
-              />{" "}
-              {wrongInputs.includes(1) && (
-                <span className="error-mark-input">✕</span>
-              )}
-            </div>
-          </span>
-        </div>
-
-        <div className="row2-unit3-page6-q1">
-          <div style={{ display: "flex", gap: "15px" }}>
-            <span className="num-span">3</span>{" "}
-            <img src={ant} alt="" className="q-img-unit3-page6-q1" />
-          </div>
-          <span style={{ position: "relative", display: "flex" }}>
-            <div className="input-wrapper-unit3-page6-q1">
-              <input
-                type="text"
-                className="q-input-unit3-page6-q1"
-                onChange={(e) => handleChange(e.target.value, 2)}
-                value={answers[2]}
-              />{" "}
-              {wrongInputs.includes(2) && (
-                <span className="error-mark-input">✕</span>
-              )}
-            </div>
-          </span>
-        </div>
-
-        <div className="row2-unit3-page6-q1">
-          <div style={{ display: "flex", gap: "15px" }}>
-            <span className="num-span">4</span>{" "}
-            <img src={dad} alt="" className="q-img-unit3-page6-q1" />
-          </div>
-          <span style={{ position: "relative", display: "flex" }}>
-            <div className="input-wrapper-unit3-page6-q1">
-              <input
-                type="text"
-                className="q-input-unit3-page6-q1"
-                onChange={(e) => handleChange(e.target.value, 3)}
-                value={answers[3]}
-              />{" "}
-              {wrongInputs.includes(3) && (
-                <span className="error-mark-input">✕</span>
-              )}
-            </div>
-          </span>
-        </div> */}
         </div>
       </div>
       <div className="action-buttons-container">

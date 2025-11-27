@@ -27,6 +27,7 @@ const Review6_Page1_Q3 = () => {
     const newAnswers = [...answers];
     newAnswers[index] = value;
     setAnswers(newAnswers);
+    setWrongInputs([])
   };
 
   const checkAnswers = () => {

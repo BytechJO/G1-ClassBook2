@@ -23,6 +23,7 @@ const Review4_Page1_Q3 = () => {
       ...prev,
       [rowId]: option,
     }));
+    setChecked(false)
   };
 
   const checkAnswers = () => {

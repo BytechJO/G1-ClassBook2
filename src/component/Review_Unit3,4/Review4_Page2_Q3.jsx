@@ -38,6 +38,7 @@ const Review4_Page2_Q3 = () => {
     const newAns = [...answers];
     newAns[qIndex] = optionIndex;
     setAnswers(newAns);
+    setShowResult(false)
   };
 
   const checkAnswers = () => {

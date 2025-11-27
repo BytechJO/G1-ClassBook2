@@ -33,7 +33,10 @@ const Unit2_Page6_Q2 = () => {
 
     // إزالة الرقم من أي مكان قديم
     Object.keys(newDropped).forEach((key) => {
-      if (newDropped[key] === draggableId) newDropped[key] = null;
+      if (newDropped[key] === draggableId) {
+        newDropped[key] = null;
+    
+      }
     });
 
     newDropped[destination.droppableId] = draggableId;
@@ -193,17 +196,16 @@ const Unit2_Page6_Q2 = () => {
             </DragDropContext>
           </div>
         </div>
-        
       </div>
       <div className="action-buttons-container">
-          <button onClick={handleReset} className="try-again-button">
-            Start Again ↻
-          </button>
+        <button onClick={handleReset} className="try-again-button">
+          Start Again ↻
+        </button>
 
-          <button onClick={handleCheckAnswers} className="check-button2">
-            Check Answer ✓
-          </button>
-        </div>
+        <button onClick={handleCheckAnswers} className="check-button2">
+          Check Answer ✓
+        </button>
+      </div>
     </>
   );
 };

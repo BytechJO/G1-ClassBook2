@@ -149,7 +149,7 @@ const Review6_Page1_Q2 = () => {
                     marginTop: "10px",
                   }}
                 >
-                  <span style={{ color: "#2c5287" }}>1</span> Can you fly a
+                  <span style={{ color: "#2c5287",fontSize:"20px",fontWeight:"700" }}>1</span> Can you fly a
                   kite?
                 </h5>
                 <img src={img1} alt="" />
@@ -176,7 +176,7 @@ const Review6_Page1_Q2 = () => {
                     marginTop: "10px",
                   }}
                 >
-                  <span style={{ color: "#2c5287" }}>2</span> Can you play the
+                  <span style={{ color: "#2c5287" ,fontSize:"20px",fontWeight:"700"}}>2</span> Can you play the
                   violin?
                 </h5>
                 <img src={img2} alt="img" />
@@ -202,7 +202,7 @@ const Review6_Page1_Q2 = () => {
                     marginTop: "10px",
                   }}
                 >
-                  <span style={{ color: "#2c5287" }}>3</span> Can you ride a
+                  <span style={{ color: "#2c5287",fontSize:"20px",fontWeight:"700" }}>3</span> Can you ride a
                   bike?
                 </h5>
                 <img src={img3} alt="" />

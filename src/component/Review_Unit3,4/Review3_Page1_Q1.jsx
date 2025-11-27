@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import deer from "../../assets/unit4/imgs/U4P34EXEA-01.svg"
+import deer from "../../assets/unit4/imgs/U4P34EXEA-01.svg";
 import duck from "../../assets/unit4/imgs/U4P34EXEA-02.svg";
 import taxi from "../../assets/unit4/imgs/U4P34EXEA-03.svg";
 import tiger from "../../assets/unit4/imgs/U4P34EXEA-04.svg";
 import ValidationAlert from "../Popup/ValidationAlert";
-import "./Review3_Page1_Q1.css"
+import "./Review3_Page1_Q1.css";
 const Review3_Page1_Q1 = () => {
-
-
   const data = [
     {
       word: "Quiet!",
@@ -41,6 +39,7 @@ const Review3_Page1_Q1 = () => {
         i === index ? { ...a, [field]: value.toLowerCase() } : a
       )
     );
+    setWrongNumbers(data.map(() => false));
   };
 
   const reset = () => {
@@ -88,9 +87,7 @@ const Review3_Page1_Q1 = () => {
   return (
     <div className="page8-wrapper">
       <div className="page8-content">
-        <header className="header-title-page8">
-          A Look and number.
-        </header>
+        <header className="header-title-page8">A Look and number.</header>
 
         {/* ✅ الصور */}
         <div
@@ -104,7 +101,11 @@ const Review3_Page1_Q1 = () => {
         >
           {data.map((item, index) => (
             <>
-              <img key={index} src={item.src} className="exercise-image-review3-p1-q1" />
+              <img
+                key={index}
+                src={item.src}
+                className="exercise-image-review3-p1-q1"
+              />
             </>
           ))}
         </div>

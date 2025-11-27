@@ -21,6 +21,7 @@ const Unit3_Page5_Q3 = () => {
   // تحديث خانة الإدخال
   const handleChange = (index, value) => {
     setAnswers((prev) => prev.map((a, i) => (i === index ? value : a)));
+    setShowResult([])
   };
 
   const checkAnswers = () => {
@@ -59,7 +60,7 @@ const Unit3_Page5_Q3 = () => {
   };
   // زر الريست
   const resetAnswers = () => {
-    setAnswers(["", "", "", ""]);
+    setAnswers(["5", "", "", ""]);
     setShowResult([]);
   };
 

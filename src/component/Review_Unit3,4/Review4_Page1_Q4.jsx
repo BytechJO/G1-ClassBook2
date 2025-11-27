@@ -32,6 +32,7 @@ const Review4_Page1_Q4 = () => {
     const newAnswers = [...answers];
     newAnswers[index] = value;
     setAnswers(newAnswers);
+    setWrongInputs([])
   };
 
   const checkAnswers = () => {
@@ -143,7 +144,7 @@ const Review4_Page1_Q4 = () => {
                 />
                 {/* ❌ علامة الخطأ */}
                 {wrongInputs.includes(index) && (
-                  <span className="wrong-icon">✕</span>
+                  <span className="wrong-icon-review4-p1-q4">✕</span>
                 )}
               </div>
             </div>

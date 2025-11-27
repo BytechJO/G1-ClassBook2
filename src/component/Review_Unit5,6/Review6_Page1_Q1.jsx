@@ -42,6 +42,7 @@ const Review6_Page1_Q1 = () => {
     const newAns = [...answers];
     newAns[qIndex] = optionIndex;
     setAnswers(newAns);
+    setShowResult(false)
   };
 
   const checkAnswers = () => {
@@ -145,7 +146,7 @@ const Review6_Page1_Q1 = () => {
                       >
                         {word}
                         {showResult && isSelected && !isCorrect && (
-                          <span className="wrong-x-review4-p2-q3">X</span>
+                          <span className="wrong-x-review4-p2-q3">✕</span>
                         )}
                       </p>
                     );

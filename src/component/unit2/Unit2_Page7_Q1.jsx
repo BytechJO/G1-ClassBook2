@@ -52,6 +52,7 @@ const Unit2_Page7_Q1 = () => {
       updated[key][index] = value; // ✅ نخزن القيمة
       return updated;
     });
+    setWrongInputs({})
   };
 
   const checkAnswers = () => {

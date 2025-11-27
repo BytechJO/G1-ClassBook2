@@ -30,12 +30,6 @@ const Unit3_Page5_Q2 = () => {
   const [isMuted, setIsMuted] = useState(false);
   const stopAtSecond = 4.5;
   const [paused, setPaused] = useState(false);
-  const changeSpeed = (rate) => {
-    if (!audioRef.current) return;
-    audioRef.current.playbackRate = rate;
-    setActiveSpeed(rate);
-  };
-
   const correctData = ["1", "2", "4"];
   const options = [
     { img: img1, num: "1" },
@@ -106,6 +100,7 @@ const Unit3_Page5_Q2 = () => {
         return [...prev, index];
       }
     });
+    setShowResult([])
   };
 
   const scoreMessage = `

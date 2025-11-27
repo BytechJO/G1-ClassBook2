@@ -33,6 +33,7 @@ const Unit3_Page6_Q2 = () => {
 
   const selectAnswer = (id, value) => {
     setAnswers({ ...answers, [id]: value });
+    setShowResult([])
   };
 
   const checkAnswers = () => {

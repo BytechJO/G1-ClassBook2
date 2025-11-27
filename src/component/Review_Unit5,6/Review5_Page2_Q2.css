@@ -84,8 +84,20 @@
 ============================ */
 
 /* correct answer X (green) */
-.correct-x {
-  color: #4caf50;
+.wrong-x-circle-review5-p2-q2{
+   position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 28px;
+  height: 28px;
+  background-color: red;
+  border-radius: 50%;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ds-x {

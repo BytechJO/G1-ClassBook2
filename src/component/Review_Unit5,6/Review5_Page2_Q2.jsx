@@ -1,4 +1,4 @@
-import React, { useState,useRef,useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./Review5_Page2_Q2.css";
 import sound from "../../assets/unit6/sounds/CD50.Pg53_Instruction1_Adult Lady.mp3";
 import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
@@ -30,7 +30,7 @@ const Review5_Page2_Q2 = () => {
     { images: ["./img3a", "./img3b", "./img3c"], different: 0 },
     { images: ["./img4a", "./img4b", "./img4c"], different: 2 },
   ];
-
+  const [showResult2, setShowResult2] = useState(false);
   const [selected, setSelected] = useState(Array(groups.length).fill(null));
   const [showResult, setShowResult] = useState(false);
   const mainAudioRef = useRef(null);
@@ -112,33 +112,36 @@ const Review5_Page2_Q2 = () => {
     }
   };
   const handleSelect = (groupIndex, imageIndex) => {
-
     const updated = [...selected];
     updated[groupIndex] = imageIndex;
     setSelected(updated);
+    setShowResult2(false)
   };
 
-const checkAnswers = () => {
+  const checkAnswers = () => {
     if (selected.some((val) => val === null)) {
       ValidationAlert.info("Please choose a circle (f or v) for all items!");
       return;
     }
-  let correctCount = 0;
-  let wrongCount = 0;
+    let correctCount = 0;
+    let wrongCount = 0;
 
-  groups.forEach((group, index) => {
-    if (selected[index] === null) return ValidationAlert.info("Please choose a circle (f or v) for all items!");
+    groups.forEach((group, index) => {
+      if (selected[index] === null)
+        return ValidationAlert.info(
+          "Please choose a circle (f or v) for all items!"
+        );
 
-    if (selected[index] === group.different) {
-      correctCount++;
-    } else {
-      wrongCount++;
-    }
-  });
+      if (selected[index] === group.different) {
+        correctCount++;
+      } else {
+        wrongCount++;
+      }
+    });
 
-
-    const total =groups.length; // 8 نقاط
-    const color = correctCount === total ? "green" : correctCount === 0 ? "red" : "orange";
+    const total = groups.length; // 8 نقاط
+    const color =
+      correctCount === total ? "green" : correctCount === 0 ? "red" : "orange";
 
     const scoreMessage = `
     <div style="font-size: 20px; margin-top: 10px; text-align:center;">
@@ -147,20 +150,21 @@ const checkAnswers = () => {
       </span>
     </div>
   `;
-  // تحديد الرسالة حسب نوع الإجابات
-  if (correctCount === groups.length) {
-  ValidationAlert.success(scoreMessage)
-  } else if (correctCount === 0) {
-   ValidationAlert.error(scoreMessage)
-  } else {
-   ValidationAlert.warning(scoreMessage)
-  }
-
-};
+    // تحديد الرسالة حسب نوع الإجابات
+    if (correctCount === groups.length) {
+      ValidationAlert.success(scoreMessage);
+    } else if (correctCount === 0) {
+      ValidationAlert.error(scoreMessage);
+    } else {
+      ValidationAlert.warning(scoreMessage);
+    }
+    setShowResult2(true);
+  };
 
   const reset = () => {
     setSelected(Array(groups.length).fill(null));
     setShowResult(false);
+    setShowResult2(false);
   };
 
   return (
@@ -292,7 +296,11 @@ const checkAnswers = () => {
                     <img src={img} className="ds-image-review5-p2-q2 " />
 
                     {/* Display X only when result is shown */}
-                    {isSelected && <div className="ds-x">X</div>}
+                    {isSelected && <div className="ds-x">✕</div>}
+                    {/* ❌ دائرة حمراء فيها X بيضاء للخطأ فقط عند النتيجة */}
+                    {showResult2 && isSelected && !isCorrect && (
+                      <span className="wrong-x-circle-review5-p2-q2">✕</span>
+                    )}
                   </div>
                 );
               })}

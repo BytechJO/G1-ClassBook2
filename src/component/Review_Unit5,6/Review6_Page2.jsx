@@ -10,6 +10,7 @@ import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
 import AudioWithCaption from "../AudioWithCaption";
 import Review6_Page2_Q2 from "./Review6_Page2_Q2";
 import Review6_Page2_Q3 from "./Review6_Page2_Q3";
+import Review6_Page2_Q1 from "./Review6_Page2_Q1";
 const Review6_Page2 = ({ openPopup }) => {
  
   return (
@@ -23,7 +24,7 @@ const Review6_Page2 = ({ openPopup }) => {
         onClick={() =>
           openPopup(
             <>
-              {/* <Review6_Page2_Q2 /> */}
+              <Review6_Page2_Q1 />
             </>,
             false
           )

@@ -30,11 +30,6 @@ const Unit4_Page5_Q2 = () => {
   const [isMuted, setIsMuted] = useState(false);
   const stopAtSecond = 11;
   const [paused, setPaused] = useState(false);
-  const changeSpeed = (rate) => {
-    if (!audioRef.current) return;
-    audioRef.current.playbackRate = rate;
-    setActiveSpeed(rate);
-  };
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -87,6 +82,7 @@ const Unit4_Page5_Q2 = () => {
     const newAnswers = [...answers];
     newAnswers[index] = value.toLowerCase();
     setAnswers(newAnswers);
+setWrongInputs([])
   };
 
   const checkAnswers = () => {

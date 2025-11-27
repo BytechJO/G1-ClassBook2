@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import conversation from "../../assets/unit4/imgs/U4P36EXEA-01.svg";
 import conversation2 from "../../assets/unit4/imgs/U4P36EXEA-02.svg";
-
 import ValidationAlert from "../Popup/ValidationAlert";
-
+import "./Review4_Page1_Q1.css"
 const Review4_Page1_Q1 = () => {
   // ✅ الإحداثيات كلها نسب مئوية (نسبة من الصورة)
   const clickableAreas = [
@@ -13,11 +12,12 @@ const Review4_Page1_Q1 = () => {
   ];
   const correctAnswers = ["blue", "red", "is this"];
   const [inputs, setInputs] = useState(Array(clickableAreas.length).fill(""));
-
+  const [wrongInputs, setWrongInputs] = useState([]);
   const handleInputChange = (value, index) => {
     const updated = [...inputs];
     updated[index] = value;
     setInputs(updated);
+    setWrongInputs([])
   };
 
   const handleCheck = () => {
@@ -34,7 +34,11 @@ const Review4_Page1_Q1 = () => {
         .toLowerCase()
         .includes(correctAnswers[index].toLowerCase());
     });
+    const wrong = results
+      .map((r, i) => (r ? null : i))
+      .filter((v) => v !== null);
 
+    setWrongInputs(wrong); // حفظ الإنپوتات الغلط
     const correctCount = results.filter((r) => r === true).length;
     const wrongCount = results.length - correctCount;
 
@@ -60,21 +64,18 @@ const Review4_Page1_Q1 = () => {
     } else {
       ValidationAlert.warning(scoreMessage);
     }
-
-    console.log(inputs);
-    console.log(correctAnswers);
-    console.log(results);
   };
 
   const handleReset = () => {
     setInputs(Array(clickableAreas.length).fill(""));
+    setWrongInputs([])
   };
 
   return (
     <div
       style={{
         display: "flex",
-        
+
         justifyContent: "center",
       }}
     >
@@ -121,21 +122,37 @@ const Review4_Page1_Q1 = () => {
             }}
           />
           {clickableAreas.map((area, index) => (
-            <input
-              key={index}
-              value={inputs[index]}
-              onChange={(e) => handleInputChange(e.target.value, index)}
-              style={{
-                position: "absolute",
-                top: `${area.y}%`,
-                left: `${area.x}%`,
-                width: `${area.w}%`,
-                height: `${area.h}%`,
-                fontSize: "1.3vw",
-                border: "2px solid black",
-                borderRadius: "8px",
-              }}
-            />
+            <>
+              <input
+                key={index}
+                value={inputs[index]}
+                onChange={(e) => handleInputChange(e.target.value, index)}
+                style={{
+                  position: "absolute",
+                  top: `${area.y}%`,
+                  left: `${area.x}%`,
+                  width: `${area.w}%`,
+                  height: `${area.h}%`,
+                  fontSize: "1.3vw",
+                  border: "2px solid black",
+                  borderRadius: "8px",
+                }}
+              />
+              {wrongInputs.includes(index) && (
+                <div
+                className="wrong-icon-review4-p1-q1"
+                  style={{
+                    position: "absolute",
+                    top: `calc(${area.y}% - 1.5%)`,
+                    left: `calc(${area.x}% + ${area.w}% - 4%)`,
+                    color: "white",
+                  
+                  }}
+                >
+                  ✕
+                </div>
+              )}
+            </>
           ))}
         </div>
       </div>

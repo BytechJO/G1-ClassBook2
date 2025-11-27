@@ -84,15 +84,11 @@ const Review4_Page2_Q1 = () => {
   const [isMuted, setIsMuted] = useState(false);
   const stopAtSecond = 8;
   const [paused, setPaused] = useState(false);
-  const changeSpeed = (rate) => {
-    if (!audioRef.current) return;
-    audioRef.current.playbackRate = rate;
-    setActiveSpeed(rate);
-  };
   const handleChange = (value, qIndex, blankIndex) => {
     const updated = [...answers];
     updated[qIndex][blankIndex] = value.toLowerCase();
     setAnswers(updated);
+    setWrongInputs([])
   };
   useEffect(() => {
     const audio = audioRef.current;
@@ -333,7 +329,7 @@ const Review4_Page2_Q1 = () => {
                     }
                   />
                   {wrongInputs.includes(`${qIndex}-${blankIndex}`) && (
-                    <span className="wrong-icon">✕</span>
+                    <span className="wrong-icon-review4-p2-q1">✕</span>
                   )}
                 </div>
 

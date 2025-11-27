@@ -43,9 +43,12 @@ const Page8_Q2 = () => {
       const newDropped = { ...droppedLetters };
       const prevDrop = Object.keys(newDropped).find(
         (key) => newDropped[key] === draggableId
+
       );
+      setWrongDrops([])
       if (prevDrop) newDropped[prevDrop] = null;
       setDroppedLetters(newDropped);
+      setWrongDrops([])
       return;
     }
 
@@ -65,7 +68,7 @@ const Page8_Q2 = () => {
   const resetExercise = () => {
     setDroppedLetters(initialDroppedState);
     setWrongDrops([]);
-    setShuffledPairs(getShuffledPairs());
+  
   };
 
   const checkAnswers = () => {

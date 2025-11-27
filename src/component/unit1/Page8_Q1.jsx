@@ -67,13 +67,6 @@ const Page8_Q1 = () => {
   const [showContinue, setShowContinue] = useState(false);
   // زر الكابشن
   const [isMuted, setIsMuted] = useState(false);
-
-  const changeSpeed = (rate) => {
-    if (!audioRef.current) return;
-    audioRef.current.playbackRate = rate;
-    setActiveSpeed(rate);
-  };
-
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -129,6 +122,8 @@ const Page8_Q1 = () => {
         i === index ? { ...a, [field]: value.toLowerCase() } : a
       )
     );
+    setWrongLetters(data.map(() => false))
+    setWrongNumbers(data.map(() => false))
   };
 
   const playSound = (src) => {

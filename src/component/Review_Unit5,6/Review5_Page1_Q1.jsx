@@ -32,6 +32,7 @@ const Review5_Page1_Q1 = () => {
 
       return updated;
     });
+    setWrongWords([])
   };
 
   const checkAnswers = () => {

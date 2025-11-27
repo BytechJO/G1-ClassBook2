@@ -40,7 +40,7 @@ const Review5_Page2_Q3 = () => {
   const [answers, setAnswers] = useState(
     questions.map((q) => q.parts.map((p) => (p.type === "blank" ? null : null)))
   );
-
+  const [showResult, setShowResult] = useState(false);
   // ===============================
   // 🔵 3) الضغط على خيار
   // ===============================
@@ -48,6 +48,7 @@ const Review5_Page2_Q3 = () => {
     const updated = [...answers];
     updated[qIndex][blankIndex] = option;
     setAnswers(updated);
+    setShowResult(false)
   };
 
   // ===============================
@@ -73,9 +74,22 @@ const Review5_Page2_Q3 = () => {
       });
     });
 
-    if (correct === total) setPopup("Excellent! All answers are correct ✓");
-    else if (correct === 0) setPopup("All your answers are wrong ✗");
-    else setPopup(`You got ${correct} out of ${total} correct.`);
+    const color =
+      correct === total ? "green" : correct === 0 ? "red" : "orange";
+
+    const scoreMessage = `
+    <div style="font-size: 20px; margin-top: 10px; text-align:center;">
+      <span style="color:${color}; font-weight:bold;">
+        Score: ${correct} / ${total}
+      </span>
+    </div>
+  `;
+
+    if (correct === total) ValidationAlert.success(scoreMessage);
+    else if (correct === 0) ValidationAlert.error(scoreMessage);
+    else ValidationAlert.warning(scoreMessage);
+
+    setShowResult(true);
   };
 
   // ===============================
@@ -134,17 +148,25 @@ const Review5_Page2_Q3 = () => {
                             answers[qIndex][actualBlankIndex] === opt;
 
                           return (
-                            <span
-                              key={optIndex}
-                              className={`option-word-review5-p2-q3 ${
-                                isSelected ? "selected2" : ""
-                              }`}
-                              onClick={() =>
-                                handleSelect(qIndex, actualBlankIndex, opt)
-                              }
-                            >
-                              {opt}
-                            </span>
+                            <>
+                              <span
+                                key={optIndex}
+                                className={`option-word-review5-p2-q3 ${
+                                  isSelected ? "selected2" : ""
+                                }`}
+                                onClick={() =>
+                                  handleSelect(qIndex, actualBlankIndex, opt)
+                                }
+                              >
+                                {opt}
+                              </span>
+                              {/* Display X only when result is shown */}
+                              {showResult &&
+                                isSelected &&
+                                opt !== q.correct[actualBlankIndex] && (
+                                  <div className="wrong-mark">✕</div>
+                                )}
+                            </>
                           );
                         })}
                       </span>
@@ -159,7 +181,19 @@ const Review5_Page2_Q3 = () => {
         </div>
       </div>
       <div className="action-buttons-container">
-        <button className="try-again-button">Start Again ↻</button>
+        <button
+          className="try-again-button"
+          onClick={() => {
+            setAnswers(
+              questions.map((q) =>
+                q.parts.map((p) => (p.type === "blank" ? null : null))
+              )
+            );
+            setShowResult(false);
+          }}
+        >
+          Start Again ↻
+        </button>
         <button onClick={checkAnswers} className="check-button2">
           Check Answer ✓
         </button>

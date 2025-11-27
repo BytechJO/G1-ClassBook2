@@ -30,6 +30,7 @@ const Review5_Page2_Q1 = () => {
     newAns[index] = value;
     setAnswers(newAns);
     setShowResult(false);
+    setWrongInputs([])
   };
   const resetAll = () => {
     setSelected(["", "", "", ""]);
@@ -167,10 +168,10 @@ const Review5_Page2_Q1 = () => {
                   onChange={(e) => handleInput(e.target.value, i)}
                   className="first-letter-input-review5-p2-q1"
                 />
-{showResult && <div className="wrong-mark-review5-p2-q1">✕</div>}
+                {showResult && (
+                  <div className="wrong-mark-review5-p2-q1">✕</div>
+                )}
                 <span className="rest-word">{item.correctInput.slice(1)}</span>
-
-                
               </div>
             </div>
           ))}

@@ -36,6 +36,7 @@ const Review4_Page1_Q2 = () => {
       ...answers,
       [qId]: idx, // نخزن رقم الخيار المختار
     });
+    setResults({})
   };
 
   const checkAnswers = () => {
@@ -131,7 +132,7 @@ const Review4_Page1_Q2 = () => {
                           />
 
                           {isWrong && (
-                            <span className="review3-p1-q3-x">X</span>
+                            <span className="review3-p1-q3-x">✕</span>
                           )}
                         </div>
                       </div>

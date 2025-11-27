@@ -79,8 +79,23 @@ const Unit2_Page5_Q1 = () => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" ,justifyContent:"center" ,alignItems:"center"}}>
-      <div style={{ display: "flex", flexDirection: "column", gap: "30px",width:"60%",justifyContent:"flex-start" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          width: "60%",
+          justifyContent: "flex-start",
+        }}
+      >
         <h5 className="header-title-page8">
           <span className="ex-A">A</span>{" "}
           <span style={{ color: "purple" }}>1</span> Which picture begins with
@@ -114,13 +129,14 @@ const Unit2_Page5_Q1 = () => {
                     alignItems: "center",
                     justifyContent: "space-around",
                   }}
-                  onClick={() =>
+                  onClick={() => {
                     setAnswers((prev) => {
                       const updated = [...prev];
                       updated[rowIndex] = optIndex;
                       return updated;
-                    })
-                  }
+                    });
+                    setResults(Array(exerciseData.length).fill(null));
+                  }}
                 >
                   <img
                     src={opt.src}

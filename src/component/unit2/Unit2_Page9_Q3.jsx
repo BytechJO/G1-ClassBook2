@@ -29,6 +29,7 @@ const Unit2_Page9_Q3 = () => {
 
       return updated;
     });
+    setWrongWords([])
   };
 
   const checkAnswers = () => {

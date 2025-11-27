@@ -67,6 +67,9 @@ const Unit2_Page7_Q3 = () => {
 
       return updated;
     });
+    
+
+      setChecked(false)
   };
 
   //   console.log(result.status); // "all-correct" | "all-wrong" | "partial"
@@ -115,7 +118,7 @@ const Unit2_Page7_Q3 = () => {
                     <span
                       key={wIndex}
                       onClick={() =>
-                        !checked && handleWordClick(sIndex, wIndex)
+                       handleWordClick(sIndex, wIndex)
                       } // 🔒 يمنع التعديل بعد الفحص
                       className={`char-container ${
                         isCircled ? "circled" : ""

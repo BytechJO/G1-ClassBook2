@@ -1,33 +1,73 @@
-.headset-icon-CD-unit2-page1-1,
-.click-icon-unit2-page1-1,
-.headset-icon-CD-unit2-page1-2,
-.click-icon-unit2-page1-2 {
+.headset-icon-CD-unit5-page1-1,
+.click-icon-unit5-page1-1,
+.headset-icon-CD-unit5-page1-2,
+.click-icon-unit5-page1-2 {
   position: absolute;
   transform: translate(-50%, -50%);
   cursor: pointer;
   position: absolute;
-  background-color: #6bcff6;
+  /* background-color: #6bcff6;
   border-radius: 20px;
-  border: rgb(255, 255, 255) solid 2px;
+  border: rgb(255, 255, 255) solid 2px; */
   padding: 5px;
 }
 
-.headset-icon-CD-unit2-page1-1 {
-  top: 8%;
-  right: 18%;
+.headset-icon-CD-unit5-page1-1 {
+     top: 7%;
+    right: 8.5%;
 }
 
-.click-icon-unit2-page1-1 {
-  left: 9%;
-  top: 38%;
+.click-icon-unit5-page1-1 {
+     left: 19%;
+    top: 37%;
 }
 
-.headset-icon-CD-unit2-page1-2 {
-  bottom: 34%;
-  left: 7%;
+.headset-icon-CD-unit5-page1-2 {
+ bottom: 38.5%;
+    left: 26%;
 }
 
-.click-icon-unit2-page1-2 {
-  bottom: 14%;
-  right: 40%;
+.click-icon-unit5-page1-2 {
+  bottom: 11.5%;
+  right: 39%;
+}
+
+#num-1-unit5 {
+  top: 20%;
+  left: 25.5%;
+}
+
+#num-2-unit5 {
+  top: 21%;
+  right: 53%;
+}
+
+#num-3-unit5 {
+  top: 53%;
+  left: 56.5%;
+}
+
+#num-4-unit5 {
+  top: 31%;
+  right: 59%;
+}
+
+#num-5-unit5 {
+  top: 28%;
+  right: 39%;
+}
+
+#num-6-unit5 {
+  bottom: 59%;
+  right: 38%;
+}
+
+#num-7-unit5 {
+  left: 42%;
+  bottom: 48.5%;
+}
+
+#num-8-unit5 {
+  left: 20%;
+  top: 32.5%;
 }

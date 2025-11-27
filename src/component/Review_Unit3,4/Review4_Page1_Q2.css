@@ -19,11 +19,13 @@
   margin-bottom: 12px;
 }
 
-
+.review3-p1-q3-input{
+  cursor: pointer;
+}
 
 @media (max-width: 991px) {
-.review4-p1-q2-grid {
-  flex-direction: row;
-  flex-wrap: wrap;
-}
+  .review4-p1-q2-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }

@@ -26,6 +26,7 @@ const Review3_Page2_Q2 = () => {
       ...prev,
       [sIndex]: [wIndex], // 🟢 كل جملة لها اختيار واحد فقط
     }));
+    setChecked(false)
   };
 
   const checkAnswers = () => {
@@ -99,7 +100,7 @@ const Review3_Page2_Q2 = () => {
                         >
                           {word}
                           {isWrong && (
-                            <span className="review3-p2-q2-wrong-x">X</span>
+                            <span className="review3-p2-q2-wrong-x">✕</span>
                           )}
                         </span>
                       );

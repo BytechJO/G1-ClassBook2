@@ -1,25 +1,24 @@
 import React, { useState } from "react";
-import find_img from "../../assets/img_unit2/imgs/find img.jpg"
-import find_title from "../../assets/img_unit2/imgs/unit2_page1_findTitle.png"
-import Popup from "../Popup/Popup";
+import find_img from "../../assets/unit5/imgs/P40-41.jpg";
 import ValidationAlert from "../Popup/ValidationAlert";
-const Unit2_Page1_find = () => {
+import Rabbit from "../../assets/img_unit2/imgs/Rabbit.svg";
+const Unit5_Page1_find = () => {
   const [clickedPoint, setClickedPoint] = useState(null);
   const [checkResult, setCheckResult] = useState(null);
 
   // ✅ منطقة المطعم (بالنسب المئوية)
   const targetArea = {
-    x1: 20,
-    y1: 67,
-    x2: 26,
-    y2: 72,
+    x1: 44.25,
+    y1: 28.76,
+    x2:55.99,
+    y2: 40.27,
   };
 
   const handleImageClick = (e) => {
     const rect = e.target.getBoundingClientRect();
     const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
     const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
-
+    console.log(xPercent, yPercent);
 
     setClickedPoint({
       x: xPercent,
@@ -57,66 +56,70 @@ const Unit2_Page1_find = () => {
 
   return (
     <div style={{ textAlign: "center" }}>
-  
-      <div style={{ position: "relative", display: "inline-block" }}>
-        <img
-          src={find_title}
-          style={{
-            height: "200px",
-            width: "auto",
-            position: "absolute",
-            bottom: "2%",
-            right: "6%",
-          }}
-        />
-        <img
-          src={find_img}
-          alt="interactive"
-          style={{ cursor: "pointer", height: "460px" ,width:"auto" }}
-          onClick={handleImageClick}
-        />
-
-        {/* ✅ الدائرة الحمراء في مكان الكبس */}
-        {clickedPoint && (
-          <div
-            style={{
-              position: "absolute",
-              top: `${clickedPoint.y}%`,
-              left: `${clickedPoint.x}%`,
-              width: "3%",
-              height: "3%",
-              backgroundColor: "red",
-              borderRadius: "50%",
-              transform: "translate(-50%, -50%)",
-              pointerEvents: "none",
-            }}
-          ></div>
-        )}
-
-        {/* ✅ تلوين المنطقة الصحيحة إذا الجواب صح */}
-        {checkResult === "success" && (
-          <div
-            style={{
-              position: "absolute",
-              top: `${targetArea.y1}%`,
-              left: `${targetArea.x1}%`,
-              width: `${targetArea.x2 - targetArea.x1}%`,
-              height: `${targetArea.y2 - targetArea.y1}%`,
-              backgroundColor: "rgba(0, 255, 0, 0.55)", // أخضر شفاف
-              borderRadius: "8px",
-              pointerEvents: "none",
-            }}
-          ></div>
-        )}
-      </div>
-
       <div
         style={{
-          marginTop: "18px",
+          textAlign: "center",
           display: "flex",
-          justifyContent: "space-around",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
+        <div
+          style={{ display: "flex", justifyContent: "center", width: "100%" }}
+        >
+          <img src={Rabbit} style={{ height: "50px", width: "auto" }} />
+          <h5 className="header-title-page8">
+            I need your help. Can you help me find the bookshelf in the picture?
+          </h5>
+        </div>
+        <div style={{ position: "relative", display: "inline-block" }}>
+          <img
+            src={find_img}
+            alt="interactive"
+            style={{
+              width: "auto",
+              height: "75vh",
+              cursor: "pointer",
+              display: "block",
+            }}
+            onClick={handleImageClick}
+          />
+
+          {/* ✅ الدائرة الحمراء في مكان الكبس */}
+          {clickedPoint && (
+            <div
+              style={{
+                position: "absolute",
+                top: `${clickedPoint.y}%`,
+                left: `${clickedPoint.x}%`,
+                width: "3%",
+                height: "3%",
+                backgroundColor: "red",
+                borderRadius: "50%",
+                transform: "translate(-50%, -50%)",
+                pointerEvents: "none",
+              }}
+            ></div>
+          )}
+
+          {/* ✅ تلوين المنطقة الصحيحة إذا الجواب صح */}
+          {checkResult === "success" && (
+            <div
+              style={{
+                position: "absolute",
+                top: `${targetArea.y1}%`,
+                left: `${targetArea.x1}%`,
+                width: `${targetArea.x2 - targetArea.x1}%`,
+                height: `${targetArea.y2 - targetArea.y1}%`,
+                backgroundColor: "rgba(0, 255, 0, 0.55)", // أخضر شفاف
+                borderRadius: "8px",
+                pointerEvents: "none",
+              }}
+            ></div>
+          )}
+        </div>
+      </div>
+      <div className="action-buttons-container ">
         <button className="try-again-button" onClick={handleStartAgain}>
           Start Again ↻
         </button>
@@ -128,4 +131,4 @@ const Unit2_Page1_find = () => {
   );
 };
 
-export default Unit2_Page1_find;
+export default Unit5_Page1_find;
