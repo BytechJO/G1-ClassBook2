@@ -620,7 +620,7 @@ export default function Book() {
                 onClick={() => setViewMode("single")}
                 className={`rounded-lg p-0.5 shadow hover:bg-[#bc90ff] transition ${
                   viewMode === "single"
-                    ? "text-white"
+                    ? "text-white bg-[#bc90ff]"
                     : " text-gray-900"
                 }`}
               >
@@ -633,7 +633,7 @@ export default function Book() {
                 onClick={() => setViewMode("spread")}
                 className={`rounded-lg p-0.5 shadow hover:bg-[#bc90ff] transition ${
                   viewMode === "spread"
-                    ? " text-white"
+                    ? " text-white bg-[#bc90ff]"
                     : " text-gray-900"
                 }`}
               >
