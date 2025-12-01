@@ -1,8 +1,6 @@
 import React, { useState, useRef } from "react";
 import page_4 from "../../assets/unit4/imgs/Right 1 Unit 04 Wonderful Shapes and Colors4.jpg";
 import "./Unit4_Page4.css";
-import { FaHeadphones } from "react-icons/fa";
-import { PiCursorClickBold } from "react-icons/pi";
 import CD30_Pg31_Grammar2_AdultLady from "../../assets/unit4/sounds/U4P31 Grammar.mp3";
 import Pg31_2_1_AdultLady from "../../assets/unit4/sounds/Pg31_2.1_Adult Lady.mp3";
 import Pg31_2_2_AdultLady from "../../assets/unit4/sounds/Pg31_2.2_Adult Lady.mp3";
@@ -16,11 +14,15 @@ import Pg31_4_2_Stella from "../../assets/unit4/sounds/Pg31_4.2_Stella.mp3";
 import Pg31_5_1_Sarah from "../../assets/unit4/sounds/Pg31_5.1_Sarah.mp3";
 import Pg31_5_2_Jack from "../../assets/unit4/sounds/Pg31_5.2_Jack.mp3";
 import video from "../../assets/unit4/sounds/p31.mp4";
-import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import AudioWithCaption from "../AudioWithCaption";
-import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
+import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg"
+import arrowBtn from "../../assets/unit1/imgs/Page 01/Arrow.svg";
+import pauseBtn from "../../assets/unit1/imgs/Page 01/Right Video Button.svg";
 const Unit2_Page4 = ({ openPopup }) => {
   const audioRef = useRef(null);
+    const [hoveredAreaIndex, setHoveredAreaIndex] = useState(null);
+      const [isPlaying, setIsPlaying] = useState(false);
+      const [activeAreaIndex, setActiveAreaIndex] = useState(null);
   const captionsExample = [
     { start: 0, end: 4.18, text: "Page 31, exercise 2, Right Grammar. " },
     { start: 4.21, end: 6.00, text: "What shape is it? " },
@@ -35,16 +37,6 @@ const Unit2_Page4 = ({ openPopup }) => {
      { start: 20.13, end: 23.19, text: "Is it a triangle on the swing set? " },
     { start: 23.22, end: 25.20, text: "Yes, it is." },
   ];
-
-  const handleImageClick = (e) => {
-    const rect = e.target.getBoundingClientRect();
-    const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
-    const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
-
-    console.log("X%:", xPercent.toFixed(2), "Y%:", yPercent.toFixed(2));
-
-    checkAreaAndPlaySound(xPercent, yPercent);
-  };
   const clickableAreas = [
     { x1: 8.3, y1: 10.5, x2: 29.5, y2: 14.0, sound: Pg31_2_1_AdultLady },
     { x1: 64.17, y1: 10.15, x2: 77.14, y2: 14.0, sound: Pg31_2_2_AdultLady },
@@ -58,24 +50,26 @@ const Unit2_Page4 = ({ openPopup }) => {
     { x1: 6.36, y1: 64.5, x2: 42.7, y2: 67.6, sound: Pg31_5_1_Sarah },
     { x1: 45.12, y1: 72.93, x2: 56.59, y2: 76.19, sound: Pg31_5_2_Jack },
   ];
-
-  const checkAreaAndPlaySound = (x, y) => {
-    const area = clickableAreas.find(
-      (a) => x >= a.x1 && x <= a.x2 && y >= a.y1 && y <= a.y2
-    );
-
-    console.log("Matched Area:", area);
-
-    if (area) playSound(area.sound);
+ const handleImageClick = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
+    const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
+    console.log("X%:", xPercent.toFixed(2), "Y%:", yPercent.toFixed(2));
   };
   const playSound = (soundPath) => {
-    console.log(soundPath);
     if (audioRef.current) {
       audioRef.current.src = soundPath;
       audioRef.current.play();
+      setIsPlaying(true);
+      setHoveredAreaIndex(null); // إزالة الهايلايت عند بدء الصوت
+
+      audioRef.current.onended = () => {
+        setIsPlaying(false);
+        setHoveredAreaIndex(null);
+        setActiveAreaIndex(null); // مسح الهايلايت بعد انتهاء الصوت
+      };
     }
   };
-
   return (
     <div className="unit4-page-background" style={{ position: "relative" }}>
       <img
@@ -86,7 +80,11 @@ const Unit2_Page4 = ({ openPopup }) => {
       {clickableAreas.map((area, index) => (
         <div
           key={index}
-          className="clickable-area"
+           className={`clickable-area ${
+            hoveredAreaIndex === index || activeAreaIndex === index
+              ? "highlight"
+              : ""
+          }`}
           style={{
             position: "absolute",
             left: `${area.x1}%`,
@@ -94,8 +92,16 @@ const Unit2_Page4 = ({ openPopup }) => {
             width: `${area.x2 - area.x1}%`,
             height: `${area.y2 - area.y1}%`,
           }}
-          onClick={() => playSound(area.sound)}
-          onMouseEnter={(e) => (e.target.style.cursor = "pointer")}
+           onClick={() => {
+            setActiveAreaIndex(index); // لتثبيت الهايلايت أثناء الصوت
+            playSound(area.sound);
+          }}
+          onMouseEnter={() => {
+            if (!isPlaying) setHoveredAreaIndex(index);
+          }}
+          onMouseLeave={() => {
+            if (!isPlaying) setHoveredAreaIndex(null);
+          }}
         ></div>
       ))}
 

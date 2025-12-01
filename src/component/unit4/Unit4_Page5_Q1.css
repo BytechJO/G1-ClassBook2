@@ -15,7 +15,14 @@
   background: white;
     position: relative;
 }
+.circle-choice-unit4-page5-q1.active.correct-color {
+  border-color: red !important;
+ 
+}
 
+.write-input-unit4-page5-q1.correct-color{
+  color: red;
+}
 .q-img-unit4-page5-q1 {
   width: 150px;
   height: 150px;
@@ -38,7 +45,7 @@
 .circle-choice-unit4-page5-q1 {
   width: 32px;
   height: 32px;
-  border: 2px solid #4a90e2;
+  border: 2px solid transparent;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -51,10 +58,10 @@
 }
 
 .circle-choice-unit4-page5-q1.active {
-  background: #4a90e2;
-  color: white;
+
+border-color: #8cc2f5;
   font-weight: bold;
-  border-color: #4a90e2;
+ 
 }
 
 .write-input-unit4-page5-q1 {

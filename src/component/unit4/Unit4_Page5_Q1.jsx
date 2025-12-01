@@ -17,18 +17,33 @@ const Unit4_Page5_Q1 = () => {
   const [answers, setAnswers] = useState(["", "", "", ""]);
   const [wrongInputs, setWrongInputs] = useState([]);
   const [showResult, setShowResult] = useState(false);
+  const [showCorrect, setShowCorrect] = useState(false);
+
   const handleSelect = (value, index) => {
+     if (showCorrect) return;
     const newSel = [...selected];
     newSel[index] = value;
     setSelected(newSel);
-     setShowResult(false);
+    setShowResult(false);
+  };
+  const showAnswers = () => {
+    const correctCircles = items.map((item) => item.correct);
+    const correctInputs = items.map((item) => item.correctInput);
+
+    setSelected(correctCircles);
+    setAnswers(correctInputs);
+
+    setWrongInputs([]);
+    setShowResult(true);
+    setShowCorrect(true);
   };
 
   const handleInput = (value, index) => {
+    if (showCorrect) return;
     const newAns = [...answers];
     newAns[index] = value;
     setAnswers(newAns);
-     setShowResult(false);
+    setShowResult(false);
   };
 
   const resetAll = () => {
@@ -36,9 +51,12 @@ const Unit4_Page5_Q1 = () => {
     setAnswers(["", "", "", ""]);
     setWrongInputs([]);
     setShowResult(false);
+    setShowCorrect(false);
+   
   };
 
   const checkAnswers = () => {
+     if (showCorrect) return;
     // 1) التشييك إذا في دائرة مش مختارة
     if (selected.some((s) => s === "")) {
       ValidationAlert.info("Please choose a circle (f or v) for all items!");
@@ -126,7 +144,7 @@ const Unit4_Page5_Q1 = () => {
                   <div
                     className={`circle-choice-unit4-page5-q1 ${
                       selected[i] === "f" ? "active" : ""
-                    }`}
+                    } ${showCorrect ? "correct-color" : ""}`}
                     onClick={() => handleSelect("f", i)}
                   >
                     f
@@ -144,7 +162,7 @@ const Unit4_Page5_Q1 = () => {
                   <div
                     className={`circle-choice-unit4-page5-q1 ${
                       selected[i] === "v" ? "active" : ""
-                    }`}
+                    } ${showCorrect ? "correct-color" : ""}`}
                     onClick={() => handleSelect("v", i)}
                   >
                     v
@@ -163,7 +181,9 @@ const Unit4_Page5_Q1 = () => {
               <div className="input-wrapper">
                 <input
                   type="text"
-                  className="write-input-unit4-page5-q1"
+                  className={`write-input-unit4-page5-q1 ${
+                    showCorrect ? "correct-color" : ""
+                  }`}
                   value={answers[i]}
                   onChange={(e) => handleInput(e.target.value, i)}
                 />
@@ -185,6 +205,10 @@ const Unit4_Page5_Q1 = () => {
         <button onClick={resetAll} className="try-again-button">
           Start Again ↻
         </button>
+        <button onClick={showAnswers} className="show-answer-btn">
+          Show Answer
+        </button>
+
         <button onClick={checkAnswers} className="check-button2">
           Check Answer ✓
         </button>

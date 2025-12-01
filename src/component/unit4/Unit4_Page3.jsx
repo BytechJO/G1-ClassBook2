@@ -12,10 +12,13 @@ import Pg12_2_2_Sarah from "../../assets/unit4/sounds/Pg30_3.2_Jack.mp3";
 import Pg12_3_1_Helen_Take from "../../assets/unit4/sounds/Pg30_4.1_Harley.mp3";
 import Pg12_3_2_Stella from "../../assets/unit4/sounds/Pg30_4.2_Hansel.mp3";
 import AudioWithCaption from "../AudioWithCaption";
-import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
-import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
+import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg";
+import pauseBtn from "../../assets/unit1/imgs/Page 01/Right Video Button.svg";
 import video from "../../assets/unit4/sounds/p30.mp4";
 const Unit4_Page3 = ({ openPopup }) => {
+  const [hoveredAreaIndex, setHoveredAreaIndex] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [activeAreaIndex, setActiveAreaIndex] = useState(null);
   const captionsExample = [
     { start: 0, end: 4.05, text: "Page 30, exercise 1. Right Grammar. " },
     { start: 4.08, end: 5.25, text: "What color is this? " },
@@ -30,31 +33,20 @@ const Unit4_Page3 = ({ openPopup }) => {
       text: "It's a blue butterfly.",
     },
     { start: 9.14, end: 11.07, text: "What color is this? " },
-    { start: 11.10, end: 13.21, text: "It's a red boat. " },
+    { start: 11.1, end: 13.21, text: "It's a red boat. " },
     { start: 13.24, end: 15.26, text: "What color is this cow? " },
-    { start: 15.30, end: 18.02, text: "It's a brown cow. " },
+    { start: 15.3, end: 18.02, text: "It's a brown cow. " },
     {
       start: 18.05,
       end: 20.11,
       text: "What color is this butterfly? ",
-    },  {
+    },
+    {
       start: 18.08,
       end: 21.18,
       text: "It's blue!",
     },
   ];
-
-  const audioRef = useRef(null);
-
-  const handleImageClick = (e) => {
-    const rect = e.target.getBoundingClientRect();
-    const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
-    const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
-
-    console.log("X%:", xPercent.toFixed(2), "Y%:", yPercent.toFixed(2));
-
-    checkAreaAndPlaySound(xPercent, yPercent);
-  };
   const clickableAreas = [
     { x1: 8.5, y1: 11.7, x2: 30.0, y2: 15.5, sound: Pg12_1_1_AdultLady },
     { x1: 69.9, y1: 10.5, x2: 80.3, y2: 14.0, sound: Pg12_1_2_AdultLady },
@@ -66,21 +58,26 @@ const Unit4_Page3 = ({ openPopup }) => {
     { x1: 28.77, y1: 58.04, x2: 60.6, y2: 29.8, sound: Pg12_3_1_Helen_Take },
     { x1: 64.7, y1: 68.8, x2: 76.0, y2: 72.0, sound: Pg12_3_2_Stella },
   ];
+  const audioRef = useRef(null);
 
-  const checkAreaAndPlaySound = (x, y) => {
-    const area = clickableAreas.find(
-      (a) => x >= a.x1 && x <= a.x2 && y >= a.y1 && y <= a.y2
-    );
-
-    console.log("Matched Area:", area);
-
-    if (area) playSound(area.sound);
+  const handleImageClick = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
+    const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
+    console.log("X%:", xPercent.toFixed(2), "Y%:", yPercent.toFixed(2));
   };
   const playSound = (soundPath) => {
-    console.log(soundPath);
     if (audioRef.current) {
       audioRef.current.src = soundPath;
       audioRef.current.play();
+      setIsPlaying(true);
+      setHoveredAreaIndex(null); // إزالة الهايلايت عند بدء الصوت
+
+      audioRef.current.onended = () => {
+        setIsPlaying(false);
+        setHoveredAreaIndex(null);
+        setActiveAreaIndex(null); // مسح الهايلايت بعد انتهاء الصوت
+      };
     }
   };
   return (
@@ -93,7 +90,11 @@ const Unit4_Page3 = ({ openPopup }) => {
       {clickableAreas.map((area, index) => (
         <div
           key={index}
-          className="clickable-area"
+          className={`clickable-area ${
+            hoveredAreaIndex === index || activeAreaIndex === index
+              ? "highlight"
+              : ""
+          }`}
           style={{
             position: "absolute",
             left: `${area.x1}%`,
@@ -101,8 +102,16 @@ const Unit4_Page3 = ({ openPopup }) => {
             width: `${area.x2 - area.x1}%`,
             height: `${area.y2 - area.y1}%`,
           }}
-          onClick={() => playSound(area.sound)}
-          onMouseEnter={(e) => (e.target.style.cursor = "pointer")}
+            onClick={() => {
+            setActiveAreaIndex(index); // لتثبيت الهايلايت أثناء الصوت
+            playSound(area.sound);
+          }}
+          onMouseEnter={() => {
+            if (!isPlaying) setHoveredAreaIndex(index);
+          }}
+          onMouseLeave={() => {
+            if (!isPlaying) setHoveredAreaIndex(null);
+          }}
         ></div>
       ))}
 

@@ -1,8 +1,8 @@
 import page_6 from "../../assets/unit4/imgs/Right 1 Unit 04 Wonderful Shapes and Colors6.jpg";
 import "./Unit4_Page6.css";
 import song from "../../assets/unit4/sounds/U4P33Song.mp3";
-import arrowBtn from "../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
-import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
+import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg"
+import arrowBtn from "../../assets/unit1/imgs/Page 01/Arrow.svg";
 import AudioWithCaption from "../AudioWithCaption";
 import Unit4_Page6_Q2 from "./Unit4_Page6_Q2";
 const Unit4_Page6 = ({ openPopup }) => {

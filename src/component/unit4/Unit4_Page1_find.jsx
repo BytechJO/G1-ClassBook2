@@ -5,7 +5,7 @@ import ValidationAlert from "../Popup/ValidationAlert";
 const Unit4_Page1_find = () => {
   const [clickedPoint, setClickedPoint] = useState(null);
   const [checkResult, setCheckResult] = useState(null);
-
+  const [showAnswer, setShowAnswer] = useState(false);
   // ✅ منطقة المطعم (بالنسب المئوية)
   const targetArea = {
     x1: 20,
@@ -31,6 +31,7 @@ const Unit4_Page1_find = () => {
   };
 
   const handleCheck = () => {
+    if (showAnswer) return;
     if (!clickedPoint) {
       ValidationAlert.info(
         "Pay attention!",
@@ -51,6 +52,13 @@ const Unit4_Page1_find = () => {
   const handleStartAgain = () => {
     setClickedPoint(null);
     setCheckResult(null);
+    setShowAnswer(false);
+  };
+
+  const handleShowAnswer = () => {
+    setShowAnswer(true);
+    setClickedPoint(null); // نمسح النقطة اللي كبسها الطالب
+    setCheckResult("success"); // اختيارية إذا بدك يظهر نجاح
   };
 
   return (
@@ -103,7 +111,7 @@ const Unit4_Page1_find = () => {
           )}
 
           {/* ✅ تلوين المنطقة الصحيحة إذا الجواب صح */}
-          {checkResult === "success" && (
+          {(checkResult === "success" || showAnswer) && (
             <div
               style={{
                 position: "absolute",
@@ -122,6 +130,9 @@ const Unit4_Page1_find = () => {
       <div className="action-buttons-container ">
         <button className="try-again-button" onClick={handleStartAgain}>
           Start Again ↻
+        </button>
+        <button className="show-answer-btn" onClick={handleShowAnswer}>
+          Show Answer
         </button>
         <button className="check-button2" onClick={handleCheck}>
           Check Answer ✓

@@ -4,9 +4,8 @@ import CD2_Pg38_Reading1_AdultLady from "../../assets/unit4/sounds/U4P28-29.mp3"
 import Unit4_Page1_Vocab from "./Unit4_Page1_Vocab";
 import Unit4_Page1_find from "./Unit4_Page1_find";
 import AudioWithCaption from "../AudioWithCaption";
-
-import audioBtn from "../../assets/unit1/imgs/Right Audio Button 2.svg";
-import arrowBtn from "../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
+import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg"
+import arrowBtn from "../../assets/unit1/imgs/Page 01/Arrow.svg";
 import Unit4_Page1_Read from "./Unit4_Pag1_Read";
 const Unit4_Page1 = ({ openPopup }) => {
   const captionsExample = [
