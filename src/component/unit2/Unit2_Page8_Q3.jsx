@@ -10,24 +10,30 @@ import "./Unit2_Page8_Q3.css";
 import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
-import { CgPlayPauseO } from "react-icons/cg";
+import { TbMessageCircle } from "react-icons/tb";
 const Unit2_Page8_Q3 = () => {
   const [lines, setLines] = useState([]);
   const containerRef = useRef(null);
   let startPoint = null;
   const [wrongImages, setWrongImages] = useState([]);
+  const [firstDot, setFirstDot] = useState(null);
+  const [showAnswer, setShowAnswer] = useState(false);
+
   const audioRef = useRef(null);
+  // إعدادات الصوت
+  const stopAtSecond = 7.3;
+  const [paused, setPaused] = useState(false);
   // إعدادات الصوت
   const [showSettings, setShowSettings] = useState(false);
   const [volume, setVolume] = useState(1);
-  const [activeSpeed, setActiveSpeed] = useState(1);
   const settingsRef = useRef(null);
   const [forceRender, setForceRender] = useState(0);
   const [showContinue, setShowContinue] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [current, setCurrent] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [showCaption, setShowCaption] = useState(false);
   // زر الكابشن
-  const [isMuted, setIsMuted] = useState(false);
-  const stopAtSecond =7.3;
-  const [paused, setPaused] = useState(false);
 
   const correctMatches = [
     { word: "d", image: ["img1", "img2", "img5"] },
@@ -44,34 +50,27 @@ const Unit2_Page8_Q3 = () => {
       if (audio.currentTime >= stopAtSecond) {
         audio.pause();
         setPaused(true);
+        setIsPlaying(false);
         setShowContinue(true);
         clearInterval(interval);
       }
-    }, 250);
+    }, 100);
 
-    // ⚡⚡ هنا الإضافة الوحيدة
+    // عند انتهاء الأوديو يرجع يبطل أنيميشن + يظهر Continue
     const handleEnded = () => {
-      audio.currentTime = 0; // يرجع لأول ثانية
-      audio.pause(); // يوقف
-      setPaused(true); // زر البلاي يصير Play
-      setShowContinue(true); // يظهر زر Continue
-      // setActiveIndex(null); // يشيل الأنيميشن عن الكلمات
+      const audio = audioRef.current;
+      audio.currentTime = 0; // ← يرجع للبداية
+      setActiveIndex(null);
+      setPaused(false);
+      setIsPlaying(false);
+      setShowContinue(true);
     };
 
-    const handleClickOutside = (e) => {
-      if (settingsRef.current && !settingsRef.current.contains(e.target)) {
-        setShowSettings(false);
-      }
-    };
+    audio.addEventListener("ended", handleEnded);
 
-    // audio.addEventListener("timeupdate", handleTimeUpdate);
-    audio.addEventListener("ended", handleEnded); // 👈 الإضافة
-    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      // audio.removeEventListener("timeupdate", handleTimeUpdate);
-      audio.removeEventListener("ended", handleEnded); // 👈 تنظيف الإضافة
-      document.removeEventListener("mousedown", handleClickOutside);
       clearInterval(interval);
+      audio.removeEventListener("ended", handleEnded);
     };
   }, []);
   useEffect(() => {
@@ -82,61 +81,48 @@ const Unit2_Page8_Q3 = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const handleDotDown2 = (e) => {
-    startPoint = e.target;
+  // ============================
+  // 1️⃣ الضغط على النقطة الأولى (start-dot)
+  // ============================
+  const handleStartDotClick = (e) => {
+    if (showAnswer) return;
 
     const rect = containerRef.current.getBoundingClientRect();
-    const x = startPoint.getBoundingClientRect().left - rect.left + 8;
-    const y = startPoint.getBoundingClientRect().top - rect.top + 8;
 
-    setLines((prev) => [...prev, { x1: x, y1: y, x2: x, y2: y }]);
-
-    window.addEventListener("mousemove", followMouse2);
-    window.addEventListener("mouseup", stopDrawingLine2);
+    setFirstDot({
+      image: e.target.dataset.image, // ⬅ صح
+      x: e.target.getBoundingClientRect().left - rect.left + 8,
+      y: e.target.getBoundingClientRect().top - rect.top + 8,
+    });
   };
 
-  const followMouse2 = (e) => {
-    const rect = containerRef.current.getBoundingClientRect();
-
-    setLines((prev) => [
-      ...prev.slice(0, -1),
-      {
-        x1: startPoint.getBoundingClientRect().left - rect.left + 8,
-        y1: startPoint.getBoundingClientRect().top - rect.top + 8,
-        x2: e.clientX - rect.left,
-        y2: e.clientY - rect.top,
-      },
-    ]);
-  };
-
-  const stopDrawingLine2 = (e) => {
-    window.removeEventListener("mousemove", followMouse2);
-    window.removeEventListener("mouseup", stopDrawingLine2);
-
-    const endDot = document.elementFromPoint(e.clientX, e.clientY);
-
-    // ✅ تصحيح اسم الكلاس
-    if (!endDot || !endDot.classList.contains("end-dot2-unit2")) {
-      setLines((prev) => prev.slice(0, -1));
-      return;
-    }
+  // ============================
+  // 2️⃣ الضغط على النقطة الثانية (end-dot)
+  // ============================
+  const handleEndDotClick = (e) => {
+    if (showAnswer) return;
+    if (!firstDot) return;
 
     const rect = containerRef.current.getBoundingClientRect();
 
     const newLine = {
-      x1: startPoint.getBoundingClientRect().left - rect.left + 8,
-      y1: startPoint.getBoundingClientRect().top - rect.top + 8,
-      x2: endDot.getBoundingClientRect().left - rect.left + 8,
-      y2: endDot.getBoundingClientRect().top - rect.top + 8,
-
-      // ✅ تصحيح تخزين البيانات
-      image: startPoint.dataset.image,
-      word: endDot.dataset.word,
+      x1: firstDot.x,
+      y1: firstDot.y,
+      x2: e.target.getBoundingClientRect().left - rect.left + 8,
+      y2: e.target.getBoundingClientRect().top - rect.top + 8,
+      word: e.target.dataset.word, // ⬅ صح
+      image: firstDot.image, // ⬅ صح
     };
 
-    setLines((prev) => [...prev.slice(0, -1), newLine]);
+    setLines((prev) => [...prev, newLine]);
+    setFirstDot(null);
   };
-  const checkAnswers2 = () => {
+
+  // ============================
+  // 3️⃣ Check Answers
+  // ============================
+  const checkAnswers = () => {
+    if (showAnswer) return;
     if (lines.length < correctMatches.length) {
       ValidationAlert.info(
         "Oops!",
@@ -145,49 +131,91 @@ const Unit2_Page8_Q3 = () => {
       return;
     }
 
-    let correctCount = 0;
     let wrong = [];
+    let correctCount = 0;
 
     lines.forEach((line) => {
       const isCorrect = correctMatches.some(
         (pair) => pair.word === line.word && pair.image.includes(line.image)
       );
 
-      if (isCorrect) {
-        correctCount++;
-      } else {
-        wrong.push(line.image); // ✅ خزّني اسم صورة الخطأ فقط
-      }
+      if (isCorrect) correctCount++;
+      else wrong.push(line.image);
     });
 
-    setWrongImages(wrong); // ✅ حفظ الصور الغلط
+    setWrongImages(wrong);
 
-    const total = 5;
+    const total = correctMatches.reduce(
+      (acc, pair) => acc + pair.image.length,
+      0
+    );
+
     const color =
       correctCount === total ? "green" : correctCount === 0 ? "red" : "orange";
+
     const scoreMessage = `
-    <div style="font-size: 20px; margin-top: 10px; text-align:center;">
-      <span style="color:${color}; font-weight:bold;">
-      Score: ${correctCount} / ${total}
-      </span>
-    </div>
-  `;
+      <div style="font-size: 20px; margin-top: 10px; text-align:center;">
+        <span style="color:${color}; font-weight:bold;">
+           Score: ${correctCount} / ${total}
+        </span>
+      </div>
+    `;
 
     if (correctCount === total) ValidationAlert.success(scoreMessage);
     else if (correctCount === 0) ValidationAlert.error(scoreMessage);
     else ValidationAlert.warning(scoreMessage);
   };
+
   const togglePlay = () => {
     const audio = audioRef.current;
+
+    if (!audio) return;
 
     if (audio.paused) {
       audio.play();
       setPaused(false);
+      setIsPlaying(true);
     } else {
       audio.pause();
       setPaused(true);
+      setIsPlaying(false);
     }
   };
+  const handleShowAnswer = () => {
+    // امنعي التعديل
+    setShowAnswer(true);
+
+    // امسحي الخطوط القديمة + الغلط
+    setLines([]);
+    setWrongImages([]);
+
+    const rect = containerRef.current.getBoundingClientRect();
+
+    // ارسم الخطوط الصحيحة
+    let answerLines = [];
+
+    correctMatches.forEach((pair) => {
+      pair.image.forEach((imgId) => {
+        // جيبي نقط البداية
+        const startDot = document.querySelector(`[data-image="${imgId}"]`);
+        const endDot = document.querySelector(`[data-word="${pair.word}"]`);
+
+        if (startDot && endDot) {
+          answerLines.push({
+            x1: startDot.getBoundingClientRect().left - rect.left + 8,
+            y1: startDot.getBoundingClientRect().top - rect.top + 8,
+            x2: endDot.getBoundingClientRect().left - rect.left + 8,
+            y2: endDot.getBoundingClientRect().top - rect.top + 8,
+            word: pair.word,
+            image: imgId,
+          });
+        }
+      });
+    });
+
+    setLines(answerLines);
+  };
+
   return (
     <div
       style={{
@@ -209,99 +237,109 @@ const Unit2_Page8_Q3 = () => {
       >
         <div className="page7-q2-container2">
           <h5 className="header-title-page8">
-            F Does it begin with d or t? Listen and match.
+            F Does it begin with <span style={{ color: "red" }}>d</span>or{" "}
+            <span style={{ color: "red" }}>t</span>? Listen and match.
           </h5>
 
           <div
             style={{
               display: "flex",
-              justifyContent: "flex-start",
+              justifyContent: "center",
+              width: "100%",
             }}
           >
-            <div className="audio-popup-vocab">
-              <div className="audio-inner-vocab">
+            <div
+              className="audio-popup-read"
+              style={{
+                width: "50%",
+                marginTop: "0px",
+              }}
+            >
+              <div className="audio-inner player-ui">
+                <audio
+                  ref={audioRef}
+                  src={sound1}
+                  onTimeUpdate={(e) => {
+                    const time = e.target.currentTime;
+                    setCurrent(time);
+
+                    const idx = checkpoints.findIndex(
+                      (cp) => time >= cp && time < cp + 0.8
+                    );
+                    setActiveIndex(idx !== -1 ? idx : null);
+                  }}
+                  onLoadedMetadata={(e) => setDuration(e.target.duration)}
+                ></audio>
                 {/* Play / Pause */}
-                <button
-                  className="audio-play-btn"
-                  style={{ height: "30px", width: "30px" }}
-                  onClick={togglePlay}
-                >
-                  {paused ? <FaPlay size={22} /> : <FaPause size={22} />}
-                </button>
+                {/* Play / Pause */}
+                {/* الوقت - السلايدر - الوقت */}
+                <div className="top-row">
+                  <span className="audio-time">
+                    {new Date(current * 1000).toISOString().substring(14, 19)}
+                  </span>
 
-                {/* Slider */}
-                <input
-                  type="range"
-                  min="0"
-                  max={audioRef.current?.duration || 0}
-                  value={audioRef.current?.currentTime || 0}
-                  className="audio-slider"
-                  onChange={(e) => {
-                    if (!audioRef.current) return;
-                    audioRef.current.currentTime = e.target.value;
-                  }}
-                />
+                  <input
+                    type="range"
+                    className="audio-slider"
+                    min="0"
+                    max={duration}
+                    value={current}
+                    onChange={(e) => {
+                      audioRef.current.currentTime = e.target.value;
+                      updateCaption(Number(e.target.value));
+                    }}
+                    style={{
+                      background: `linear-gradient(to right, #8247ffff ${
+                        (current / duration) * 100
+                      }%, #d9d9d9ff ${(current / duration) * 100}%)`,
+                    }}
+                  />
 
-                {/* Current Time */}
-                <span className="audio-time">
-                  {new Date((audioRef.current?.currentTime || 0) * 1000)
-                    .toISOString()
-                    .substring(14, 19)}
-                </span>
+                  <span className="audio-time">
+                    {new Date(duration * 1000).toISOString().substring(14, 19)}
+                  </span>
+                </div>
+                {/* الأزرار 3 أزرار بنفس السطر */}
+                <div className="bottom-row">
+                  {/* فقاعة */}
+                  <div className={`round-btn ${showCaption ? "active" : ""}`}>
+                    <TbMessageCircle size={36} />
+                  </div>
 
-                {/* Total Time */}
-                <span className="audio-time">
-                  {new Date((audioRef.current?.duration || 0) * 1000)
-                    .toISOString()
-                    .substring(14, 19)}
-                </span>
-
-                {/* Mute */}
-                <button
-                  className="mute-btn-outside"
-                  onClick={() => {
-                    audioRef.current.muted = !audioRef.current.muted;
-                    setIsMuted(!isMuted);
-                  }}
-                >
-                  {audioRef.current?.muted ? (
-                    <FaVolumeMute size={22} color="#1d4f7b" />
-                  ) : (
-                    <FaVolumeUp size={22} color="#1d4f7b" />
-                  )}
-                </button>
-                <div className="settings-wrapper" ref={settingsRef}>
-                  <button
-                    className={`settings-btn ${showSettings ? "active" : ""}`}
-                    onClick={() => setShowSettings(!showSettings)}
-                  >
-                    <IoMdSettings size={22} color="#1d4f7b" />
+                  {/* Play */}
+                  <button className="play-btn2" onClick={togglePlay}>
+                    {isPlaying ? <FaPause size={26} /> : <FaPlay size={26} />}
                   </button>
 
-                  {showSettings && (
-                    <div className="settings-popup">
-                      <label>Volume</label>
-                      <input
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.05"
-                        value={volume}
-                        onChange={(e) => {
-                          setVolume(e.target.value);
-                          audioRef.current.volume = e.target.value;
-                        }}
-                      />
+                  {/* Settings */}
+                  <div className="settings-wrapper" ref={settingsRef}>
+                    <button
+                      className={`round-btn ${showSettings ? "active" : ""}`}
+                      onClick={() => setShowSettings(!showSettings)}
+                    >
+                      <IoMdSettings size={36} />
+                    </button>
 
-                    
-                    </div>
-                  )}
-                </div>
+                    {showSettings && (
+                      <div className="settings-popup">
+                        <label>Volume</label>
+                        <input
+                          type="range"
+                          min="0"
+                          max="1"
+                          step="0.05"
+                          value={volume}
+                          onChange={(e) => {
+                            setVolume(e.target.value);
+                            audioRef.current.volume = e.target.value;
+                          }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>{" "}
               </div>
             </div>
-            <audio ref={audioRef}>
-              <source src={sound1} type="audio/mp3" />
-            </audio>
           </div>
 
           <div className="match-wrapper2" ref={containerRef}>
@@ -316,7 +354,7 @@ const Unit2_Page8_Q3 = () => {
                 <div
                   className="dot2-unit2 start-dot2-unit2"
                   data-image="img1"
-                  onMouseDown={handleDotDown2}
+                  onClick={handleStartDotClick}
                 ></div>
               </div>
 
@@ -328,7 +366,7 @@ const Unit2_Page8_Q3 = () => {
                 <div
                   className="dot2-unit2 start-dot2-unit2"
                   data-image="img2"
-                  onMouseDown={handleDotDown2}
+                  onClick={handleStartDotClick}
                 ></div>
               </div>
 
@@ -340,7 +378,7 @@ const Unit2_Page8_Q3 = () => {
                 <div
                   className="dot2-unit2 start-dot2-unit2"
                   data-image="img3"
-                  onMouseDown={handleDotDown2}
+                  onClick={handleStartDotClick}
                 ></div>
               </div>
               <div className="img-box2">
@@ -351,7 +389,7 @@ const Unit2_Page8_Q3 = () => {
                 <div
                   className="dot2-unit2 start-dot2-unit2"
                   data-image="img4"
-                  onMouseDown={handleDotDown2}
+                  onClick={handleStartDotClick}
                 ></div>
               </div>
               <div className="img-box2">
@@ -362,7 +400,7 @@ const Unit2_Page8_Q3 = () => {
                 <div
                   className="dot2-unit2 start-dot2-unit2"
                   data-image="img5"
-                  onMouseDown={handleDotDown2}
+                  onClick={handleStartDotClick}
                 ></div>
               </div>
             </div>
@@ -381,11 +419,16 @@ const Unit2_Page8_Q3 = () => {
                     display: "flex",
                     justifyContent: "center",
                     marginTop: "10px",
+                    alignItems: "center",
                   }}
                 >
                   d
                 </h5>
-                <div className="dot2-unit2 end-dot2-unit2" data-word="d"></div>
+                <div
+                  className="dot2-unit2 end-dot2-unit2"
+                  data-word="d"
+                  onClick={handleEndDotClick}
+                ></div>
               </div>
 
               <div className="word-box2">
@@ -400,11 +443,16 @@ const Unit2_Page8_Q3 = () => {
                     display: "flex",
                     justifyContent: "center",
                     marginTop: "10px",
+                    alignItems: "center",
                   }}
                 >
                   t
                 </h5>
-                <div className="dot2-unit2 end-dot2-unit2" data-word="t"></div>
+                <div
+                  className="dot2-unit2 end-dot2-unit2"
+                  data-word="t"
+                  onClick={handleEndDotClick}
+                ></div>
               </div>
             </div>
 
@@ -429,29 +477,16 @@ const Unit2_Page8_Q3 = () => {
             onClick={() => {
               setLines([]);
               setWrongImages([]);
+              setShowAnswer(false); // ← رجع التعديل
             }}
             className="try-again-button"
           >
             Start Again ↻
           </button>
-          {showContinue && (
-            <button className="play-btn swal-continue" onClick={togglePlay}>
-              {paused ? (
-                <>
-                  Continue
-                  <svg width="20" height="20" viewBox="0 0 30 30">
-                    <image href={pauseBtn} x="0" y="0" width="30" height="30" />
-                  </svg>
-                </>
-              ) : (
-                <>
-                  Pause
-                  <CgPlayPauseO size={20} style={{ color: "red" }} />
-                </>
-              )}
-            </button>
-          )}
-          <button onClick={checkAnswers2} className="check-button2">
+          <button onClick={handleShowAnswer} className="show-answer-btn">
+            Show Answer
+          </button>
+          <button onClick={checkAnswers} className="check-button2">
             Check Answer ✓
           </button>
         </div>

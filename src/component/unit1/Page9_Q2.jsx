@@ -241,7 +241,7 @@ export default function Page9_Q2() {
                   onClick={handleStartDotClick}
                 ></div>
                 {wrongWords.includes(word) && ( // ⭐ تم التعديل هون
-                  <span className="error-mark3">X</span>
+                  <span className="error-mark3">✕</span>
                 )}
               </div>
             ))}

@@ -19,7 +19,6 @@ const Page6 = ({ openPopup }) => {
   const audioRef = useRef(null);
   const [hoveredAreaIndex, setHoveredAreaIndex] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [hoverEnabled, setHoverEnabled] = useState(true);
   const [activeAreaIndex, setActiveAreaIndex] = useState(null);
   const captionsExample = [
     { start: 0, end: 4.05, text: "Page 6, exercise 1. Right grammar. " },
@@ -96,13 +95,12 @@ const Page6 = ({ openPopup }) => {
             setActiveAreaIndex(index); // لتثبيت الهايلايت أثناء الصوت
             playSound(area.sound);
           }}
-       onMouseEnter={() => {
-  if (!isPlaying) setHoveredAreaIndex(index);
-}}
-onMouseLeave={() => {
-  if (!isPlaying) setHoveredAreaIndex(null);
-}}
-
+          onMouseEnter={() => {
+            if (!isPlaying) setHoveredAreaIndex(index);
+          }}
+          onMouseLeave={() => {
+            if (!isPlaying) setHoveredAreaIndex(null);
+          }}
         ></div>
       ))}
 
@@ -110,7 +108,6 @@ onMouseLeave={() => {
         width="30"
         height="30"
         viewBox="0 0 60 60"
-        
         onClick={() =>
           openPopup(
             <div

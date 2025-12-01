@@ -11,14 +11,19 @@ const Unit2_Page8_Q2 = () => {
   const [answers, setAnswers] = useState(["", "", "", ""]);
   const [score, setScore] = useState(null);
   const [wrongInput, setWrongInputs] = useState([]);
+  const [showAnswer, setShowAnswer] = useState(false);
+
   const handleChange = (value, index) => {
+    if(showAnswer)return
     const newAnswers = [...answers];
     newAnswers[index] = value.toLowerCase();
     setAnswers(newAnswers);
-    setWrongInputs([])
+    setWrongInputs([]);
   };
 
   const checkAnswers = () => {
+
+    if(showAnswer)return
     // 1️⃣ التحقق إذا في فراغات
     if (answers.some((ans) => ans.trim() === "")) {
       ValidationAlert.info("Please fill in all the blanks before checking!");
@@ -62,11 +67,19 @@ const Unit2_Page8_Q2 = () => {
   };
 
   const reset = () => {
+    setShowAnswer(false);
     setAnswers(["", "", "", ""]);
     setChecked(false);
     setError("");
     setScore(null);
     setWrongInputs();
+    
+  };
+  const showAnswerFun = () => {
+    setAnswers(correctAnswers); // عبّي الإجابات
+    setWrongInputs([]); // شيل الأخطاء
+    setScore(correctAnswers.length);
+    setShowAnswer(true); // 🔥 ممنوع تعديل بعد Show Answer
   };
 
   return (
@@ -97,7 +110,7 @@ const Unit2_Page8_Q2 = () => {
                 <div className="input-wrapper">
                   <input
                     type="text"
-                    className="q-input"
+                      className={`q-input ${showAnswer ? "show-red" : ""}`}
                     onChange={(e) => handleChange(e.target.value, 0)}
                     value={answers[0]}
                   />
@@ -116,7 +129,7 @@ const Unit2_Page8_Q2 = () => {
                 <div className="input-wrapper">
                   <input
                     type="text"
-                    className="q-input"
+                     className={`q-input ${showAnswer ? "show-red" : ""}`}
                     onChange={(e) => handleChange(e.target.value, 1)}
                     value={answers[1]}
                   />{" "}
@@ -135,7 +148,7 @@ const Unit2_Page8_Q2 = () => {
                 <div className="input-wrapper">
                   <input
                     type="text"
-                    className="q-input"
+                      className={`q-input ${showAnswer ? "show-red" : ""}`}
                     onChange={(e) => handleChange(e.target.value, 2)}
                     value={answers[2]}
                   />{" "}
@@ -154,7 +167,7 @@ const Unit2_Page8_Q2 = () => {
                 <div className="input-wrapper">
                   <input
                     type="text"
-                    className="q-input"
+                      className={`q-input ${showAnswer ? "show-red" : ""}`}
                     onChange={(e) => handleChange(e.target.value, 3)}
                     value={answers[3]}
                   />{" "}
@@ -172,6 +185,13 @@ const Unit2_Page8_Q2 = () => {
           <button onClick={reset} className="try-again-button">
             Start Again ↻
           </button>
+          <button
+            onClick={showAnswerFun}
+            className="show-answer-btn swal-continue"
+          >
+            Show Answer
+          </button>
+
           <button onClick={checkAnswers} className="check-button2">
             Check Answer ✓
           </button>

@@ -40,9 +40,23 @@ const Unit2_Page5_Q4 = () => {
     [25, 15, 21], //you
   ];
   const [wrongInputs, setWrongInputs] = useState([]); // ⭐ تم التعديل هون
+  const [showAnswer, setShowAnswer] = useState(false);
   const [letters, setLetters] = useState(
     questionGroups.map((group) => group.map(() => ""))
   );
+  // ========================
+  //  ✔ Show Answer
+  // ========================
+  const handleShowAnswer = () => {
+    const correctLetters = questionGroups.map((group) =>
+      group.map((num) => data.find((d) => d.number === num).letter)
+    );
+
+    setLetters(correctLetters);
+    setWrongInputs([]);
+    setShowAnswer(true);
+  };
+
   const handleInputChange = (value, groupIndex, letterIndex) => {
     const updated = [...letters];
     updated[groupIndex][letterIndex] = value.toLowerCase();
@@ -53,6 +67,7 @@ const Unit2_Page5_Q4 = () => {
   const fullSentence = formedWords.join(" ");
 
   const handleCheckAnswers = () => {
+    if (showAnswer) return; // ❌ إذا مستخدم show answer ما نعمل check
     // 1️⃣ التحقق من وجود فراغات
     const hasEmpty = letters.some((group) =>
       group.some((letter) => letter === "")
@@ -113,7 +128,7 @@ const Unit2_Page5_Q4 = () => {
         </h5>
 
         <div className="alphabet-box">
-          <div className="row">
+          <div className="row1">
             {data.map((c, i) => (
               <div className="letter-char">
                 <div className="data">
@@ -122,7 +137,7 @@ const Unit2_Page5_Q4 = () => {
                   </span>
                 </div>
                 <div className="data">
-                  <span key={i} className="cell1 number">
+                  <span key={i} className="cell1 number1">
                     {c.number}
                   </span>
                 </div>
@@ -150,6 +165,10 @@ const Unit2_Page5_Q4 = () => {
                             letterIndex
                           )
                         }
+                           style={{
+                          color: showAnswer ? "red" : "black", // 🔥 لوّن الأحمر عند Show Answer
+                          fontWeight: showAnswer ? "bold" : "normal",
+                        }}
                       />
                       {wrongInputs.includes(`${groupIndex}-${letterIndex}`) && (
                         <span className="error-mark1">✕</span> // ⭐ تم التعديل هون
@@ -167,7 +186,6 @@ const Unit2_Page5_Q4 = () => {
                 {word}
               </span>
             ))}
-            
           </div>
         </div>
       </div>
@@ -176,10 +194,18 @@ const Unit2_Page5_Q4 = () => {
           onClick={() => {
             setLetters(questionGroups.map((group) => group.map(() => "")));
             setWrongInputs([]);
+            setShowAnswer(false); // 🔄 رجوع طبيعي
           }}
           className="try-again-button"
         >
           Start Again ↻
+        </button>
+        {/* 🔥 زر Show Answer */}
+        <button
+          onClick={handleShowAnswer}
+          className="show-answer-btn swal-continue"
+        >
+          Show Answer
         </button>
         <button onClick={handleCheckAnswers} className="check-button2">
           Check Answer ✓

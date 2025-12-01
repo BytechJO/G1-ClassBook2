@@ -37,10 +37,11 @@ const Unit2_Page5_Q1 = () => {
 
   const [answers, setAnswers] = useState(Array(exerciseData.length).fill(null));
   const [results, setResults] = useState(Array(exerciseData.length).fill(null)); // ✅ لتحديد الصح والخطأ
-
+  const [showAnswer, setShowAnswer] = useState(false);
   const resetAnswers = () => {
     setAnswers(Array(exerciseData.length).fill(null));
     setResults(Array(exerciseData.length).fill(null)); // ✅ اخفاء الأخطاء عند الإعادة
+    setShowAnswer(false)
   };
 
   const checkAnswers = () => {
@@ -77,6 +78,17 @@ const Unit2_Page5_Q1 = () => {
     else if (correct === 0) ValidationAlert.error(scoreMessage);
     else ValidationAlert.warning(scoreMessage);
   };
+  const handleShowAnswer = () => {
+    let correctAnswers = exerciseData.map((row) => {
+      return row.options.findIndex((opt) =>
+        opt.word.toLowerCase().startsWith(row.letter)
+      );
+    });
+
+    setAnswers(correctAnswers);
+    setResults(Array(exerciseData.length).fill(true)); // الكل صح
+    setShowAnswer(true);
+  };
 
   return (
     <div
@@ -106,7 +118,7 @@ const Unit2_Page5_Q1 = () => {
           className="imgFeild"
           style={{
             display: "flex",
-            margin: "100px 0px",
+            margin: "80px 0px",
             gap: "13px",
             justifyContent: "space-around",
           }}
@@ -114,7 +126,7 @@ const Unit2_Page5_Q1 = () => {
           {exerciseData.map((item, rowIndex) => (
             <div
               key={rowIndex}
-              className="row1"
+              className="row11"
               style={{ display: "flex", position: "relative" }}
             >
               <span className="letter-Q1-Pag5-Unit2">{item.letter}</span>
@@ -128,13 +140,17 @@ const Unit2_Page5_Q1 = () => {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "space-around",
+                    cursor:"pointer"
                   }}
                   onClick={() => {
+                    if (showAnswer) return; // ❌ يمنع التعديل بعد Show Answer
+
                     setAnswers((prev) => {
                       const updated = [...prev];
                       updated[rowIndex] = optIndex;
                       return updated;
                     });
+
                     setResults(Array(exerciseData.length).fill(null));
                   }}
                 >
@@ -145,7 +161,7 @@ const Unit2_Page5_Q1 = () => {
                       width: "130px",
                       height: "130px",
                       objectFit: "contain",
-                      cursor: "pointer",
+               
                     }}
                   />
 
@@ -186,6 +202,10 @@ const Unit2_Page5_Q1 = () => {
         <button onClick={resetAnswers} className="try-again-button">
           Start Again ↻
         </button>
+        <button onClick={handleShowAnswer} className="show-answer-btn">
+          Show Answer
+        </button>
+
         <button onClick={checkAnswers} className="check-button2">
           Check Answer ✓
         </button>

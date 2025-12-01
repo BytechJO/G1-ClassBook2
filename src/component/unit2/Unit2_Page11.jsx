@@ -8,12 +8,14 @@ import sound4 from "../../assets/img_unit2/sounds-unit2/Pg20_1.3_Adult Lady.mp3"
 import sound5 from "../../assets/img_unit2/sounds-unit2/Pg20_1.4_Adult Lady.mp3";
 import AudioWithCaption from "../AudioWithCaption";
 import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg"
-import arrowBtn from "../../assets/unit1/imgs/Page 01/Arrow.svg";
 import pauseBtn from "../../assets/unit1/imgs/Page 01/Right Video Button.svg";
-
 import video3 from "../../assets/unit1/sounds/STORY (1).mp4";
+
 const Unit2_Page11 = ({ openPopup }) => {
   const audioRef = useRef(null);
+    const [hoveredAreaIndex, setHoveredAreaIndex] = useState(null);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [activeAreaIndex, setActiveAreaIndex] = useState(null);
   const captionsExample = [
     { start: 0, end: 3.17, text: "Page 20 Reading. It's a Bunny." },
     {
@@ -57,51 +59,33 @@ const Unit2_Page11 = ({ openPopup }) => {
       text: "Tilly hops and chases Lolo. Lolo is surprised. Stella and Sara laugh and laugh. This is the best birthday.",
     },
   ];
-
-  /**
-
-
-
- 
-
-
-
-
-
-   */
-
-  const handleImageClick = (e) => {
-    const rect = e.target.getBoundingClientRect();
-    const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
-    const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
-
-    console.log("X%:", xPercent.toFixed(2), "Y%:", yPercent.toFixed(2));
-
-    checkAreaAndPlaySound(xPercent, yPercent);
-  };
-  const clickableAreas = [
+   const clickableAreas = [
     { x1: 15.9, y1: 39.4, x2: 51.14, y2: 44.0, sound: sound2 },
     { x1: 56.0, y1: 39.1, x2: 93.9, y2: 44.0, sound: sound3 },
     { x1: 16.0, y1: 84.0, x2: 52.9, y2: 89.5, sound: sound4 },
     { x1: 56.0, y1: 84.5, x2: 93.7, y2: 90.9, sound: sound5 },
   ];
-
-  const checkAreaAndPlaySound = (x, y) => {
-    const area = clickableAreas.find(
-      (a) => x >= a.x1 && x <= a.x2 && y >= a.y1 && y <= a.y2
-    );
-
-    console.log("Matched Area:", area);
-
-    if (area) playSound(area.sound);
+const handleImageClick = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
+    const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
+    console.log("X%:", xPercent.toFixed(2), "Y%:", yPercent.toFixed(2));
   };
   const playSound = (soundPath) => {
-    console.log(soundPath);
     if (audioRef.current) {
       audioRef.current.src = soundPath;
       audioRef.current.play();
+      setIsPlaying(true);
+      setHoveredAreaIndex(null); // إزالة الهايلايت عند بدء الصوت
+
+      audioRef.current.onended = () => {
+        setIsPlaying(false);
+        setHoveredAreaIndex(null);
+        setActiveAreaIndex(null); // مسح الهايلايت بعد انتهاء الصوت
+      };
     }
   };
+
   return (
     <div className="page_2-background">
       <img
@@ -113,7 +97,11 @@ const Unit2_Page11 = ({ openPopup }) => {
       {clickableAreas.map((area, index) => (
         <div
           key={index}
-          className="clickable-area"
+         className={`clickable-area ${
+            hoveredAreaIndex === index || activeAreaIndex === index
+              ? "highlight"
+              : ""
+          }`}
           style={{
             position: "absolute",
             left: `${area.x1}%`,
@@ -121,8 +109,16 @@ const Unit2_Page11 = ({ openPopup }) => {
             width: `${area.x2 - area.x1}%`,
             height: `${area.y2 - area.y1}%`,
           }}
-          onClick={() => playSound(area.sound)}
-          onMouseEnter={(e) => (e.target.style.cursor = "pointer")}
+         onClick={() => {
+            setActiveAreaIndex(index); // لتثبيت الهايلايت أثناء الصوت
+            playSound(area.sound);
+          }}
+          onMouseEnter={() => {
+            if (!isPlaying) setHoveredAreaIndex(index);
+          }}
+          onMouseLeave={() => {
+            if (!isPlaying) setHoveredAreaIndex(null);
+          }}
         ></div>
       ))}
 

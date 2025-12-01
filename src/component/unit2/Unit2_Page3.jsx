@@ -15,18 +15,20 @@ import Pg12_4_1_Hansel from "../../assets/img_unit2/sounds-unit2/Pg12_4.1_Hansel
 import Pg12_4_2_Stella from "../../assets/img_unit2/sounds-unit2/Pg12_4.2_Stella.mp3";
 import Pg12_4_3_Hansel from "../../assets/img_unit2/sounds-unit2/Pg12_4.3_Hansel.mp3";
 import AudioWithCaption from "../AudioWithCaption";
-import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg"
-import arrowBtn from "../../assets/unit1/imgs/Page 01/Arrow.svg";
+import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg";
 import pauseBtn from "../../assets/unit1/imgs/Page 01/Right Video Button.svg";
 import video from "../../assets/img_unit2/sounds-unit2/p12 1920.mp4";
 const Unit2_Page3 = ({ openPopup }) => {
   const audioRef = useRef(null);
+  const [hoveredAreaIndex, setHoveredAreaIndex] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [activeAreaIndex, setActiveAreaIndex] = useState(null);
   const captionsExample = [
     { start: 0, end: 3.22, text: "Page 12, Exercise 1. Right Grammar." },
-    {start: 3.25,end: 7.11,text: " How old are you? I'm seven years old.",},
+    { start: 3.25, end: 7.11, text: " How old are you? I'm seven years old." },
     {
       start: 7.15,
-      end:11.02,
+      end: 11.02,
       text: " When is your birthday? My birthday is in August.",
     },
     {
@@ -34,28 +36,19 @@ const Unit2_Page3 = ({ openPopup }) => {
       end: 13.11,
       text: "It is on Tuesday. ",
     },
-    { start:13.15, end: 14.22, text: "How old are you, Sara? " },
+    { start: 13.15, end: 14.22, text: "How old are you, Sara? " },
     { start: 14.26, end: 16.05, text: "I'm three years old. " },
     { start: 16.09, end: 17.24, text: "When is your birthday party, Stella? " },
     { start: 17.27, end: 19.16, text: "It is on Tuesday. " },
     {
-      start: 19.20,
-      end: 22.10,
+      start: 19.2,
+      end: 22.1,
       text: "Happy birthday! This is for you, Stella. ",
     },
-    { start: 22.14, end: 23.10, text: "Thank you.  " },
-    { start: 23.14, end:25.05, text: "You're welcome. Open it." },
+    { start: 22.14, end: 23.1, text: "Thank you.  " },
+    { start: 23.14, end: 25.05, text: "You're welcome. Open it." },
   ];
 
-  const handleImageClick = (e) => {
-    const rect = e.target.getBoundingClientRect();
-    const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
-    const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
-
-    console.log("X%:", xPercent.toFixed(2), "Y%:", yPercent.toFixed(2));
-
-    checkAreaAndPlaySound(xPercent, yPercent);
-  };
   const clickableAreas = [
     { x1: 6.5, y1: 10.7, x2: 30.0, y2: 15.0, sound: Pg12_1_1_AdultLady },
     { x1: 54.2, y1: 9.5, x2: 78.3, y2: 13.0, sound: Pg12_1_2_AdultLady },
@@ -70,23 +63,27 @@ const Unit2_Page3 = ({ openPopup }) => {
     { x1: 44.0, y1: 61.6, x2: 58.3, y2: 65.1, sound: Pg12_4_2_Stella },
     { x1: 7.16, y1: 74.6, x2: 26.3, y2: 80.4, sound: Pg12_4_3_Hansel },
   ];
-
-  const checkAreaAndPlaySound = (x, y) => {
-    const area = clickableAreas.find(
-      (a) => x >= a.x1 && x <= a.x2 && y >= a.y1 && y <= a.y2
-    );
-
-    console.log("Matched Area:", area);
-
-    if (area) playSound(area.sound);
+  const handleImageClick = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
+    const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
+    console.log("X%:", xPercent.toFixed(2), "Y%:", yPercent.toFixed(2));
   };
   const playSound = (soundPath) => {
-    console.log(soundPath);
     if (audioRef.current) {
       audioRef.current.src = soundPath;
       audioRef.current.play();
+      setIsPlaying(true);
+      setHoveredAreaIndex(null); // إزالة الهايلايت عند بدء الصوت
+
+      audioRef.current.onended = () => {
+        setIsPlaying(false);
+        setHoveredAreaIndex(null);
+        setActiveAreaIndex(null); // مسح الهايلايت بعد انتهاء الصوت
+      };
     }
   };
+
   return (
     <div className="unit2-page-background">
       <img
@@ -97,7 +94,11 @@ const Unit2_Page3 = ({ openPopup }) => {
       {clickableAreas.map((area, index) => (
         <div
           key={index}
-          className="clickable-area"
+          className={`clickable-area ${
+            hoveredAreaIndex === index || activeAreaIndex === index
+              ? "highlight"
+              : ""
+          }`}
           style={{
             position: "absolute",
             left: `${area.x1}%`,
@@ -105,8 +106,16 @@ const Unit2_Page3 = ({ openPopup }) => {
             width: `${area.x2 - area.x1}%`,
             height: `${area.y2 - area.y1}%`,
           }}
-          onClick={() => playSound(area.sound)}
-          onMouseEnter={(e) => (e.target.style.cursor = "pointer")}
+          onClick={() => {
+            setActiveAreaIndex(index); // لتثبيت الهايلايت أثناء الصوت
+            playSound(area.sound);
+          }}
+          onMouseEnter={() => {
+            if (!isPlaying) setHoveredAreaIndex(index);
+          }}
+          onMouseLeave={() => {
+            if (!isPlaying) setHoveredAreaIndex(null);
+          }}
         ></div>
       ))}
 

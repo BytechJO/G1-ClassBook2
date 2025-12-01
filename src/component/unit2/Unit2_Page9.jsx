@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import page_9 from "../../assets/img_unit2/imgs/Right 1 Unit 02 Stell Birthday9.jpg";
-import { FaHeadphones } from "react-icons/fa";
-import { PiCursorClickBold } from "react-icons/pi";
-import Popup from "../Popup/Popup";
 import "./Unit2_Page9.css";
-import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg"
 import arrowBtn from "../../assets/unit1/imgs/Page 01/Arrow.svg";
-import pauseBtn from "../../assets/unit1/imgs/Page 01/Right Video Button.svg";
-import AudioWithCaption from "../AudioWithCaption";
 import Unit2_Page9_Q1 from "./Unit2_Page9_Q1";
 import Unit2_Page9_Q2 from "./Unit2_Page9_Q2";
 import Unit2_Page9_Q3 from "./Unit2_Page9_Q3";

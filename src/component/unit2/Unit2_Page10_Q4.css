@@ -20,6 +20,10 @@
   vertical-align: middle; /* توسيط عمودي */
   line-height: normal;
 }
+.show-answer-red {
+  color: red !important;
+
+}
 
 .row-content {
   display: flex;

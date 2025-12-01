@@ -23,6 +23,7 @@
   margin-bottom: 20px;
 }
 
+
 .question-box {
   border: 2px solid #92ccff;
   border-radius: 10px;
@@ -72,10 +73,14 @@
 }
 
 .option-letter.selected {
-  background-color: #2c5287;
-  color: white;
+  border-color: #2c5287;
   transform: scale(1.1);
 }
+.option-letter.selected.correct-answer {
+  border-color: #0a8f00 !important;
+  font-weight: bold;
+}
+
 
 .option-letter {
   position: relative;

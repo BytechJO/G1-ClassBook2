@@ -10,6 +10,9 @@ const Unit2_Page10_Q2 = () => {
   const containerRef = useRef(null);
   let startPoint = null;
   const [wrongWords, setWrongWords] = useState([]); // ⭐ تم التعديل هون
+  const [firstDot, setFirstDot] = useState(null);
+  const [showAnswer, setShowAnswer] = useState(false);
+
   const correctMatches = [
     { word: "bird", image: "img1" },
     { word: "boy", image: "img2" },
@@ -17,56 +20,53 @@ const Unit2_Page10_Q2 = () => {
     { word: "ball", image: "img4" },
   ];
 
-  const handleDotDown = (e) => {
-    startPoint = e.target;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = startPoint.getBoundingClientRect().left - rect.left + 8;
-    const y = startPoint.getBoundingClientRect().top - rect.top + 8;
+  // ============================
+  // 1️⃣ الضغط على النقطة الأولى (start-dot)
+  // ============================
+  const handleStartDotClick = (e) => {
+    if (showAnswer) return;
 
-    setLines((prev) => [...prev, { x1: x, y1: y, x2: x, y2: y }]);
-    window.addEventListener("mousemove", followMouse);
-    window.addEventListener("mouseup", stopDrawingLine);
+    const rect = containerRef.current.getBoundingClientRect();
+
+    const word = e.target.dataset.word || null;
+    const image = e.target.dataset.image || null;
+
+    setFirstDot({
+      word,
+      image,
+      x: e.target.getBoundingClientRect().left - rect.left + 8,
+      y: e.target.getBoundingClientRect().top - rect.top + 8,
+    });
   };
 
-  const followMouse = (e) => {
-    const rect = containerRef.current.getBoundingClientRect();
-    setLines((prev) => [
-      ...prev.slice(0, -1),
-      {
-        x1: startPoint.getBoundingClientRect().left - rect.left + 8,
-        y1: startPoint.getBoundingClientRect().top - rect.top + 8,
-        x2: e.clientX - rect.left,
-        y2: e.clientY - rect.top,
-      },
-    ]);
-  };
-
-  const stopDrawingLine = (e) => {
-    window.removeEventListener("mousemove", followMouse);
-    window.removeEventListener("mouseup", stopDrawingLine);
-
-    const endDot = document.elementFromPoint(e.clientX, e.clientY);
-
-    if (!endDot || !endDot.classList.contains("end-dot2")) {
-      setLines((prev) => prev.slice(0, -1));
-      return;
-    }
+  // ============================
+  // 2️⃣ الضغط على النقطة الثانية (end-dot)
+  // ============================
+  const handleEndDotClick = (e) => {
+    if (showAnswer) return;
+    if (!firstDot) return;
 
     const rect = containerRef.current.getBoundingClientRect();
+
+    const endWord = e.target.dataset.word || null;
+    const endImage = e.target.dataset.image || null;
+
     const newLine = {
-      x1: startPoint.getBoundingClientRect().left - rect.left + 8,
-      y1: startPoint.getBoundingClientRect().top - rect.top + 8,
-      x2: endDot.getBoundingClientRect().left - rect.left + 8,
-      y2: endDot.getBoundingClientRect().top - rect.top + 8,
-      word: endDot.dataset.letter, // ✅ أخذ الكلمة من نقطة النهاية
-      image: startPoint.dataset.image, // ✅ أخذ الصورة من نقطة البداية
+      x1: firstDot.x,
+      y1: firstDot.y,
+      x2: e.target.getBoundingClientRect().left - rect.left + 8,
+      y2: e.target.getBoundingClientRect().top - rect.top + 8,
+
+      word: firstDot.word || endWord, // نأخذ الكلمة من البداية أو النهاية حسب المتوفر
+      image: firstDot.image || endImage, // نفس الشي للصورة
     };
 
-    setLines((prev) => [...prev.slice(0, -1), newLine]);
+    setLines((prev) => [...prev, newLine]);
+    setFirstDot(null);
   };
 
-  const checkAnswers = () => {
-    // تأكد إنو الطالب وصل كل الأزواج
+  const checkAnswers2 = () => {
+    if (showAnswer) return;
     if (lines.length < correctMatches.length) {
       ValidationAlert.info(
         "Oops!",
@@ -74,40 +74,35 @@ const Unit2_Page10_Q2 = () => {
       );
       return;
     }
-
+    if (showAnswer) return;
+    let wrong = [];
     let correctCount = 0;
-    const total = correctMatches.length;
-    let wrong = []; // ⭐ تم التعديل هون
-    // احسب كم وصلة صحيحة
+
     lines.forEach((line) => {
       const isCorrect = correctMatches.some(
         (pair) => pair.word === line.word && pair.image === line.image
       );
+
       if (isCorrect) correctCount++;
-      else wrong.push(line.word); // ⭐ تم التعديل هون
+      else wrong.push(line.word);
     });
-    setWrongWords(wrong); // ⭐ تم التعديل هون
-    // تحديد اللون حسب النتيجة
+
+    setWrongWords(wrong);
+    const total = correctMatches.length;
     const color =
       correctCount === total ? "green" : correctCount === 0 ? "red" : "orange";
 
-    // رسالة النتيجة منسقة بالألوان
     const scoreMessage = `
-        <div style="font-size: 20px; margin-top: 10px; text-align:center;">
-          <span style="color:${color}; font-weight:bold;">
-            Score: ${correctCount} / ${total}
-          </span>
-        </div>
-      `;
+      <div style="font-size: 20px; margin-top: 10px; text-align:center;">
+        <span style="color:${color}; font-weight:bold;">
+           Score: ${correctCount} / ${total}
+        </span>
+      </div>
+    `;
 
-    // الحالات الثلاث
-    if (correctCount === total) {
-      ValidationAlert.success(scoreMessage);
-    } else if (correctCount === 0) {
-      ValidationAlert.error(scoreMessage);
-    } else {
-      ValidationAlert.warning(scoreMessage);
-    }
+    if (correctCount === total) ValidationAlert.success(scoreMessage);
+    else if (correctCount === 0) ValidationAlert.error(scoreMessage);
+    else ValidationAlert.warning(scoreMessage);
   };
 
   return (
@@ -144,19 +139,23 @@ const Unit2_Page10_Q2 = () => {
                   style={{ height: "auto", width: "120px" }}
                 />
                 {wrongWords.includes("bird") && ( // ⭐ تم التعديل هون
-                  <span className="error-mark">✕</span>
+                  <span className="error-mark8">✕</span>
                 )}{" "}
                 <div className="dot-wrapper2">
                   <div
                     className="dot2 start-dot2"
                     data-image="img1"
-                    onMouseDown={handleDotDown}
+                    onClick={handleStartDotClick}
                   ></div>
                 </div>
               </div>
               <div className="word-with-dot2">
                 <div className="dot-wrapper2">
-                  <div className="dot2 end-dot2" data-letter="ball"></div>
+                  <div
+                    className="dot2 end-dot2"
+                    data-word="ball"
+                    onClick={handleEndDotClick}
+                  ></div>
                 </div>
 
                 <span className="word-text2">Ball</span>
@@ -174,19 +173,23 @@ const Unit2_Page10_Q2 = () => {
                   style={{ height: "auto", width: "120px" }}
                 />
                 {wrongWords.includes("boy") && ( // ⭐ تم التعديل هون
-                  <span className="error-mark">✕</span>
+                  <span className="error-mark8">✕</span>
                 )}{" "}
                 <div className="dot-wrapper2">
                   <div
                     className="dot2 start-dot2"
                     data-image="img2"
-                    onMouseDown={handleDotDown}
+                    onClick={handleStartDotClick}
                   ></div>
                 </div>
               </div>
               <div className="word-with-dot2">
                 <div className="dot-wrapper2">
-                  <div className="dot2 end-dot2" data-letter="pizza"></div>
+                  <div
+                    className="dot2 end-dot2"
+                    data-word="pizza"
+                    onClick={handleEndDotClick}
+                  ></div>
                 </div>
 
                 <span className="word-text2">pizza</span>
@@ -203,19 +206,23 @@ const Unit2_Page10_Q2 = () => {
                   style={{ height: "auto", width: "120px" }}
                 />
                 {wrongWords.includes("pizza") && ( // ⭐ تم التعديل هون
-                  <span className="error-mark">✕</span>
+                  <span className="error-mark8">✕</span>
                 )}{" "}
                 <div className="dot-wrapper2">
                   <div
                     className="dot2 start-dot2"
                     data-image="img3"
-                    onMouseDown={handleDotDown}
+                    onClick={handleStartDotClick}
                   ></div>
                 </div>
               </div>
               <div className="word-with-dot2">
                 <div className="dot-wrapper2">
-                  <div className="dot2 end-dot2" data-letter="bird"></div>
+                  <div
+                    className="dot2 end-dot2"
+                    data-word="bird"
+                    onClick={handleEndDotClick}
+                  ></div>
                 </div>
 
                 <span className="word-text2">bird</span>
@@ -233,19 +240,23 @@ const Unit2_Page10_Q2 = () => {
                   style={{ height: "auto", width: "120px" }}
                 />
                 {wrongWords.includes("ball") && ( // ⭐ تم التعديل هون
-                  <span className="error-mark">✕</span>
+                  <span className="error-mark8">✕</span>
                 )}{" "}
                 <div className="dot-wrapper2">
                   <div
                     className="dot2 start-dot2"
                     data-image="img4"
-                    onMouseDown={handleDotDown}
+                    onClick={handleStartDotClick}
                   ></div>
                 </div>
               </div>
               <div className="word-with-dot2">
                 <div className="dot-wrapper2">
-                  <div className="dot2 end-dot2" data-letter="boy"></div>
+                  <div
+                    className="dot2 end-dot2"
+                    data-word="boy"
+                    onClick={handleEndDotClick}
+                  ></div>
                 </div>
 
                 <span className="word-text2">boy</span>
@@ -265,12 +276,45 @@ const Unit2_Page10_Q2 = () => {
           onClick={() => {
             setLines([]);
             setWrongWords([]);
+                setFirstDot(null);
+              setShowAnswer(false);
           }}
           className="try-again-button"
         >
           Start Again ↻
         </button>
-        <button onClick={checkAnswers} className="check-button2">
+          {/* Show Answer */}
+          <button
+            onClick={() => {
+              const rect = containerRef.current.getBoundingClientRect();
+
+              const getDotPosition = (selector) => {
+                const el = document.querySelector(selector);
+                if (!el) return { x: 0, y: 0 };
+                const r = el.getBoundingClientRect();
+                return {
+                  x: r.left - rect.left + 8,
+                  y: r.top - rect.top + 8,
+                };
+              };
+
+              const finalLines = correctMatches.map((line) => ({
+                ...line,
+                x1: getDotPosition(`[data-word="${line.word}"]`).x,
+                y1: getDotPosition(`[data-word="${line.word}"]`).y,
+                x2: getDotPosition(`[data-image="${line.image}"]`).x,
+                y2: getDotPosition(`[data-image="${line.image}"]`).y,
+              }));
+
+              setLines(finalLines);
+              setWrongWords([]);
+              setShowAnswer(true);
+            }}
+            className="show-answer-btn swal-continue"
+          >
+            Show Answer
+          </button>
+        <button onClick={checkAnswers2} className="check-button2">
           Check Answer ✓
         </button>
       </div>

@@ -18,7 +18,7 @@ import openBook from "../assets/unit1/imgs/Page 01/open-book.svg";
 import zoomIn from "../assets/unit1/imgs/Page 01/zoom in.svg";
 import zoomOut from "../assets/unit1/imgs/Page 01/zoom out.svg";
 import Popup from "./Popup/Popup";
-import logo from "../assets/unit1/imgs/PreissMurphy Logo-BGSDEhSA (1).svg";
+import logo from "../assets/unit1/imgs/Page 01/PMAAlogo.svg";
 //===================== unit 1 pages
 import Page1 from "./unit1/Page1";
 import Page2 from "./unit1/Page2";
@@ -195,18 +195,18 @@ export default function Book() {
     <Page7 openPopup={openPopup} />,
     <Page8 openPopup={openPopup} />,
     <Page9 openPopup={openPopup} />,
-    // <Unit2_Page1 openPopup={openPopup} />,
-    // <Unit2_Page2 openPopup={openPopup} />,
-    // <Unit2_Page3 openPopup={openPopup} />,
-    // <Unit2_Page4 openPopup={openPopup} />,
-    // <Unit2_Page5 openPopup={openPopup} />,
-    // <Unit2_Page6 openPopup={openPopup} />,
-    // <Unit2_Page7 openPopup={openPopup} />,
-    // <Unit2_Page8 openPopup={openPopup} />,
-    // <Unit2_Page9 openPopup={openPopup} />,
-    // <Unit2_Page10 openPopup={openPopup} />,
-    // <Unit2_Page11 openPopup={openPopup} />,
-    // <Unit2_Page12 openPopup={openPopup} />,
+    <Unit2_Page1 openPopup={openPopup} />,
+    <Unit2_Page2 openPopup={openPopup} />,
+    <Unit2_Page3 openPopup={openPopup} />,
+    <Unit2_Page4 openPopup={openPopup} />,
+    <Unit2_Page5 openPopup={openPopup} />,
+    <Unit2_Page6 openPopup={openPopup} />,
+    <Unit2_Page7 openPopup={openPopup} />,
+    <Unit2_Page8 openPopup={openPopup} />,
+    <Unit2_Page9 openPopup={openPopup} />,
+    <Unit2_Page10 openPopup={openPopup} />,
+    <Unit2_Page11 openPopup={openPopup} />,
+    <Unit2_Page12 openPopup={openPopup} />,
     // <Unit3_Page1 openPopup={openPopup} />,
     // <Unit3_Page2 openPopup={openPopup} />,
     // <Unit3_Page3 openPopup={openPopup} />,
@@ -334,7 +334,7 @@ export default function Book() {
             <img
               src={logo}
               alt="J1 Logo"
-              style={{ height: "40px", width: "100px",background:"blueviolet" }}
+              style={{ height: "40px", width: "100px"}}
             />
 
             {/* TABS */}

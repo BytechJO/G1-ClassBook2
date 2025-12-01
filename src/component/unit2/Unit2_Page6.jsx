@@ -4,17 +4,19 @@ import song from "../../assets/img_unit2/sounds-unit2/Pg15.Sing_Adult Lady.mp3";
 import "./Unit2_Page6.css";
 import Unit2_Page6_Q1 from "./Unit2_Page6_Q1";
 import Unit2_Page6_Q2 from "./Unit2_Page6_Q2";
-import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg"
+import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg";
 import arrowBtn from "../../assets/unit1/imgs/Page 01/Arrow.svg";
-import pauseBtn from "../../assets/unit1/imgs/Page 01/Right Video Button.svg";
 import AudioWithCaption from "../AudioWithCaption";
 
 const Unit2_Page6 = ({ openPopup }) => {
-   const captionsExample = [
-    { start: 0, end: 1, text: "Hello!" },
-    { start: 1, end: 2.2, text: "My name is Tom." },
-    { start: 2.2, end: 4, text: "I like apples." },
+  const captionsExample = [
+    { start: 0, end: 1, text: "Is it my birthday?" },
+    { start: 1, end: 2.2, text: "Yes, it is!" },
+    { start: 2.22, end: 4.05, text: "It’s my birthday!" },
+    { start: 4.08, end:7.04, text: "Yes, it is! Happy I am." },
+    { start: 7.08, end:9.25, text: "Because it’s my birthday." },
   ];
+
   return (
     <div className="unit2-page-background">
       <img src={page_6} />

@@ -22,6 +22,9 @@
   font-weight: 700;
   color: darkblue;
 }
+.show-red {
+  color: red !important;
+}
 
 .word-number {
   display: flex;
@@ -77,10 +80,7 @@
   position: relative;
 }
 
-/* الانبت الغلط */
-.input-sentence.wrong-input1 {
-  border-color: #ff3b3b !important;
-}
+
 
 .wrong-icon {
   position: absolute;

@@ -1,12 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import "./Unit2_Page9_Q3.css";
 import jello from "../../assets/img_unit2/imgs/jello.jpg";
 import present from "../../assets/img_unit2/imgs/Present1.jpg";
 import balloons from "../../assets/img_unit2/imgs/balloons..jpg";
 import ValidationAlert from "../Popup/ValidationAlert";
+
 const Unit2_Page9_Q3 = () => {
   const [answers, setAnswers] = useState([]);
-  const [wrongWords, setWrongWords] = useState([]); // ⭐ تم التعديل هون
+  const [wrongWords, setWrongWords] = useState([]);
+  const [showAnswers, setShowAnswers] = useState(false);
+  const [disableInputs, setDisableInputs] = useState(false);
+
   const correctMatches = [
     { input: "It’s jello", num: "input1" },
     { input: "It’s a present", num: "input2" },
@@ -14,8 +18,9 @@ const Unit2_Page9_Q3 = () => {
   ];
 
   const handleChange = (e) => {
+    if (disableInputs) return; // 🔥 يمنع التعديل عند Show Answer
+
     const { id, value } = e.target;
-    console.log(id, value);
 
     setAnswers((prev) => {
       const updated = [...prev];
@@ -26,27 +31,24 @@ const Unit2_Page9_Q3 = () => {
       } else {
         updated.push({ input: value, num: id });
       }
-
       return updated;
     });
-    setWrongWords([])
+
+    setWrongWords([]);
   };
 
   const checkAnswers = () => {
-    // تأكد إنو الطالب وصل كل الأزواج
-
-    let correctCount = 0;
-
-    let wrong = []; // ⭐ تم التعديل هون
-    // احسب كم وصلة صحيحة
-
     if (answers.length === 0) {
       ValidationAlert.info("Please fill in all the blanks before checking!");
       return;
     }
 
+    let correctCount = 0;
+    let wrong = [];
+
     correctMatches.forEach((ans, i) => {
-      if (ans.input === answers[i].input) {
+      const userAns = answers.find((a) => a.num === ans.num)?.input || "";
+      if (ans.input === userAns) {
         correctCount++;
       } else {
         wrong.push(ans.num);
@@ -55,181 +57,153 @@ const Unit2_Page9_Q3 = () => {
 
     setWrongWords(wrong);
 
-    console.log(correctCount);
-    console.log(wrongWords);
     const total = correctMatches.length;
-    // تحديد اللون حسب النتيجة
     const color =
       correctCount === total ? "green" : correctCount === 0 ? "red" : "orange";
 
-    // رسالة النتيجة منسقة بالألوان
     const scoreMessage = `
-        <div style="font-size: 20px; margin-top: 10px; text-align:center;">
-          <span style="color:${color}; font-weight:bold;">
-            Score: ${correctCount} / ${total}
-          </span>
-        </div>
-      `;
+      <div style="font-size: 20px; text-align:center;">
+        <span style="color:${color}; font-weight:bold;">
+          Score: ${correctCount} / ${total}
+        </span>
+      </div>
+    `;
 
-    // الحالات الثلاث
+    if (total === correctCount) ValidationAlert.success(scoreMessage);
+    else if (correctCount === 0) ValidationAlert.error(scoreMessage);
+    else ValidationAlert.warning(scoreMessage);
+  };
 
-    if (total === correctCount) {
-      ValidationAlert.success(scoreMessage);
-    } else if (correctCount === 0) {
-      ValidationAlert.error(scoreMessage);
-    } else {
-      ValidationAlert.warning(scoreMessage);
-    }
+  // ⭐ Show Correct Answers
+  const showCorrectAnswers = () => {
+    const correctFilled = correctMatches.map((item) => ({
+      input: item.input,
+      num: item.num,
+    }));
+
+    setAnswers(correctFilled);
+    setDisableInputs(true);
+    setShowAnswers(true);
+    setWrongWords([]);
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <div
-        className="div-forall"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "30px",
-          width: "60%",
-          justifyContent: "flex-start",
-        }}
-      >
-        <div className="unit2-page9-q3-container">
-          <h5 className="header-title-page8">C Look and answer.</h5>
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <div style={{ width: "60%" }}>
+        <h5 className="header-title-page8">C Look and answer.</h5>
 
-          <div className="content-container-P9-Q3">
-            <div className="section-one11">
-              <div style={{ display: "flex" }}>
-                <span
-                  style={{
-                    color: "#2c5287",
-                    fontSize: "25px",
-                    fontWeight: "500",
-                    display: "flex",
-                    gap: "10px",
-                  }}
-                >
-                  1
-                </span>{" "}
-                <img src={jello} className="p9-q1-img2" />
-              </div>
-              <div className="content-input">
-                <input
-                  type="text"
-                  value={"What is it?"}
-                  readOnly
-                  style={{ pointerEvents: "none" }}
-                />
-                <div style={{ position: "relative" }}>
-                  <input
-                    type="text"
-                    className="answer-input33"
-                    value={answers.find((a) => a.num === "input1")?.input || ""}
-                    id="input1"
-                    onChange={handleChange}
-                  />
-                  {wrongWords.includes(answers[0]?.num) && (
-                    <span className="error-mark-input1">✕</span>
-                  )}
-                </div>
-              </div>
+        <div className="content-container-P9-Q3">
+
+          {/* ========== Q1 ========== */}
+          <div className="section-one11">
+            <div style={{ display: "flex" }}>
+              <span className="num2">1</span>
+              <img src={jello} className="p9-q1-img2" />
             </div>
 
-            <div className="section-two22">
-              <div style={{ display: "flex" }}>
-                <span
-                  style={{
-                    color: "#2c5287",
-                    fontSize: "25px",
-                    fontWeight: "500",
-                    display: "flex",
-                    gap: "10px",
-                  }}
-                >
-                  2
-                </span>{" "}
-                <img src={present} className="p9-q1-img2" />
-              </div>
-              <div className="content-input">
+            <div className="content-input">
+              <input readOnly value="What is it?" />
+
+              <div style={{ position: "relative" }}>
                 <input
                   type="text"
-                  value={"What is it?"}
-                  readOnly
-                  style={{ pointerEvents: "none" }}
+                  id="input1"
+                  className={`answer-input33 ${
+                    showAnswers ? "red-text" : ""
+                  }`}
+                  value={
+                    answers.find((a) => a.num === "input1")?.input || ""
+                  }
+                  onChange={handleChange}
                 />
 
-                <div style={{ position: "relative" }}>
-                  <input
-                    type="text"
-                    className="answer-input33"
-                    value={answers.find((a) => a.num === "input2")?.input || ""}
-                    id="input2"
-                    onChange={handleChange}
-                  />
-                  {wrongWords.includes(answers[1]?.num) && (
-                    <span className="error-mark-input1">✕</span>
-                  )}
-                </div>
+                {wrongWords.includes("input1") && (
+                  <span className="error-mark-input1">✕</span>
+                )}
               </div>
             </div>
+          </div>
 
-            <div className="section-three33">
-              <div style={{ display: "flex" }}>
-                <span
-                  style={{
-                    color: "#2c5287",
-                    fontSize: "25px",
-                    fontWeight: "500",
-                    display: "flex",
-                    gap: "10px",
-                  }}
-                >
-                  3
-                </span>{" "}
-                <img src={balloons} className="p9-q1-img2" />
-              </div>
-              <div className="content-input">
+          {/* ========== Q2 ========== */}
+          <div className="section-two22">
+            <div style={{ display: "flex" }}>
+              <span className="num2">2</span>
+              <img src={present} className="p9-q1-img2" />
+            </div>
+
+            <div className="content-input">
+              <input readOnly value="What is it?" />
+
+              <div style={{ position: "relative" }}>
                 <input
                   type="text"
-                  value={"What are these?"}
-                  readOnly
-                  style={{ pointerEvents: "none" }}
+                  id="input2"
+                  className={`answer-input33 ${
+                    showAnswers ? "red-text" : ""
+                  }`}
+                  value={
+                    answers.find((a) => a.num === "input2")?.input || ""
+                  }
+                  onChange={handleChange}
                 />
-                <div style={{ position: "relative" }}>
-                  <input
-                    type="text"
-                    className="answer-input33"
-                    value={answers.find((a) => a.num === "input3")?.input || ""}
-                    id="input3"
-                    onChange={handleChange}
-                  />
-                  {wrongWords.includes(answers[2]?.num) && (
-                    <span className="error-mark-input1">✕</span>
-                  )}
-                  ?
-                </div>
+
+                {wrongWords.includes("input2") && (
+                  <span className="error-mark-input1">✕</span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* ========== Q3 ========== */}
+          <div className="section-three33">
+            <div style={{ display: "flex" }}>
+              <span className="num2">3</span>
+              <img src={balloons} className="p9-q1-img2" />
+            </div>
+
+            <div className="content-input">
+              <input readOnly value="What are these?" />
+
+              <div style={{ position: "relative" }}>
+                <input
+                  type="text"
+                  id="input3"
+                  className={`answer-input33 ${
+                    showAnswers ? "red-text" : ""
+                  }`}
+                  value={
+                    answers.find((a) => a.num === "input3")?.input || ""
+                  }
+                  onChange={handleChange}
+                />
+
+                {wrongWords.includes("input3") && (
+                  <span className="error-mark-input1">✕</span>
+                )}
               </div>
             </div>
           </div>
         </div>
+
+        {/* ⭐ Buttons */}
         <div className="action-buttons-container">
           <button
+            className="try-again-button"
             onClick={() => {
               setAnswers([]);
               setWrongWords([]);
+              setShowAnswers(false);
+              setDisableInputs(false);
             }}
-            className="try-again-button"
           >
             Start Again ↻
           </button>
-          <button onClick={checkAnswers} className="check-button2">
+
+          <button className="show-answer-btn swal-continue" onClick={showCorrectAnswers}>
+            Show Answer
+          </button>
+
+          <button className="check-button2" onClick={checkAnswers}>
             Check Answer ✓
           </button>
         </div>

@@ -91,9 +91,10 @@ const Page8_Q1 = () => {
     const handleEnded = () => {
       const audio = audioRef.current;
       audio.currentTime = 0; // ← يرجع للبداية
-      setActiveIndex(null);
-      setPaused(false);
       setIsPlaying(false);
+      
+      setPaused(false);
+     
       setShowContinue(true);
     };
 
@@ -220,10 +221,7 @@ const Page8_Q1 = () => {
                   const time = e.target.currentTime;
                   setCurrent(time);
 
-                  const idx = checkpoints.findIndex(
-                    (cp) => time >= cp && time < cp + 0.8
-                  );
-                  setActiveIndex(idx !== -1 ? idx : null);
+                
                 }}
                 onLoadedMetadata={(e) => setDuration(e.target.duration)}
               ></audio>

@@ -19,6 +19,11 @@
     font-weight: 500;
     width: 80%;
 }
+.red-text {
+  color: red !important;
+  font-weight: 600;
+  border-color: black !important;
+}
 
 .p9-q1-img2{
     height: auto;

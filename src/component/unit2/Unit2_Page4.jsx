@@ -15,19 +15,20 @@ import Pg13_5_2_Sarah from "../../assets/img_unit2/sounds-unit2/Pg13.5.2_Sarah.m
 import Pg13_6_1_Helen from "../../assets/img_unit2/sounds-unit2/Pg13.6.1_Helen.mp3";
 import Pg13_6_2_Sarah from "../../assets/img_unit2/sounds-unit2/Pg13.6.2_Sarah.mp3";
 import video from "../../assets/img_unit2/sounds-unit2/p13.mp4";
-import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg"
-import arrowBtn from "../../assets/unit1/imgs/Page 01/Arrow.svg";
+import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg";
 import pauseBtn from "../../assets/unit1/imgs/Page 01/Right Video Button.svg";
 import AudioWithCaption from "../AudioWithCaption";
 
-
 const Unit2_Page4 = ({ openPopup }) => {
   const audioRef = useRef(null);
+  const [hoveredAreaIndex, setHoveredAreaIndex] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [activeAreaIndex, setActiveAreaIndex] = useState(null);
   const captionsExample = [
     { start: 0, end: 4.07, text: " Page 13, exercise 2. Right Grammar. " },
-    { start: 4.10, end: 5.12, text: " What is it? " },
-    {start: 5.15, end: 6.15,text: "It’s a cake.",},
-    {start: 6.19,end: 7.21,text: "What are these?",},
+    { start: 4.1, end: 5.12, text: " What is it? " },
+    { start: 5.15, end: 6.15, text: "It’s a cake." },
+    { start: 6.19, end: 7.21, text: "What are these?" },
     { start: 7.25, end: 9.04, text: "These are presents. " },
     { start: 9.07, end: 11.29, text: "What is it? It's a birthday cake. " },
     { start: 11.32, end: 15.04, text: "What are these? These are presents." },
@@ -38,15 +39,7 @@ const Unit2_Page4 = ({ openPopup }) => {
       text: "Is it a cake? No, it isn't.",
     },
   ];
-  const handleImageClick = (e) => {
-    const rect = e.target.getBoundingClientRect();
-    const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
-    const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
 
-    console.log("X%:", xPercent.toFixed(2), "Y%:", yPercent.toFixed(2));
-
-    checkAreaAndPlaySound(xPercent, yPercent);
-  };
   const clickableAreas = [
     { x1: 6.53, y1: 10.4, x2: 23.43, y2: 14.2, sound: Pg13_2_1_AdultLady },
     { x1: 54.19, y1: 10.4, x2: 71.5, y2: 14.5, sound: Pg13_2_2_AdultLady },
@@ -62,20 +55,24 @@ const Unit2_Page4 = ({ openPopup }) => {
     { x1: 77.1, y1: 60.69, x2: 91.4, y2: 63.7, sound: Pg13_6_2_Sarah },
   ];
 
-  const checkAreaAndPlaySound = (x, y) => {
-    const area = clickableAreas.find(
-      (a) => x >= a.x1 && x <= a.x2 && y >= a.y1 && y <= a.y2
-    );
-
-    console.log("Matched Area:", area);
-
-    if (area) playSound(area.sound);
+  const handleImageClick = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
+    const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
+    console.log("X%:", xPercent.toFixed(2), "Y%:", yPercent.toFixed(2));
   };
   const playSound = (soundPath) => {
-    console.log(soundPath);
     if (audioRef.current) {
       audioRef.current.src = soundPath;
       audioRef.current.play();
+      setIsPlaying(true);
+      setHoveredAreaIndex(null); // إزالة الهايلايت عند بدء الصوت
+
+      audioRef.current.onended = () => {
+        setIsPlaying(false);
+        setHoveredAreaIndex(null);
+        setActiveAreaIndex(null); // مسح الهايلايت بعد انتهاء الصوت
+      };
     }
   };
 
@@ -89,7 +86,11 @@ const Unit2_Page4 = ({ openPopup }) => {
       {clickableAreas.map((area, index) => (
         <div
           key={index}
-          className="clickable-area"
+          className={`clickable-area ${
+            hoveredAreaIndex === index || activeAreaIndex === index
+              ? "highlight"
+              : ""
+          }`}
           style={{
             position: "absolute",
             left: `${area.x1}%`,
@@ -97,8 +98,16 @@ const Unit2_Page4 = ({ openPopup }) => {
             width: `${area.x2 - area.x1}%`,
             height: `${area.y2 - area.y1}%`,
           }}
-          onClick={() => playSound(area.sound)}
-          onMouseEnter={(e) => (e.target.style.cursor = "pointer")}
+          onClick={() => {
+            setActiveAreaIndex(index); // لتثبيت الهايلايت أثناء الصوت
+            playSound(area.sound);
+          }}
+          onMouseEnter={() => {
+            if (!isPlaying) setHoveredAreaIndex(index);
+          }}
+          onMouseLeave={() => {
+            if (!isPlaying) setHoveredAreaIndex(null);
+          }}
         ></div>
       ))}
       <svg

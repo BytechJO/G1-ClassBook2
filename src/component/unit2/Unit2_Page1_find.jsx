@@ -5,7 +5,7 @@ import ValidationAlert from "../Popup/ValidationAlert";
 const Unit2_Page1_find = () => {
   const [clickedPoint, setClickedPoint] = useState(null);
   const [checkResult, setCheckResult] = useState(null);
-
+  const [showAnswer, setShowAnswer] = useState(false);
   // ✅ منطقة المطعم (بالنسب المئوية)
   const targetArea = {
     x1: 18,
@@ -51,6 +51,13 @@ const Unit2_Page1_find = () => {
   const handleStartAgain = () => {
     setClickedPoint(null);
     setCheckResult(null);
+    setShowAnswer(false);
+  };
+
+  const handleShowAnswer = () => {
+    setShowAnswer(true);
+    setClickedPoint(null); // نمسح النقطة اللي كبسها الطالب
+    setCheckResult("success"); // اختيارية إذا بدك يظهر نجاح
   };
 
   return (
@@ -63,7 +70,9 @@ const Unit2_Page1_find = () => {
           alignItems: "center",
         }}
       >
-        <div style={{ display: "flex" ,justifyContent: "center",width:"100%" }}>
+        <div
+          style={{ display: "flex", justifyContent: "center", width: "100%" }}
+        >
           <img src={Rabbit} style={{ height: "50px", width: "auto" }} />{" "}
           <h5 className="header-title-page8">
             I need your help. Can you help me find the boat in the picture?
@@ -73,12 +82,12 @@ const Unit2_Page1_find = () => {
           <img
             src={find_img}
             alt="interactive"
-           style={{
-            width: "auto",
-            height: "75vh",
-            cursor: "pointer",
-            display: "block",
-          }}
+            style={{
+              width: "auto",
+              height: "75vh",
+              cursor: "pointer",
+              display: "block",
+            }}
             onClick={handleImageClick}
           />
 
@@ -100,7 +109,7 @@ const Unit2_Page1_find = () => {
           )}
 
           {/* ✅ تلوين المنطقة الصحيحة إذا الجواب صح */}
-          {checkResult === "success" && (
+          {(checkResult === "success"||showAnswer) && (
             <div
               style={{
                 position: "absolute",
@@ -116,9 +125,12 @@ const Unit2_Page1_find = () => {
           )}
         </div>
       </div>
-      <div className="action-buttons-container " >
+      <div className="action-buttons-container ">
         <button className="try-again-button" onClick={handleStartAgain}>
           Start Again ↻
+        </button>
+        <button className="show-answer-btn" onClick={handleShowAnswer}>
+          Show Answer
         </button>
         <button className="check-button2" onClick={handleCheck}>
           Check Answer ✓

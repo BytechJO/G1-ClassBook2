@@ -4,17 +4,16 @@ import girl1 from "../../assets/img_unit2/imgs/girl1.jpg";
 import girl2 from "../../assets/img_unit2/imgs/girl2.jpg";
 import boy1 from "../../assets/img_unit2/imgs/boy1.jpg";
 import boy2 from "../../assets/img_unit2/imgs/boy2.jpg";
-import sound1 from "../../assets/unit1/sounds/P15QD.mp3"
+import sound1 from "../../assets/unit1/sounds/P15QD.mp3";
 import stella from "../../assets/img_unit2/sounds-unit2/Pg15_1.1_Stella.mp3";
 import tom from "../../assets/img_unit2/sounds-unit2/Pg15_1.2_Tom.mp3";
 import harley from "../../assets/img_unit2/sounds-unit2/Pg15_1.3_Harley.mp3";
 import helen from "../../assets/img_unit2/sounds-unit2/Pg15_1.4_Helen.mp3";
 import "./Unit2_Page6_Q1.css";
 import ValidationAlert from "../Popup/ValidationAlert";
-import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
-import { CgPlayPauseO } from "react-icons/cg";
+import { TbMessageCircle } from "react-icons/tb";
 const exerciseData = {
   pairs: [
     { id: "pair-1", letter: "1", content: "January" },
@@ -32,22 +31,21 @@ const exerciseData = {
 
 const Unit2_Page6_Q1 = () => {
   const audioRef = useRef(null);
-  // إعدادات الصوت
-  const [showSettings, setShowSettings] = useState(false);
-  const [volume, setVolume] = useState(1);
-  const [activeSpeed, setActiveSpeed] = useState(1);
-  const settingsRef = useRef(null);
-  const [forceRender, setForceRender] = useState(0);
-  const [showContinue, setShowContinue] = useState(false);
+
   // زر الكابشن
   const [isMuted, setIsMuted] = useState(false);
   const stopAtSecond = 4.5;
   const [paused, setPaused] = useState(false);
-  const changeSpeed = (rate) => {
-    if (!audioRef.current) return;
-    audioRef.current.playbackRate = rate;
-    setActiveSpeed(rate);
-  };
+  // إعدادات الصوت
+  const [showSettings, setShowSettings] = useState(false);
+  const [volume, setVolume] = useState(1);
+  const settingsRef = useRef(null);
+  const [forceRender, setForceRender] = useState(0);
+  const [showContinue, setShowContinue] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [current, setCurrent] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [showCaption, setShowCaption] = useState(false);
   const initialDroppedState = {
     "drop-1": null,
     "drop-2": null,
@@ -55,15 +53,18 @@ const Unit2_Page6_Q1 = () => {
     "drop-4": null,
   };
   const [wrongDrops, setWrongDrops] = useState([]);
+  const [showAnswer, setShowAnswer] = useState(false);
+
   const [droppedLetters, setDroppedLetters] = useState(initialDroppedState);
   const clickAudioRef = useRef(null); // ✅ صوت المناطق
   const handleOnDragEnd = (result) => {
+    if (showAnswer) return; // 🚫 يمنع السحب بعد عرض الإجابة
+
     if (!result.destination) return;
 
     const { destination, draggableId } = result;
     const newDropped = { ...droppedLetters };
 
-    // Remove previous droppable placement (if exists):
     const previousDrop = Object.keys(newDropped).find(
       (key) => newDropped[key] === draggableId
     );
@@ -84,34 +85,27 @@ const Unit2_Page6_Q1 = () => {
       if (audio.currentTime >= stopAtSecond) {
         audio.pause();
         setPaused(true);
+        setIsPlaying(false);
         setShowContinue(true);
         clearInterval(interval);
       }
-    }, 250);
+    }, 100);
 
-    // ⚡⚡ هنا الإضافة الوحيدة
+    // عند انتهاء الأوديو يرجع يبطل أنيميشن + يظهر Continue
     const handleEnded = () => {
-      audio.currentTime = 0; // يرجع لأول ثانية
-      audio.pause(); // يوقف
-      setPaused(true); // زر البلاي يصير Play
-      setShowContinue(true); // يظهر زر Continue
-      // setActiveIndex(null); // يشيل الأنيميشن عن الكلمات
+      const audio = audioRef.current;
+      audio.currentTime = 0; // ← يرجع للبداية
+      setActiveIndex(null);
+      setPaused(false);
+      setIsPlaying(false);
+      setShowContinue(true);
     };
 
-    const handleClickOutside = (e) => {
-      if (settingsRef.current && !settingsRef.current.contains(e.target)) {
-        setShowSettings(false);
-      }
-    };
+    audio.addEventListener("ended", handleEnded);
 
-    // audio.addEventListener("timeupdate", handleTimeUpdate);
-    audio.addEventListener("ended", handleEnded); // 👈 الإضافة
-    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      // audio.removeEventListener("timeupdate", handleTimeUpdate);
-      audio.removeEventListener("ended", handleEnded); // 👈 تنظيف الإضافة
-      document.removeEventListener("mousedown", handleClickOutside);
       clearInterval(interval);
+      audio.removeEventListener("ended", handleEnded);
     };
   }, []);
   useEffect(() => {
@@ -121,7 +115,6 @@ const Unit2_Page6_Q1 = () => {
 
     return () => clearInterval(timer);
   }, []);
-
   const playSound = (src) => {
     if (!clickAudioRef.current) return;
     clickAudioRef.current.src = src;
@@ -137,6 +130,7 @@ const Unit2_Page6_Q1 = () => {
   };
 
   const handleCheckAnswers = () => {
+    if(showAnswer)return
     const allFilled = Object.values(droppedLetters).every((v) => v !== null);
 
     if (!allFilled) {
@@ -178,16 +172,30 @@ const Unit2_Page6_Q1 = () => {
       ValidationAlert.warning(scoreMessage);
     }
   };
+  const handleShowAnswer = () => {
+    // ❗ ضبط جميع الإجابات على الصحيح
+    const correct = { ...correctAnswers };
+
+    setDroppedLetters(correct); // يحط كل إجابة صحيحة مكانها
+    setWrongDrops([]); // يشيل X من الغلط
+    setShowAnswer(true); // يمنع أي تعديل بعد هيك
+
+  
+  };
 
   const togglePlay = () => {
     const audio = audioRef.current;
 
+    if (!audio) return;
+
     if (audio.paused) {
       audio.play();
       setPaused(false);
+      setIsPlaying(true);
     } else {
       audio.pause();
       setPaused(true);
+      setIsPlaying(false);
     }
   };
   return (
@@ -204,7 +212,7 @@ const Unit2_Page6_Q1 = () => {
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: "30px",
+            gap: "12px",
             width: "60%",
             justifyContent: "flex-start",
           }}
@@ -215,93 +223,101 @@ const Unit2_Page6_Q1 = () => {
           <div
             style={{
               display: "flex",
-              justifyContent: "flex-start",
+              justifyContent: "center",
+              width: "100%",
             }}
           >
-            <div className="audio-popup-vocab">
-              <div className="audio-inner-vocab">
+            <div
+              className="audio-popup-read"
+              style={{
+                width: "50%",
+              }}
+            >
+              <div className="audio-inner player-ui">
+                <audio
+                  ref={audioRef}
+                  src={sound1}
+                  onTimeUpdate={(e) => {
+                    const time = e.target.currentTime;
+                    setCurrent(time);
+
+                    const idx = checkpoints.findIndex(
+                      (cp) => time >= cp && time < cp + 0.8
+                    );
+                    setActiveIndex(idx !== -1 ? idx : null);
+                  }}
+                  onLoadedMetadata={(e) => setDuration(e.target.duration)}
+                ></audio>
                 {/* Play / Pause */}
-                <button
-                  className="audio-play-btn"
-                  style={{ height: "30px", width: "30px" }}
-                  onClick={togglePlay}
-                >
-                  {paused ? <FaPlay size={22} /> : <FaPause size={22} />}
-                </button>
+                {/* Play / Pause */}
+                {/* الوقت - السلايدر - الوقت */}
+                <div className="top-row">
+                  <span className="audio-time">
+                    {new Date(current * 1000).toISOString().substring(14, 19)}
+                  </span>
 
-                {/* Slider */}
-                <input
-                  type="range"
-                  min="0"
-                  max={audioRef.current?.duration || 0}
-                  value={audioRef.current?.currentTime || 0}
-                  className="audio-slider"
-                  onChange={(e) => {
-                    if (!audioRef.current) return;
-                    audioRef.current.currentTime = e.target.value;
-                  }}
-                />
+                  <input
+                    type="range"
+                    className="audio-slider"
+                    min="0"
+                    max={duration}
+                    value={current}
+                    onChange={(e) => {
+                      audioRef.current.currentTime = e.target.value;
+                      updateCaption(Number(e.target.value));
+                    }}
+                    style={{
+                      background: `linear-gradient(to right, #8247ffff ${
+                        (current / duration) * 100
+                      }%, #d9d9d9ff ${(current / duration) * 100}%)`,
+                    }}
+                  />
 
-                {/* Current Time */}
-                <span className="audio-time">
-                  {new Date((audioRef.current?.currentTime || 0) * 1000)
-                    .toISOString()
-                    .substring(14, 19)}
-                </span>
+                  <span className="audio-time">
+                    {new Date(duration * 1000).toISOString().substring(14, 19)}
+                  </span>
+                </div>
+                {/* الأزرار 3 أزرار بنفس السطر */}
+                <div className="bottom-row">
+                  {/* فقاعة */}
+                  <div className={`round-btn ${showCaption ? "active" : ""}`}>
+                    <TbMessageCircle size={36} />
+                  </div>
 
-                {/* Total Time */}
-                <span className="audio-time">
-                  {new Date((audioRef.current?.duration || 0) * 1000)
-                    .toISOString()
-                    .substring(14, 19)}
-                </span>
-
-                {/* Mute */}
-                <button
-                  className="mute-btn-outside"
-                  onClick={() => {
-                    audioRef.current.muted = !audioRef.current.muted;
-                    setIsMuted(!isMuted);
-                  }}
-                >
-                  {audioRef.current?.muted ? (
-                    <FaVolumeMute size={22} color="#1d4f7b" />
-                  ) : (
-                    <FaVolumeUp size={22} color="#1d4f7b" />
-                  )}
-                </button>
-                <div className="settings-wrapper" ref={settingsRef}>
-                  <button
-                    className={`settings-btn ${showSettings ? "active" : ""}`}
-                    onClick={() => setShowSettings(!showSettings)}
-                  >
-                    <IoMdSettings size={22} color="#1d4f7b" />
+                  {/* Play */}
+                  <button className="play-btn2" onClick={togglePlay}>
+                    {isPlaying ? <FaPause size={26} /> : <FaPlay size={26} />}
                   </button>
 
-                  {showSettings && (
-                    <div className="settings-popup">
-                      <label>Volume</label>
-                      <input
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.05"
-                        value={volume}
-                        onChange={(e) => {
-                          setVolume(e.target.value);
-                          audioRef.current.volume = e.target.value;
-                        }}
-                      />
+                  {/* Settings */}
+                  <div className="settings-wrapper" ref={settingsRef}>
+                    <button
+                      className={`round-btn ${showSettings ? "active" : ""}`}
+                      onClick={() => setShowSettings(!showSettings)}
+                    >
+                      <IoMdSettings size={36} />
+                    </button>
 
-                     
-                    </div>
-                  )}
-                </div>
+                    {showSettings && (
+                      <div className="settings-popup">
+                        <label>Volume</label>
+                        <input
+                          type="range"
+                          min="0"
+                          max="1"
+                          step="0.05"
+                          value={volume}
+                          onChange={(e) => {
+                            setVolume(e.target.value);
+                            audioRef.current.volume = e.target.value;
+                          }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>{" "}
               </div>
             </div>
-            <audio ref={audioRef}>
-              <source src={sound1} type="audio/mp3" />
-            </audio>
           </div>
 
           <div className="u2-container">
@@ -410,28 +426,15 @@ const Unit2_Page6_Q1 = () => {
             onClick={() => {
               setDroppedLetters(initialDroppedState);
               setWrongDrops([]);
+              setShowAnswer(false);
             }}
             className="try-again-button"
           >
             Start Again ↻
           </button>
-          {showContinue && (
-            <button className="play-btn swal-continue" onClick={togglePlay}>
-              {paused ? (
-                <>
-                  Continue
-                  <svg width="20" height="20" viewBox="0 0 30 30">
-                    <image href={pauseBtn} x="0" y="0" width="30" height="30" />
-                  </svg>
-                </>
-              ) : (
-                <>
-                  Pause
-                  <CgPlayPauseO size={20} style={{ color: "red" }} />
-                </>
-              )}
-            </button>
-          )}
+          <button onClick={handleShowAnswer} className="show-answer-btn">
+            Show Answer
+          </button>
 
           <button onClick={handleCheckAnswers} className="check-button2">
             Check Answer ✓

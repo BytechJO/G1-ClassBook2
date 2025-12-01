@@ -21,7 +21,7 @@ const Unit2_Page6_Q2 = () => {
     "drop-2": null,
     "drop-3": null,
   };
-
+  const [showAnswer, setShowAnswer] = useState(false);
   const [droppedLetters, setDroppedLetters] = useState(initialDroppedState);
   const clickAudioRef = useRef(null);
   const [wrongDrops, setWrongDrops] = useState([]);
@@ -35,7 +35,6 @@ const Unit2_Page6_Q2 = () => {
     Object.keys(newDropped).forEach((key) => {
       if (newDropped[key] === draggableId) {
         newDropped[key] = null;
-    
       }
     });
 
@@ -50,6 +49,7 @@ const Unit2_Page6_Q2 = () => {
   };
 
   const handleCheckAnswers = () => {
+    if(showAnswer)return
     const allFilled = Object.values(droppedLetters).every((v) => v !== null);
     if (!allFilled)
       return ValidationAlert.info(
@@ -82,6 +82,7 @@ const Unit2_Page6_Q2 = () => {
   const handleReset = () => {
     setDroppedLetters(initialDroppedState);
     setWrongDrops([]);
+    setShowAnswer(false)
   };
 
   return (
@@ -116,7 +117,9 @@ const Unit2_Page6_Q2 = () => {
                 <div className="left-side2">
                   {exerciseData.images.map((img, index) => {
                     const dropId = `drop-${index + 1}`;
-                    const droppedId = droppedLetters[dropId];
+                    const droppedId = showAnswer
+                      ? correctAnswers[dropId]
+                      : droppedLetters[dropId];
                     const droppedPair = exerciseData.pairs.find(
                       (p) => p.id === droppedId
                     );
@@ -161,14 +164,17 @@ const Unit2_Page6_Q2 = () => {
                       {...provided.droppableProps}
                     >
                       {exerciseData.pairs
-                        .filter(
-                          (p) => !Object.values(droppedLetters).includes(p.id)
+                        .filter((p) =>
+                          showAnswer
+                            ? false
+                            : !Object.values(droppedLetters).includes(p.id)
                         )
                         .map((pair, index) => (
                           <Draggable
                             key={pair.id}
                             draggableId={pair.id}
                             index={index}
+                            isDragDisabled={showAnswer}
                           >
                             {(providedDraggable) => (
                               <div className="option-box2">
@@ -201,7 +207,16 @@ const Unit2_Page6_Q2 = () => {
         <button onClick={handleReset} className="try-again-button">
           Start Again ↻
         </button>
-
+        <button
+          onClick={() => {
+            setShowAnswer(true);
+            setWrongDrops([]); // إخفاء X
+            setDroppedLetters(initialDroppedState);
+          }}
+          className="show-answer-btn"
+        >
+          Show Answer
+        </button>
         <button onClick={handleCheckAnswers} className="check-button2">
           Check Answer ✓
         </button>

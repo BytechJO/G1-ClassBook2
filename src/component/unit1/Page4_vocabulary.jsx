@@ -59,9 +59,11 @@ const Page4_vocabulary = () => {
 
   // عند انتهاء الأوديو يرجع يبطل أنيميشن + يظهر Continue
   const handleEnded = () => {
+     audio.currentTime = 0;
     setActiveIndex(null);
     setPaused(true);
     setShowContinue(true);
+    setIsPlaying(false)
   };
 
   audio.addEventListener("ended", handleEnded);

@@ -42,9 +42,10 @@ const Unit2_Page7_Q1 = () => {
 
   const [userAnswers, setUserAnswers] = useState({});
   const [checked, setChecked] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
   const [error, setError] = useState("");
-  const [score, setScore] = useState(null);
   const [wrongInputs, setWrongInputs] = useState({});
+  
   const handleChange = (key, index, value) => {
     setUserAnswers((prev) => {
       const updated = { ...prev };
@@ -52,10 +53,11 @@ const Unit2_Page7_Q1 = () => {
       updated[key][index] = value; // ✅ نخزن القيمة
       return updated;
     });
-    setWrongInputs({})
+    setWrongInputs({});
   };
 
   const checkAnswers = () => {
+    if (showAnswer) return;
     let tempScore = 0;
     let totalInputs = 0;
 
@@ -127,7 +129,6 @@ const Unit2_Page7_Q1 = () => {
     else if (tempScore === 0) ValidationAlert.error(scoreMessage);
     else ValidationAlert.warning(scoreMessage);
 
-    setScore(tempScore);
     setChecked(true);
   };
 
@@ -135,7 +136,21 @@ const Unit2_Page7_Q1 = () => {
     setUserAnswers({});
     setChecked(false);
     setError("");
-    setScore(null);
+    setShowAnswer(false);
+    setWrongInputs({});
+  };
+  const handleShowAnswer = () => {
+    let filled = {};
+
+    Object.entries(sentences).forEach(([key, arr], index) => {
+      if (index === 0) return; // نتجاهل الجملة الأولى
+
+      filled[key] = arr.map((num, i) => correctAnswers2[key][i]);
+    });
+
+    setUserAnswers(filled);
+    setShowAnswer(true);
+    setChecked(false);
     setWrongInputs({});
   };
 
@@ -149,7 +164,8 @@ const Unit2_Page7_Q1 = () => {
           alignItems: "center",
         }}
       >
-        <div className="div-forall"
+        <div
+          className="div-forall"
           style={{
             display: "flex",
             flexDirection: "column",
@@ -190,26 +206,28 @@ const Unit2_Page7_Q1 = () => {
                         return (
                           <div className="input-wrapper1" key={index}>
                             <input
-                              className={`input-sentence ${
-                                checked && wrongInputs[key]?.[index]
-                                  ? "wrong-input1"
-                                  : ""
-                              }`}
+                              className={`input-sentence 
+                                 ${
+                                   checked && wrongInputs[key]?.[index]
+                                     ? "wrong-input1"
+                                     : ""
+                                 } 
+                                 ${showAnswer ? "show-red" : ""}`}
                               value={
                                 sentenceIndex === 0
                                   ? correctWord // ✅ الجملة الأولى تظهر الكلمات الصحيحة
                                   : userAnswers[key]?.[index] || ""
                               }
                               onChange={(e) =>
-                                sentenceIndex === 0
+                                sentenceIndex === 0 || showAnswer
                                   ? null
                                   : handleChange(key, index, e.target.value)
                               }
-                              readOnly={sentenceIndex === 0} // ✅ الجملة الأولى غير قابلة للتعديل
+                              readOnly={sentenceIndex === 0 || showAnswer}
                             />
 
                             {checked && wrongInputs[key]?.[index] && (
-                              <span className="wrong-icon">X</span>
+                              <span className="wrong-icon">✕</span>
                             )}
                           </div>
                         );
@@ -225,6 +243,10 @@ const Unit2_Page7_Q1 = () => {
           <button onClick={reset} className="try-again-button">
             Start Again ↻
           </button>
+          <button onClick={handleShowAnswer} className="show-answer-btn">
+            Show Answer
+          </button>
+
           <button onClick={checkAnswers} className="check-button2">
             Check Answer ✓
           </button>

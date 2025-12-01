@@ -126,4 +126,5 @@
   position: absolute;
   left: 20%;
   top: 28%;
+  z-index: 99;
 }
