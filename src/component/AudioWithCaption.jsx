@@ -122,7 +122,7 @@ setIsPlaying(false)
           </div>
 
           {/* Play */}
-          <button className="play-btn" onClick={togglePlay}>
+          <button className="play-btn2" onClick={togglePlay}>
             {isPlaying ? <FaPause size={26} /> : <FaPlay size={26} />}
           </button>
 

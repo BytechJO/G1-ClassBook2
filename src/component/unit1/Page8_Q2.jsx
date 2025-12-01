@@ -32,9 +32,10 @@ const Page8_Q2 = () => {
   const [shuffledPairs, setShuffledPairs] = useState(getShuffledPairs());
   const [wrongDrops, setWrongDrops] = useState([]); // ✅ state added here
   const audioRef = useRef(null);
-
+  const [showAnswer, setShowAnswer] = useState(false);
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;
+    if (showAnswer) return; // ← تجاهل السحب بالكامل
 
     const { destination, draggableId } = result;
 
@@ -43,12 +44,11 @@ const Page8_Q2 = () => {
       const newDropped = { ...droppedLetters };
       const prevDrop = Object.keys(newDropped).find(
         (key) => newDropped[key] === draggableId
-
       );
-      setWrongDrops([])
+      setWrongDrops([]);
       if (prevDrop) newDropped[prevDrop] = null;
       setDroppedLetters(newDropped);
-      setWrongDrops([])
+      setWrongDrops([]);
       return;
     }
 
@@ -68,7 +68,7 @@ const Page8_Q2 = () => {
   const resetExercise = () => {
     setDroppedLetters(initialDroppedState);
     setWrongDrops([]);
-  
+    setShowAnswer(false); // ← رجوع للوضع الطبيعي
   };
 
   const checkAnswers = () => {
@@ -100,9 +100,7 @@ const Page8_Q2 = () => {
     setWrongDrops(wrongList);
 
     const color =
-      correctCount === total ? "green" :
-      correctCount === 0 ? "red" :
-      "orange";
+      correctCount === total ? "green" : correctCount === 0 ? "red" : "orange";
 
     const scoreMessage = `
       <div style="font-size: 20px; margin-top: 10px; text-align:center;">
@@ -147,6 +145,7 @@ const Page8_Q2 = () => {
                         draggableId={pair.letter}
                         index={index}
                         key={pair.id}
+                        isDragDisabled={showAnswer}
                       >
                         {(providedDraggable, snapshot) => (
                           <div
@@ -174,6 +173,7 @@ const Page8_Q2 = () => {
                 <Droppable
                   key={`drop-${index + 1}`}
                   droppableId={`drop-${index + 1}`}
+                  isDragDisabled={showAnswer} // ← منع التغيير بعد إظهار الحل
                 >
                   {(provided, snapshot) => (
                     <div className="image-container">
@@ -183,7 +183,11 @@ const Page8_Q2 = () => {
                         {...provided.droppableProps}
                         className={`drop-box ${
                           snapshot.isDraggingOver ? "is-over" : ""
-                        } ${wrongDrops.includes(`drop-${index + 1}`) ? "wrong-drop" : ""}`}
+                        } ${
+                          wrongDrops.includes(`drop-${index + 1}`)
+                            ? "wrong-drop"
+                            : ""
+                        }`}
                       >
                         {droppedLetters[`drop-${index + 1}`] ? (
                           <Draggable
@@ -213,16 +217,34 @@ const Page8_Q2 = () => {
             </div>
           </div>
         </DragDropContext>
+      </div>{" "}
+      <div className="action-buttons-container">
+        <button onClick={resetExercise} className="try-again-button">
+          Start Again ↻
+        </button>
+        <button
+          onClick={() => {
+            // تعبئة كل drop zones بالإجابة الصحيحة
+            const correct = {
+              "drop-1": "Table",
+              "drop-2": "Taxi",
+              "drop-3": "Deer",
+              "drop-4": "Dish",
+            };
 
-      
-      </div>  <div className="action-buttons-container">
-          <button onClick={resetExercise} className="try-again-button">
-            Start Again ↻
-          </button>
-          <button onClick={checkAnswers} className="check-button2">
-            Check Answer ✓
-          </button>
-        </div>
+            setDroppedLetters(correct);
+            setWrongDrops([]);
+            setShowAnswer(true);
+          }}
+          className="show-answer-btn swal-continue"
+        >
+          Show Answer 
+        </button>
+
+        <button onClick={checkAnswers} className="check-button2">
+          Check Answer ✓
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,3 @@
-
 /*================ CONTAINER ================*/
 .audio-popup {
   background: #ffffff;
@@ -8,14 +7,14 @@
   max-width: 520px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
-.audio-popup-vocab{
-   width: 40%;
+.audio-popup-vocab {
+  width: 40%;
   margin: 0 auto;
   margin-top: -20px;
   background: #ffffff;
-      padding: 0px 25px;
+  padding: 0px 25px;
   border-radius: 0 0 25px 25px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   position: absolute;
   top: 0;
   left: 50%;
@@ -79,9 +78,34 @@
   background: rgba(125, 85, 255, 0.15);
 }
 
-.play-btn {
-  width: 60px;
-  height: 60px;
+.show-answer-btn {
+  background: #2c78b4;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-grow: 1;
+  max-width: 250px;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.show-answer-btn:hover {
+  background-color: #4093d2;
+
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(40, 108, 167, 0.3);
+}
+
+.play-btn2 {
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: #7d55ff;
   color: white;
@@ -92,22 +116,6 @@
   font-size: 26px;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.play-btn2 {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: #7d55ff;
-    color: white;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-
 }
 /*================ CAPTION POPUP ================*/
 .caption-popup {

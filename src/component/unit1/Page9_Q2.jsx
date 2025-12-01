@@ -137,6 +137,38 @@ export default function Page9_Q2() {
       ValidationAlert.warning(scoreMessage);
     }
   };
+  // ⭐ Show Correct Answers
+  const showCorrectAnswers = () => {
+    const rect = containerRef.current.getBoundingClientRect();
+
+    // 1️⃣ تجهيز خطوط الإجابة الصحيحة
+    const correctLines = correctMatches.map((pair) => {
+      const startEl = document.querySelector(
+        `.start-dot1[data-letter="${pair.word1}"]`
+      );
+      const endEl = document.querySelector(
+        `.end-dot1[data-image="${pair.word2}"]`
+      );
+
+      return {
+        x1: startEl.getBoundingClientRect().left - rect.left + 8,
+        y1: startEl.getBoundingClientRect().top - rect.top + 8,
+        x2: endEl.getBoundingClientRect().left - rect.left + 8,
+        y2: endEl.getBoundingClientRect().top - rect.top + 8,
+        word: pair.word1,
+        image: pair.word2,
+      };
+    });
+
+    // 2️⃣ وضع الخطوط
+    setLines(correctLines);
+
+    // 3️⃣ إخفاء علامات الإكس
+    setWrongWords([]);
+
+    // 4️⃣ إعادة تلوين الكلمات (إذا بدك)
+    setWordColors(["green", "green", "green", "green", "green", "green"]);
+  };
 
   return (
     <div
@@ -285,6 +317,13 @@ export default function Page9_Q2() {
         >
           Start Again ↻
         </button>
+        <button
+          onClick={showCorrectAnswers}
+          className="show-answer-btn swal-continue"
+        >
+          Show Answer 
+        </button>
+
         <button onClick={checkAnswers} className="check-button2">
           Check Answer ✓
         </button>

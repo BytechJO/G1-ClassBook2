@@ -10,6 +10,7 @@ export default function Page8_Q3() {
   const [wrongWords, setWrongWords] = useState([]);
   const [firstDot, setFirstDot] = useState(null); // ⭐ أول نقطة
   const containerRef = useRef(null);
+  const [showAnswer, setShowAnswer] = useState(false);
 
   const correctMatches = [
     { word: "Hello! I’m John.", image: "img1" },
@@ -20,6 +21,7 @@ export default function Page8_Q3() {
   // 1️⃣ الضغط على النقطة الأولى (start-dot)
   // ============================
   const handleStartDotClick = (e) => {
+    if (showAnswer) return; // 🔒 يمنع الرسم بعد show answer
     const rect = containerRef.current.getBoundingClientRect();
 
     setFirstDot({
@@ -33,6 +35,7 @@ export default function Page8_Q3() {
   // 2️⃣ الضغط على النقطة الثانية (end-dot)
   // ============================
   const handleEndDotClick = (e) => {
+    if (showAnswer) return; // 🔒 يمنع الرسم بعد show answer
     if (!firstDot) return;
 
     const rect = containerRef.current.getBoundingClientRect();
@@ -192,10 +195,62 @@ export default function Page8_Q3() {
             setLines([]);
             setWrongWords([]);
             setFirstDot(null);
+            setShowAnswer(false); // ← مهم جدًا
           }}
           className="try-again-button"
         >
           Start Again ↻
+        </button>
+        <button
+          onClick={() => {
+            // خطوط الإجابة الصحيحة
+            const correctLines = [
+              {
+                word: "Hello! I’m John.",
+                image: "img1",
+                x1: 0,
+                y1: 0,
+                x2: 0,
+                y2: 0,
+              },
+              {
+                word: "Goodbye!",
+                image: "img2",
+                x1: 0,
+                y1: 0,
+                x2: 0,
+                y2: 0,
+              },
+            ];
+
+            // نحسب الإحداثيات اعتماداً على الدوتات الموجودة
+            const rect = containerRef.current.getBoundingClientRect();
+
+            const getDotPosition = (selector) => {
+              const el = document.querySelector(selector);
+              if (!el) return { x: 0, y: 0 };
+              const r = el.getBoundingClientRect();
+              return {
+                x: r.left - rect.left + 8,
+                y: r.top - rect.top + 8,
+              };
+            };
+
+            const finalLines = correctLines.map((line) => ({
+              ...line,
+              x1: getDotPosition(`[data-letter="${line.word}"]`).x,
+              y1: getDotPosition(`[data-letter="${line.word}"]`).y,
+              x2: getDotPosition(`[data-image="${line.image}"]`).x,
+              y2: getDotPosition(`[data-image="${line.image}"]`).y,
+            }));
+
+            setLines(finalLines);
+            setWrongWords([]); // إطفاء الأخطاء
+            setShowAnswer(true); // تفعيل وضع Show Answer
+          }}
+          className="show-answer-btn swal-continue"
+        >
+          Show Answer 
         </button>
 
         <button onClick={checkAnswers} className="check-button2">

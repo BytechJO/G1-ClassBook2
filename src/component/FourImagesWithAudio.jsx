@@ -15,8 +15,6 @@ const FourImagesWithAudio = ({
   audioArr,
 }) => {
   const audioRef = useRef(null);
-
-  const [currentIndex, setCurrentIndex] = useState(0); // 0 = intro
   const [clickedIndex, setClickedIndex] = useState(null);
   const [paused, setPaused] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
@@ -29,17 +27,13 @@ const FourImagesWithAudio = ({
   const settingsRef = useRef(null);
   const [forceRender, setForceRender] = useState(0);
   // زر الكابشن
-  const [isMuted, setIsMuted] = useState(false);
+
   const [isPlaying, setIsPlaying] = useState(true);
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
 
   const [showCaption, setShowCaption] = useState(false);
-  const changeSpeed = (rate) => {
-    if (!audioRef.current) return;
-    audioRef.current.playbackRate = rate;
-    setActiveSpeed(rate);
-  };
+ 
 
   const playImageSound = (index) => {
     const sound = audioArr[index];
