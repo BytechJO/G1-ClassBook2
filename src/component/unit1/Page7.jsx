@@ -16,7 +16,7 @@ import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg"
 import arrowBtn from "../../assets/unit1/imgs/Page 01/Arrow.svg";
 import video2 from "../../assets/unit1/sounds/p7 1920.mp4"
 import AudioWithCaption from "../AudioWithCaption";
-import pauseBtn from "../../assets/unit1/imgs/Page 01/Right Video Button.svg";
+import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 const Page7 = ({ openPopup }) => {
   const audioRef = useRef(null);
    const [hoveredAreaIndex, setHoveredAreaIndex] = useState(null);
@@ -116,9 +116,9 @@ onMouseLeave={() => {
       ))}
 
       <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
+          width="32"
+          height="32"
+          viewBox="0 0 90 90"
         onClick={() =>
           openPopup(
             <div
@@ -138,12 +138,12 @@ onMouseLeave={() => {
         }
         className="headset-icon-CD-page7 hover:scale-110 transition"
       >
-        <image href={audioBtn} x="0" y="0" width="60" height="60" />
+        <image href={audioBtn} x="0" y="0" width="90" height="90" />
       </svg>
        <svg
-              width="30"
-              height="30"
-              viewBox="0 0 60 60"
+                width="32"
+          height="32"
+          viewBox="0 0 90 90"
               onClick={() =>
                 openPopup(
                   <div
@@ -170,7 +170,7 @@ onMouseLeave={() => {
               }
               className="pauseBtn-icon-CD-page7 hover:scale-110 transition"
             >
-              <image href={pauseBtn} x="0" y="0" width="60" height="60" />
+              <image href={pauseBtn} x="0" y="0" width="90" height="90" />
             </svg>
       <audio ref={audioRef} style={{ display: "none" }} />
     </div>

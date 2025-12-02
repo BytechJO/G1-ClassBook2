@@ -7,9 +7,7 @@ export default function Page9_Q2() {
   const containerRef = useRef(null);
   const [wrongWords, setWrongWords] = useState([]); // ⭐ تم التعديل هون
   const [firstDot, setFirstDot] = useState(null);
-
-  let startPoint = null;
-
+  const [showAnswer, setShowAnswer] = useState(false);
   // 🎨 ألوان الكلمات
   const colors = ["red", "blue", "green", "orange", "purple", "yellow"];
   const [selectedWordIndex, setSelectedWordIndex] = useState(null);
@@ -93,6 +91,7 @@ export default function Page9_Q2() {
   }, []);
 
   const checkAnswers = () => {
+    if (showAnswer) return;
     // 1️⃣ إذا في خطوط ناقصة
     if (lines.length < correctMatches.length) {
       ValidationAlert.info(
@@ -165,7 +164,7 @@ export default function Page9_Q2() {
 
     // 3️⃣ إخفاء علامات الإكس
     setWrongWords([]);
-
+    setShowAnswer(true);
     // 4️⃣ إعادة تلوين الكلمات (إذا بدك)
     setWordColors(["green", "green", "green", "green", "green", "green"]);
   };
@@ -312,6 +311,7 @@ export default function Page9_Q2() {
               "transparent",
             ]);
             setWrongWords([]);
+            setShowAnswer(false)
           }}
           className="try-again-button"
         >
@@ -321,7 +321,7 @@ export default function Page9_Q2() {
           onClick={showCorrectAnswers}
           className="show-answer-btn swal-continue"
         >
-          Show Answer 
+          Show Answer
         </button>
 
         <button onClick={checkAnswers} className="check-button2">

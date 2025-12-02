@@ -11,7 +11,6 @@ import num4 from "../../assets/img_unit2/imgs/Num4.svg";
 import num5 from "../../assets/img_unit2/imgs/Num5.svg";
 import num6 from "../../assets/img_unit2/imgs/Num6.svg";
 import num7 from "../../assets/img_unit2/imgs/Num7.svg";
-import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import { TbMessageCircle } from "react-icons/tb";
 import { IoMdSettings } from "react-icons/io";
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
@@ -40,8 +39,8 @@ const Unit2_Page1_Vocab = () => {
   const wordTimings = [
     { start: 3.2, end: 5.0 }, // party hat
     { start: 5.1, end: 7.2 }, // jellow
-    { start: 7.3, end: 10.2 }, // cake
-    { start: 10.3, end: 12.7 }, // Hello
+    { start: 7.3, end: 9.9}, // cake
+    { start: 9.92, end: 12.7 }, // Hello
     { start: 12.8, end: 15.2 }, // Good morning
     { start: 15.3, end: 17.0 },
     { start: 17.1, end: 19.3 },
@@ -67,11 +66,11 @@ const Unit2_Page1_Vocab = () => {
 
     // عند انتهاء الأوديو يرجع يبطل أنيميشن + يظهر Continue
     const handleEnded = () => {
-       audio.currentTime = 0;
+      audio.currentTime = 0;
       setActiveIndex(null);
       setPaused(true);
       setShowContinue(true);
-      setIsPlaying(false)
+      setIsPlaying(false);
     };
 
     audio.addEventListener("ended", handleEnded);
@@ -105,14 +104,27 @@ const Unit2_Page1_Vocab = () => {
       setIsPlaying(false);
     }
   };
-  // 🟦 تشغيل صوت المناطق (لو انضاف لاحقاً)
-  const playSound = (sound) => {
-    if (!sound || !clickAudioRef.current) return;
-    clickAudioRef.current.src = sound;
-    clickAudioRef.current.currentTime = 0;
-    clickAudioRef.current.play();
-  };
+  const playSingleWord = (index) => {
+    const audio = mainAudioRef.current;
+    if (!audio) return;
 
+    const { start, end } = wordTimings[index];
+
+    // ✨ انتقال لبداية الكلمة
+    audio.currentTime = start;
+    audio.play();
+
+    setIsPlaying(true);
+    setPaused(false);
+
+    // ✨ وقف الصوت عند نهاية الكلمة
+    const stopInterval = setInterval(() => {
+      if (audio.currentTime >= end) {
+        audio.pause();
+        clearInterval(stopInterval);
+      }
+    }, 50);
+  };
   const nums = [num1, num2, num3, num4, num5, num6, num7];
 
   return (
@@ -229,7 +241,7 @@ const Unit2_Page1_Vocab = () => {
             <img
               src={page2_2}
               style={{
-                height: "200px",
+                height: "210px",
                 width: "auto",
                 position: "absolute",
                 bottom: "0%",
@@ -241,7 +253,7 @@ const Unit2_Page1_Vocab = () => {
             {/* النصوص */}
             <div
               className="vocab_container"
-              style={{ bottom: "1%", right: "4%" }}
+              style={{ bottom: "1.4%", right: "4.5%" }}
             >
               {[
                 "party hat",
@@ -260,7 +272,8 @@ const Unit2_Page1_Vocab = () => {
                   onClick={() => {
                     setClickedIndex(i);
 
-                    // يرجع يشيل الانيميشن بعد 500ms (حسب زمن أنيميشنك)
+                    playSingleWord(i); // 🔥 تشغيل كلمة واحدة فقط
+
                     setTimeout(() => setClickedIndex(null), 500);
                   }}
                 >

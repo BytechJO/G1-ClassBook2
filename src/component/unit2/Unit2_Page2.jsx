@@ -47,9 +47,9 @@ const Unit2_Page2 = ({ openPopup }) => {
     <div className="unit2-page-background">
       <img src={page_2} />
       <svg
-        width="30"
-        height="30"
-        viewBox="0 0 90 90"
+         width="32"
+          height="32"
+          viewBox="0 0 90 90"
         onClick={() =>
           openPopup(
             <AudioWithCaption
@@ -65,9 +65,9 @@ const Unit2_Page2 = ({ openPopup }) => {
       </svg>
 
       <svg
-        width="30"
-        height="30"
-        viewBox="0 0 90 90"
+         width="32"
+          height="32"
+          viewBox="0 0 90 90"
         onClick={() =>
           openPopup(
             <FourImagesWithAudio
@@ -86,9 +86,9 @@ const Unit2_Page2 = ({ openPopup }) => {
         <image href={audioBtn} x="0" y="0" width="90" height="90" />
       </svg>
      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
+         width="32"
+          height="32"
+          viewBox="0 0 90 90"
         onClick={() =>
           openPopup(
             <FourImagesWithAudio
@@ -104,7 +104,7 @@ const Unit2_Page2 = ({ openPopup }) => {
         }
         className="click-icon-unit2-page2-1 hover:scale-110 transition"
       >
-        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+        <image href={arrowBtn} x="0" y="0" width="90" height="90" />
       </svg>
     </div>
   );

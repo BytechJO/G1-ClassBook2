@@ -57,8 +57,8 @@ const Page4 = ({ openPopup }) => {
         <img src={page4} />
 
         <svg
-          width="30"
-          height="30"
+          width="32"
+          height="32"
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
@@ -83,9 +83,9 @@ const Page4 = ({ openPopup }) => {
         </svg>
 
         <svg
-          width="30"
-          height="30"
-          viewBox="0 0 60 60"
+          width="32"
+          height="32"
+          viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
               <>
@@ -96,13 +96,13 @@ const Page4 = ({ openPopup }) => {
           }
           className="click-icon-page4-1 hover:scale-110 transition"
         >
-          <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+          <image href={arrowBtn}  x="0" y="0" width="90" height="90" />
         </svg>
 
         <svg
-          width="30"
-          height="30"
-          viewBox="0 0 60 60"
+          width="32"
+          height="32"
+          viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
               <>
@@ -113,13 +113,13 @@ const Page4 = ({ openPopup }) => {
           }
           className="headset-icon-CD-page4-2 hover:scale-110 transition"
         >
-          <image href={audioBtn} x="0" y="0" width="60" height="60" />
+          <image href={audioBtn}  x="0" y="0" width="90" height="90" />
         </svg>
 
         <svg
-          width="30"
-          height="30"
-          viewBox="0 0 60 60"
+          width="32"
+          height="32"
+          viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
               <FourImagesWithAudio
@@ -135,7 +135,7 @@ const Page4 = ({ openPopup }) => {
           }
           className="click-icon-page4 hover:scale-110 transition"
         >
-          <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+          <image href={arrowBtn}  x="0" y="0" width="90" height="90" />
         </svg>
       </div>
     </>

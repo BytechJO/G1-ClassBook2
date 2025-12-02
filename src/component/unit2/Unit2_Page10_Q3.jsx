@@ -186,6 +186,7 @@ const Unit2_Page10_Q3 = () => {
               className="audio-popup-read"
               style={{
                 width: "50%",
+                marginTop:"0px"
               }}
             >
               <div className="audio-inner player-ui">
@@ -304,7 +305,7 @@ const Unit2_Page10_Q3 = () => {
                         onClick={() => !showAnswer && handleSelect(q.id, opt)}
                       >
                         {opt}
-                        {isWrong && <span className="wrong-x10-3">X</span>}
+                        {isWrong && <span className="wrong-x10-3">✕</span>}
                       </span>
                     );
                   })}

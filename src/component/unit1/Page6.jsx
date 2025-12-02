@@ -13,7 +13,7 @@ import Pg6_3_1_Harley from "../../assets/unit1/sounds/Pg6_3.1_Harley.mp3";
 import Pg6_3_2_ModifiedHarley from "../../assets/unit1/sounds/Pg6_3.2_Modified Harley.mp3";
 import AudioWithCaption from "../AudioWithCaption";
 import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg";
-import pauseBtn from "../../assets/unit1/imgs/Page 01/Right Video Button.svg";
+import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import video from "../../assets/unit1/sounds/Grammer P6 Video.mp4";
 const Page6 = ({ openPopup }) => {
   const audioRef = useRef(null);
@@ -105,9 +105,9 @@ const Page6 = ({ openPopup }) => {
       ))}
 
       <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
+        width="32"
+          height="32"
+          viewBox="0 0 90 90"
         onClick={() =>
           openPopup(
             <div
@@ -127,13 +127,13 @@ const Page6 = ({ openPopup }) => {
         }
         className="headset-icon-CD-page6 hover:scale-110 transition"
       >
-        <image href={audioBtn} x="0" y="0" width="60" height="60" />
+        <image href={audioBtn} x="0" y="0" width="90" height="90" />
       </svg>
 
       <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
+         width="32"
+          height="32"
+          viewBox="0 0 90 90"
         onClick={() =>
           openPopup(
             <div
@@ -160,7 +160,7 @@ const Page6 = ({ openPopup }) => {
         }
         className="pauseBtn-icon-CD-page6 hover:scale-110 transition"
       >
-        <image href={pauseBtn} x="0" y="0" width="60" height="60" />
+        <image href={pauseBtn} x="0" y="0" width="90" height="90" />
       </svg>
       <audio ref={audioRef} style={{ display: "none" }} />
     </div>

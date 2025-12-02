@@ -41,39 +41,39 @@ const Page4_vocabulary = () => {
   ];
 
   useEffect(() => {
-  const audio = mainAudioRef.current;
-  if (!audio) return;
+    const audio = mainAudioRef.current;
+    if (!audio) return;
 
-  audio.currentTime = 0;
-  audio.play();
+    audio.currentTime = 0;
+    audio.play();
 
-  const interval = setInterval(() => {
-    if (audio.currentTime >= stopAtSecond) {
-      audio.pause();
+    const interval = setInterval(() => {
+      if (audio.currentTime >= stopAtSecond) {
+        audio.pause();
+        setPaused(true);
+        setIsPlaying(false);
+        setShowContinue(true);
+        clearInterval(interval);
+      }
+    }, 100);
+
+    // عند انتهاء الأوديو يرجع يبطل أنيميشن + يظهر Continue
+    const handleEnded = () => {
+      audio.currentTime = 0;
+      setIsPlaying(false);
       setPaused(true);
-      setIsPlaying(false)
       setShowContinue(true);
+
+      setActiveIndex(null);
+    };
+
+    audio.addEventListener("ended", handleEnded);
+
+    return () => {
       clearInterval(interval);
-    }
-  }, 100);
-
-  // عند انتهاء الأوديو يرجع يبطل أنيميشن + يظهر Continue
-  const handleEnded = () => {
-     audio.currentTime = 0;
-   setIsPlaying(false)  
-    setPaused(true);
-    setShowContinue(true);
-   
-    setActiveIndex(null);
-  };
-
-  audio.addEventListener("ended", handleEnded);
-
-  return () => {
-    clearInterval(interval);
-    audio.removeEventListener("ended", handleEnded);
-  };
-}, []);
+      audio.removeEventListener("ended", handleEnded);
+    };
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -83,21 +83,42 @@ const Page4_vocabulary = () => {
     return () => clearInterval(timer);
   }, []);
 
- const togglePlay = () => {
-  const audio = mainAudioRef.current;
+  const togglePlay = () => {
+    const audio = mainAudioRef.current;
 
-  if (!audio) return;
+    if (!audio) return;
 
-  if (audio.paused) {
+    if (audio.paused) {
+      audio.play();
+      setPaused(false);
+      setIsPlaying(true);
+    } else {
+      audio.pause();
+      setPaused(true);
+      setIsPlaying(false);
+    }
+  };
+  const playSingleWord = (index) => {
+    const audio = mainAudioRef.current;
+    if (!audio) return;
+
+    const { start, end } = wordTimings[index];
+
+    // ✨ انتقال لبداية الكلمة
+    audio.currentTime = start;
     audio.play();
+
+    setIsPlaying(true);
     setPaused(false);
-    setIsPlaying(true)
-  } else {
-    audio.pause();
-    setPaused(true);
-    setIsPlaying(false)
-  }
-};
+
+    // ✨ وقف الصوت عند نهاية الكلمة
+    const stopInterval = setInterval(() => {
+      if (audio.currentTime >= end) {
+        audio.pause();
+        clearInterval(stopInterval);
+      }
+    }, 50);
+  };
 
   const nums = [num1, num2, num3, num4, num5];
 
@@ -243,8 +264,7 @@ const Page4_vocabulary = () => {
                   }
                   onClick={() => {
                     setClickedIndex(i);
-
-                    // يرجع يشيل الانيميشن بعد 500ms (حسب زمن أنيميشنك)
+                    playSingleWord(i); // 🔥 تشغيل كلمة واحدة فقط
                     setTimeout(() => setClickedIndex(null), 500);
                   }}
                 >

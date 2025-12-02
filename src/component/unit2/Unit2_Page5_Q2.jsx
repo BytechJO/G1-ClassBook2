@@ -298,7 +298,7 @@ const Unit2_Page5_Q2 = () => {
                     {showResult &&
                       answers[index] === "b" &&
                       answers[index] !== item.correct && (
-                        <span className="wrong-x">X</span>
+                        <span className="wrong-x">✕</span>
                       )}
                   </span>
 
@@ -319,7 +319,7 @@ const Unit2_Page5_Q2 = () => {
                     {showResult &&
                       answers[index] === "p" &&
                       answers[index] !== item.correct && (
-                        <span className="wrong-x">X</span>
+                        <span className="wrong-x">✕</span>
                       )}
                   </span>
                 </div>

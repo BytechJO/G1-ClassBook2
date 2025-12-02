@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Unit4_Page5_Q4.css";
 import ValidationAlert from "../Popup/ValidationAlert";
-import img from "../../assets/unit4/imgs/U4P32EXEC.svg"
+import img from "../../assets/unit4/imgs/U4P32EXEC.svg";
 const Unit4_Page5_Q4 = () => {
   const data = [
     { letter: "a", number: 1 },
@@ -41,10 +41,12 @@ const Unit4_Page5_Q4 = () => {
   const [bigInput, setBigInput] = useState("");
   const [bigInputWrong, setBigInputWrong] = useState(false);
   const [wrongInputs, setWrongInputs] = useState([]); // ⭐ تم التعديل هون
+  const [showAnswer, setShowAnswer] = useState(false);
   const [letters, setLetters] = useState(
     questionGroups.map((group) => group.map(() => ""))
   );
   const handleInputChange = (value, groupIndex, letterIndex) => {
+    if (showAnswer) return; // ❌ يمنع الكتابة بعد Show Answer
     const updated = [...letters];
     updated[groupIndex][letterIndex] = value.toLowerCase();
     setLetters(updated);
@@ -52,8 +54,24 @@ const Unit4_Page5_Q4 = () => {
 
   const formedWords = letters.map((group) => group.join(""));
   const fullSentence = "it's a circle";
+  // ========================
+  //  ✔ Show Answer
+  // ========================
+  const handleShowAnswer = () => {
+    const correctLetters = questionGroups.map((group) =>
+      group.map((num) => data.find((d) => d.number === num).letter)
+    );
 
+    setLetters(correctLetters);
+    setWrongInputs([]);
+    setShowAnswer(true);
+  };
+
+  // ========================
+  //  ✔ Check Answer
+  // ========================
   const handleCheckAnswers = () => {
+    if (showAnswer) return; // ❌ إذا مستخدم show answer ما نعمل check
     // 1️⃣ التحقق من وجود فراغات
     const hasEmpty = letters.some((group) =>
       group.some((letter) => letter === "")
@@ -69,7 +87,7 @@ const Unit4_Page5_Q4 = () => {
     // 2️⃣ حساب عدد الصحيحة
     let correctCount = 0;
     let total = letters.flat().length + 1; // +1 for big input
-    let wrong = []; // ⭐ تم التعديل هون  
+    let wrong = []; // ⭐ تم التعديل هون
     const isBigCorrect =
       bigInput.trim().toLowerCase() === fullSentence.trim().toLowerCase();
 
@@ -107,7 +125,7 @@ const Unit4_Page5_Q4 = () => {
 
     // 🔹 3) التحقق من الجملة الكبيرة
     const correctSentence = fullSentence.trim().toLowerCase(); // from small inputs
-  
+
     // الآن الشرط رح يكون صحيح
     if (correctCount === total) {
       ValidationAlert.success(scoreMessage);
@@ -152,7 +170,7 @@ const Unit4_Page5_Q4 = () => {
                   </span>
                 </div>
                 <div className="unit3-q4-data">
-                  <span key={i} className="unit3-q4-cell number">
+                  <span key={i} className="unit3-q4-cell number1">
                     {c.number}
                   </span>
                 </div>
@@ -180,6 +198,10 @@ const Unit4_Page5_Q4 = () => {
                             letterIndex
                           )
                         }
+                          style={{
+                          color: showAnswer ? "red" : "black", // 🔥 لوّن الأحمر عند Show Answer
+                          fontWeight: showAnswer ? "bold" : "normal",
+                        }}
                       />
                       {wrongInputs.includes(`${groupIndex}-${letterIndex}`) && (
                         <span className="error-mark1-unit4-page5-q4">✕</span> // ⭐ تم التعديل هون
@@ -189,10 +211,7 @@ const Unit4_Page5_Q4 = () => {
                 ))}
               </div>
             ))}
-            <img
-              src={img}
-              style={{ height: "100px", width: "130px" }}
-            />
+            <img src={img} style={{ height: "100px", width: "130px" }} />
           </div>
 
           <div className="unit3-q4-sentence">
@@ -208,7 +227,9 @@ const Unit4_Page5_Q4 = () => {
                 onChange={(e) => setBigInput(e.target.value.toLowerCase())}
               />
 
-              {bigInputWrong && <span className="error-mark1-unit4-page5-q4">✕</span>}
+              {bigInputWrong && (
+                <span className="error-mark1-unit4-page5-q4">✕</span>
+              )}
             </div>
           </div>
         </div>
@@ -218,12 +239,19 @@ const Unit4_Page5_Q4 = () => {
           onClick={() => {
             setLetters(questionGroups.map((group) => group.map(() => "")));
             setWrongInputs([]);
-            setBigInputWrong(false)
-            setBigInput("")
+            setBigInputWrong(false);
+            setBigInput("");
           }}
           className="try-again-button"
         >
           Start Again ↻
+        </button>
+        {/* 🔥 زر Show Answer */}
+        <button
+          onClick={handleShowAnswer}
+          className="show-answer-btn swal-continue"
+        >
+          Show Answer
         </button>
         <button onClick={handleCheckAnswers} className="check-button2">
           Check Answer ✓

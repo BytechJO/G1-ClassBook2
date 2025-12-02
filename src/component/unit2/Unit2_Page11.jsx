@@ -7,19 +7,19 @@ import sound3 from "../../assets/img_unit2/sounds-unit2/Pg20_1.2_Adult Lady.mp3"
 import sound4 from "../../assets/img_unit2/sounds-unit2/Pg20_1.3_Adult Lady.mp3";
 import sound5 from "../../assets/img_unit2/sounds-unit2/Pg20_1.4_Adult Lady.mp3";
 import AudioWithCaption from "../AudioWithCaption";
-import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg"
-import pauseBtn from "../../assets/unit1/imgs/Page 01/Right Video Button.svg";
+import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg";
+import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import video3 from "../../assets/unit1/sounds/STORY (1).mp4";
 
 const Unit2_Page11 = ({ openPopup }) => {
   const audioRef = useRef(null);
-    const [hoveredAreaIndex, setHoveredAreaIndex] = useState(null);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [activeAreaIndex, setActiveAreaIndex] = useState(null);
+  const [hoveredAreaIndex, setHoveredAreaIndex] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [activeAreaIndex, setActiveAreaIndex] = useState(null);
   const captionsExample = [
     { start: 0, end: 3.17, text: "Page 20 Reading. It's a Bunny." },
     {
-      start: 3.20,
+      start: 3.2,
       end: 7.18,
       text: " Today is Stella's birthday. Her friends are at her party. ",
     },
@@ -34,13 +34,13 @@ const Unit2_Page11 = ({ openPopup }) => {
       text: "Harley, Hansel, and John see the cupcakes. They look delicious.",
     },
     {
-      start: 18.30,
+      start: 18.3,
       end: 26.09,
       text: "Hansel eats a lot of cupcakes. His tummy hurts. John tells him it is not good to eat so many sweets.",
     },
     {
       start: 26.12,
-      end: 34.00,
+      end: 34.0,
       text: "Now, it's time for presents. Mom gives Stella her present. Stella is so excited.",
     },
     {
@@ -59,13 +59,13 @@ const Unit2_Page11 = ({ openPopup }) => {
       text: "Tilly hops and chases Lolo. Lolo is surprised. Stella and Sara laugh and laugh. This is the best birthday.",
     },
   ];
-   const clickableAreas = [
+  const clickableAreas = [
     { x1: 15.9, y1: 39.4, x2: 51.14, y2: 44.0, sound: sound2 },
     { x1: 56.0, y1: 39.1, x2: 93.9, y2: 44.0, sound: sound3 },
     { x1: 16.0, y1: 84.0, x2: 52.9, y2: 89.5, sound: sound4 },
     { x1: 56.0, y1: 84.5, x2: 93.7, y2: 90.9, sound: sound5 },
   ];
-const handleImageClick = (e) => {
+  const handleImageClick = (e) => {
     const rect = e.target.getBoundingClientRect();
     const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
     const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
@@ -97,7 +97,7 @@ const handleImageClick = (e) => {
       {clickableAreas.map((area, index) => (
         <div
           key={index}
-         className={`clickable-area ${
+          className={`clickable-area ${
             hoveredAreaIndex === index || activeAreaIndex === index
               ? "highlight"
               : ""
@@ -109,7 +109,7 @@ const handleImageClick = (e) => {
             width: `${area.x2 - area.x1}%`,
             height: `${area.y2 - area.y1}%`,
           }}
-         onClick={() => {
+          onClick={() => {
             setActiveAreaIndex(index); // لتثبيت الهايلايت أثناء الصوت
             playSound(area.sound);
           }}
@@ -123,9 +123,9 @@ const handleImageClick = (e) => {
       ))}
 
       <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
+        width="32"
+        height="32"
+        viewBox="0 0 90 90"
         onClick={() =>
           openPopup(
             <div
@@ -142,12 +142,12 @@ const handleImageClick = (e) => {
         }
         className="headset-icon-CD-unit2-page11-1 hover:scale-110 transition"
       >
-        <image href={audioBtn} x="0" y="0" width="60" height="60" />
+        <image href={audioBtn} x="0" y="0" width="90" height="90" />
       </svg>
       <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
+        width="32"
+        height="32"
+        viewBox="0 0 90 90"
         onClick={() =>
           openPopup(
             <div
@@ -174,7 +174,7 @@ const handleImageClick = (e) => {
         }
         className="pauseBtn-icon-CD-page21 hover:scale-110 transition"
       >
-        <image href={pauseBtn} x="0" y="0" width="60" height="60" />
+        <image href={pauseBtn} x="0" y="0" width="90" height="90" />
       </svg>
       <audio ref={audioRef} style={{ display: "none" }} />
     </div>

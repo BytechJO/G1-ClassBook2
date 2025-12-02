@@ -16,7 +16,7 @@ import Pg13_6_1_Helen from "../../assets/img_unit2/sounds-unit2/Pg13.6.1_Helen.m
 import Pg13_6_2_Sarah from "../../assets/img_unit2/sounds-unit2/Pg13.6.2_Sarah.mp3";
 import video from "../../assets/img_unit2/sounds-unit2/p13.mp4";
 import audioBtn from "../../assets/unit1/imgs/Page 01/Audio btn.svg";
-import pauseBtn from "../../assets/unit1/imgs/Page 01/Right Video Button.svg";
+import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
 import AudioWithCaption from "../AudioWithCaption";
 
 const Unit2_Page4 = ({ openPopup }) => {
@@ -111,9 +111,9 @@ const Unit2_Page4 = ({ openPopup }) => {
         ></div>
       ))}
       <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
+         width="32"
+          height="32"
+          viewBox="0 0 90 90"
         onClick={() =>
           openPopup(
             <div
@@ -133,13 +133,13 @@ const Unit2_Page4 = ({ openPopup }) => {
         }
         className="headset-icon-CD-unit2-page4-1 hover:scale-110 transition"
       >
-        <image href={audioBtn} x="0" y="0" width="60" height="60" />
+        <image href={audioBtn} x="0" y="0" width="90" height="90" />
       </svg>
 
       <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
+          width="32"
+          height="32"
+          viewBox="0 0 90 90"
         onClick={() =>
           openPopup(
             <div
@@ -166,7 +166,7 @@ const Unit2_Page4 = ({ openPopup }) => {
         }
         className="pauseBtn-icon-CD-unit2-page4-1 hover:scale-110 transition"
       >
-        <image href={pauseBtn} x="0" y="0" width="60" height="60" />
+        <image href={pauseBtn} x="0" y="0" width="90" height="90" />
       </svg>
       <audio ref={audioRef} style={{ display: "none" }} />
     </div>

@@ -52,9 +52,9 @@ const Page5 = ({ openPopup }) => {
       <img src={page_5} />
 
       <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
+         width="32"
+          height="32"
+          viewBox="0 0 90 90"
         id="CD-1-page5"
         onClick={() =>
           openPopup(
@@ -64,7 +64,7 @@ const Page5 = ({ openPopup }) => {
         }
         className="headset-icon-CD-page5 hover:scale-110 transition"
       >
-        <image href={audioBtn} x="0" y="0" width="60" height="60" />
+        <image href={audioBtn} x="0" y="0" width="90" height="90" />
       </svg>
 
       <svg

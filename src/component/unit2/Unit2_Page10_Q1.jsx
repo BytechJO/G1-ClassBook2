@@ -282,7 +282,7 @@ const Unit2_Page10_Q1 = () => {
                       className={`word-text10 ${isCircled ? "circled2" : ""}`}
                     >
                       {word}
-                      {isWrong && <span className="wrong-x10">X</span>}
+                      {isWrong && <span className="wrong-x10">✕</span>}
                     </span>
                   );
                 })}

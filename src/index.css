@@ -366,7 +366,7 @@ img {
   border-radius: 20px;
   border: rgb(255, 255, 255) solid 2px; */
   padding: 5px;
-  top: 4%;
+  top: 3.5%;
   left: 35%;
   cursor: pointer;
 }
@@ -378,7 +378,7 @@ img {
 .pauseBtn-icon-CD-page6 {
   position: absolute;
   padding: 5px;
-  top: 4%;
+  top: 3.5%;
   left: 40%;
   cursor: pointer;
 }
@@ -389,16 +389,16 @@ img {
   border-radius: 20px;
   border: rgb(255, 255, 255) solid 2px; */
   padding: 5px;
-  top: 4%;
-  right: 59%;
+  top: 3.5%;
+  right: 58%;
   cursor: pointer;
 }
 
 .pauseBtn-icon-CD-page7 {
   position: absolute;
   padding: 5px;
-  top: 4%;
-  right: 54%;
+  top: 3.5%;
+  right: 53%;
   cursor: pointer;
 }
 /*===========page8==================*/

@@ -38,6 +38,7 @@ const Unit2_Page9_Q3 = () => {
   };
 
   const checkAnswers = () => {
+    if (showAnswers) return;
     if (answers.length === 0) {
       ValidationAlert.info("Please fill in all the blanks before checking!");
       return;
@@ -93,7 +94,6 @@ const Unit2_Page9_Q3 = () => {
         <h5 className="header-title-page8">C Look and answer.</h5>
 
         <div className="content-container-P9-Q3">
-
           {/* ========== Q1 ========== */}
           <div className="section-one11">
             <div style={{ display: "flex" }}>
@@ -108,12 +108,8 @@ const Unit2_Page9_Q3 = () => {
                 <input
                   type="text"
                   id="input1"
-                  className={`answer-input33 ${
-                    showAnswers ? "red-text" : ""
-                  }`}
-                  value={
-                    answers.find((a) => a.num === "input1")?.input || ""
-                  }
+                  className={`answer-input33 ${showAnswers ? "red-text" : ""}`}
+                  value={answers.find((a) => a.num === "input1")?.input || ""}
                   onChange={handleChange}
                 />
 
@@ -138,12 +134,8 @@ const Unit2_Page9_Q3 = () => {
                 <input
                   type="text"
                   id="input2"
-                  className={`answer-input33 ${
-                    showAnswers ? "red-text" : ""
-                  }`}
-                  value={
-                    answers.find((a) => a.num === "input2")?.input || ""
-                  }
+                  className={`answer-input33 ${showAnswers ? "red-text" : ""}`}
+                  value={answers.find((a) => a.num === "input2")?.input || ""}
                   onChange={handleChange}
                 />
 
@@ -168,12 +160,8 @@ const Unit2_Page9_Q3 = () => {
                 <input
                   type="text"
                   id="input3"
-                  className={`answer-input33 ${
-                    showAnswers ? "red-text" : ""
-                  }`}
-                  value={
-                    answers.find((a) => a.num === "input3")?.input || ""
-                  }
+                  className={`answer-input33 ${showAnswers ? "red-text" : ""}`}
+                  value={answers.find((a) => a.num === "input3")?.input || ""}
                   onChange={handleChange}
                 />
 
@@ -199,7 +187,10 @@ const Unit2_Page9_Q3 = () => {
             Start Again ↻
           </button>
 
-          <button className="show-answer-btn swal-continue" onClick={showCorrectAnswers}>
+          <button
+            className="show-answer-btn swal-continue"
+            onClick={showCorrectAnswers}
+          >
             Show Answer
           </button>
 
