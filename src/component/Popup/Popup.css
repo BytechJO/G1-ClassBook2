@@ -41,6 +41,17 @@
   overflow-x: hidden;
 }
 
+
+.video-size{
+    position: relative;
+  background: transparent;
+  border-radius: 12px;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+  width: 100vw;
+  height: calc(100vh - 45px); /* يغطي باقي الشاشة */
+  border-radius: 0;
+}
 /* إذا مش Audio → fullscreen */
 .fullscreen-size {
   position: relative;
@@ -66,10 +77,10 @@
 
 .popup-close-btn.audio {
   position: absolute;
-     top: 9%;
+     top: 12%;
     right: 4%;
   background: none;
   border: none;
-  font-size: 21px;
+  font-size: 16px;
   cursor: pointer;
 }

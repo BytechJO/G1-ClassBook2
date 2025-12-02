@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./FourImagesWithAudio.css";
 import { IoMdSettings } from "react-icons/io";
-import { CgPlayPauseO } from "react-icons/cg";
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
-import { FaRegCirclePlay } from "react-icons/fa6";
 import { TbMessageCircle } from "react-icons/tb";
-import pauseBtn from "../assets/unit1/imgs/Right Video Button.svg";
 const FourImagesWithAudio = ({
   images,
   audioSrc,

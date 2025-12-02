@@ -10,115 +10,14 @@ import zoomIn from "../assets/unit1/imgs/Page 01/zoom in.svg";
 import zoomOut from "../assets/unit1/imgs/Page 01/zoom out.svg";
 import Popup from "./Popup/Popup";
 import logo from "../assets/unit1/imgs/Page 01/PMAAlogo.svg";
-//===================== unit 1 pages
-import Page1 from "./unit1/Page1";
-import Page2 from "./unit1/Page2";
-import Page3 from "./unit1/Page3";
-import Page4 from "./unit1/Page4";
-import Page5 from "./unit1/Page5";
-import Page6 from "./unit1/Page6";
-import Page7 from "./unit1/Page7";
-import Page8 from "./unit1/Page8";
-import Page9 from "./unit1/Page9";
 
-//==================== unit 2 pages
-import Unit2_Page1 from "./unit2/Unit2_Page1";
-import Unit2_Page2 from "./unit2/Unit2_Page2";
-import Unit2_Page3 from "./unit2/Unit2_Page3";
-import Unit2_Page4 from "./unit2/Unit2_Page4";
-import Unit2_Page5 from "./unit2/Unit2_Page5";
-import Unit2_Page6 from "./unit2/Unit2_Page6";
-import Unit2_Page7 from "./unit2/Unit2_Page7";
-import Unit2_Page8 from "./unit2/Unit2_Page8";
-import Unit2_Page9 from "./unit2/Unit2_Page9";
-import Unit2_Page10 from "./unit2/Unit2_Page10";
-import Unit2_Page11 from "./unit2/Unit2_Page11";
-import Unit2_Page12 from "./unit2/Unit2_Page12";
-
-// ==================== unit 3 pages
-import Unit3_Page1 from "./unit3/Unit3_Page1";
-import Unit3_Page2 from "./unit3/Unit3_Page2";
-import Unit3_Page3 from "./unit3/Unit3_Page3";
-import Unit3_Page4 from "./unit3/Unit3_Page4";
-import Unit3_Page5 from "./unit3/Unit3_Page5";
-import Unit3_Page6 from "./unit3/Unit3_Page6";
-
-//==================== unit 4 pages
-import Unit4_Page1 from "./unit4/Unit4_Page1";
-import Unit4_Page2 from "./unit4/Unit4_Page2";
-import Unit4_Page3 from "./unit4/Unit4_Page3";
-import Unit4_Page4 from "./unit4/Unit4_Page4";
-import Unit4_Page5 from "./unit4/Unit4_Page5";
-import Unit4_Page6 from "./unit4/Unit4_Page6";
-
-//=================== Review3,4
-import Review3_Page1 from "./Review_Unit3,4/Review3_Page1";
-import Review3_Page2 from "./Review_Unit3,4/Review3_Page2 ";
-import Review4_Page1 from "./Review_Unit3,4/Review4_Page1";
-import Review4_Page2 from "./Review_Unit3,4/Review4_Page2";
-import Unit4_Reading_P1 from "./unit4/Unit4_Reading_P1";
-import Unit4_Reading_P2 from "./unit4/Unit4_Reading_P2";
-
-//================== unit 5 pages
-import Unit5_Page1 from "./unit5/Unit5_Page1";
-import Unit5_Page2 from "./unit5/Unit5_Page2";
-import Unit5_Page3 from "./unit5/Unit5_Page3";
-import Unit5_Page4 from "./unit5/Unit5_Page4";
-import Unit5_Page5 from "./unit5/Unit5_Page5";
-import Unit5_Page6 from "./unit5/Unit5_Page6";
-
-//================== unit 6 pages
-import Unit6_Page1 from "./unit6/Unit6_Page1";
-import Unit6_Page2 from "./unit6/Unit6_Page2";
-import Unit6_Page3 from "./unit6/Unit6_Page3";
-import Unit6_Page4 from "./unit6/Unit6_Page4";
-import Unit6_Page5 from "./unit6/Unit6_Page5";
-import Unit6_Page6 from "./unit6/Unit6_Page6";
-
-// ==================Review5,6
-import Review5_Page1 from "./Review_Unit5,6/Review5_Page1";
-import Review5_Page2 from "./Review_Unit5,6/Review5_Page2 ";
-import Review6_Page1 from "./Review_Unit5,6/Review6_Page1";
-import Review6_Page2 from "./Review_Unit5,6/Review6_Page2";
-import Unit6_Reading_P1 from "./unit6/Unit6_Reading_P1";
-import Unit6_Reading_P2 from "./unit6/Unit6_Reading_P2";
-
-//================ Unit7
-import Unit7_Page1 from "./unit7/Unit7_Page1";
-import Unit7_Page2 from "./unit7/Unit7_Page2";
-import Unit7_Page3 from "./unit7/Unit7_Page3";
-import Unit7_Page4 from "./unit7/Unit7_Page4";
-import Unit7_Page5 from "./unit7/Unit7_Page5";
-import Unit7_Page6 from "./unit7/Unit7_Page6";
-
-//=============== unit8
-import Unit8_Page1 from "./unit8/Unit8_Page1";
-import Unit8_Page2 from "./unit8/Unit8_Page2";
-import Unit8_Page3 from "./unit8/Unit8_Page3";
-import Unit8_Page4 from "./unit8/Unit8_Page4";
-import Unit8_Page5 from "./unit8/Unit8_Page5";
-import Unit8_Page6 from "./unit8/Unit8_Page6";
-
-//================ review 7,8
-import Review7_Page1 from "./Review_Unit7,8/Review7_Page1";
-import Review7_Page2 from "./Review_Unit7,8/Review7_Page2";
-import Review8_Page1 from "./Review_Unit7,8/Review8_Page1";
-import Review8_Page2 from "./Review_Unit7,8/Review8_Page2";
-//================== Unit 9
-import Unit9_Page1 from "./unit9/Unit9_Page1";
-import Unit9_Page2 from "./unit9/Unit9_Page2";
-import Unit9_Page3 from "./unit9/Unit9_Page3";
-import Unit9_Page4 from "./unit9/Unit9_Page4";
-import Unit9_Page5 from "./unit9/Unit9_Page5";
-import Unit9_Page6 from "./unit9/Unit9_Page6";
-
-//================= Unit10
-import Unit10_Page1 from "./unit10/Unit10_Page1";
-import Unit10_Page2 from "./unit10/Unit10_Page2";
-import Unit10_Page3 from "./unit10/Unit10_Page3";
-import Unit10_Page4 from "./unit10/Unit10_Page4";
-import Unit10_Page5 from "./unit10/Unit10_Page5";
-import Unit10_Page6 from "./unit10/Unit10_Page6";
+import {
+  studentPages,
+  workbookPages,
+  teacherPages,
+  flashPages,
+  posterPages,
+} from "./BookData/index";
 
 export default function Book() {
   const [pageIndex, setPageIndex] = useState(0);
@@ -137,10 +36,34 @@ export default function Book() {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 1100);
     };
-
+    if (isMobile || viewMode === "single") {
+      setDisplayedPage(`${pageIndex + 1}`);
+    } else {
+      // spread mode
+      const left = pageIndex + 1;
+      const right = pageIndex + 2;
+      setDisplayedPage(`${left}-${right}`);
+    }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [pageIndex, isMobile, viewMode]);
+  // ======================= POPUP CONTROL ========================
+  const [globalPopupOpen, setGlobalPopupOpen] = useState(false);
+  const [globalPopupContent, setGlobalPopupContent] = useState(null);
+  const [globalPopupAudio, setGlobalPopupAudio] = useState(false);
+ const [globalPopupVideo, setGlobalPopupVideo] = useState(false);
+  const openPopup = (content, isAudio = false,isVideo=false) => {
+    setGlobalPopupContent(content);
+    setGlobalPopupAudio(isAudio);
+    setGlobalPopupOpen(true);
+    setGlobalPopupVideo(isVideo)
+  };
+
+  const closePopup = () => {
+    setGlobalPopupOpen(false);
+    setGlobalPopupContent(null);
+  };
+  // ==============================================================
 
   const toggleFullScreen = () => {
     const elem = document.documentElement;
@@ -159,6 +82,64 @@ export default function Book() {
       setPageIndex(unitStartIndex);
     }
   };
+  const pages = {
+    student: studentPages(openPopup, goToUnit),
+    work: workbookPages(openPopup, goToUnit),
+    teacher: teacherPages(openPopup, goToUnit),
+    flash: flashPages(openPopup, goToUnit),
+    poster: posterPages(openPopup, goToUnit),
+  }[activeTab];
+ const goToPage = (pageNumber) => {
+  // حوّل القيمة لرقم
+  const num = Number(pageNumber);
+
+  // ===========================
+  // ❌ التحقق من إدخال غير صحيح
+  // ===========================
+  if (isNaN(num) || num < 1 || num > pages.length) {
+    // رجّعه للفهرس (الصفحة الثانية لأن الأولى سينجل)
+    setPageIndex(1);
+    return;
+  }
+
+  const index = num - 1;
+
+  // ===========================
+  // 📱 Mobile OR single mode
+  // ===========================
+  if (isMobile || viewMode === "single") {
+    setPageIndex(index);
+    return;
+  }
+
+  // ===========================
+  // 📘 Spread Mode (صفحتين)
+  // ===========================
+
+  // الصفحة الأولى دائماً سينجل
+  if (num === 1) {
+    setPageIndex(0);
+    return;
+  }
+
+  // لو كانت الصفحة فردية → اعرض السابقة معها
+  if (num % 2 === 1) {
+    // مثال: 3 → (2–3)
+    setPageIndex(index - 1);
+    return;
+  }
+
+  // لو كانت زوجية → اعرضها مع التالية
+  setPageIndex(index);
+};
+
+
+  const totalPages = pages.length;
+  const leftPage = pageIndex + 1;
+  const rightPage = !isMobile && viewMode === "spread" ? pageIndex + 2 : null;
+  const [goToPageInput, setGoToPageInput] = useState("");
+  const [displayedPage, setDisplayedPage] = useState("1");
+  const [isEditingPage, setIsEditingPage] = useState(false);
 
   const units = [
     { id: 1, label: "Unit 1", start: 3 },
@@ -170,110 +151,6 @@ export default function Book() {
     // ... أكمل حسب فهرس صفحاتك
   ];
 
-  const [globalPopupOpen, setGlobalPopupOpen] = useState(false);
-  const [globalPopupContent, setGlobalPopupContent] = useState(null);
-  const [globalPopupAudio, setGlobalPopupAudio] = useState(false);
-
-  const openPopup = (content, isAudio = false) => {
-    setGlobalPopupContent(content);
-    setGlobalPopupAudio(isAudio);
-    setGlobalPopupOpen(true);
-  };
-
-  const closePopup = () => {
-    setGlobalPopupOpen(false);
-    setGlobalPopupContent(null);
-  };
-  const pages = [
-    <Page1 />,
-    <Page2 goToUnit={goToUnit} />,
-    <Page3 goToUnit={goToUnit} />,
-    <Page4 openPopup={openPopup} />,
-    <Page5 openPopup={openPopup} />,
-    <Page6 openPopup={openPopup} />,
-    <Page7 openPopup={openPopup} />,
-    <Page8 openPopup={openPopup} />,
-    <Page9 openPopup={openPopup} />,
-    <Unit2_Page1 openPopup={openPopup} />,
-    <Unit2_Page2 openPopup={openPopup} />,
-    <Unit2_Page3 openPopup={openPopup} />,
-    <Unit2_Page4 openPopup={openPopup} />,
-    <Unit2_Page5 openPopup={openPopup} />,
-    <Unit2_Page6 openPopup={openPopup} />,
-    <Unit2_Page7 openPopup={openPopup} />,
-    <Unit2_Page8 openPopup={openPopup} />,
-    <Unit2_Page9 openPopup={openPopup} />,
-    <Unit2_Page10 openPopup={openPopup} />,
-    <Unit2_Page11 openPopup={openPopup} />,
-    <Unit2_Page12 openPopup={openPopup} />,
-    // <Unit3_Page1 openPopup={openPopup} />,
-    // <Unit3_Page2 openPopup={openPopup} />,
-    // <Unit3_Page3 openPopup={openPopup} />,
-    // <Unit3_Page4 openPopup={openPopup} />,
-    // <Unit3_Page5 openPopup={openPopup} />,
-    // <Unit3_Page6 openPopup={openPopup} />,
-    // <Unit4_Page1 openPopup={openPopup} />,
-    // <Unit4_Page2 openPopup={openPopup} />,
-    // <Unit4_Page3 openPopup={openPopup} />,
-    // <Unit4_Page4 openPopup={openPopup} />,
-    // <Unit4_Page5 openPopup={openPopup} />,
-    // <Unit4_Page6 openPopup={openPopup} />,
-    // <Review3_Page1 openPopup={openPopup} />,
-    // <Review3_Page2 openPopup={openPopup} />,
-    // <Review4_Page1 openPopup={openPopup} />,
-    // <Review4_Page2 openPopup={openPopup} />,
-    // <Unit4_Reading_P1 openPopup={openPopup} />,
-    // <Unit4_Reading_P2 openPopup={openPopup} />,
-    // <Unit5_Page1 openPopup={openPopup} />,
-    // <Unit5_Page2 openPopup={openPopup} />,
-    // <Unit5_Page3 openPopup={openPopup} />,
-    // <Unit5_Page4 openPopup={openPopup} />,
-    // <Unit5_Page5 openPopup={openPopup} />,
-    // <Unit5_Page6 openPopup={openPopup} />,
-    // <Unit6_Page1 openPopup={openPopup} />,
-    // <Unit6_Page2 openPopup={openPopup} />,
-    // <Unit6_Page3 openPopup={openPopup} />,
-    // <Unit6_Page4 openPopup={openPopup} />,
-    // <Unit6_Page5 openPopup={openPopup} />,
-    // <Unit6_Page6 openPopup={openPopup} />,
-    // <Review5_Page1 openPopup={openPopup} />,
-    // <Review5_Page2 openPopup={openPopup} />,
-    // <Review6_Page1 openPopup={openPopup} />,
-    // <Review6_Page2 openPopup={openPopup} />,
-    // <Unit6_Reading_P1 openPopup={openPopup} />,
-    // <Unit6_Reading_P2 openPopup={openPopup} />,
-    // <Unit7_Page1 openPopup={openPopup} />,
-    // <Unit7_Page2 openPopup={openPopup} />,
-    // <Unit7_Page3 openPopup={openPopup} />,
-    // <Unit7_Page4 openPopup={openPopup} />,
-    // <Unit7_Page5 openPopup={openPopup} />,
-    // <Unit7_Page6 openPopup={openPopup} />,
-    // <Unit8_Page1 openPopup={openPopup} />,
-    // <Unit8_Page2 openPopup={openPopup} />,
-    // <Unit8_Page3 openPopup={openPopup} />,
-    // <Unit8_Page4 openPopup={openPopup} />,
-    // <Unit8_Page5 openPopup={openPopup} />,
-    // <Unit8_Page6 openPopup={openPopup} />,
-    // should chang to review for unit 7+8
-    // <Review7_Page1 openPopup={openPopup} />,
-    // <Review7_Page2 openPopup={openPopup} />,
-    // <Review8_Page1 openPopup={openPopup} />,
-    // <Review8_Page2 openPopup={openPopup} />,
-    // <Unit6_Reading_P1 openPopup={openPopup} />,
-    // <Unit6_Reading_P2 openPopup={openPopup} />,
-    // <Unit9_Page1 openPopup={openPopup} />,
-    // <Unit9_Page2 openPopup={openPopup} />,
-    // <Unit9_Page3 openPopup={openPopup} />,
-    // <Unit9_Page4 openPopup={openPopup} />,
-    // <Unit9_Page5 openPopup={openPopup} />,
-    // <Unit9_Page6 openPopup={openPopup} />,
-    //    <Unit10_Page1 openPopup={openPopup} />,
-    // <Unit10_Page2 openPopup={openPopup} />,
-    // <Unit10_Page3 openPopup={openPopup} />,
-    // <Unit10_Page4 openPopup={openPopup} />,
-    // <Unit10_Page5 openPopup={openPopup} />,
-    // <Unit10_Page6 openPopup={openPopup} />,
-  ];
   const hideArrows = zoom > 1;
   const [isDragging, setIsDragging] = useState(false);
   const startPosition = useRef({ x: 0, y: 0 });
@@ -316,7 +193,7 @@ export default function Book() {
       else if (pageIndex > 1) setPageIndex(pageIndex - 2);
     }
   };
- 
+
   return (
     <>
       <div
@@ -349,8 +226,8 @@ export default function Book() {
             px-4 py-1 rounded-xl border font-medium transition-all duration-200 text-[15px]
             ${
               activeTab === tab.id
-                ? "border-[#6B40C8] text-[#6B40C8] bg-[#f6f0ff]"
-                : "border-[#b99cfa] text-[#6B40C8] hover:bg-purple-50"
+                ? "border-[#430f68] text-[#430f68] bg-[#f6f0ff]"
+                : "border-[#b99cfa] text-[#430f68] hover:bg-purple-50"
             }
           `}
                 >
@@ -362,7 +239,7 @@ export default function Book() {
 
           {/* RIGHT SECTION */}
           <div className="flex items-center gap-4">
-            <span className="cursor-pointer text-[#6B40C8] hover:opacity-75">
+            <span className="cursor-pointer text-[#430f68] hover:opacity-75">
               Student Edition
             </span>
           </div>
@@ -561,7 +438,6 @@ export default function Book() {
           >
             <image href={menu} x="0" y="0" width="90" height="90" />
           </svg>
-
           {/* HOME BUTTON */}
           {pageIndex !== 1 && pageIndex !== 2 && (
             <svg
@@ -574,7 +450,6 @@ export default function Book() {
               <image href={home} x="0" y="0" width="90" height="90" />
             </svg>
           )}
-
           <svg
             width="30"
             height="30"
@@ -597,7 +472,6 @@ export default function Book() {
           >
             <image href={zoomOut} x="0" y="0" width="90" height="90" />
           </svg>
-
           <svg
             width="30"
             height="30"
@@ -606,7 +480,34 @@ export default function Book() {
             className="text-white rounded-lg p-0.5 shadow hover:bg-[#bc90ff] transition"
           >
             <image href={fullScreen} x="0" y="0" width="90" height="90" />
-          </svg>
+          </svg>{" "}
+          <div className="flex items-center gap-2 px-1 py-1 pr-4 border-2 border-[#430f68] rounded text-[#430f68] text-center">
+            {/* input للذهاب لصفحة */}
+            <input
+              type="text"
+              value={isEditingPage ? goToPageInput : displayedPage}
+              onFocus={() => {
+                setIsEditingPage(true);
+                setGoToPageInput(""); // يفرغ فقط عند بداية الكتابة
+              }}
+              onChange={(e) => setGoToPageInput(e.target.value)}
+              onBlur={() => {
+                setIsEditingPage(false); // رجوع لعرض displayedPage عند الخروج
+                setGoToPageInput("");
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  goToPage(Number(goToPageInput));
+                  setIsEditingPage(false); // رجوع لوضع العرض
+                  setGoToPageInput("");
+                }
+              }}
+              className="w-10 text-center border-none focus:outline-none text-[#430f68] font-medium"
+            />
+
+            {/* total pages */}
+            <span className="text-[#430f68] font-medium">| {totalPages}</span>
+          </div>
           {!isMobile && (
             <>
               <svg
@@ -637,9 +538,7 @@ export default function Book() {
               </svg>
             </>
           )}
-
           {/* Sidebar */}
-
           {/* Bottom-Left Sidebar */}
           <div
             className={`fixed left-0 bottom-0 w-64 h-[100%] bg-white shadow-2xl z-[99999] rounded-tr-2xl transform transition-transform duration-300 ${
@@ -648,10 +547,10 @@ export default function Book() {
           >
             {/* Header */}
             <div className="p-4 border-b flex justify-between items-center">
-              <h2 className="text-xl text-[#6B40C8]  font-semibold">Menu</h2>
+              <h2 className="text-xl text-[#430f68]  font-semibold">Menu</h2>
               <button
                 onClick={() => setIsSidebarOpen(false)}
-                className="text-[#6B40C8] text-xl"
+                className="text-[#430f68] text-xl"
               >
                 ✕
               </button>
@@ -659,7 +558,7 @@ export default function Book() {
 
             {/* MENU LIST */}
 
-            <h3 className="text-lg font-semibold text-[#6B40C8]  mt-6 mb-2 px-3">
+            <h3 className="text-lg font-semibold text-[#430f68]  mt-6 mb-2 px-3">
               Units 📘
             </h3>
 
@@ -671,14 +570,13 @@ export default function Book() {
                     goToUnit(unit.start);
                     setIsSidebarOpen(false); // يغلق الـ sidebar بعد الضغط
                   }}
-                  className="flex items-center gap-3 text-[#6B40C8] p-3 rounded-lg cursor-pointer bg-purple-100 hover:bg-[#6B40C8] hover:text-white transition"
+                  className="flex items-center gap-3 text-[#430f68] p-3 rounded-lg cursor-pointer bg-purple-100 hover:bg-[#6B40C8] hover:text-white transition"
                 >
                   <span className="text-base font-medium">{unit.label}</span>
                 </li>
               ))}
             </ul>
           </div>
-
           {isSidebarOpen && (
             <div
               onClick={() => setIsSidebarOpen(false)}
@@ -692,6 +590,7 @@ export default function Book() {
         isOpen={globalPopupOpen}
         onClose={closePopup}
         isAudio={globalPopupAudio}
+        isVideo={globalPopupVideo}
       >
         {globalPopupContent}
       </Popup>
