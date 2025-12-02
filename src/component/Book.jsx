@@ -1,15 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { GrLinkNext } from "react-icons/gr";
-import { IoMdArrowBack } from "react-icons/io";
 import next from "../assets/unit1/imgs/Page 01/next btn.svg";
 import back from "../assets/unit1/imgs/Page 01/back btn.svg";
-import { FaHome } from "react-icons/fa";
-import { MdOutlineZoomIn } from "react-icons/md";
-import { MdOutlineZoomOut } from "react-icons/md";
-import { LuFullscreen } from "react-icons/lu";
-import { RiBookOpenLine } from "react-icons/ri";
-import { AiOutlineBook } from "react-icons/ai";
-import { IoMdMenu } from "react-icons/io";
 import home from "../assets/unit1/imgs/Page 01/home.svg";
 import fullScreen from "../assets/unit1/imgs/Page 01/fullscreen.svg";
 import menu from "../assets/unit1/imgs/Page 01/menu.svg";
@@ -325,10 +316,7 @@ export default function Book() {
       else if (pageIndex > 1) setPageIndex(pageIndex - 2);
     }
   };
-  const handleMenuClick = (id) => {
-    if (id === 1) goToHome();
-    if (id === 2) goToIndex();
-  };
+ 
   return (
     <>
       <div

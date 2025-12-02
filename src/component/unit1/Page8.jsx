@@ -28,6 +28,7 @@ const Page8 = ({ openPopup }) => {
             )
           }
           // className="click-icon-page8-1 hover:scale-110 transition"
+          style={{ overflow: "visible" }}
         >
           <image
             href={arrowBtn}
