@@ -10,7 +10,10 @@ import zoomIn from "../assets/unit1/imgs/Page 01/zoom in.svg";
 import zoomOut from "../assets/unit1/imgs/Page 01/zoom out.svg";
 import Popup from "./Popup/Popup";
 import logo from "../assets/unit1/imgs/Page 01/PMAAlogo.svg";
-
+import { FaKey } from "react-icons/fa";
+import audioBtn from "../assets/unit1/imgs/Page 01/Audio btn.svg";
+import arrowBtn from "../assets/unit1/imgs/Page 01/Arrow.svg";
+import pauseBtn from "../assets/unit1/imgs/Right Video Button.svg";
 import {
   studentPages,
   workbookPages,
@@ -143,15 +146,15 @@ export default function Book() {
   const [goToPageInput, setGoToPageInput] = useState("");
   const [displayedPage, setDisplayedPage] = useState("1");
   const [isEditingPage, setIsEditingPage] = useState(false);
+  const [openUnit, setOpenUnit] = useState(null);
 
   const units = [
-    { id: 1, label: "Unit 1", start: 3 },
-    { id: 2, label: "Unit 2", start: 10 },
-    { id: 3, label: "Unit 3", start: 21 },
-    { id: 4, label: "Unit 4", start: 30 },
-    { id: 5, label: "Unit 5", start: 40 },
-    { id: 6, label: "Unit 6", start: 50 },
-    // ... أكمل حسب فهرس صفحاتك
+    { id: 1, label: "Unit 1", start: 4, pages: 6 }, // pages 3 → 9
+    { id: 2, label: "Unit 2", start: 10, pages: 12 },
+    { id: 3, label: "Unit 3", start: 22, pages: 9 },
+    { id: 4, label: "Unit 4", start: 30, pages: 10 },
+    { id: 5, label: "Unit 5", start: 40, pages: 10 },
+    { id: 6, label: "Unit 6", start: 50, pages: 10 },
   ];
 
   const hideArrows = zoom > 1;
@@ -196,6 +199,28 @@ export default function Book() {
       else if (pageIndex > 1) setPageIndex(pageIndex - 2);
     }
   };
+  const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
+
+  const rightMenuData = [
+    {
+      key: "audio",
+      btn: "Audio Button",
+      icon: audioBtn,
+      onClick: () => console.log("Download clicked"),
+    },
+    {
+      key: "video",
+      btn: "Video Button",
+      icon: pauseBtn,
+      onClick: () => console.log("Share clicked"),
+    },
+    {
+      key: "Arrow",
+      btn: "Arrow Button",
+      icon: arrowBtn,
+      onClick: () => console.log("Info clicked"),
+    },
+  ];
 
   return (
     <>
@@ -251,12 +276,7 @@ export default function Book() {
               className="lg:hidden border px-3 py-1 rounded-lg text-[#430f68]"
               onClick={() => setMobileTabsOpen(!mobileTabsOpen)}
             >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 90 90"
-               
-              >
+              <svg width="20" height="20" viewBox="0 0 90 90">
                 <image href={menu} x="0" y="0" width="90" height="90" />
               </svg>
             </button>
@@ -612,15 +632,42 @@ export default function Book() {
 
             <ul className="p-3 space-y-2">
               {units.map((unit) => (
-                <li
-                  key={unit.id}
-                  onClick={() => {
-                    goToUnit(unit.start);
-                    setIsSidebarOpen(false); // يغلق الـ sidebar بعد الضغط
-                  }}
-                  className="flex items-center gap-3 text-[#430f68] p-3 rounded-lg cursor-pointer bg-purple-100 hover:bg-[#6B40C8] hover:text-white transition"
-                >
-                  <span className="text-base font-medium">{unit.label}</span>
+                <li key={unit.id}>
+                  {/* Unit Item */}
+                  <div
+                    onClick={() => {
+                      setOpenUnit(openUnit === unit.id ? null : unit.id);
+                    }}
+                    className="flex items-center justify-between text-[#430f68] 
+                   p-3 rounded-lg cursor-pointer bg-purple-100 
+                   hover:bg-[#6B40C8] hover:text-white transition"
+                  >
+                    <span className="text-base font-medium">{unit.label}</span>
+                    <span>{openUnit === unit.id ? "−" : "+"}</span>
+                  </div>
+
+                  {/* Pages inside this unit */}
+                  {openUnit === unit.id && (
+                    <ul className="ml-5 mt-2 space-y-1">
+                      {Array.from({ length: unit.pages }).map((_, i) => {
+                        const pageNumber = unit.start + i;
+
+                        return (
+                          <li
+                            key={i}
+                            onClick={() => {
+                              goToPage(pageNumber);
+                              setIsSidebarOpen(false);
+                            }}
+                            className="p-2 cursor-pointer bg-purple-50 text-[#430f68] 
+                           rounded hover:bg-[#d8c4ff] transition"
+                          >
+                            Page {pageNumber}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
                 </li>
               ))}
             </ul>
@@ -630,6 +677,56 @@ export default function Book() {
               onClick={() => setIsSidebarOpen(false)}
               className="fixed inset-0 bg-black/40 z-[99998]"
             ></div>
+          )}
+          {/* RIGHT SIDEBAR BUTTON */}
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 90 90"
+            onClick={() => setIsRightSidebarOpen(true)}
+            className="absolute right-3 text-white p-0.5 rounded-lg shadow hover:bg-[#bc90ff] transition"
+          >
+            <FaKey size={80} color="#430f68"/>
+          </svg>
+          {/* RIGHT SIDEBAR */}
+          {isRightSidebarOpen && (
+            <div
+              onClick={() => setIsRightSidebarOpen(false)}
+              className="fixed inset-0 bg-black/40 z-[99998]"
+            >
+              <div
+                className={`fixed right-0 bottom-0 w-64 h-[100%] bg-white shadow-2xl z-[99999] rounded-tl-2xl 
+  transform transition-transform duration-300 
+  ${isRightSidebarOpen ? "translate-y-0" : "translate-y-full"}`}
+              >
+                {/* Header */}
+                <div className="p-4 border-b flex justify-between items-center">
+                  <h2 className="text-xl text-[#430f68] font-semibold">
+                    Options
+                  </h2>
+                  <button
+                    onClick={() => setIsRightSidebarOpen(false)}
+                    className="text-[#430f68] text-xl"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                {/* STATIC DATA LIST */}
+                <ul className="p-3 space-y-3">
+                  {rightMenuData.map((item) => (
+                    <li
+                      key={item.key}
+                      onClick={() => item.onClick()}
+                      className="flex items-center gap-3 p-3 bg-purple-100 rounded-lg cursor-pointer hover:bg-[#6B40C8] hover:text-white transition"
+                    >
+                      <img src={item.icon} alt="" style={{height:"50px" ,width:"50px"}} />
+                      <span className="font-medium">{item.btn}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           )}
         </footer>
       </div>

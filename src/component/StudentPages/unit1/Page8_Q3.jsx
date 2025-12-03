@@ -111,7 +111,7 @@ export default function Page8_Q3() {
             <div className="word-with-dot">
               <span className="span-num">1</span>
 
-              <span className="word-text">
+              <span className="word-text"  onClick={handleStartDotClick}>
                 Hello! I’m John.
                 {wrongWords.includes("Hello! I’m John.") && (
                   <span className="error-mark">✕</span>
@@ -144,7 +144,7 @@ export default function Page8_Q3() {
             <div className="word-with-dot">
               <span className="span-num">2</span>
 
-              <span className="word-text">
+              <span className="word-text"  onClick={handleStartDotClick}>
                 Goodbye!
                 {wrongWords.includes("Goodbye!") && (
                   <span className="error-mark">✕</span>
@@ -160,7 +160,7 @@ export default function Page8_Q3() {
               </div>
             </div>
 
-            <div className="img-with-dot">
+            <div className="img-with-dot"  onClick={handleEndDotClick}>
               <div className="dot-wrapper">
                 <div
                   className="dot end-dot"

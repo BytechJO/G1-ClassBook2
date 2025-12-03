@@ -12,10 +12,9 @@ const Popup = ({
   isVideo = false,
 }) => {
   if (!isOpen) return null;
-  
 
   return ReactDOM.createPortal(
-    <div className="popup-overlay">
+    <div className={`popup-overlay  ${isAudio ? "audio-overlay" : ""}`}>
       <div
         className={`popup-content ${
           isAudio ? "audio-size" : isVideo ? "video-size" : "fullscreen-size"
@@ -23,10 +22,9 @@ const Popup = ({
       >
         <button
           className={`popup-close-btn ${
-          isAudio ? "audio" : isVideo ? "video" : ""
-        }`}
+            isAudio ? "audio" : isVideo ? "video" : ""
+          }`}
           onClick={onClose}
-
         >
           <FontAwesomeIcon icon={faTimes} />
         </button>

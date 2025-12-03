@@ -24,7 +24,20 @@
   animation: fadeIn 0.2s ease;
   overflow: visible;
 }
-
+.popup-overlay.audio-overlay{
+position: fixed;
+  top: 55px; /* ارتفاع النافبار */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 45px); /* يغطي باقي الشاشة */
+  background: transparent;
+  z-index: 999999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 .popup-content video {
   display: block;
   width: 100%;
@@ -68,7 +81,7 @@
   padding: 20px;
   animation: fadeIn 0.2s ease;
   width: 100vw;
-  height: calc(100vh - 50px); /* يغطي باقي الشاشة */
+  height: calc(100vh - 46px); /* يغطي باقي الشاشة */
   border-radius: 0;
 }
 
@@ -98,7 +111,6 @@
       top: 12%;
     right: 2.5%;
   font-size: 24px;
-
   border-radius: 50%;
   padding: 6px;
   z-index: 99999;
