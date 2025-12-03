@@ -223,7 +223,7 @@ const Page8_Q1 = () => {
     <div className="page8-wrapper">
       <div className="page8-content">
         <header className="header-title-page8">
-          <span className="ex-A">A</span> 1 Listen and write the missing
+          <span className="ex-A">A</span> <span className="number-of-q">1</span> Listen and write the missing
           letters. Number the pictures.
         </header>
         <div

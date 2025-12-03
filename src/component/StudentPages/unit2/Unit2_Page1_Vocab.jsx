@@ -166,7 +166,7 @@ const Unit2_Page1_Vocab = () => {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <div style={{ width: "40%" }}>
+      <div style={{ width: "33%" }}>
         <div className="audio-popup-vocab">
           <div className="audio-inner player-ui">
             <audio

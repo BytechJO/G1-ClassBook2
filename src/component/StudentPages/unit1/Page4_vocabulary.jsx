@@ -163,7 +163,7 @@ const Page4_vocabulary = () => {
       {/* ============================
            AUDIO PLAYER
       ============================= */}
-      <div style={{ width: "40%" }}>
+      <div style={{ width: "33%" }}>
         <div className="audio-popup-vocab">
           <div className="audio-inner player-ui">
             <audio
