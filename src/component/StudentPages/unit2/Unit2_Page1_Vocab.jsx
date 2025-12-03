@@ -40,11 +40,11 @@ const Unit2_Page1_Vocab = () => {
   // ✔ Captions Array
   // ================================
   const captions = [
-     { start: 0, end: 3.10, text: "Page 10, Unit 2, Vocabulary." },
+    { start: 0, end: 3.1, text: "Page 10, Unit 2, Vocabulary." },
     { start: 3.12, end: 5.15, text: " 1. Party Hat. " },
     { start: 5.17, end: 7.16, text: "2. Jello." },
     { start: 7.18, end: 9.27, text: "3. Cake. " },
-    { start: 9.29, end: 12.20, text: "4. Happy Birthday." },
+    { start: 9.29, end: 12.2, text: "4. Happy Birthday." },
     { start: 12.22, end: 15.07, text: " 5. Balloons." },
     { start: 15.09, end: 17.13, text: " 6. Present. " },
     { start: 17.15, end: 19.26, text: "7.card" },
@@ -166,7 +166,17 @@ const Unit2_Page1_Vocab = () => {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <div style={{ width: "33%" }}>
+      <div
+        style={{
+          width: "30%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          margin: "0px 20px",
+          position: "relative",
+          alignItems: "center",
+        }}
+      >
         <div className="audio-popup-vocab">
           <div className="audio-inner player-ui">
             <audio
@@ -251,104 +261,102 @@ const Unit2_Page1_Vocab = () => {
           </div>
         </div>
       </div>
-     
-        <div
-          style={{
-            position: "relative",
-            marginTop: "5px",
-            width: "fit-content",
-          }}
-        >
-          <div className={`caption-inPopup ${showCaption ? "show" : ""}`}>
-            {captions.map((cap, i) => (
-              <p
-                key={i}
-                id={`caption-${i}`}
-                className={`caption-inPopup-line2 ${
-                  activeIndex === i ? "active" : ""
-                }`}
-              >
-                {cap.text}
-              </p>
-            ))}
-          </div>
-          {/* كلمة + صورة صغيرة */}
-     
-            <img
-              src={page2_2}
-              style={{
-                height: "210px",
-                width: "auto",
-                position: "absolute",
-                bottom: "0%",
-                right: "0%",
-                borderRadius: "5%",
-              }}
-            />
 
-            {/* النصوص */}
-            <div
-              className="vocab_container"
-              style={{ bottom: "1.4%", right: "4.5%" }}
-            >
-              {[
-                "party hat",
-                "jello",
-                "cake",
-                "happy birthday ",
-                "balloons",
-                "present",
-                "card",
-              ].map((text, i) => (
-                <h6
-                  key={i}
-                  className={
-                    (activeIndex2 === i && current >= 3.2) || clickedIndex === i
-                      ? "active"
-                      : ""
-                  }
-                  onClick={() => {
-                    setClickedIndex(i);
-
-                    playSingleWord(i); // 🔥 تشغيل كلمة واحدة فقط
-
-                    setTimeout(() => setClickedIndex(null), 500);
-                  }}
-                >
-                  {i + 1} {text}
-                </h6>
-              ))}
-            </div>
-         
-
-          {/* الأرقام */}
-          {nums.map((num, i) => (
-            <img
+      <div
+        style={{
+          position: "relative",
+          marginTop: "5px",
+          width: "fit-content",
+        }}
+      >
+        <div className={`caption-inPopup ${showCaption ? "show" : ""}`}>
+          {captions.map((cap, i) => (
+            <p
               key={i}
-              src={num}
-              id={`num-${i + 1}`}
-              className={`num-img ${
+              id={`caption-${i}`}
+              className={`caption-inPopup-line2 ${
+                activeIndex === i ? "active" : ""
+              }`}
+            >
+              {cap.text}
+            </p>
+          ))}
+        </div>
+        {/* كلمة + صورة صغيرة */}
+
+        <img
+          src={page2_2}
+          style={{
+            height: "210px",
+            width: "auto",
+            position: "absolute",
+            bottom: "0%",
+            right: "0%",
+            borderRadius: "5%",
+          }}
+        />
+
+        {/* النصوص */}
+        <div
+          className="vocab_container"
+          style={{ bottom: "1.4%", right: "4.5%" }}
+        >
+          {[
+            "party hat",
+            "jello",
+            "cake",
+            "happy birthday ",
+            "balloons",
+            "present",
+            "card",
+          ].map((text, i) => (
+            <h6
+              key={i}
+              className={
                 (activeIndex2 === i && current >= 3.2) || clickedIndex === i
                   ? "active"
                   : ""
-              }`}
-              style={{
-                height: "20px",
-                width: "auto",
-                position: "absolute",
-              }}
-            />
-          ))}
+              }
+              onClick={() => {
+                setClickedIndex(i);
 
-          {/* الصورة الرئيسية */}
-          <img
-            src={backgroundImage}
-            alt="interactive"
-            style={{ height: "75vh" }}
-          />
+                playSingleWord(i); // 🔥 تشغيل كلمة واحدة فقط
+
+                setTimeout(() => setClickedIndex(null), 500);
+              }}
+            >
+              {i + 1} {text}
+            </h6>
+          ))}
         </div>
+
+        {/* الأرقام */}
+        {nums.map((num, i) => (
+          <img
+            key={i}
+            src={num}
+            id={`num-${i + 1}`}
+            className={`num-img ${
+              (activeIndex2 === i && current >= 3.2) || clickedIndex === i
+                ? "active"
+                : ""
+            }`}
+            style={{
+              height: "20px",
+              width: "auto",
+              position: "absolute",
+            }}
+          />
+        ))}
+
+        {/* الصورة الرئيسية */}
+        <img
+          src={backgroundImage}
+          alt="interactive"
+          style={{ height: "75vh" }}
+        />
       </div>
-   
+    </div>
   );
 };
 
