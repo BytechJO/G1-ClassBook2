@@ -414,8 +414,8 @@ img {
   border-radius: 20px;
   border: rgb(255, 255, 255) solid 3px; */
   padding: 5px;
-  top: 7.3%;
-  right: 4.5%;
+  top: 8%;
+  right: 3.4%;
   cursor: pointer;
 }
 .click-icon-page8-2 {
@@ -526,7 +526,6 @@ img {
 }
 
 .page8-content {
- 
   max-width: 900px;
 }
 
@@ -810,7 +809,7 @@ img {
   background: rgba(0, 0, 0, 0.15);
 }
 
-@media (max-width:820px) {
+@media (max-width: 820px) {
   .page-image {
     width: 100%;
     height: auto; /* خلي الارتفاع تلقائي بالموبايل */
@@ -865,31 +864,30 @@ img {
     bottom: 31%;
   }
 
-  .exercise-image-div{
-      
+  .exercise-image-div {
     flex-wrap: wrap !important;
     gap: 20px;
   }
-  .audio-popup-vocab-container{
+  .audio-popup-vocab-container {
     width: 60% !important;
   }
-  .audio-popup-read-container{
+  .audio-popup-read-container {
     width: 60% !important;
   }
 }
 
-@media (max-width:600px) {
-      .action-buttons-container {
-        flex-direction: row !important;
-        gap: 10px;
-    }
-    .show-answer-btn {
-      font-size: 14px;
-    }
+@media (max-width: 600px) {
+  .action-buttons-container {
+    flex-direction: row !important;
+    gap: 10px;
+  }
+  .show-answer-btn {
+    font-size: 14px;
+  }
 }
-
 
 @media (max-width: 540px) {
   .exercise-image {
-    height: 80px;}
+    height: 80px;
+  }
 }
