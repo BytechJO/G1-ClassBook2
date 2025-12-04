@@ -95,7 +95,7 @@ const Unit2_Page7_Q3 = () => {
           justifyContent: "flex-start",
         }}
       >
-        {/* <div className="content-container1"> */}
+        <div className="content-container1">
          
             <h5 className="header-title-page8">
               C Read and circle the mistakes.
@@ -106,7 +106,7 @@ const Unit2_Page7_Q3 = () => {
               <div
                 key={sIndex}
                 style={{
-                  marginBottom: "14px",
+                  margin: "14px",
                   fontSize: "25px",
                   fontWeight: "500",
                 }}
@@ -140,7 +140,7 @@ const Unit2_Page7_Q3 = () => {
               </div>
             ))}
           </div>
-        {/* </div> */}
+        </div>
       </div>
       <div className="action-buttons-container">
         <button
