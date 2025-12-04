@@ -21,53 +21,53 @@ const Unit2_Page7_Q2 = () => {
   // ============================
   // 1️⃣ الضغط على النقطة الأولى (start-dot)
   // ============================
-const handleStartDotClick = (e) => {
-  if (showAnswer) return;
+  const handleStartDotClick = (e) => {
+    if (showAnswer) return;
 
-  const rect = containerRef.current.getBoundingClientRect();
+    const rect = containerRef.current.getBoundingClientRect();
 
-  const word = e.target.dataset.word || null;  
-  const image = e.target.dataset.image || null;
+    const word = e.target.dataset.word || null;
+    const image = e.target.dataset.image || null;
 
-  setFirstDot({
-    word,
-    image,
-    x: e.target.getBoundingClientRect().left - rect.left + 8,
-    y: e.target.getBoundingClientRect().top - rect.top + 8,
-  });
-};
+    setFirstDot({
+      word,
+      image,
+      x: e.target.getBoundingClientRect().left - rect.left + 8,
+      y: e.target.getBoundingClientRect().top - rect.top + 8,
+    });
+  };
 
   // ============================
   // 2️⃣ الضغط على النقطة الثانية (end-dot)
   // ============================
   const handleEndDotClick = (e) => {
-  if (showAnswer) return;
-  if (!firstDot) return;
+    if (showAnswer) return;
+    if (!firstDot) return;
 
-  const rect = containerRef.current.getBoundingClientRect();
+    const rect = containerRef.current.getBoundingClientRect();
 
-  const endWord = e.target.dataset.word || null;
-  const endImage = e.target.dataset.image || null;
+    const endWord = e.target.dataset.word || null;
+    const endImage = e.target.dataset.image || null;
 
-  const newLine = {
-    x1: firstDot.x,
-    y1: firstDot.y,
-    x2: e.target.getBoundingClientRect().left - rect.left + 8,
-    y2: e.target.getBoundingClientRect().top - rect.top + 8,
+    const newLine = {
+      x1: firstDot.x,
+      y1: firstDot.y,
+      x2: e.target.getBoundingClientRect().left - rect.left + 8,
+      y2: e.target.getBoundingClientRect().top - rect.top + 8,
 
-    word: firstDot.word || endWord,     // نأخذ الكلمة من البداية أو النهاية حسب المتوفر
-    image: firstDot.image || endImage,  // نفس الشي للصورة
+      word: firstDot.word || endWord, // نأخذ الكلمة من البداية أو النهاية حسب المتوفر
+      image: firstDot.image || endImage, // نفس الشي للصورة
+    };
+
+    setLines((prev) => [...prev, newLine]);
+    setFirstDot(null);
   };
-
-  setLines((prev) => [...prev, newLine]);
-  setFirstDot(null);
-};
 
   // ============================
   // 3️⃣ Check Answers
   // ============================
   const checkAnswers2 = () => {
-      if (showAnswer) return;
+    if (showAnswer) return;
 
     if (lines.length < correctMatches.length) {
       ValidationAlert.info(
@@ -133,10 +133,14 @@ const handleStartDotClick = (e) => {
           <div className="match-wrapper2" ref={containerRef}>
             {/* الصور */}
             <div className="match-images-row2">
-
               {/* IMAGE 1 */}
               <div className="img-box2">
-                <img src={img1} alt="" />
+                <img
+                  src={img1}
+                  alt=""
+                  onClick={() => document.getElementById("img1-dot").click()}
+                  style={{ cursor: "pointer" }}
+                />
                 {wrongImages.includes("img1") && (
                   <span className="error-mark-img">✕</span>
                 )}
@@ -144,19 +148,26 @@ const handleStartDotClick = (e) => {
                 <div
                   className="dot22-unit2-q7 start-dot22-unit2-q7"
                   data-image="img1"
+                  id="img1-dot"
                   onClick={handleStartDotClick}
                 ></div>
               </div>
 
               {/* IMAGE 2 */}
               <div className="img-box2">
-                <img src={img2} alt="" />
+                <img
+                  src={img2}
+                  alt=""
+                  onClick={() => document.getElementById("img2-dot").click()}
+                  style={{ cursor: "pointer" }}
+                />
                 {wrongImages.includes("img2") && (
                   <span className="error-mark-img">✕</span>
                 )}
 
                 <div
                   className="dot22-unit2-q7 start-dot22-unit2-q7"
+                  id="img2-dot"
                   data-image="img2"
                   onClick={handleStartDotClick}
                 ></div>
@@ -164,13 +175,19 @@ const handleStartDotClick = (e) => {
 
               {/* IMAGE 3 */}
               <div className="img-box2">
-                <img src={img3} alt="" />
+                <img
+                  src={img3}
+                  alt=""
+                  onClick={() => document.getElementById("img3-dot").click()}
+                  style={{ cursor: "pointer" }}
+                />
                 {wrongImages.includes("img3") && (
                   <span className="error-mark-img">✕</span>
                 )}
 
                 <div
                   className="dot22-unit2-q7 start-dot22-unit2-q7"
+                  id="img3-dot"
                   data-image="img3"
                   onClick={handleStartDotClick}
                 ></div>
@@ -180,7 +197,10 @@ const handleStartDotClick = (e) => {
             {/* الجمل */}
             <div className="match-words-row2">
               <div className="word-box2">
-                <h5>
+                <h5
+                  onClick={() => document.getElementById("dot-hello").click()}
+                  style={{ cursor: "pointer" }}
+                >
                   <span style={{ color: "darkblue", fontWeight: "700" }}>
                     1{" "}
                   </span>
@@ -188,14 +208,17 @@ const handleStartDotClick = (e) => {
                 </h5>
                 <div
                   className="dot22-unit2-q7 end-dot22-unit2-q7"
+                  id="dot-hello"
                   data-word="Hello! I’m Hansel."
-                  data-image="img2"
                   onClick={handleEndDotClick}
                 ></div>
               </div>
 
               <div className="word-box2">
-                <h5>
+                <h5
+                  onClick={() => document.getElementById("dot-good").click()}
+                  style={{ cursor: "pointer" }}
+                >
                   <span style={{ color: "darkblue", fontWeight: "700" }}>
                     2{" "}
                   </span>
@@ -203,23 +226,26 @@ const handleStartDotClick = (e) => {
                 </h5>
                 <div
                   className="dot22-unit2-q7 end-dot22-unit2-q7"
+                  id="dot-good"
                   data-word="Good morning!"
-                  data-image="img1"
                   onClick={handleEndDotClick}
                 ></div>
               </div>
 
               <div className="word-box2">
-                <h5>
+                <h5
+                  onClick={() => document.getElementById("dot-goodbye").click()}
+                  style={{ cursor: "pointer" }}
+                >
                   <span style={{ color: "darkblue", fontWeight: "700" }}>
                     3{" "}
                   </span>
                   Goodbye!
                 </h5>
                 <div
+                  id="dot-goodbye"
                   className="dot22-unit2-q7 end-dot22-unit2-q7"
                   data-word="Goodbye!"
-                  data-image="img3"
                   onClick={handleEndDotClick}
                 ></div>
               </div>

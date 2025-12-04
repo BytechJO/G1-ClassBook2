@@ -34,7 +34,7 @@ const Page8_Q4 = () => {
 
   const questionGroups = [
     [8, 15, 23], // how
-    [1, 18, 5],  // are
+    [1, 18, 5], // are
     [25, 15, 21], // you
   ];
 
@@ -77,7 +77,10 @@ const Page8_Q4 = () => {
 
     const hasEmpty = letters.some((g) => g.some((l) => l === ""));
     if (hasEmpty) {
-      ValidationAlert.info("Oops!", "Please complete all fields before checking.");
+      ValidationAlert.info(
+        "Oops!",
+        "Please complete all fields before checking."
+      );
       return;
     }
 
@@ -118,87 +121,106 @@ const Page8_Q4 = () => {
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
-      <div className="container8">
-        <h5 className="header-title-page8">
-          <span className="letter-of-Q"> C</span>Answer the question.
-        </h5>
+      <div
+        className="div-forall"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
+          position: "relative",
+          width: "60%",
+        }}
+      >
+        <div className="container8">
+          <h5 className="header-title-page8">
+            <span className="ex-A"> C</span>Answer the question.
+          </h5>
 
-        <div className="alphabet-box">
-          <div className="row1">
-            {data.map((c, i) => (
-              <div className="letter-char1" key={i}>
-                <div className="data">
-                  <span className="cell1">{c.letter}</span>
-                </div>
-                <div className="data">
-                  <span className="cell1 number1">{c.number}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="words">
-            {questionGroups.map((group, groupIndex) => (
-              <div className="word-group" key={groupIndex}>
-                {group.map((num, letterIndex) => (
-                  <div className="input-h6" key={letterIndex}>
-                    <h6 className="unit1-page8-q4-nums" style={{ fontSize: "25px" }}>
-                      {num}
-                    </h6>
-
-                    <div className="input-wrapper">
-                      <input
-                        className="inputs"
-                        maxLength={1}
-                        value={letters[groupIndex][letterIndex]}
-                        onChange={(e) =>
-                          handleInputChange(e.target.value, groupIndex, letterIndex)
-                        }
-                        style={{
-                          color: showAnswer ? "red" : "black", // 🔥 لوّن الأحمر عند Show Answer
-                          fontWeight: showAnswer ? "bold" : "normal",
-                        }}
-                      />
-
-                      {wrongInputs.includes(`${groupIndex}-${letterIndex}`) &&
-                        !showAnswer && <span className="error-mark1">✕</span>}
-                    </div>
+          <div className="alphabet-box">
+            <div className="row1">
+              {data.map((c, i) => (
+                <div className="letter-char1" key={i}>
+                  <div className="data">
+                    <span className="cell1">{c.letter}</span>
                   </div>
-                ))}
-              </div>
-            ))}
-          </div>
+                  <div className="data">
+                    <span className="cell1 number1">{c.number}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-          <div className="sentence">
-            {formedWords.map((word, i) => (
-              <span key={i} className="sentence-word">
-                {word}
-              </span>
-            ))}
+            <div className="words">
+              {questionGroups.map((group, groupIndex) => (
+                <div className="word-group" key={groupIndex}>
+                  {group.map((num, letterIndex) => (
+                    <div className="input-h6" key={letterIndex}>
+                      <h6
+                        className="unit1-page8-q4-nums"
+                        style={{ fontSize: "25px" }}
+                      >
+                        {num}
+                      </h6>
+
+                      <div className="input-wrapper">
+                        <input
+                          className="inputs"
+                          maxLength={1}
+                          value={letters[groupIndex][letterIndex]}
+                          onChange={(e) =>
+                            handleInputChange(
+                              e.target.value,
+                              groupIndex,
+                              letterIndex
+                            )
+                          }
+                          style={{
+                            color: showAnswer ? "red" : "black", // 🔥 لوّن الأحمر عند Show Answer
+                            fontWeight: showAnswer ? "bold" : "normal",
+                          }}
+                        />
+
+                        {wrongInputs.includes(`${groupIndex}-${letterIndex}`) &&
+                          !showAnswer && <span className="error-mark1">✕</span>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            <div className="sentence">
+              {formedWords.map((word, i) => (
+                <span key={i} className="sentence-word">
+                  {word}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
-
-        <div className="action-buttons-container">
-          <button
-            onClick={() => {
-              setLetters(questionGroups.map((g) => g.map(() => "")));
-              setWrongInputs([]);
-              setShowAnswer(false); // 🔄 رجوع طبيعي
-            }}
-            className="try-again-button"
-          >
-            Start Again ↻
-          </button>
- {/* 🔥 زر Show Answer */}
-          <button onClick={handleShowAnswer} className="show-answer-btn swal-continue">
-            Show Answer 
-          </button>
-          <button onClick={handleCheckAnswers} className="check-button2">
-            Check Answer ✓
-          </button>
-
-         
-        </div>
+      </div>{" "}
+      <div className="action-buttons-container">
+        <button
+          onClick={() => {
+            setLetters(questionGroups.map((g) => g.map(() => "")));
+            setWrongInputs([]);
+            setShowAnswer(false); // 🔄 رجوع طبيعي
+          }}
+          className="try-again-button"
+        >
+          Start Again ↻
+        </button>
+        {/* 🔥 زر Show Answer */}
+        <button
+          onClick={handleShowAnswer}
+          className="show-answer-btn swal-continue"
+        >
+          Show Answer
+        </button>
+        <button onClick={handleCheckAnswers} className="check-button2">
+          Check Answer ✓
+        </button>
       </div>
     </div>
   );

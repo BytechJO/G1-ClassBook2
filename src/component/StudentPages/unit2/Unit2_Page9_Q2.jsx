@@ -8,7 +8,7 @@ export default function Unit2_Page9_Q2() {
   const [wrongWords, setWrongWords] = useState([]);
   const startPointRef = useRef(null);
   const [firstDot, setFirstDot] = useState(null);
-const [showAnswer ,setShowAnswer]=useState(false)
+  const [showAnswer, setShowAnswer] = useState(false);
   const correctMatches = [
     { word1: "Happy", word2: "birthday!" },
     { word1: "I’m seven", word2: "years old." },
@@ -49,7 +49,7 @@ const [showAnswer ,setShowAnswer]=useState(false)
   };
 
   const checkAnswers = () => {
-    if(showAnswer)return
+    if (showAnswer) return;
     // 1️⃣ إذا في خطوط ناقصة
     if (lines.length < correctMatches.length) {
       ValidationAlert.info(
@@ -119,7 +119,7 @@ const [showAnswer ,setShowAnswer]=useState(false)
 
     // 2️⃣ وضع الخطوط
     setLines(correctLines);
-setShowAnswer(true)
+    setShowAnswer(true);
     // 3️⃣ إخفاء علامات الإكس
     setWrongWords([]);
   };
@@ -150,10 +150,17 @@ setShowAnswer(true)
             {["Happy", "I’m seven", "How old", "Thank"].map((word, i) => (
               <div className="word-row2" key={i}>
                 <span className="num2">{i + 1}</span>
-                <span className="word-text3">{word}</span>
+                <span
+                  className="word-text3"
+                  onClick={() => document.getElementById(`dot-${word}`).click()}
+                  style={{ cursor: "pointer" }}
+                >
+                  {word}
+                </span>
                 <div
                   className="dot5 start-dot5"
                   data-letter={word}
+                  id={`dot-${word}`}
                   onClick={handleStartDotClick}
                 ></div>
                 {wrongWords.includes(word) && (
@@ -169,9 +176,11 @@ setShowAnswer(true)
                 <div
                   className="dot5 end-dot5"
                   data-image={word}
+                  id={`dot-${word}`}
                   onClick={handleEndDotClick}
                 ></div>
-                <span className="word-text3">{word}</span>
+                <span className="word-text3"   onClick={() => document.getElementById(`dot-${word}`).click()}
+                  style={{ cursor: "pointer" }}>{word}</span>
               </div>
             ))}
           </div>
@@ -196,17 +205,17 @@ setShowAnswer(true)
           onClick={() => {
             setLines([]);
             setWrongWords([]);
-            setShowAnswer(false)
+            setShowAnswer(false);
           }}
           className="try-again-button"
         >
           Start Again ↻
         </button>
-           <button
+        <button
           onClick={showCorrectAnswers}
           className="show-answer-btn swal-continue"
         >
-          Show Answer 
+          Show Answer
         </button>
         <button onClick={checkAnswers} className="check-button2">
           Check Answer ✓

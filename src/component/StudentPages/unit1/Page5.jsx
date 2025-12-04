@@ -44,10 +44,9 @@ const Page5 = ({ openPopup }) => {
     { start: 3.28, end: 5.15, text: "Hello. How are you? " },
     { start: 5.17, end: 7.13, text: "Fine, thank you. " },
   ];
-  
+
   const captions2 = [
-   
-   { start:0, end: 3.19, text: " Page 5. Listen and read along. " },
+    { start: 0, end: 3.19, text: " Page 5. Listen and read along. " },
     { start: 3.21, end: 7.22, text: "T. Table. Taxi. Tiger." },
   ];
   // أصوات الصور
@@ -169,6 +168,7 @@ const Page5 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
+              "html",
               <FourImagesWithAudio
                 images={[read, repeat1, repeat2]}
                 audioSrc={longsound2}
@@ -177,8 +177,7 @@ const Page5 = ({ openPopup }) => {
                 titleQ={`Listen, read, and repeat.`}
                 audioArr={imageSounds2}
                 captions={captions}
-              />,
-              false
+              />
             )
           }
           style={{ overflow: "visible" }}
@@ -196,6 +195,7 @@ const Page5 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
+              "html",
               <FourImagesWithAudio
                 images={[Rabbit, img1, img2, img3, img4]}
                 audioSrc={longsound}
@@ -204,8 +204,7 @@ const Page5 = ({ openPopup }) => {
                 titleQ={"Listen and read along."}
                 audioArr={imageSounds}
                 captions={captions2}
-              />,
-              false
+              />
             )
           }
           style={{ overflow: "visible" }}

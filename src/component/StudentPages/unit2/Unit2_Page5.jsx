@@ -20,12 +20,7 @@ const Unit2_Page5 = ({ openPopup }) => {
           height="22"
           viewBox="0 0 90 90"
           onClick={() =>
-            openPopup(
-              <>
-                <Unit2_Page5_Q1 />
-              </>,
-              false
-            )
+            openPopup("exercise", { startIndex: 6 })
           }
           style={{ overflow: "visible" }}
         >
@@ -42,12 +37,7 @@ const Unit2_Page5 = ({ openPopup }) => {
           height="22"
           viewBox="0 0 90 90"
           onClick={() =>
-            openPopup(
-              <>
-                <Unit2_Page5_Q2 />
-              </>,
-              false
-            )
+            openPopup("exercise", { startIndex: 7})
           }
           style={{ overflow: "visible" }}
         >
@@ -64,12 +54,7 @@ const Unit2_Page5 = ({ openPopup }) => {
           height="22"
           viewBox="0 0 90 90"
           onClick={() =>
-            openPopup(
-              <>
-                <Unit2_Page5_Q3 />
-              </>,
-              false
-            )
+           openPopup("exercise", { startIndex: 8})
           }
           style={{ overflow: "visible" }}
         >
@@ -86,12 +71,7 @@ const Unit2_Page5 = ({ openPopup }) => {
           height="22"
           viewBox="0 0 90 90"
           onClick={() =>
-            openPopup(
-              <>
-                <Unit2_Page5_Q4 />
-              </>,
-              false
-            )
+          openPopup("exercise", { startIndex: 9})
           }
           style={{ overflow: "visible" }}
         >

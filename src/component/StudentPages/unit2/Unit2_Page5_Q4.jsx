@@ -122,70 +122,84 @@ const Unit2_Page5_Q4 = () => {
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
-      <div className="container8">
-        <h5 className="header-title-page8">
-          <span className="letter-of-Q"> C</span>Answer the question.
-        </h5>
+      <div
+        className="div-forall"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
+          position: "relative",
+          width: "60%",
+        }}
+      >
+        <div className="container8">
+          <h5 className="header-title-page8">
+            <span className="ex-A"> C</span>Answer the question.
+          </h5>
 
-        <div className="alphabet-box">
-          <div className="row1">
-            {data.map((c, i) => (
-              <div className="letter-char">
-                <div className="data">
-                  <span key={i} className="cell1">
-                    {c.letter}
-                  </span>
-                </div>
-                <div className="data">
-                  <span key={i} className="cell1 number1">
-                    {c.number}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="words" style={{ gap: "25px" }}>
-            {questionGroups.map((group, groupIndex) => (
-              <div className="word-group" key={groupIndex}>
-                {group.map((num, letterIndex) => (
-                  <div className="input-h6" key={letterIndex}>
-                    <h6>{num}</h6>
-                    <div className="input-wrapper">
-                      {" "}
-                      {/* ⭐ تم التعديل هون */}
-                      <input
-                        className="inputs"
-                        maxLength={1}
-                        value={letters[groupIndex][letterIndex]}
-                        onChange={(e) =>
-                          handleInputChange(
-                            e.target.value,
-                            groupIndex,
-                            letterIndex
-                          )
-                        }
-                           style={{
-                          color: showAnswer ? "red" : "black", // 🔥 لوّن الأحمر عند Show Answer
-                          fontWeight: showAnswer ? "bold" : "normal",
-                        }}
-                      />
-                      {wrongInputs.includes(`${groupIndex}-${letterIndex}`) && (
-                        <span className="error-mark1">✕</span> // ⭐ تم التعديل هون
-                      )}
-                    </div>
+          <div className="alphabet-box">
+            <div className="row1">
+              {data.map((c, i) => (
+                <div className="letter-char">
+                  <div className="data">
+                    <span key={i} className="cell1">
+                      {c.letter}
+                    </span>
                   </div>
-                ))}
-              </div>
-            ))}
-          </div>
+                  <div className="data">
+                    <span key={i} className="cell1 number1">
+                      {c.number}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-          <div className="sentence">
-            {formedWords.map((word, i) => (
-              <span key={i} className="sentence-word">
-                {word}
-              </span>
-            ))}
+            <div className="words" style={{ gap: "25px" }}>
+              {questionGroups.map((group, groupIndex) => (
+                <div className="word-group" key={groupIndex}>
+                  {group.map((num, letterIndex) => (
+                    <div className="input-h6" key={letterIndex}>
+                      <h6>{num}</h6>
+                      <div className="input-wrapper">
+                        {" "}
+                        {/* ⭐ تم التعديل هون */}
+                        <input
+                          className="inputs"
+                          maxLength={1}
+                          value={letters[groupIndex][letterIndex]}
+                          onChange={(e) =>
+                            handleInputChange(
+                              e.target.value,
+                              groupIndex,
+                              letterIndex
+                            )
+                          }
+                          style={{
+                            color: showAnswer ? "red" : "black", // 🔥 لوّن الأحمر عند Show Answer
+                            fontWeight: showAnswer ? "bold" : "normal",
+                          }}
+                        />
+                        {wrongInputs.includes(
+                          `${groupIndex}-${letterIndex}`
+                        ) && (
+                          <span className="error-mark1">✕</span> // ⭐ تم التعديل هون
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            <div className="sentence">
+              {formedWords.map((word, i) => (
+                <span key={i} className="sentence-word">
+                  {word}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>

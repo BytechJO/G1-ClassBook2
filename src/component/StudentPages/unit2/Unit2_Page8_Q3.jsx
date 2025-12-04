@@ -43,13 +43,16 @@ const Unit2_Page8_Q3 = () => {
   // ✔ Captions Array
   // ================================
   const captions = [
-    { start: 0, end: 7.17, text: "Page 17, exercise F. Does it begin with a D or T? Listen and match." },
+    {
+      start: 0,
+      end: 7.17,
+      text: "Page 17, exercise F. Does it begin with a D or T? Listen and match.",
+    },
     { start: 7.19, end: 9.16, text: "1-doll. " },
     { start: 9.18, end: 11.11, text: "2-dog. " },
     { start: 11.13, end: 13.09, text: "3-tail." },
-    { start: 13.11, end:15.16, text: "4-tall." },
+    { start: 13.11, end: 15.16, text: "4-tall." },
     { start: 15.18, end: 17.22, text: "5-dates." },
-   
   ];
 
   // ================================
@@ -389,7 +392,12 @@ const Unit2_Page8_Q3 = () => {
             {/* الصور */}
             <div className="match-images-row2">
               <div className="img-box2">
-                <img src={img1} alt="" />
+                <img
+                  src={img1}
+                  alt=""
+                  onClick={() => document.getElementById("img1-dot").click()}
+                  style={{ cursor: "pointer" }}
+                />
                 {wrongImages.includes("img1") && (
                   <span className="error-mark-img">✕</span>
                 )}
@@ -397,52 +405,61 @@ const Unit2_Page8_Q3 = () => {
                 <div
                   className="dot2-unit2 start-dot2-unit2"
                   data-image="img1"
+                  id="img1-dot"
                   onClick={handleStartDotClick}
                 ></div>
               </div>
 
               <div className="img-box2">
-                <img src={img2} alt="img" />
+                <img src={img2} alt="img"  onClick={() => document.getElementById("img2-dot").click()}
+                style={{ cursor: "pointer" }}/>
                 {wrongImages.includes("img2") && (
                   <span className="error-mark-img">✕</span>
                 )}
                 <div
                   className="dot2-unit2 start-dot2-unit2"
                   data-image="img2"
+                  id="img2-dot"
                   onClick={handleStartDotClick}
                 ></div>
               </div>
 
               <div className="img-box2">
-                <img src={img3} alt="" />{" "}
+                <img src={img3} alt=""  onClick={() => document.getElementById("img3-dot").click()}
+                style={{ cursor: "pointer" }}/>{" "}
                 {wrongImages.includes("img3") && (
                   <span className="error-mark-img">✕</span>
                 )}
                 <div
                   className="dot2-unit2 start-dot2-unit2"
                   data-image="img3"
+                  id="img3-dot"
                   onClick={handleStartDotClick}
                 ></div>
               </div>
               <div className="img-box2">
-                <img src={img4} alt="" />{" "}
+                <img src={img4} alt=""  onClick={() => document.getElementById("img4-dot").click()}
+                style={{ cursor: "pointer" }}/>{" "}
                 {wrongImages.includes("img4") && (
                   <span className="error-mark-img">✕</span>
                 )}
                 <div
                   className="dot2-unit2 start-dot2-unit2"
                   data-image="img4"
+                  id="img4-dot"
                   onClick={handleStartDotClick}
                 ></div>
               </div>
               <div className="img-box2">
-                <img src={img5} alt="" />{" "}
+                <img src={img5} alt=""  onClick={() => document.getElementById("img5-dot").click()}
+                style={{ cursor: "pointer" }}/>{" "}
                 {wrongImages.includes("img5") && (
                   <span className="error-mark-img">✕</span>
                 )}
                 <div
                   className="dot2-unit2 start-dot2-unit2"
                   data-image="img5"
+                  id="img5-dot"
                   onClick={handleStartDotClick}
                 ></div>
               </div>
@@ -451,7 +468,8 @@ const Unit2_Page8_Q3 = () => {
             {/* الجمل */}
             <div className="match-words-row2">
               <div className="word-box2">
-                <h5
+                <h5 onClick={() => document.getElementById("d-dot").click()}
+              
                   id="d-char"
                   style={{
                     border: "2px solid #2effeaff",
@@ -463,6 +481,7 @@ const Unit2_Page8_Q3 = () => {
                     justifyContent: "center",
                     marginTop: "10px",
                     alignItems: "center",
+                    cursor: "pointer" 
                   }}
                 >
                   d
@@ -470,12 +489,13 @@ const Unit2_Page8_Q3 = () => {
                 <div
                   className="dot2-unit2 end-dot2-unit2"
                   data-word="d"
+                  id="d-dot"
                   onClick={handleEndDotClick}
                 ></div>
               </div>
 
               <div className="word-box2">
-                <h5
+                <h5 onClick={() => document.getElementById("t-dot").click()}
                   id="t-char"
                   style={{
                     border: "2px solid green",
@@ -486,14 +506,17 @@ const Unit2_Page8_Q3 = () => {
                     display: "flex",
                     justifyContent: "center",
                     marginTop: "10px",
+                    cursor: "pointer" ,
                     alignItems: "center",
                   }}
+                
                 >
                   t
                 </h5>
                 <div
                   className="dot2-unit2 end-dot2-unit2"
                   data-word="t"
+                  id="t-dot"
                   onClick={handleEndDotClick}
                 ></div>
               </div>

@@ -401,7 +401,7 @@ const Unit2_Page6_Q1 = () => {
                               {droppedPair && (
                                 <Draggable
                                   draggableId={droppedPair.id}
-                                  index={0}
+                                  index={index}
                                 >
                                   {(providedDraggable) => (
                                     <div
@@ -424,40 +424,38 @@ const Unit2_Page6_Q1 = () => {
                   })}
                 </div>
 
-                <Droppable droppableId="letters">
-                  {(provided) => (
-                    <div
-                      className="right-side"
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                    >
-                      {exerciseData.pairs
-                        .filter(
-                          (p) => !Object.values(droppedLetters).includes(p.id)
-                        )
-                        .map((pair, index) => (
-                          <div className="option-box">
-                            <Draggable draggableId={pair.id} index={index}>
-                              {(providedDraggable) => (
-                                <span
-                                  ref={providedDraggable.innerRef}
-                                  {...providedDraggable.draggableProps}
-                                  {...providedDraggable.dragHandleProps}
-                                  className="number-tag draggable-number"
-                                >
-                                  {pair.letter}
-                                </span>
-                              )}
-                            </Draggable>
+              <Droppable droppableId="letters">
+  {(provided) => (
+    <div
+      className="right-side"
+      ref={provided.innerRef}
+      {...provided.droppableProps}
+    >
+      {exerciseData.pairs
+        .filter((p) => !Object.values(droppedLetters).includes(p.id))
+        .map((pair, index) => (
+          <div className="option-box" key={pair.id}>
+            <Draggable draggableId={pair.id} index={index}>
+              {(providedDraggable) => (
+                <span
+                  ref={providedDraggable.innerRef}
+                  {...providedDraggable.draggableProps}
+                  {...providedDraggable.dragHandleProps}
+                  className="number-tag draggable-number"
+                >
+                  {pair.letter}
+                </span>
+              )}
+            </Draggable>
 
-                            {/* النص ثابت ولا يتحرك */}
-                            <span className="month-label">{pair.content}</span>
-                          </div>
-                        ))}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
+            <span className="month-label">{pair.content}</span>
+          </div>
+        ))}
+
+      {provided.placeholder}
+    </div>
+  )}
+</Droppable>
               </div>
             </DragDropContext>
           </div>

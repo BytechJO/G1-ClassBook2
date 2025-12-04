@@ -21,12 +21,14 @@ import {
   flashPages,
   posterPages,
 } from "./BookData/index";
+import LessonNavigator from "./StudentPages/LessonNavigator";
 
 export default function Book() {
   const [pageIndex, setPageIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1100);
   const [activeTab, setActiveTab] = useState("student");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showPopup, setShowPopup] = useState(true);
   // ZOOM + VIEW MODE
   const [zoom, setZoom] = useState(1);
   const [viewMode, setViewMode] = useState("spread"); // spread | single
@@ -57,12 +59,9 @@ export default function Book() {
   const [globalPopupAudio, setGlobalPopupAudio] = useState(false);
   const [globalPopupVideo, setGlobalPopupVideo] = useState(false);
   const [globalPopupClose, setGlobalPopupClose] = useState(true);
-  const openPopup = (content, isAudio = false, isVideo = false) => {
-    setGlobalPopupContent(content);
-    setGlobalPopupAudio(isAudio);
+  const openPopup = (type, data = null) => {
+    setGlobalPopupContent({ type, data });
     setGlobalPopupOpen(true);
-    setGlobalPopupClose(false);
-    setGlobalPopupVideo(isVideo);
   };
 
   const closePopup = () => {
@@ -218,6 +217,17 @@ export default function Book() {
       key: "Arrow",
       btn: "Arrow Button",
       icon: arrowBtn,
+      onClick: () => console.log("Info clicked"),
+    },
+    {
+      key: "Previous",
+      btn: "Previous Button",
+      icon: back,
+      onClick: () => console.log("Info clicked"),
+    },{
+      key: "Next",
+      btn: "Next Button",
+      icon: next,
       onClick: () => console.log("Info clicked"),
     },
   ];
@@ -686,7 +696,7 @@ export default function Book() {
             onClick={() => setIsRightSidebarOpen(true)}
             className="absolute right-3 text-white p-0.5 rounded-lg shadow hover:bg-[#bc90ff] transition"
           >
-            <FaKey size={80} color="#430f68"/>
+            <FaKey size={80} color="#430f68" />
           </svg>
           {/* RIGHT SIDEBAR */}
           {isRightSidebarOpen && (
@@ -720,7 +730,11 @@ export default function Book() {
                       onClick={() => item.onClick()}
                       className="flex items-center gap-3 p-3 bg-purple-100 rounded-lg cursor-pointer hover:bg-[#6B40C8] hover:text-white transition"
                     >
-                      <img src={item.icon} alt="" style={{height:"50px" ,width:"50px"}} />
+                      <img
+                        src={item.icon}
+                        alt=""
+                        style={{ height: "50px", width: "50px" }}
+                      />
                       <span className="font-medium">{item.btn}</span>
                     </li>
                   ))}
@@ -734,11 +748,24 @@ export default function Book() {
       <Popup
         isOpen={globalPopupOpen}
         onClose={closePopup}
-        isAudio={globalPopupAudio}
-        isVideo={globalPopupVideo}
+        type={globalPopupContent?.type}
       >
-        {globalPopupContent}
-      </Popup>
+    {globalPopupOpen && globalPopupContent && (
+    {
+      exercise: (
+        <LessonNavigator
+          startIndex={globalPopupContent.data.startIndex}
+        />
+      ),
+
+      audio: globalPopupContent.data,
+      video: globalPopupContent.data,
+      image: globalPopupContent.data,
+      html: globalPopupContent.data,
+
+      default: null,
+    }[globalPopupContent.type]
+  )} </Popup>
     </>
   );
 }

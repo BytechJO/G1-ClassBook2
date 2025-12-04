@@ -8,7 +8,7 @@ import ValidationAlert from "../../Popup/ValidationAlert";
 export default function Page8_Q3() {
   const [lines, setLines] = useState([]);
   const [wrongWords, setWrongWords] = useState([]);
-  const [firstDot, setFirstDot] = useState(null); // ⭐ أول نقطة
+  const [firstDot, setFirstDot] = useState(null);
   const containerRef = useRef(null);
   const [showAnswer, setShowAnswer] = useState(false);
 
@@ -21,7 +21,8 @@ export default function Page8_Q3() {
   // 1️⃣ الضغط على النقطة الأولى (start-dot)
   // ============================
   const handleStartDotClick = (e) => {
-    if (showAnswer) return; // 🔒 يمنع الرسم بعد show answer
+    if (showAnswer) return;
+
     const rect = containerRef.current.getBoundingClientRect();
 
     setFirstDot({
@@ -35,7 +36,7 @@ export default function Page8_Q3() {
   // 2️⃣ الضغط على النقطة الثانية (end-dot)
   // ============================
   const handleEndDotClick = (e) => {
-    if (showAnswer) return; // 🔒 يمنع الرسم بعد show answer
+    if (showAnswer) return;
     if (!firstDot) return;
 
     const rect = containerRef.current.getBoundingClientRect();
@@ -50,8 +51,6 @@ export default function Page8_Q3() {
     };
 
     setLines((prev) => [...prev, newLine]);
-
-    // تفريغ النقطة الأولى
     setFirstDot(null);
   };
 
@@ -111,7 +110,12 @@ export default function Page8_Q3() {
             <div className="word-with-dot">
               <span className="span-num">1</span>
 
-              <span className="word-text"  onClick={handleStartDotClick}>
+              {/* الكلمة تشغّل كليك على الدوت */}
+              <span
+                className="word-text"
+                onClick={() => document.getElementById("dot-hello").click()}
+                style={{ cursor: "pointer" }}
+              >
                 Hello! I’m John.
                 {wrongWords.includes("Hello! I’m John.") && (
                   <span className="error-mark">✕</span>
@@ -120,6 +124,7 @@ export default function Page8_Q3() {
 
               <div className="dot-wrapper">
                 <div
+                  id="dot-hello"
                   className="dot start-dot"
                   data-letter="Hello! I’m John."
                   onClick={handleStartDotClick}
@@ -130,12 +135,21 @@ export default function Page8_Q3() {
             <div className="img-with-dot">
               <div className="dot-wrapper">
                 <div
+                  id="img2-dot"
                   className="dot end-dot"
                   data-image="img2"
                   onClick={handleEndDotClick}
                 ></div>
               </div>
-              <img src={img2} className="matched-img" alt="" />
+
+              {/* الصورة تشغّل كليك على الدوت */}
+              <img
+                src={img2}
+                className="matched-img"
+                alt=""
+                onClick={() => document.getElementById("img2-dot").click()}
+                style={{ cursor: "pointer" }}
+              />
             </div>
           </div>
 
@@ -144,7 +158,11 @@ export default function Page8_Q3() {
             <div className="word-with-dot">
               <span className="span-num">2</span>
 
-              <span className="word-text"  onClick={handleStartDotClick}>
+              <span
+                className="word-text"
+                onClick={() => document.getElementById("dot-goodbye").click()}
+                style={{ cursor: "pointer" }}
+              >
                 Goodbye!
                 {wrongWords.includes("Goodbye!") && (
                   <span className="error-mark">✕</span>
@@ -153,6 +171,7 @@ export default function Page8_Q3() {
 
               <div className="dot-wrapper">
                 <div
+                  id="dot-goodbye"
                   className="dot start-dot"
                   data-letter="Goodbye!"
                   onClick={handleStartDotClick}
@@ -160,16 +179,23 @@ export default function Page8_Q3() {
               </div>
             </div>
 
-            <div className="img-with-dot"  onClick={handleEndDotClick}>
+            <div className="img-with-dot">
               <div className="dot-wrapper">
                 <div
+                  id="img1-dot"
                   className="dot end-dot"
                   data-image="img1"
                   onClick={handleEndDotClick}
                 ></div>
               </div>
 
-              <img src={img1} className="matched-img" alt="" />
+              <img
+                src={img1}
+                className="matched-img"
+                alt=""
+                onClick={() => document.getElementById("img1-dot").click()}
+                style={{ cursor: "pointer" }}
+              />
             </div>
           </div>
 
@@ -196,15 +222,15 @@ export default function Page8_Q3() {
             setLines([]);
             setWrongWords([]);
             setFirstDot(null);
-            setShowAnswer(false); // ← مهم جدًا
+            setShowAnswer(false);
           }}
           className="try-again-button"
         >
           Start Again ↻
         </button>
+
         <button
           onClick={() => {
-            // خطوط الإجابة الصحيحة
             const correctLines = [
               {
                 word: "Hello! I’m John.",
@@ -214,17 +240,9 @@ export default function Page8_Q3() {
                 x2: 0,
                 y2: 0,
               },
-              {
-                word: "Goodbye!",
-                image: "img2",
-                x1: 0,
-                y1: 0,
-                x2: 0,
-                y2: 0,
-              },
+              { word: "Goodbye!", image: "img2", x1: 0, y1: 0, x2: 0, y2: 0 },
             ];
 
-            // نحسب الإحداثيات اعتماداً على الدوتات الموجودة
             const rect = containerRef.current.getBoundingClientRect();
 
             const getDotPosition = (selector) => {
@@ -246,8 +264,8 @@ export default function Page8_Q3() {
             }));
 
             setLines(finalLines);
-            setWrongWords([]); // إطفاء الأخطاء
-            setShowAnswer(true); // تفعيل وضع Show Answer
+            setWrongWords([]);
+            setShowAnswer(true);
           }}
           className="show-answer-btn swal-continue"
         >

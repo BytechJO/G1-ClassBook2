@@ -30,12 +30,7 @@ const Unit2_Page6 = ({ openPopup }) => {
           height="22"
           viewBox="0 0 90 90"
           onClick={() =>
-            openPopup(
-              <>
-                <Unit2_Page6_Q1 />
-              </>,
-              false
-            )
+            openPopup("exercise", { startIndex: 10 })
           }
           style={{ overflow: "visible" }}
         >
@@ -52,8 +47,8 @@ const Unit2_Page6 = ({ openPopup }) => {
           height="22"
           viewBox="0 0 90 90"
           onClick={() =>
-            openPopup(
-              <div
+          openPopup(
+            "audio",    <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -61,8 +56,7 @@ const Unit2_Page6 = ({ openPopup }) => {
                 }}
               >
                 <AudioWithCaption src={song} captions={captionsExample} />
-              </div>,
-              true
+              </div>
             )
           }
           style={{ overflow: "visible" }}
@@ -80,12 +74,7 @@ const Unit2_Page6 = ({ openPopup }) => {
           height="22"
           viewBox="0 0 90 90"
           onClick={() =>
-            openPopup(
-              <>
-                <Unit2_Page6_Q2 />
-              </>,
-              false
-            )
+            openPopup("exercise", { startIndex: 11 })
           }
           style={{ overflow: "visible" }}
         >

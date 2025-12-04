@@ -143,11 +143,10 @@ const Unit2_Page2 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-              <AudioWithCaption
+             "audio", <AudioWithCaption
                 src={Pg11_1_1_Stella}
                 captions={captionsExample}
-              />,
-              true
+              />
             )
           }
           style={{ overflow: "visible" }}
@@ -165,7 +164,7 @@ const Unit2_Page2 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-              <FourImagesWithAudio
+               "html", <FourImagesWithAudio
                 images={[read, repeat1, repeat2]}
                 audioSrc={soundListen}
                 checkpoints={[0, 3.7, 5.3]}
@@ -173,8 +172,7 @@ const Unit2_Page2 = ({ openPopup }) => {
                 titleQ={`Listen, read, and repeat.`}
                 audioArr={imageSounds2}
                 captions={captions}
-              />,
-              false
+              />
             )
           }
           style={{ overflow: "visible" }}
@@ -192,7 +190,7 @@ const Unit2_Page2 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-              <FourImagesWithAudio
+               "html", <FourImagesWithAudio
                 images={[Rabbit, img1, img2, img3, img4]}
                 audioSrc={longsound}
                 checkpoints={[0, 3.4, 4, 4.9, 6]}
@@ -200,8 +198,7 @@ const Unit2_Page2 = ({ openPopup }) => {
                 titleQ={"Listen and read along."}
                 audioArr={imageSounds}
                 captions={captions2}
-              />,
-              false
+              />
             )
           }
           style={{ overflow: "visible" }}

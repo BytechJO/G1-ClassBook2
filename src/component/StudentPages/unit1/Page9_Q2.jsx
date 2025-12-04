@@ -67,7 +67,7 @@ export default function Page9_Q2() {
 
     setFirstDot(null);
   };
-
+ 
   useEffect(() => {
     const hidePalette = (e) => {
       // إذا الكبس كان على دائرة اللون أو على الكلمة المختارة → لا تخفيه
@@ -177,7 +177,8 @@ export default function Page9_Q2() {
         justifyContent: "center",
       }}
     >
-      <div className="div-forall"
+      <div
+        className="div-forall"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -188,8 +189,9 @@ export default function Page9_Q2() {
         }}
       >
         <h4 className="header-title-page8">
-          <span className="ex-A">E</span>Match and color.
+          <span className="ex-A">E</span>Match and color. 
         </h4>
+        <span style={{fontSize:"14px",color:"gray"}}>Hint: Double Click to Color Word</span>
         {selectedWordIndex !== null && (
           <div className="color-palette">
             {colors.map((c) => (
@@ -230,11 +232,14 @@ export default function Page9_Q2() {
                     textAlign: "start",
                     width: "100%",
                   }}
-                  onClick={() => handleWordClick(i)}
+                  onClick={() => document.getElementById(`dot-${word}`).click()} // رسم الخط
+                  onDoubleClick={() => handleWordClick(i)} // فتح الباليت
+                   onTouchEnd={() => handleWordClick(i)}         
                 >
                   {word}
                 </h5>{" "}
                 <div
+                  id={`dot-${word}`}
                   className="dot1 start-dot1"
                   data-letter={word}
                   onClick={handleStartDotClick}
@@ -260,6 +265,7 @@ export default function Page9_Q2() {
               >
                 <div
                   className="dot1 end-dot1"
+                  id={`dot-${word}`}
                   data-image={word}
                   onClick={handleEndDotClick}
                 ></div>
@@ -275,7 +281,9 @@ export default function Page9_Q2() {
                     cursor: "pointer",
                     position: "relative",
                   }}
-                  onClick={() => handleWordClick(i + 3)}
+                  onClick={() => document.getElementById(`dot-${word}`).click()}
+                  onDoubleClick={() => handleWordClick(i + 3)}
+                  onTouchEnd={() => handleWordClick(i + 3)}
                 >
                   {word}
                 </h5>
@@ -311,7 +319,7 @@ export default function Page9_Q2() {
               "transparent",
             ]);
             setWrongWords([]);
-            setShowAnswer(false)
+            setShowAnswer(false);
           }}
           className="try-again-button"
         >

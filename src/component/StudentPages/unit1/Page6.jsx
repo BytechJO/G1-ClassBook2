@@ -114,7 +114,7 @@ const Page6 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-              <div
+             "audio", <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -125,8 +125,7 @@ const Page6 = ({ openPopup }) => {
                   src={CD4_Pg6_Grammar1_AdultLady}
                   captions={captionsExample}
                 />
-              </div>,
-              true
+              </div>
             )
           }
           style={{ overflow: "visible" }}
@@ -151,7 +150,7 @@ const Page6 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-              <div
+             "video", <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -175,9 +174,7 @@ const Page6 = ({ openPopup }) => {
                 >
                   <source src={video} type="video/mp4" />
                 </video>
-              </div>,
-              false,
-              true
+              </div>
             )
           }
           style={{ overflow: "visible" }}

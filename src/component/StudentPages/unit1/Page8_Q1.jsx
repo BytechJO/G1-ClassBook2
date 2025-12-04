@@ -74,20 +74,22 @@ const Page8_Q1 = () => {
   // ✔ Captions Array
   // ================================
   const captions = [
-   
-    { start: 0, end: 4.23, text: "Page 8. Right Activities. Exercise A, number 1. " },
+    {
+      start: 0,
+      end: 4.23,
+      text: "Page 8. Right Activities. Exercise A, number 1. ",
+    },
     {
       start: 4.25,
       end: 8.28,
       text: "Listen and write the missing letters. Number the pictures.  ",
     },
-    { start: 8.30, end: 11.05, text: "1-tiger." },
+    { start: 8.3, end: 11.05, text: "1-tiger." },
     { start: 11.07, end: 13.12, text: "2-taxi." },
     { start: 13.14, end: 15.14, text: "3-duck." },
     { start: 15.16, end: 17.13, text: "4-deer." },
   ];
 
-  
   // ================================
   // ✔ Update caption highlight
   // ================================
@@ -225,317 +227,286 @@ const Page8_Q1 = () => {
   };
   return (
     <div className="page8-wrapper">
-      <div className="page8-content">
-        <header className="header-title-page8">
-          <span className="ex-A">A</span> <span className="number-of-q">1</span>{" "}
-          Listen and write the missing letters. Number the pictures.
-        </header>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            margin: "30px 0px",
-            width: "100%",
-          }}
-        >
+      <div   className="div-forall"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
+          position: "relative",
+          width: "60%",
+        }}>
+        <div className="page8-content">
+          <header className="header-title-page8">
+            <span className="ex-A">A</span>{" "}
+            <span className="number-of-q">1</span> Listen and write the missing
+            letters. Number the pictures.
+          </header>
           <div
-            className="audio-popup-read"
             style={{
-              width: "50%",
+              display: "flex",
+              justifyContent: "center",
+              margin: "30px 0px",
+              width: "100%",
             }}
           >
-            <div className="audio-inner player-ui">
-              <audio
-                ref={audioRef}
-                src={CD6_Pg8_Instruction1_AdultLady}
-                onTimeUpdate={(e) => {
-                  const time = e.target.currentTime;
-                  setCurrent(time);
-                  updateCaption(time);
-                }}
-                onLoadedMetadata={(e) => setDuration(e.target.duration)}
-              ></audio>
-              {/* Play / Pause */}
-              {/* Play / Pause */}
-              {/* الوقت - السلايدر - الوقت */}
-              <div className="top-row">
-                <span className="audio-time">
-                  {new Date(current * 1000).toISOString().substring(14, 19)}
-                </span>
-
-                <input
-                  type="range"
-                  className="audio-slider"
-                  min="0"
-                  max={duration}
-                  value={current}
-                  onChange={(e) => {
-                    audioRef.current.currentTime = e.target.value;
-                    updateCaption(Number(e.target.value));
+            <div
+              className="audio-popup-read"
+              style={{
+                width: "50%",
+              }}
+            >
+              <div className="audio-inner player-ui">
+                <audio
+                  ref={audioRef}
+                  src={CD6_Pg8_Instruction1_AdultLady}
+                  onTimeUpdate={(e) => {
+                    const time = e.target.currentTime;
+                    setCurrent(time);
+                    updateCaption(time);
                   }}
+                  onLoadedMetadata={(e) => setDuration(e.target.duration)}
+                ></audio>
+                {/* Play / Pause */}
+                {/* Play / Pause */}
+                {/* الوقت - السلايدر - الوقت */}
+                <div className="top-row">
+                  <span className="audio-time">
+                    {new Date(current * 1000).toISOString().substring(14, 19)}
+                  </span>
+
+                  <input
+                    type="range"
+                    className="audio-slider"
+                    min="0"
+                    max={duration}
+                    value={current}
+                    onChange={(e) => {
+                      audioRef.current.currentTime = e.target.value;
+                      updateCaption(Number(e.target.value));
+                    }}
+                    style={{
+                      background: `linear-gradient(to right, #430f68 ${
+                        (current / duration) * 100
+                      }%, #d9d9d9ff ${(current / duration) * 100}%)`,
+                    }}
+                  />
+
+                  <span className="audio-time">
+                    {new Date(duration * 1000).toISOString().substring(14, 19)}
+                  </span>
+                </div>
+                {/* الأزرار 3 أزرار بنفس السطر */}
+                <div className="bottom-row">
+                  {/* فقاعة */}
+                  <div
+                    className={`round-btn ${showCaption ? "active" : ""}`}
+                    style={{ position: "relative" }}
+                    onClick={() => setShowCaption(!showCaption)}
+                  >
+                    <TbMessageCircle size={36} />
+                    <div
+                      className={`caption-inPopup ${showCaption ? "show" : ""}`}
+                      style={{ top: "100%", left: "10%" }}
+                    >
+                      {captions.map((cap, i) => (
+                        <p
+                          key={i}
+                          id={`caption-${i}`}
+                          className={`caption-inPopup-line2 ${
+                            activeIndex === i ? "active" : ""
+                          }`}
+                        >
+                          {cap.text}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Play */}
+                  <button className="play-btn2" onClick={togglePlay}>
+                    {isPlaying ? <FaPause size={26} /> : <FaPlay size={26} />}
+                  </button>
+
+                  {/* Settings */}
+                  <div className="settings-wrapper" ref={settingsRef}>
+                    <button
+                      className={`round-btn ${showSettings ? "active" : ""}`}
+                      onClick={() => setShowSettings(!showSettings)}
+                    >
+                      <IoMdSettings size={36} />
+                    </button>
+
+                    {showSettings && (
+                      <div className="settings-popup">
+                        <label>Volume</label>
+                        <input
+                          type="range"
+                          min="0"
+                          max="1"
+                          step="0.05"
+                          value={volume}
+                          onChange={(e) => {
+                            setVolume(e.target.value);
+                            audioRef.current.volume = e.target.value;
+                          }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>{" "}
+              </div>
+            </div>
+          </div>
+          <audio ref={clickAudioRef} style={{ display: "none" }} />
+
+          {/* ✅ الكلمات */}
+          <div
+            className="div-input"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "30px",
+              // marginLeft:"40px",
+              width: "100%",
+            }}
+          >
+            {displayOrder.map((dataIndex, index) => (
+              <div
+                key={index}
+                style={{
+                  display: "flex",
+                  alignItems: "flex-end",
+                  position: "relative",
+                }}
+              >
+                <span className="number-of-q">{index + 1}</span>
+                <input
+                  type="text"
+                  maxLength="1"
+                  className="char-input"
+                  value={answers[dataIndex].letter}
+                  onChange={(e) =>
+                    !showAnswer &&
+                    updateAnswer(dataIndex, "letter", e.target.value)
+                  }
+                  disabled={showAnswer}
                   style={{
-                    background: `linear-gradient(to right, #430f68 ${
-                      (current / duration) * 100
-                    }%, #d9d9d9ff ${(current / duration) * 100}%)`,
+                    width: "40px",
+                    textAlign: "center",
+                    fontSize: "30px",
+                    marginRight: "5px",
+                    color: isAutoAnswer ? "red" : "black", // ← هون
                   }}
                 />
 
-                <span className="audio-time">
-                  {new Date(duration * 1000).toISOString().substring(14, 19)}
-                </span>
-              </div>
-              {/* الأزرار 3 أزرار بنفس السطر */}
-              <div className="bottom-row">
-                {/* فقاعة */}
-                <div
-                  className={`round-btn ${showCaption ? "active" : ""}`}
-                  style={{ position: "relative" }}
-                  onClick={() => setShowCaption(!showCaption)}
+                <span
+                  style={{
+                    textAlign: "center",
+                    fontSize: "25px",
+                  }}
                 >
-                  <TbMessageCircle size={36} />
+                  {data[dataIndex].word.slice(1)}
+                </span>
+                {wrongLetters[dataIndex] && (
                   <div
-                    className={`caption-inPopup ${showCaption ? "show" : ""}`}
-                    style={{ top: "100%", left: "10%" }}
+                    style={{
+                      position: "absolute",
+                      left: "56%",
+                      top: "19%",
+                      transform: "translateY(-50%)",
+                      width: "25px",
+                      height: "25px",
+                      background: "red",
+                      color: "white",
+                      borderRadius: "50%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      fontSize: "14px",
+                      fontWeight: "bold",
+                      border: "2px solid white",
+                    }}
                   >
-                    {captions.map((cap, i) => (
-                      <p
-                        key={i}
-                        id={`caption-${i}`}
-                        className={`caption-inPopup-line2 ${
-                          activeIndex === i ? "active" : ""
-                        }`}
-                      >
-                        {cap.text}
-                      </p>
-                    ))}
+                    X
                   </div>
-                </div>
-
-                {/* Play */}
-                <button className="play-btn2" onClick={togglePlay}>
-                  {isPlaying ? <FaPause size={26} /> : <FaPlay size={26} />}
-                </button>
-
-                {/* Settings */}
-                <div className="settings-wrapper" ref={settingsRef}>
-                  <button
-                    className={`round-btn ${showSettings ? "active" : ""}`}
-                    onClick={() => setShowSettings(!showSettings)}
-                  >
-                    <IoMdSettings size={36} />
-                  </button>
-
-                  {showSettings && (
-                    <div className="settings-popup">
-                      <label>Volume</label>
-                      <input
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.05"
-                        value={volume}
-                        onChange={(e) => {
-                          setVolume(e.target.value);
-                          audioRef.current.volume = e.target.value;
-                        }}
-                      />
-                    </div>
-                  )}
-                </div>
-              </div>{" "}
-            </div>
+                )}
+              </div>
+            ))}
           </div>
-        </div>
-        <audio ref={clickAudioRef} style={{ display: "none" }} />
 
-        {/* ✅ الكلمات */}
-        <div
-          className="div-input"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginBottom: "30px",
-            // marginLeft:"40px",
-            width: "100%",
-          }}
-        >
-          {displayOrder.map((dataIndex, index) => (
-            <div
-              key={index}
-              style={{
-                display: "flex",
-                alignItems: "flex-end",
-                position: "relative",
-              }}
-            >
-              <span className="number-of-q">{index + 1}</span>
-              <input
-                type="text"
-                maxLength="1"
-                className="char-input"
-                value={answers[dataIndex].letter}
-                onChange={(e) =>
-                  !showAnswer &&
-                  updateAnswer(dataIndex, "letter", e.target.value)
-                }
-                disabled={showAnswer}
+          {/* ✅ الصور */}
+          <div
+            className="exercise-image-div"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              marginBottom: "20px",
+            }}
+          >
+            {data.map((item, index) => (
+              <div
                 style={{
-                  width: "40px",
-                  textAlign: "center",
-                  fontSize: "30px",
-                  marginRight: "5px",
-                  color: isAutoAnswer ? "red" : "black", // ← هون
-                }}
-              />
-
-              <span
-                style={{
-                  textAlign: "center",
-                  fontSize: "25px",
+                  display: "flex",
+                  gap: "20px",
+                  flexDirection: "column",
                 }}
               >
-                {data[dataIndex].word.slice(1)}
-              </span>
-              {wrongLetters[dataIndex] && (
+                <img
+                  key={item.num}
+                  src={item.src}
+                  className="exercise-image"
+                  onClick={() => playSound(item.sound)}
+                />
                 <div
-                  style={{
-                    position: "absolute",
-                    left: "56%",
-                    top: "19%",
-                    transform: "translateY(-50%)",
-                    width: "25px",
-                    height: "25px",
-                    background: "red",
-                    color: "white",
-                    borderRadius: "50%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontSize: "14px",
-                    fontWeight: "bold",
-                    border: "2px solid white",
-                  }}
+                  key={index + 1}
+                  className="exercise-item"
+                  style={{ position: "relative" }}
                 >
-                  X
-                </div>
-              )}
-            </div>
-          ))}
+                  <input
+                    type="text"
+                    maxLength="1"
+                    className="missing-input"
+                    value={answers[index].number}
+                    onChange={(e) =>
+                      !showAnswer &&
+                      updateAnswer(index, "number", e.target.value)
+                    }
+                    disabled={showAnswer}
+                    style={{
+                      color: isAutoAnswer ? "red" : "black", // ← نفس الشي هون
+                    }}
+                  />
+
+                  {wrongNumbers[index] && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        right: "-17px",
+                        top: "5%",
+                        transform: "translateY(-50%)",
+                        width: "25px",
+                        height: "25px",
+                        background: "red",
+                        color: "white",
+                        borderRadius: "50%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        fontSize: "14px",
+                        fontWeight: "bold",
+                        border: "2px solid white",
+                      }}
+                    >
+                      X
+                    </div>
+                  )}
+                </div>{" "}
+              </div>
+            ))}
+          </div>
         </div>
-
-        {/* ✅ الصور */}
-        <div
-          className="exercise-image-div"
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-around",
-            marginBottom: "20px",
-          }}
-        >
-          {data.map((item, index) => (
-            <div style={{display:"flex",gap:"20px",flexDirection:"column"}}>
-            <img
-              key={index}
-              src={item.src}
-              className="exercise-image"
-              onClick={() => playSound(item.sound)}
-            />
-              <div
-              key={index}
-              className="exercise-item"
-              style={{ position: "relative" }}
-            >
-              <input
-                type="text"
-                maxLength="1"
-                className="missing-input"
-                value={answers[index].number}
-                onChange={(e) =>
-                  !showAnswer && updateAnswer(index, "number", e.target.value)
-                }
-                disabled={showAnswer}
-                style={{
-                  color: isAutoAnswer ? "red" : "black", // ← نفس الشي هون
-                }}
-              />
-
-              {wrongNumbers[index] && (
-                <div
-                  style={{
-                    position: "absolute",
-                    right: "-17px",
-                    top: "5%",
-                    transform: "translateY(-50%)",
-                    width: "25px",
-                    height: "25px",
-                    background: "red",
-                    color: "white",
-                    borderRadius: "50%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontSize: "14px",
-                    fontWeight: "bold",
-                    border: "2px solid white",
-                  }}
-                >
-                  X
-                </div>
-              )}
-            </div> </div>
-          ))}
-          {/* ✅ مربعات الأرقام + علامة الخطأ
-        <div className="exercise-container">
-          {data.map((item, index) => (
-            <div
-              key={index}
-              className="exercise-item"
-              style={{ position: "relative" }}
-            >
-              <input
-                type="text"
-                maxLength="1"
-                className="missing-input"
-                value={answers[index].number}
-                onChange={(e) =>
-                  !showAnswer && updateAnswer(index, "number", e.target.value)
-                }
-                disabled={showAnswer}
-                style={{
-                  color: isAutoAnswer ? "red" : "black", // ← نفس الشي هون
-                }}
-              />
-
-              {wrongNumbers[index] && (
-                <div
-                  style={{
-                    position: "absolute",
-                    right: "-17px",
-                    top: "5%",
-                    transform: "translateY(-50%)",
-                    width: "25px",
-                    height: "25px",
-                    background: "red",
-                    color: "white",
-                    borderRadius: "50%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontSize: "14px",
-                    fontWeight: "bold",
-                    border: "2px solid white",
-                  }}
-                >
-                  X
-                </div>
-              )}
-            </div>
-          ))}
-        </div> */}
-        </div>
-
-       
       </div>
       <div className="action-buttons-container">
         <button onClick={reset} className="try-again-button">

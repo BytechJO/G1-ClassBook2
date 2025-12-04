@@ -1,9 +1,5 @@
 import page_10 from "../../../assets/img_unit2/imgs/Right 1 Unit 02 Stell Birthday10.jpg";
 import "./Unit2_Page10.css";
-import Unit2_Page10_Q1 from "./Unit2_Page10_Q1";
-import Unit2_Page10_Q3 from "./Unit2_Page10_Q3";
-import Unit2_Page10_Q2 from "./Unit2_Page10_Q2";
-import Unit2_Page10_Q4 from "./Unit2_Page10_Q4";
 import arrowBtn from "../../../assets/unit1/imgs/Page 01/Arrow.svg";
 
 const Unit2_Page10 = ({ openPopup }) => {
@@ -19,12 +15,7 @@ const Unit2_Page10 = ({ openPopup }) => {
           height="22"
           viewBox="0 0 90 90"
           onClick={() =>
-            openPopup(
-              <>
-                <Unit2_Page10_Q1 />
-              </>,
-              false
-            )
+         openPopup("exercise", { startIndex: 21 })
           }
           style={{ overflow: "visible" }}
         >
@@ -40,12 +31,7 @@ const Unit2_Page10 = ({ openPopup }) => {
           height="22"
           viewBox="0 0 90 90"
           onClick={() =>
-            openPopup(
-              <>
-                <Unit2_Page10_Q2 />
-              </>,
-              false
-            )
+            openPopup("exercise", { startIndex: 22 })
           }
           style={{ overflow: "visible" }}
         >
@@ -61,12 +47,7 @@ const Unit2_Page10 = ({ openPopup }) => {
           height="22"
           viewBox="0 0 90 90"
           onClick={() =>
-            openPopup(
-              <>
-                <Unit2_Page10_Q3 />
-              </>,
-              false
-            )
+            openPopup("exercise", { startIndex: 23 })
           }
           style={{ overflow: "visible" }}
         >
@@ -82,12 +63,7 @@ const Unit2_Page10 = ({ openPopup }) => {
           height="22"
           viewBox="0 0 90 90"
           onClick={() =>
-            openPopup(
-              <>
-                <Unit2_Page10_Q4 />
-              </>,
-              false
-            )
+           openPopup("exercise", { startIndex: 24 })
           }
           style={{ overflow: "visible" }}
         >

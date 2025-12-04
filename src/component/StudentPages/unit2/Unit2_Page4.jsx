@@ -120,7 +120,7 @@ const Unit2_Page4 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-              <div
+             "audio", <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -131,8 +131,7 @@ const Unit2_Page4 = ({ openPopup }) => {
                   src={CD12_Pg13_Grammar2_AdultLady}
                   captions={captionsExample}
                 />
-              </div>,
-              true
+              </div>
             )
           }
           style={{ overflow: "visible" }}
@@ -150,7 +149,7 @@ const Unit2_Page4 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-              <div
+             "video", <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -173,9 +172,7 @@ const Unit2_Page4 = ({ openPopup }) => {
                 >
                   <source src={video} type="video/mp4" />
                 </video>
-              </div>,
-              false,
-              true
+              </div>
             )
           }
           style={{ overflow: "visible" }}

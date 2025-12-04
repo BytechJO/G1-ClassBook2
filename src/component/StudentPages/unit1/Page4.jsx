@@ -81,10 +81,9 @@ const Page4 = ({ openPopup }) => {
     2: sound4,
     3: sound5,
   };
- const captions = [
-   { start: 0, end: 3.0, text: "Page 4. Listen and read along." },
-    { start: 3.02, end: 6.10, text: " D. Dear. Dish. Duck. " },
-    
+  const captions = [
+    { start: 0, end: 3.0, text: "Page 4. Listen and read along." },
+    { start: 3.02, end: 6.1, text: " D. Dear. Dish. Duck. " },
   ];
   const handleImageClick = (e) => {
     const rect = e.target.getBoundingClientRect();
@@ -149,6 +148,7 @@ const Page4 = ({ openPopup }) => {
             viewBox="0 0 90 90"
             onClick={() =>
               openPopup(
+                "audio",
                 <div
                   style={{
                     display: "flex",
@@ -160,9 +160,7 @@ const Page4 = ({ openPopup }) => {
                     src={allUnitSound}
                     captions={captionsExample}
                   />
-                </div>,
-                true,
-                false
+                </div>
               )
             }
             style={{ overflow: "visible" }}
@@ -187,12 +185,8 @@ const Page4 = ({ openPopup }) => {
             height="22"
             viewBox="0 0 90 90"
             onClick={() =>
-              openPopup(
-                <>
-                  <Page4_Interactive1 />
-                </>,
-                false
-              )
+            
+              openPopup("html", <Page4_Interactive1 />)
             }
             style={{ overflow: "visible" }}
           >
@@ -216,12 +210,8 @@ const Page4 = ({ openPopup }) => {
             height="22"
             viewBox="0 0 90 90"
             onClick={() =>
-              openPopup(
-                <>
-                  <Page4_vocabulary />
-                </>,
-                false
-              )
+            
+              openPopup("html", <Page4_vocabulary />)
             }
             style={{ overflow: "visible" }}
           >
@@ -245,7 +235,7 @@ const Page4 = ({ openPopup }) => {
             viewBox="0 0 90 90"
             onClick={() =>
               openPopup(
-                <FourImagesWithAudio
+              "html",  <FourImagesWithAudio
                   images={[Rabbit, img1, img2, img3, img4]}
                   audioSrc={longAudio}
                   checkpoints={[0, 2.9, 3.4, 4.2, 5.1]}
@@ -253,9 +243,9 @@ const Page4 = ({ openPopup }) => {
                   titleQ={"Listen and read along."}
                   audioArr={imageSounds}
                   captions={captions}
-                />,
-                false
+                />
               )
+
             }
             style={{ overflow: "visible" }}
           >

@@ -77,7 +77,7 @@ const Unit2_Page8_Q1 = () => {
       );
       return;
     }
-   
+
     let wrong = [];
     let correctCount = 0;
 
@@ -135,13 +135,20 @@ const Unit2_Page8_Q1 = () => {
             <div className="matching-row2">
               <div className="word-with-dot2">
                 <span className="span-num2">1</span>
-                <span className="word-text2">duck</span>
+                <span
+                  className="word-text2"
+                  onClick={() => document.getElementById("dot-duck").click()}
+                  style={{ cursor: "pointer" }}
+                >
+                  duck
+                </span>
                 {wrongWords.includes("duck") && ( // ⭐ تم التعديل هون
                   <span className="error-mark8">✕</span>
                 )}
                 <div className="dot-wrapper2">
                   <div
                     className="dot2 start-dot2"
+                    id="dot-duck"
                     data-word="duck"
                     onClick={handleStartDotClick}
                   ></div>
@@ -153,6 +160,7 @@ const Unit2_Page8_Q1 = () => {
                   <div
                     className="dot2 end-dot2"
                     data-image="img1"
+                    id="dot-img1"
                     onClick={handleEndDotClick}
                   ></div>
                 </div>
@@ -160,7 +168,8 @@ const Unit2_Page8_Q1 = () => {
                   src={table}
                   className="matched-img2"
                   alt=""
-                  style={{ height: "90px", width: "auto" }}
+                  onClick={() => document.getElementById("dot-img1").click()}
+                  style={{ height: "100px", width: "auto", cursor: "pointer" }}
                 />
               </div>
             </div>
@@ -169,7 +178,13 @@ const Unit2_Page8_Q1 = () => {
             <div className="matching-row2">
               <div className="word-with-dot2">
                 <span className="span-num2">2</span>
-                <span className="word-text2">tiger</span>
+                <span
+                  className="word-text2"
+                  onClick={() => document.getElementById("dot-tiger").click()}
+                  style={{ cursor: "pointer" }}
+                >
+                  tiger
+                </span>
                 {wrongWords.includes("tiger") && ( // ⭐ تم التعديل هون
                   <span className="error-mark8">✕</span>
                 )}
@@ -177,6 +192,7 @@ const Unit2_Page8_Q1 = () => {
                   <div
                     className="dot2 start-dot2"
                     data-word="tiger"
+                    id="dot-tiger"
                     onClick={handleStartDotClick}
                   ></div>
                 </div>
@@ -187,6 +203,7 @@ const Unit2_Page8_Q1 = () => {
                   <div
                     className="dot2 end-dot2"
                     data-image="img2"
+                    id="dot-img2"
                     onClick={handleEndDotClick}
                   ></div>
                 </div>
@@ -194,7 +211,8 @@ const Unit2_Page8_Q1 = () => {
                   src={dish}
                   className="matched-img2"
                   alt=""
-                  style={{ height: "100px", width: "135px" }}
+                  onClick={() => document.getElementById("dot-img2").click()}
+                  style={{ height: "110px", width: "auto", cursor: "pointer" }}
                 />
               </div>
             </div>
@@ -203,7 +221,13 @@ const Unit2_Page8_Q1 = () => {
             <div className="matching-row2">
               <div className="word-with-dot2">
                 <span className="span-num2">3</span>
-                <span className="word-text2">dish</span>
+                <span
+                  className="word-text2"
+                  onClick={() => document.getElementById("dot-dish").click()}
+                  style={{ cursor: "pointer" }}
+                >
+                  dish
+                </span>
                 {wrongWords.includes("dish") && ( // ⭐ تم التعديل هون
                   <span className="error-mark8">✕</span>
                 )}
@@ -211,6 +235,7 @@ const Unit2_Page8_Q1 = () => {
                   <div
                     className="dot2 start-dot2"
                     data-word="dish"
+                    id="dot-dish"
                     onClick={handleStartDotClick}
                   ></div>
                 </div>
@@ -221,6 +246,7 @@ const Unit2_Page8_Q1 = () => {
                   <div
                     className="dot2 end-dot2"
                     data-image="img3"
+                    id="dot-img3"
                     onClick={handleEndDotClick}
                   ></div>
                 </div>
@@ -228,7 +254,8 @@ const Unit2_Page8_Q1 = () => {
                   src={duck}
                   className="matched-img2"
                   alt=""
-                  style={{ height: "100px", width: "auto" }}
+                  onClick={() => document.getElementById("dot-img3").click()}
+                  style={{ height: "100px", width: "auto", cursor: "pointer" }}
                 />
               </div>
             </div>
@@ -237,7 +264,13 @@ const Unit2_Page8_Q1 = () => {
             <div className="matching-row2">
               <div className="word-with-dot2">
                 <span className="span-num2">4</span>
-                <span className="word-text2">table</span>
+                <span
+                  className="word-text2"
+                  onClick={() => document.getElementById("dot-table").click()}
+                  style={{ cursor: "pointer" }}
+                >
+                  table
+                </span>
                 {wrongWords.includes("table") && ( // ⭐ تم التعديل هون
                   <span className="error-mark8">✕</span>
                 )}
@@ -245,6 +278,7 @@ const Unit2_Page8_Q1 = () => {
                   <div
                     className="dot2 start-dot2"
                     data-word="table"
+                    id="dot-table"
                     onClick={handleStartDotClick}
                   ></div>
                 </div>
@@ -255,6 +289,7 @@ const Unit2_Page8_Q1 = () => {
                   <div
                     className="dot2 end-dot2"
                     data-image="img4"
+                    id="dot-img4"
                     onClick={handleEndDotClick}
                   ></div>
                 </div>
@@ -262,7 +297,8 @@ const Unit2_Page8_Q1 = () => {
                   src={tiger}
                   className="matched-img2"
                   alt=""
-                  style={{ height: "100px", width: "auto" }}
+                  onClick={() => document.getElementById("dot-img4").click()}
+                  style={{ height: "100px", width: "auto", cursor: "pointer" }}
                 />
               </div>
             </div>
@@ -278,10 +314,9 @@ const Unit2_Page8_Q1 = () => {
           <button
             onClick={() => {
               setLines([]);
-               setShowAnswer(false);
+              setShowAnswer(false);
               setWrongWords([]);
               setFirstDot(null);
-             
             }}
             className="try-again-button"
           >
@@ -309,10 +344,9 @@ const Unit2_Page8_Q1 = () => {
                 x2: getDotPosition(`[data-image="${line.image}"]`).x,
                 y2: getDotPosition(`[data-image="${line.image}"]`).y,
               }));
-      setShowAnswer(true);
+              setShowAnswer(true);
               setLines(finalLines);
               setWrongImages([]);
-        
             }}
             className="show-answer-btn swal-continue"
           >

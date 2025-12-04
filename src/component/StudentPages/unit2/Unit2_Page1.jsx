@@ -143,7 +143,7 @@ const Unit2_Page1 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-              <div
+             "audio", <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -151,9 +151,7 @@ const Unit2_Page1 = ({ openPopup }) => {
                 }}
               >
                 <AudioWithCaption src={allUnit2} captions={captionsExample} />
-              </div>,
-              true,
-              false
+              </div>
             )
           }
           style={{ overflow: "visible" }}
@@ -172,10 +170,9 @@ const Unit2_Page1 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-              <>
+             "html", <>
                 <Unit2_Page1_find />
-              </>,
-              false
+              </>
             )
           }
           style={{ overflow: "visible" }}
@@ -193,10 +190,9 @@ const Unit2_Page1 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-              <>
+                "html",<>
                 <Unit2_Page1_Vocab />
-              </>,
-              false
+              </>
             )
           }
           style={{ overflow: "visible" }}
@@ -214,10 +210,9 @@ const Unit2_Page1 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-              <>
+               "html", <>
                 <Unit2_Page1_Read />
-              </>,
-              false
+              </>
             )
           }
           style={{ overflow: "visible" }}

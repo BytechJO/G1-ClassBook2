@@ -34,7 +34,7 @@ const Page9 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-              <div
+             "audio", <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -42,8 +42,7 @@ const Page9 = ({ openPopup }) => {
                 }}
               >
                 <AudioWithCaption src={song} captions={captionsExample} />
-              </div>,
-              true
+              </div>
             )
           }
           // className="headset-icon-CD-page9 hover:scale-110 transition"
@@ -69,9 +68,7 @@ const Page9 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-              <>
-                <Page9_Q1 />
-              </>
+             "exercise", { startIndex: 4} 
             )
           }
           style={{ overflow: "visible" }}
@@ -96,9 +93,7 @@ const Page9 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-              <>
-                <Page9_Q2 />
-              </>
+              "exercise", { startIndex: 5} 
             )
           }
           style={{ overflow: "visible" }}

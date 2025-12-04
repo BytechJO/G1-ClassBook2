@@ -19,14 +19,7 @@ const Page8 = ({ openPopup }) => {
           width="22"
           height="22"
           viewBox="0 0 90 90"
-          onClick={() =>
-            openPopup(
-              <>
-                <Page8_Q1 />
-              </>,
-              false
-            )
-          }
+          onClick={() => openPopup("exercise", { startIndex: 0 })}
           // className="click-icon-page8-1 hover:scale-110 transition"
           style={{ overflow: "visible" }}
         >
@@ -48,14 +41,7 @@ const Page8 = ({ openPopup }) => {
           width="22"
           height="22"
           viewBox="0 0 90 90"
-          onClick={() =>
-            openPopup(
-              <>
-                <Page8_Q2 />
-              </>,
-              false
-            )
-          }
+          onClick={() => openPopup("exercise", { startIndex: 1 })}
           style={{ overflow: "visible" }}
           // className="click-icon-page8-2 hover:scale-110 transition"
         >
@@ -78,14 +64,7 @@ const Page8 = ({ openPopup }) => {
           width="22"
           height="22"
           viewBox="0 0 90 90"
-          onClick={() =>
-            openPopup(
-              <>
-                <Page8_Q3 />
-              </>,
-              false
-            )
-          }
+          onClick={() => openPopup("exercise", { startIndex: 2 })}
           // className="click-icon-page8-3 hover:scale-110 transition"
           style={{ overflow: "visible" }}
         >
@@ -99,34 +78,27 @@ const Page8 = ({ openPopup }) => {
           />
         </svg>
       </div>
-         <div
+      <div
         className="click-icon-page8-4 hover:scale-110 transition"
         style={{ overflow: "visible" }}
       >
-      <svg
-        width="22"
-        height="22"
-        viewBox="0 0 90 90"
-        onClick={() =>
-          openPopup(
-            <>
-              <Page8_Q4 />
-            </>,
-            false
-          )
-        }
-        // className="click-icon-page8-4 hover:scale-110 transition"
-        style={{ overflow: "visible" }}
-      >
-        <image
-          href={arrowBtn}
-          x="0"
-          y="0"
-          width="100%"
-          height="100%"
-          preserveAspectRatio="xMidYMid meet"
-        />
-      </svg>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 90 90"
+          onClick={() => openPopup("exercise", { startIndex: 3 })}
+          // className="click-icon-page8-4 hover:scale-110 transition"
+          style={{ overflow: "visible" }}
+        >
+          <image
+            href={arrowBtn}
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            preserveAspectRatio="xMidYMid meet"
+          />
+        </svg>
       </div>
     </div>
   );

@@ -124,7 +124,7 @@ const Page7 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-              <div
+             "audio", <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -162,7 +162,7 @@ const Page7 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-              <div
+           "video",   <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -184,9 +184,7 @@ const Page7 = ({ openPopup }) => {
                 >
                   <source src={video2} type="video/mp4" />
                 </video>
-              </div>,
-              false,
-              true
+              </div>
             )
           }
           style={{ overflow: "visible" }}

@@ -136,7 +136,8 @@ const Unit2_Page10_Q2 = () => {
                   src={bird}
                   className="matched-img2"
                   alt=""
-                  style={{ height: "auto", width: "120px" }}
+                  onClick={() => document.getElementById("dot-img1").click()}
+                  style={{ height: "auto", width: "120px", cursor: "pointer" }}
                 />
                 {wrongWords.includes("bird") && ( // ⭐ تم التعديل هون
                   <span className="error-mark8">✕</span>
@@ -145,6 +146,7 @@ const Unit2_Page10_Q2 = () => {
                   <div
                     className="dot2 start-dot2"
                     data-image="img1"
+                    id="dot-img1"
                     onClick={handleStartDotClick}
                   ></div>
                 </div>
@@ -154,11 +156,18 @@ const Unit2_Page10_Q2 = () => {
                   <div
                     className="dot2 end-dot2"
                     data-word="ball"
+                    id="dot-ball"
                     onClick={handleEndDotClick}
                   ></div>
                 </div>
 
-                <span className="word-text2">Ball</span>
+                <span
+                  className="word-text2"
+                  onClick={() => document.getElementById("dot-ball").click()}
+                  style={{ cursor: "pointer" }}
+                >
+                  Ball
+                </span>
               </div>
             </div>
 
@@ -170,7 +179,8 @@ const Unit2_Page10_Q2 = () => {
                   src={boy}
                   className="matched-img2"
                   alt=""
-                  style={{ height: "auto", width: "120px" }}
+                  onClick={() => document.getElementById("dot-img2").click()}
+                  style={{ height: "auto", width: "120px", cursor: "pointer" }}
                 />
                 {wrongWords.includes("boy") && ( // ⭐ تم التعديل هون
                   <span className="error-mark8">✕</span>
@@ -179,6 +189,7 @@ const Unit2_Page10_Q2 = () => {
                   <div
                     className="dot2 start-dot2"
                     data-image="img2"
+                    id="dot-img2"
                     onClick={handleStartDotClick}
                   ></div>
                 </div>
@@ -188,11 +199,18 @@ const Unit2_Page10_Q2 = () => {
                   <div
                     className="dot2 end-dot2"
                     data-word="pizza"
+                    id="dot-pizza"
                     onClick={handleEndDotClick}
                   ></div>
                 </div>
 
-                <span className="word-text2">pizza</span>
+                <span
+                  className="word-text2"
+                  onClick={() => document.getElementById("dot-pizza").click()}
+                  style={{ cursor: "pointer" }}
+                >
+                  pizza
+                </span>
               </div>
             </div>
             {/* الصف الثالث */}
@@ -203,7 +221,8 @@ const Unit2_Page10_Q2 = () => {
                   src={pizza2}
                   className="matched-img2"
                   alt=""
-                  style={{ height: "auto", width: "120px" }}
+                  onClick={() => document.getElementById("dot-img3").click()}
+                  style={{ height: "auto", width: "120px", cursor: "pointer" }}
                 />
                 {wrongWords.includes("pizza") && ( // ⭐ تم التعديل هون
                   <span className="error-mark8">✕</span>
@@ -211,6 +230,7 @@ const Unit2_Page10_Q2 = () => {
                 <div className="dot-wrapper2">
                   <div
                     className="dot2 start-dot2"
+                    id="dot-img3"
                     data-image="img3"
                     onClick={handleStartDotClick}
                   ></div>
@@ -221,11 +241,18 @@ const Unit2_Page10_Q2 = () => {
                   <div
                     className="dot2 end-dot2"
                     data-word="bird"
+                    id="dot-bird"
                     onClick={handleEndDotClick}
                   ></div>
                 </div>
 
-                <span className="word-text2">bird</span>
+                <span
+                  className="word-text2"
+                  onClick={() => document.getElementById("dot-bird").click()}
+                  style={{ cursor: "pointer" }}
+                >
+                  bird
+                </span>
               </div>
             </div>
 
@@ -237,7 +264,8 @@ const Unit2_Page10_Q2 = () => {
                   src={fotball}
                   className="matched-img2"
                   alt=""
-                  style={{ height: "auto", width: "120px" }}
+                  onClick={() => document.getElementById("dot-img4").click()}
+                  style={{ height: "auto", width: "120px", cursor: "pointer" }}
                 />
                 {wrongWords.includes("ball") && ( // ⭐ تم التعديل هون
                   <span className="error-mark8">✕</span>
@@ -246,6 +274,7 @@ const Unit2_Page10_Q2 = () => {
                   <div
                     className="dot2 start-dot2"
                     data-image="img4"
+                    id="dot-img4"
                     onClick={handleStartDotClick}
                   ></div>
                 </div>
@@ -255,11 +284,18 @@ const Unit2_Page10_Q2 = () => {
                   <div
                     className="dot2 end-dot2"
                     data-word="boy"
+                    id="dot-boy"
                     onClick={handleEndDotClick}
                   ></div>
                 </div>
 
-                <span className="word-text2">boy</span>
+                <span
+                  className="word-text2"
+                  onClick={() => document.getElementById("dot-boy").click()}
+                  style={{ cursor: "pointer" }}
+                >
+                  boy
+                </span>
               </div>
             </div>
 
@@ -276,44 +312,44 @@ const Unit2_Page10_Q2 = () => {
           onClick={() => {
             setLines([]);
             setWrongWords([]);
-                setFirstDot(null);
-              setShowAnswer(false);
+            setFirstDot(null);
+            setShowAnswer(false);
           }}
           className="try-again-button"
         >
           Start Again ↻
         </button>
-          {/* Show Answer */}
-          <button
-            onClick={() => {
-              const rect = containerRef.current.getBoundingClientRect();
+        {/* Show Answer */}
+        <button
+          onClick={() => {
+            const rect = containerRef.current.getBoundingClientRect();
 
-              const getDotPosition = (selector) => {
-                const el = document.querySelector(selector);
-                if (!el) return { x: 0, y: 0 };
-                const r = el.getBoundingClientRect();
-                return {
-                  x: r.left - rect.left + 8,
-                  y: r.top - rect.top + 8,
-                };
+            const getDotPosition = (selector) => {
+              const el = document.querySelector(selector);
+              if (!el) return { x: 0, y: 0 };
+              const r = el.getBoundingClientRect();
+              return {
+                x: r.left - rect.left + 8,
+                y: r.top - rect.top + 8,
               };
+            };
 
-              const finalLines = correctMatches.map((line) => ({
-                ...line,
-                x1: getDotPosition(`[data-word="${line.word}"]`).x,
-                y1: getDotPosition(`[data-word="${line.word}"]`).y,
-                x2: getDotPosition(`[data-image="${line.image}"]`).x,
-                y2: getDotPosition(`[data-image="${line.image}"]`).y,
-              }));
+            const finalLines = correctMatches.map((line) => ({
+              ...line,
+              x1: getDotPosition(`[data-word="${line.word}"]`).x,
+              y1: getDotPosition(`[data-word="${line.word}"]`).y,
+              x2: getDotPosition(`[data-image="${line.image}"]`).x,
+              y2: getDotPosition(`[data-image="${line.image}"]`).y,
+            }));
 
-              setLines(finalLines);
-              setWrongWords([]);
-              setShowAnswer(true);
-            }}
-            className="show-answer-btn swal-continue"
-          >
-            Show Answer
-          </button>
+            setLines(finalLines);
+            setWrongWords([]);
+            setShowAnswer(true);
+          }}
+          className="show-answer-btn swal-continue"
+        >
+          Show Answer
+        </button>
         <button onClick={checkAnswers2} className="check-button2">
           Check Answer ✓
         </button>

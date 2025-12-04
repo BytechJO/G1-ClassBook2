@@ -56,7 +56,7 @@ const Page9_Q1 = () => {
   style={{
     position: "relative",
     width: "100%",
-    marginTop:"30px",
+
     maxWidth: "900px",
     aspectRatio: "3 / 1", // نسبة الصورة
   }}

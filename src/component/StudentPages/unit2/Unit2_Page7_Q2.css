@@ -97,13 +97,7 @@
   -moz-user-select: none;
 }
 
-.match-wrapper2 img,
-.match-words-row2,
-.match-images-row2,
-.word-box2,
-.img-box2 {
-  pointer-events: none; /* يمنع الكبس عليها */
-}
+
 
 /* ⭐ تم إضافتها */
 .error-mark-img {
