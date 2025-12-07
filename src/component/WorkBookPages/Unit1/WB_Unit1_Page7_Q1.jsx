@@ -52,7 +52,7 @@ export default function WB_Unit1_Page7_Q1() {
           Hint: Double Click to Color Word
         </span>
         {selectedWordIndex !== null && (
-          <div className="color-palette">
+          <div className="color-palette-wb-u1-p7-q1">
             {colors.map((c) => (
               <div
                 key={c}

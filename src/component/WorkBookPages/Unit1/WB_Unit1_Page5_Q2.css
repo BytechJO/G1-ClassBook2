@@ -96,7 +96,17 @@
   pointer-events: none;
   border: 2px solid white;
 }
+.circled-wb-u1-p5-q2 {
+  border: 2px solid red;
+  border-radius: 50%;
+  padding: 10px; /* إذا بدك تزيد حجمها */
+  display: inline-flex; /* الأفضل */
+  align-items: center;
+  justify-content: center;
 
+  width: 28px; /* 👈 حط الحجم المناسب */
+  height: 28px; /* 👈 نفس القيمة حتى تصبح دائرة حقيقية */
+}
 /* ======================== */
 /*      TABLET 992px        */
 /* ======================== */
@@ -140,17 +150,17 @@
     gap: 13px;
   }
 }
-.sentence-container-wb-u1-p5-q2{
-        display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 10px;
-    width: 60%;
-    margin-bottom: 75px;
-    position: absolute;
-    top: 15%;
-    left: 27%;
-    justify-content: space-between;
+.sentence-container-wb-u1-p5-q2 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+  width: 60%;
+  margin-bottom: 75px;
+  position: absolute;
+  top: 15%;
+  left: 27%;
+  justify-content: space-between;
 }
 /* ======================== */
 /*        MOBILE 600px      */
@@ -197,10 +207,10 @@
   .sentence-row {
     flex-direction: row;
   }
-      .num-container {
-        width: auto;
-        justify-content: center;
-    }
+  .num-container {
+    width: auto;
+    justify-content: center;
+  }
 }
 /* ======================== */
 /*    SMALL SCREENS 400px   */

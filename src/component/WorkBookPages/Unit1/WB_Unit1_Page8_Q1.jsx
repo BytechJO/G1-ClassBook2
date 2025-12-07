@@ -54,7 +54,7 @@ const WB_Unit1_Page8_Q1 = () => {
   const captions = [
     {
       start: 0,
-      end: 6.00,
+      end: 6.0,
       text: "Phonics Exercise A. Listen, read, and circle the correct word. ",
     },
     {
@@ -64,7 +64,6 @@ const WB_Unit1_Page8_Q1 = () => {
     },
     { start: 8.28, end: 11.15, text: "2.	the table is round." },
   ];
-
 
   // ================================
   // ✔ Update caption highlight
@@ -122,7 +121,12 @@ const WB_Unit1_Page8_Q1 = () => {
     return () => clearInterval(timer);
   }, [activeIndex]);
 
-  const [answers, setAnswers] = useState(Array(questions.length).fill(null));
+  const [answers, setAnswers] = useState(() => {
+    const arr = Array(questions.length).fill(null);
+    arr[0] = questions[0].correctIndex; // 👈 أول جملة محلولة تلقائياً
+    return arr;
+  });
+
   const [showResult, setShowResult] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
 
@@ -135,14 +139,16 @@ const WB_Unit1_Page8_Q1 = () => {
   };
 
   const checkAnswers = () => {
+    if (showAnswer) return;
     if (answers.includes(null)) {
       return ValidationAlert.info("Oops!", "Please circle all the words!");
     }
 
-    const total = questions.length;
+    const total = questions.length - 1;
     let correct = 0;
 
     answers.forEach((ans, i) => {
+      if (i === 0) return; // ← تجاهل السؤال الأول تماماً
       if (ans === questions[i].correctIndex) correct++;
     });
 
@@ -163,7 +169,11 @@ const WB_Unit1_Page8_Q1 = () => {
   };
 
   const reset = () => {
-    setAnswers(Array(questions.length).fill(null));
+    setAnswers(() => {
+      const arr = Array(questions.length).fill(null);
+      arr[0] = questions[0].correctIndex; // 👈 أول جملة محلولة تلقائياً
+      return arr;
+    });
     setShowResult(false);
     setShowAnswer(false);
   };
@@ -325,7 +335,7 @@ const WB_Unit1_Page8_Q1 = () => {
           </div>
         </div>
 
-        <div className="container-wb-u1-p5-q1">
+        <div className="container-wb-u1-p8-q1">
           {questions.map((q, i) => (
             <div key={i} className="question-box-wb-u1-p8-q1">
               <span
@@ -377,10 +387,9 @@ const WB_Unit1_Page8_Q1 = () => {
                 ${showResult && isSelected && !isCorrect ? "wrong" : ""}
                 ${showResult && isCorrect ? "correct" : ""}
             `}
-                          onClick={() => selectOption(i, optIndex)}
                         >
                           {word}
-                          {optIndex === 0 ? " / " : ""}
+                          {optIndex === 0 ? "/" : ""}
                           {showResult && isSelected && !isCorrect && (
                             <span className="wrong-x-wb-u1-p5-q1">✕</span>
                           )}
@@ -433,7 +442,7 @@ const WB_Unit1_Page8_Q1 = () => {
                           onClick={() => selectOption(i, optIndex)}
                         >
                           {word}
-                          {optIndex === 0 ? " / " : ""}
+                          {optIndex === 0 ? "/" : ""}
                           {showResult && isSelected && !isCorrect && (
                             <span className="wrong-x-wb-u1-p5-q1">✕</span>
                           )}

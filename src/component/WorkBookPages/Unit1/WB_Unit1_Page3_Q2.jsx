@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
-import img1 from "../../../assets/U1 WB/U1/SVG/U1P5EXEE-01.svg";
-import img2 from "../../../assets/U1 WB/U1/SVG/U1P5EXEE-02.svg";
-import img3 from "../../../assets/U1 WB/U1/SVG/U1P5EXEE-03.svg";
-import img4 from "../../../assets/U1 WB/U1/SVG/U1P5EXEE-04.svg";
+import img1 from "../../../assets/U1 WB/U1/SVG/U1P4EXEC-01.svg";
+import img2 from "../../../assets/U1 WB/U1/SVG/U1P4EXEC-02.svg";
+import img3 from "../../../assets/U1 WB/U1/SVG/U1P4EXEC-03.svg";
+import img4 from "../../../assets/U1 WB/U1/SVG/U1P4EXEC-04.svg";
 
 import ValidationAlert from "../../Popup/ValidationAlert";
 import "./WB_Unit1_Page3_Q2.css";
@@ -164,7 +164,7 @@ const WB_Unit1_Page3_Q2 = () => {
                 </span>
                 {question.word}
               </div>
-              <div className="shorti-container-review6-p2-q1 ">
+              <div className="shorti-container-wb-u1-q2 ">
                 {question.imgs.map((img, index) => {
                   return (
                     <div
@@ -188,7 +188,7 @@ const WB_Unit1_Page3_Q2 = () => {
                         alt="TEST"
                        
                       />
-                      <div className="check-box-review6-p2-q1 ">
+                      <div className="check-box-wb-u1-q2 ">
                         {selected[question.id] === index ? "✓" : ""}
                       </div>
                     </div>

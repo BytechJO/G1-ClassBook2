@@ -11,16 +11,19 @@ const WB_Unit1_Page5_Q2 = () => {
     "Goodbye?",
   ];
   const [checked, setChecked] = useState(false);
-  const [circledWords, setCircledWords] = useState({});
+
   const [showAnswer, setShowAnswer] = useState(false);
 
   const correct = {
     0: [12], // جملة رقم 0، الأحرف التي يجب أن تُحاط بدائرة
-    1: [12], // جملة رقم 1، حرفين خاطئين
-    2: [5], // جملة رقم 2، الأحرف الخاطئة
-    3: [5],
-    4: [5],
+    1: [5], // جملة رقم 1، حرفين خاطئين
+    2: [18], // جملة رقم 2، الأحرف الخاطئة
+    3: [0, 15],
+    4: [7],
   };
+  const [circledWords, setCircledWords] = useState({
+    0: [...correct[0]], // 👈 إجابة الجملة الأولى ظاهرة من البداية
+  });
   const checkAnswers = (circledWords, correctAnswers) => {
     if (showAnswer) return;
     if (Object.keys(circledWords).length === 0) {
@@ -134,7 +137,7 @@ const WB_Unit1_Page5_Q2 = () => {
                         key={wIndex}
                         onClick={() => handleWordClick(sIndex, wIndex)} // 🔒 يمنع التعديل بعد الفحص
                         className={`char-container ${
-                          isCircled ? "circled" : ""
+                          isCircled ? "circled-wb-u1-p5-q2" : ""
                         } ${isCorrect ? "correct" : ""}`}
                       >
                         {char}
@@ -144,16 +147,17 @@ const WB_Unit1_Page5_Q2 = () => {
                   })}
                 </div>
               ))}
-
-             
-            </div> <img src={img1} style={{ width: "auto", height: "260px" }} />
+            </div>{" "}
+            <img src={img1} style={{ width: "auto", height: "260px" }} />
           </div>
         </div>
       </div>
       <div className="action-buttons-container">
         <button
           onClick={() => {
-            setCircledWords({});
+            setCircledWords({
+              0: [...correct[0]], // 👈 إجابة الجملة الأولى ظاهرة من البداية
+            });
             setChecked(false);
             setShowAnswer(false);
           }}

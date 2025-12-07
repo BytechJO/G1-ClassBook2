@@ -6,10 +6,6 @@ import img2 from "../../../assets/U1 WB/U1/SVG/U1P5EXEE-02.svg";
 import img3 from "../../../assets/U1 WB/U1/SVG/U1P5EXEE-03.svg";
 import img4 from "../../../assets/U1 WB/U1/SVG/U1P5EXEE-04.svg";
 const WB_Unit1_Page5_Q1 = () => {
-  const [answers, setAnswers] = useState(Array(4).fill(null));
-  const [showResult, setShowResult] = useState(false);
-  const [showAnswer, setShowAnswer] = useState(false);
-
   // 🔥 الداتا المطابقة للصورة
   const items = [
     {
@@ -33,6 +29,13 @@ const WB_Unit1_Page5_Q1 = () => {
       correctIndex: 0,
     },
   ];
+  const [answers, setAnswers] = useState(() => {
+    const arr = Array(items.length).fill(null);
+    arr[0] = items[0].correctIndex; // 👈 أول إجابة مختارة تلقائياً
+    return arr;
+  });
+  const [showResult, setShowResult] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
 
   const handleSelect = (qIndex, optionIndex) => {
     if (showAnswer) return;

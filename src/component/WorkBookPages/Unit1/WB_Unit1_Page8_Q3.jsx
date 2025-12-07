@@ -13,7 +13,7 @@ import { FaPlay, FaPause } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 
 const WB_Unit1_Page8_Q3 = () => {
-  const [answers, setAnswers] = useState([null, null, null, null]);
+  const [answers, setAnswers] = useState(["d", null, null, null]);
   const audioRef = useRef(null);
   const [showResult, setShowResult] = useState(false);
   const stopAtSecond = 5.1;
@@ -164,7 +164,7 @@ const WB_Unit1_Page8_Q3 = () => {
   };
 
   const resetAnswers = () => {
-    setAnswers(Array(items.length).fill(null));
+    setAnswers(["d", null, null, null]);
     setShowResult(false);
     setShowAnswer(false); // يمنع أي تعديل بعد هيك
   };
@@ -333,9 +333,9 @@ const WB_Unit1_Page8_Q3 = () => {
         >
           <div className="dt-container-wb-u1-p8-q3 ">
             {items.map((item, index) => (
-              <div className="bp-item" key={index}>
-                <img src={item.img} className="bp-image" />
-                <div className="bp-options">
+              <div className="dt-item-wb-u1-p8-q3" key={index}>
+                <img src={item.img} className="dt-image-wb-u1-p8-q3" />
+                <div className="dt-options-wb-u1-p8-q3">
                   {/* B OPTION */}
                   <span
                     className={`bp-option 
