@@ -378,7 +378,7 @@ export default function Book() {
 
       {/* ===================== MAIN PAGE VIEW ===================== */}
       <div
-        className="content-wrapper overflow-auto lg:overflow-hidden w-full h-[86vh] flex items-center justify-center relative"
+        className="content-wrapper overflow-auto lg:overflow-hidden w-full h-[87vh] flex items-center justify-center relative"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}

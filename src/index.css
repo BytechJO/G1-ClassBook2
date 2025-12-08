@@ -16,6 +16,9 @@ img {
   overflow: auto;
 }
 
+button{
+  cursor: pointer;
+}
 /* من 1024px وفوق → ديسكتوب */
 @media (max-width: 780px) {
   body {

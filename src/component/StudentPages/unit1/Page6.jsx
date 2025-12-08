@@ -43,7 +43,7 @@ const Page6 = ({ openPopup }) => {
     { x1: 32.0, y1: 28.0, x2: 51.0, y2: 33.5, sound: Pg6_2_1_Stella },
     { x1: 62.0, y1: 32.0, x2: 71.02, y2: 35.5, sound: Pg6_2_2_ModifiedStella },
     { x1: 6.7, y1: 63.7, x2: 23.5, y2: 67.5, sound: Pg6_3_1_Harley },
-    { x1: 48.0, y1: 64.0, x2: 67.3, y2: 68.2, sound: Pg6_3_2_ModifiedHarley },
+    { x1: 47.4, y1: 65.0, x2: 67.3, y2: 68.6, sound: Pg6_3_2_ModifiedHarley },
   ];
   const handleImageClick = (e) => {
     const rect = e.target.getBoundingClientRect();

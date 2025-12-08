@@ -55,7 +55,7 @@ const Page7 = ({ openPopup }) => {
     { x1: 19.4, y1: 41.0, x2: 44.8, y2: 44.6, sound: Pg7_3_2_Mom },
     { x1: 50.0, y1: 19.8, x2: 70.2, y2: 22.8, sound: Pg7_4_1_Hansel },
     { x1: 70.25, y1: 47.0, x2: 90.0, y2: 50.4, sound: Pg7_4_2_ModifiedJack },
-    { x1: 7.5, y1: 57.4, x2: 27.0, y2: 61.2, sound: Pg7_5_1_Dad },
+    { x1: 7.2, y1: 58.0, x2: 27.0, y2: 61.2, sound: Pg7_5_1_Dad },
     { x1: 30.0, y1: 59.4, x2: 49.0, y2: 62.8, sound: Pg7_5_2_Mom },
     { x1: 71.2, y1: 61.0, x2: 90.7, y2: 64.5, sound: Pg7_6_1_Mom },
   ];
