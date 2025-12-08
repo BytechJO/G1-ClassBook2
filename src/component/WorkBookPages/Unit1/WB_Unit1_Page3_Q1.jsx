@@ -66,7 +66,7 @@ const WB_Unit1_Page3_Q1 = () => {
   };
 
   return (
-    <div className="page8-wrapper">
+    <div className="page8-wrapper" style={{padding:"30px"}}>
       <div
         className="div-forall"
         style={{
@@ -95,7 +95,7 @@ const WB_Unit1_Page3_Q1 = () => {
             }}
           >
             <div
-              style={{ fontSize: "20px", marginBottom: "5px", width: "20%" }}
+              style={{ fontSize: "20px", marginBottom: "5px", width: "25%" }}
             >
               <span
                 style={{

@@ -140,7 +140,7 @@ export default function WB_Unit1_Page4_Q2() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "center",padding:"30px"
       }}
     >
       <div

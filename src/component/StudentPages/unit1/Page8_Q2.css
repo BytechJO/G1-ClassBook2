@@ -196,9 +196,16 @@
 
   .image-section-horizontal {
     gap: 20px;
-    flex-wrap: wrap !important;
+    display: grid;
+    /* flex-wrap: wrap !important; */
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
   }
-
+.image-container img {
+    width: 80%;
+    height: auto;
+   
+}
   .image-container {
     width: 180px;
     gap: 12px;

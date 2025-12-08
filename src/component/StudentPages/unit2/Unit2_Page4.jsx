@@ -77,12 +77,14 @@ const Unit2_Page4 = ({ openPopup }) => {
   };
 
   return (
-    <div className="unit2-page-background">
-      <img
+    <div className="page1-img-wrapper"
+          onClick={handleImageClick}
+          style={{ backgroundImage: `url(${page_4})` }}>
+      {/* <img
         src={page_4}
         style={{ display: "block" }}
         onClick={handleImageClick}
-      />
+      /> */}
       {clickableAreas.map((area, index) => (
         <div
           key={index}
@@ -136,7 +138,7 @@ const Unit2_Page4 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image href={audioBtn} x="0" y="0" width="90" height="90" />
+          <image className="svg-img" href={audioBtn} x="0" y="0" width="90" height="90" />
         </svg>
       </div>
       <div
@@ -177,7 +179,7 @@ const Unit2_Page4 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image href={pauseBtn} x="0" y="0" width="90" height="90" />
+          <image className="svg-img" href={pauseBtn} x="0" y="0" width="90" height="90" />
         </svg>
       </div>
       <audio ref={audioRef} style={{ display: "none" }} />

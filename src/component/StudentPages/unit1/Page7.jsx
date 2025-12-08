@@ -85,8 +85,12 @@ const Page7 = ({ openPopup }) => {
   };
 
   return (
-    <div className="page_7-background" style={{ position: "relative" }}>
-      <img src={page_7} onClick={handleImageClick} />
+    <div
+      className="page1-img-wrapper"
+      onClick={handleImageClick}
+      style={{ backgroundImage: `url(${page_7})` }}
+    >
+      {/* <img src={page_7} onClick={handleImageClick} /> */}
       {clickableAreas.map((area, index) => (
         <div
           key={index}
@@ -124,7 +128,8 @@ const Page7 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-             "audio", <div
+              "audio",
+              <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -141,7 +146,7 @@ const Page7 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image
+          <image className="svg-img"
             href={audioBtn}
             x="0"
             y="0"
@@ -162,7 +167,8 @@ const Page7 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-           "video",   <div
+              "video",
+              <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -189,7 +195,7 @@ const Page7 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image href={pauseBtn} x="0" y="0" width="90" height="90" />
+          <image className="svg-img" href={pauseBtn} x="0" y="0" width="90" height="90" />
         </svg>
       </div>
       <audio ref={audioRef} style={{ display: "none" }} />

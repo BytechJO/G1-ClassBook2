@@ -9,7 +9,7 @@ export default function PosterViewer({ poster, openPopup }) {
       <img
         src={poster.img}
         alt="poster"
-        className="max-w-full max-h-[80vh] object-contain rounded-xl shadow-lg"
+        className="poster-grammar-img max-w-full max-h-[80vh] object-fill rounded-xl shadow-lg"
       />
 
       {/* 🔊 زر الصوت داخل popup */}

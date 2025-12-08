@@ -183,6 +183,7 @@ export default function Page9_Q2() {
       style={{
         display: "flex",
         // marginTop: "30px",
+        padding:"30px",
         justifyContent: "center",
       }}
     >

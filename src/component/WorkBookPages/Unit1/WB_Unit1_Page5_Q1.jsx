@@ -101,10 +101,10 @@ const WB_Unit1_Page5_Q1 = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "center",padding:"30px"
       }}
     >
-      <div
+      <div   className="div-forall"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -113,12 +113,12 @@ const WB_Unit1_Page5_Q1 = () => {
           justifyContent: "flex-start",
         }}
       >
-        <div>
+        
           <h5 className="header-title-page8">
             <span className="ex-A">E</span>
             Look, read, and circle.
           </h5>
-        </div>
+      
         <div className="container-wb-u1-p5-q1">
           {items.map((q, i) => (
             <div

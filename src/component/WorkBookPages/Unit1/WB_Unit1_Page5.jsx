@@ -5,8 +5,10 @@ import "./WB_Unit1_Page5.css"
 
 const WB_Unit1_Page5 = ({ openPopup }) => {
   return (
-    <div className="page_8-background">
-      <img src={page} />
+    <div className="page1-img-wrapper"
+            
+              style={{ backgroundImage: `url(${page})` }}>
+      {/* <img src={page} /> */}
       <div
         className="wb-unit1-p5-q1 hover:scale-110 transition"
         style={{ overflow: "visible" }}
@@ -19,7 +21,7 @@ const WB_Unit1_Page5 = ({ openPopup }) => {
           // className="click-icon-page8-1 hover:scale-110 transition"
           style={{ overflow: "visible" }}
         >
-          <image
+          <image className="svg-img"
             href={arrowBtn}
             x="0"
             y="0"
@@ -41,7 +43,7 @@ const WB_Unit1_Page5 = ({ openPopup }) => {
           style={{ overflow: "visible" }}
           // className="click-icon-page8-2 hover:scale-110 transition"
         >
-          <image
+          <image className="svg-img"
             href={arrowBtn}
             x="0"
             y="0"

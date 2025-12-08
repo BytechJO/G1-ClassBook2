@@ -22,8 +22,11 @@ const Page9 = ({ openPopup }) => {
   ];
 
   return (
-    <div className="page_9-background">
-      <img src={page_9} />
+    <div
+      className="page1-img-wrapper"
+      style={{ backgroundImage: `url(${page_9})` }}
+    >
+      {/* <img src={page_9} /> */}
       <div
         className="headset-icon-CD-page9 hover:scale-110 transition"
         style={{ overflow: "visible" }}
@@ -34,7 +37,8 @@ const Page9 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-             "audio", <div
+              "audio",
+              <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -48,7 +52,7 @@ const Page9 = ({ openPopup }) => {
           // className="headset-icon-CD-page9 hover:scale-110 transition"
           style={{ overflow: "visible" }}
         >
-          <image
+          <image className="svg-img"
             href={audioBtn}
             x="0"
             y="0"
@@ -66,14 +70,10 @@ const Page9 = ({ openPopup }) => {
           width="22"
           height="22"
           viewBox="0 0 90 90"
-          onClick={() =>
-            openPopup(
-             "exercise", { startIndex: 4} 
-            )
-          }
+          onClick={() => openPopup("exercise", { startIndex: 4 })}
           style={{ overflow: "visible" }}
         >
-          <image
+          <image className="svg-img"
             href={arrowBtn}
             x="0"
             y="0"
@@ -91,14 +91,10 @@ const Page9 = ({ openPopup }) => {
           width="22"
           height="22"
           viewBox="0 0 90 90"
-          onClick={() =>
-            openPopup(
-              "exercise", { startIndex: 5} 
-            )
-          }
+          onClick={() => openPopup("exercise", { startIndex: 5 })}
           style={{ overflow: "visible" }}
         >
-          <image
+          <image className="svg-img"
             href={arrowBtn}
             x="0"
             y="0"

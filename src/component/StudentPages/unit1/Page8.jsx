@@ -9,8 +9,11 @@ import arrowBtn from "../../../assets/unit1/imgs/Page 01/Arrow.svg";
 
 const Page8 = ({ openPopup }) => {
   return (
-    <div className="page_8-background">
-      <img src={page_8} />
+    <div
+      className="page1-img-wrapper"
+      style={{ backgroundImage: `url(${page_8})` }}
+    >
+      {/* <img src={page_8} /> */}
       <div
         className="click-icon-page8-1 hover:scale-110 transition"
         style={{ overflow: "visible" }}
@@ -24,6 +27,7 @@ const Page8 = ({ openPopup }) => {
           style={{ overflow: "visible" }}
         >
           <image
+            className="svg-img"
             href={arrowBtn}
             x="0"
             y="0"
@@ -46,6 +50,7 @@ const Page8 = ({ openPopup }) => {
           // className="click-icon-page8-2 hover:scale-110 transition"
         >
           <image
+            className="svg-img"
             href={arrowBtn}
             x="0"
             y="0"
@@ -69,6 +74,7 @@ const Page8 = ({ openPopup }) => {
           style={{ overflow: "visible" }}
         >
           <image
+            className="svg-img"
             href={arrowBtn}
             x="0"
             y="0"
@@ -91,6 +97,7 @@ const Page8 = ({ openPopup }) => {
           style={{ overflow: "visible" }}
         >
           <image
+            className="svg-img"
             href={arrowBtn}
             x="0"
             y="0"

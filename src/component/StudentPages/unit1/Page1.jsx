@@ -1,19 +1,12 @@
-import React from 'react'
-import page_1 from "../../../assets/unit1/imgs/Pages/Cover.jpg"
+import React from "react";
+import page_1 from "../../../assets/unit1/imgs/Pages from cover right SbEd copy.pdf.png";
 const Page1 = () => {
   return (
-    <div className='page_1-background' >
-        
-      <img
-        src={page_1}
+    <div
+      className="page1-img-wrapper"
+      style={{ backgroundImage: `url(${page_1})` }}
+    ></div>
+  );
+};
 
-       
-        // className="w-full h-full object-contain rounded-2xl shadow-lg"
-      />
-
-      
-    </div>
-  )
-}
-
-export default Page1
+export default Page1;

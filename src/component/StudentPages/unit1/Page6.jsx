@@ -67,13 +67,15 @@ const Page6 = ({ openPopup }) => {
   };
 
   return (
-    <div className="page_6-background" style={{ position: "relative" }}>
-      <img
+    <div className="page1-img-wrapper"
+          onClick={handleImageClick}
+          style={{ backgroundImage: `url(${page_6})` }}>
+      {/* <img
         src={page_6}
         style={{ display: "block" }}
         alt="page 6"
         onClick={handleImageClick}
-      />
+      /> */}
 
       {/* رسم المستطيلات التفاعلية */}
       {clickableAreas.map((area, index) => (
@@ -130,8 +132,8 @@ const Page6 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image
-            href={audioBtn}
+          <image className="svg-img"
+            href={ audioBtn}
             x="0"
             y="0"
             width="100%"
@@ -179,7 +181,7 @@ const Page6 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image
+          <image className="svg-img"
             href={pauseBtn}
             x="0"
             y="0"

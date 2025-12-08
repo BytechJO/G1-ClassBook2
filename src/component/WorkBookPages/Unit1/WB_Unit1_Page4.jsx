@@ -21,8 +21,10 @@ const WB_Unit1_Page4 = ({ openPopup }) => {
   ];
 
   return (
-    <div className="page_9-background" style={{position:"relative"}}>
-      <img src={page_4} />
+    <div className="page1-img-wrapper"
+            
+              style={{ backgroundImage: `url(${page_4})` }}>
+      {/* <img src={page_4} /> */}
      
       <div
         className="wb-unit1-p4-q1 hover:scale-110 transition"
@@ -35,7 +37,7 @@ const WB_Unit1_Page4 = ({ openPopup }) => {
           onClick={() => openPopup("exercise", { startIndex: 2 })}
           style={{ overflow: "visible" }}
         >
-          <image
+          <image className="svg-img"
             href={arrowBtn}
             x="0"
             y="0"
@@ -56,7 +58,7 @@ const WB_Unit1_Page4 = ({ openPopup }) => {
           onClick={() => openPopup("exercise", { startIndex: 3 })}
           style={{ overflow: "visible" }}
         >
-          <image
+          <image className="svg-img"
             href={arrowBtn}
             x="0"
             y="0"

@@ -1,12 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import page from "../../../assets/U1 WB/U1/Right Int WB G1 U16.png";
 import arrowBtn from "../../../assets/unit1/imgs/Page 01/Arrow.svg";
-import "./WB_Unit1_Page6.css"
+import "./WB_Unit1_Page6.css";
 
 const WB_Unit1_Page6 = ({ openPopup }) => {
   return (
-    <div className="page_8-background">
-      <img src={page} />
+    <div
+      className="page1-img-wrapper"
+      style={{ backgroundImage: `url(${page})` }}
+    >
+      {/* <img src={page} /> */}
       <div
         className="wb-unit1-p6-q1 hover:scale-110 transition"
         style={{ overflow: "visible" }}
@@ -19,7 +22,7 @@ const WB_Unit1_Page6 = ({ openPopup }) => {
           // className="click-icon-page8-1 hover:scale-110 transition"
           style={{ overflow: "visible" }}
         >
-          <image
+          <image className="svg-img"
             href={arrowBtn}
             x="0"
             y="0"
@@ -41,7 +44,7 @@ const WB_Unit1_Page6 = ({ openPopup }) => {
           style={{ overflow: "visible" }}
           // className="click-icon-page8-2 hover:scale-110 transition"
         >
-          <image
+          <image className="svg-img"
             href={arrowBtn}
             x="0"
             y="0"
@@ -51,8 +54,6 @@ const WB_Unit1_Page6 = ({ openPopup }) => {
           />
         </svg>
       </div>
-
- 
     </div>
   );
 };

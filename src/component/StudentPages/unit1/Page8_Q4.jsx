@@ -120,7 +120,7 @@ const Page8_Q4 = () => {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ display: "flex", justifyContent: "center" ,padding:"30px"}}>
       <div
         className="div-forall"
         style={{

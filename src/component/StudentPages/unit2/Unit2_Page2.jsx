@@ -107,58 +107,62 @@ const Unit2_Page2 = ({ openPopup }) => {
     }
   };
   return (
-    <div className="unit2-page-background" style={{ position: "relative" }}>
+    <div
+      className="page1-img-wrapper"
+      onClick={handleImageClick}
+      style={{ backgroundImage: `url(${page_2})` }}
+    >
       <audio ref={audioRef} style={{ display: "none" }} />
-      <img
+      {/* <img
         src={page_2}
         onClick={handleImageClick}
         style={{ display: "block" }}
-      />
-    {areas.map((area, index) => {
-          const isActive = activeAreaIndex === area.sound;
+      /> */}
+      {areas.map((area, index) => {
+        const isActive = activeAreaIndex === area.sound;
 
-          // ============================
-          // 1️⃣ المنطقة الأساسية → دائرة تظهر فقط عندما تكون Active
-          // ============================
-          if (area.isPrimary) {
-            return (
-              <div
-                key={index}
-                className={`circle-area ${isActive ? "active" : ""}`}
-                style={{
-                  left: `${area.x1}%`,
-                  top: `${area.y1}%`,
-                }}
-                onClick={() => {
-                  setActiveAreaIndex(area.sound);
-                  playSound(sounds[area.sound]);
-                }}
-              ></div>
-            );
-          }
-
-          // ============================
-          // 2️⃣ المناطق الفرعية → مربعات داكنة مخفية ولازم
-          //    عند الضغط عليها → تفعّل الدائرة الأساسية
-          // ============================
+        // ============================
+        // 1️⃣ المنطقة الأساسية → دائرة تظهر فقط عندما تكون Active
+        // ============================
+        if (area.isPrimary) {
           return (
             <div
               key={index}
-              className="clickable-area"
+              className={`circle-area ${isActive ? "active" : ""}`}
               style={{
-                position: "absolute",
                 left: `${area.x1}%`,
                 top: `${area.y1}%`,
-                width: `${area.x2 - area.x1}%`,
-                height: `${area.y2 - area.y1}%`,
               }}
               onClick={() => {
-                setActiveAreaIndex(area.sound); // 👈 يفعل الدائرة فوق الرقم
+                setActiveAreaIndex(area.sound);
                 playSound(sounds[area.sound]);
               }}
             ></div>
           );
-        })}
+        }
+
+        // ============================
+        // 2️⃣ المناطق الفرعية → مربعات داكنة مخفية ولازم
+        //    عند الضغط عليها → تفعّل الدائرة الأساسية
+        // ============================
+        return (
+          <div
+            key={index}
+            className="clickable-area"
+            style={{
+              position: "absolute",
+              left: `${area.x1}%`,
+              top: `${area.y1}%`,
+              width: `${area.x2 - area.x1}%`,
+              height: `${area.y2 - area.y1}%`,
+            }}
+            onClick={() => {
+              setActiveAreaIndex(area.sound); // 👈 يفعل الدائرة فوق الرقم
+              playSound(sounds[area.sound]);
+            }}
+          ></div>
+        );
+      })}
 
       <div
         className="headset-icon-CD-unit2-page2-1 hover:scale-110 transition"
@@ -170,7 +174,8 @@ const Unit2_Page2 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-             "audio", <AudioWithCaption
+              "audio",
+              <AudioWithCaption
                 src={Pg11_1_1_Stella}
                 captions={captionsExample}
               />
@@ -178,7 +183,7 @@ const Unit2_Page2 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image href={audioBtn} x="0" y="0" width="90" height="90" />
+          <image className="svg-img" href={audioBtn} x="0" y="0" width="90" height="90" />
         </svg>
       </div>
       <div
@@ -191,7 +196,8 @@ const Unit2_Page2 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-               "html", <FourImagesWithAudio
+              "html",
+              <FourImagesWithAudio
                 images={[read, repeat1, repeat2]}
                 audioSrc={soundListen}
                 checkpoints={[0, 3.7, 5.3]}
@@ -204,7 +210,7 @@ const Unit2_Page2 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image href={audioBtn} x="0" y="0" width="90" height="90" />
+          <image className="svg-img" href={audioBtn} x="0" y="0" width="90" height="90" />
         </svg>
       </div>
       <div
@@ -217,7 +223,8 @@ const Unit2_Page2 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-               "html", <FourImagesWithAudio
+              "html",
+              <FourImagesWithAudio
                 images={[Rabbit, img1, img2, img3, img4]}
                 audioSrc={longsound}
                 checkpoints={[0, 3.4, 4, 4.9, 6]}
@@ -230,7 +237,7 @@ const Unit2_Page2 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image href={arrowBtn} x="0" y="0" width="90" height="90" />
+          <image className="svg-img" href={arrowBtn} x="0" y="0" width="90" height="90" />
         </svg>
       </div>
     </div>

@@ -98,6 +98,7 @@ const Unit2_Page5_Q1 = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        padding:"30px"
       }}
     >
       <div   className="div-forall"

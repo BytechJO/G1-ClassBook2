@@ -40,6 +40,11 @@
     height: 100px;
     width: auto;
   }
+  .matching-scale {
+  width: 85%;
+  /* max-width: 100%; */
+  position: relative;
+}
   .word-with-dot {
     width: 40%;
   }

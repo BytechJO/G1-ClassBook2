@@ -74,3 +74,10 @@
   font-weight: bold;
   border: 2px solid white;
 }
+
+@media (max-width: 1024px) {
+  .img-box-wb-u1-q2 {
+    width: 164px;
+    height: 173px;
+  }
+}

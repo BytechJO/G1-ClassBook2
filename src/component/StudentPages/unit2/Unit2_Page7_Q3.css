@@ -9,7 +9,7 @@
   flex-direction: column;
   gap: 45px;
   align-items: flex-start;
-  width: 40vw;
+  width: 100%;
 }
 
 .sentence-container {

@@ -31,7 +31,7 @@ export default function WB_Unit1_Page7_Q1() {
       style={{
         display: "flex",
         // marginTop: "30px",
-        justifyContent: "center",
+        justifyContent: "center",padding:"30px"
       }}
     >
       <div

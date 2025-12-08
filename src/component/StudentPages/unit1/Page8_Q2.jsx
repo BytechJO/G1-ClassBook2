@@ -121,7 +121,7 @@ const Page8_Q2 = () => {
   };
 
   return (
-    <div>
+    <div style={{padding:"30px"}}>
       <div className="exercise-container2">
         <h5 className="header-title-page8">
           <span className="number-of-q">2</span>Look and write.

@@ -62,14 +62,17 @@ const Page2 = ({ goToUnit }) => {
   };
 
   return (
-    <div className="relative w-full h-full flex justify-center items-center">
-      <img
+    <div className="page1-img-wrapper"
+      ref={imgRef}
+        onClick={handleClick}
+      style={{ backgroundImage: `url(${page2})` }}>
+      {/* <img
         src={page2}
         alt="Book Index"
         ref={imgRef}
         onClick={handleClick}
         className="w-full h-full rounded-2xl shadow-lg"
-      />
+      /> */}
 
       {clickableAreas.map((area, index) => (
         <div

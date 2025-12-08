@@ -160,6 +160,7 @@
   position: absolute;
   top: 15%;
   left: 27%;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 /* ======================== */

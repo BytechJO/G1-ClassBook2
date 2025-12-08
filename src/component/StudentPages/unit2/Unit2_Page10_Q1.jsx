@@ -183,6 +183,7 @@ const Unit2_Page10_Q1 = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        padding:"30px"
       }}
     >
       <div

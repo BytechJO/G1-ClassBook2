@@ -226,7 +226,7 @@ const Page8_Q1 = () => {
     }
   };
   return (
-    <div className="page8-wrapper">
+    <div className="page8-wrapper"  style={{padding:"30px"}}>
       <div   className="div-forall"
         style={{
           display: "flex",

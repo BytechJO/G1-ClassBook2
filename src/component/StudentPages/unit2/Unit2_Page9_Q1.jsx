@@ -84,7 +84,8 @@ const Unit2_Page9_Q1 = () => {
 
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      style={{ display: "flex", flexDirection: "column", alignItems: "center",
+        padding:"30px" }}
     >
       <div
         className="div-forall"

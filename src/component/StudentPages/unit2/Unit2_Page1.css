@@ -11,6 +11,21 @@
   border: rgb(255, 255, 255) solid 2px; */
   padding: 5px;
 }
+.page1-img-wrapper {
+  width: 100%;
+  height: 100%;
+  min-height: 85vh;
+  /* أهم 3 سطور تضمن ظهور الصورة */
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: top left;
+
+  /* هذا يجعل الـ DIV يأخذ نفس نسبة صورة الكتاب (ضروري جداً) */
+  aspect-ratio: 875 / 1114;
+
+  position: relative;
+  display: block;
+}
 
 .headset-icon-CD-unit2-page1-1 {
   top: 7%;
@@ -66,20 +81,32 @@
   bottom: 40.5%;
   right: 25%;
 }
-
+@media (max-width: 1024px) {
+  .headset-icon-CD-unit2-page1-1 {
+    top: 6%;
+    right: 18%;
+  }
+  .headset-icon-CD-unit2-page1-2 {
+    bottom: 38%;
+    left: 25%;
+  }
+  .click-icon-unit2-page1-2 {
+    bottom: 14.5%;
+    right: 43%;
+  }
+}
 
 @media (max-width: 820px) {
-
   .headset-icon-CD-unit2-page1-1 {
     top: 6.5%;
     right: 16%;
-}
-.headset-icon-CD-unit2-page1-2 {
+  }
+  .headset-icon-CD-unit2-page1-2 {
     bottom: 35.9%;
     left: 26%;
-}
-.click-icon-unit2-page1-2 {
+  }
+  .click-icon-unit2-page1-2 {
     bottom: 13%;
     right: 41%;
-}
+  }
 }

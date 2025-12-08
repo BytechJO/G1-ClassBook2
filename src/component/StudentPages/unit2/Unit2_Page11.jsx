@@ -87,12 +87,16 @@ const Unit2_Page11 = ({ openPopup }) => {
   };
 
   return (
-    <div className="page_2-background">
-      <img
+    <div
+      className="page1-img-wrapper"
+      onClick={handleImageClick}
+      style={{ backgroundImage: `url(${page24})` }}
+    >
+      {/* <img
         src={page24}
         style={{ display: "block" }}
         onClick={handleImageClick}
-      />
+      /> */}
 
       {clickableAreas.map((area, index) => (
         <div
@@ -132,7 +136,8 @@ const Unit2_Page11 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-            "audio",  <div
+              "audio",
+              <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -145,7 +150,7 @@ const Unit2_Page11 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image href={audioBtn} x="0" y="0" width="90" height="90" />
+          <image className="svg-img" href={audioBtn} x="0" y="0" width="90" height="90" />
         </svg>
       </div>
 
@@ -159,7 +164,8 @@ const Unit2_Page11 = ({ openPopup }) => {
           viewBox="0 0 90 90"
           onClick={() =>
             openPopup(
-             "video", <div
+              "video",
+              <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -181,13 +187,12 @@ const Unit2_Page11 = ({ openPopup }) => {
                 >
                   <source src={video3} type="video/mp4" />
                 </video>
-              </div>,
-            
+              </div>
             )
           }
           style={{ overflow: "visible" }}
         >
-          <image href={pauseBtn} x="0" y="0" width="90" height="90" />
+          <image className="svg-img" href={pauseBtn} x="0" y="0" width="90" height="90" />
         </svg>
       </div>
       <audio ref={audioRef} style={{ display: "none" }} />

@@ -89,7 +89,8 @@ const Unit2_Page9_Q3 = () => {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ display: "flex", justifyContent: "center" ,
+        padding:"30px"}}>
       <div style={{ width: "60%" }}  className="div-forall">
         <h5 className="header-title-page8">C Look and answer.</h5>
 

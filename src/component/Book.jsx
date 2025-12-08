@@ -319,7 +319,7 @@ export default function Book() {
     { id: 2, label: "Workbook Unit 2", start: 8, pages: 10 },
   ];
 
-  const teacherUnits = [{ id: 1, label: "Teacher Unit 1", start: 1, pages: 5 }];
+  const teacherUnits = [{ id: 1, label: "Teacher Unit 1", start: 1, pages: 256 }];
 
   const flashUnits = [
     { id: 1, label: "Flashcards", start: 1, pages: flashPages.length },
@@ -417,7 +417,7 @@ export default function Book() {
         pageIndex === 0 ||
         (activeTab === "work" && pageIndex <= 1) ? (
           <div
-            className="bg-white rounded-2xl shadow-2xl border flex items-center justify-center overflow-hidden self-end"
+            className="bg-white rounded-2xl shadow-2xl border flex items-center justify-center overflow-hidden self-center"
             style={{
               transform: `translate(${offset.x}px, ${offset.y}px) scale(${zoom})`,
               cursor: zoom === 1 ? "default" : isDragging ? "grabbing" : "grab",
@@ -429,7 +429,7 @@ export default function Book() {
           // Spread Mode
 
           <div
-            className="bg-white rounded-2xl shadow-2xl border grid grid-cols-2 overflow-hidden self-end"
+            className="bg-white rounded-2xl shadow-2xl border grid grid-cols-2 overflow-hidden self-center"
             style={{
               transform: `translate(${offset.x}px, ${offset.y}px) scale(${zoom})`,
               cursor: zoom === 1 ? "default" : isDragging ? "grabbing" : "grab",
@@ -508,7 +508,7 @@ export default function Book() {
           { key: "next", label: "Next Button", icon: next },
         ]}
       />
-      {mobileTabsOpen && (
+      {/* {mobileTabsOpen && (
         <div className="lg:hidden bg-white shadow-md border-b px-4 py-3 absolute w-full z-[9999]">
           {tabs.map((tab) => (
             <button
@@ -528,7 +528,7 @@ export default function Book() {
             </button>
           ))}
         </div>
-      )}
+      )} */}
       {/* ===================== POPUP ===================== */}
       <Popup isOpen={popupOpen} onClose={closePopup} type={popupContent?.type}>
         {/* لو المستخدم داخل Workbook */}

@@ -107,14 +107,18 @@ const Page4 = ({ openPopup }) => {
   };
   return (
     <>
-      <div className="page_4-background" style={{ position: "relative" }}>
+      <div
+        className="page1-img-wrapper"
+        style={{ backgroundImage: `url(${page4})` }}
+        onClick={handleImageClick}
+      >
         <audio ref={audioRef} style={{ display: "none" }} />
 
-        <img
+        {/* <img
           src={page4}
           onClick={handleImageClick}
           style={{ display: "block" }}
-        />
+        /> */}
 
         {areas.map((area, index) => {
           const isActive = activeAreaIndex === area.sound;
@@ -189,7 +193,7 @@ const Page4 = ({ openPopup }) => {
             }
             style={{ overflow: "visible" }}
           >
-            <image
+            <image className="svg-img"
               href={audioBtn}
               x="0"
               y="0"
@@ -211,7 +215,7 @@ const Page4 = ({ openPopup }) => {
             onClick={() => openPopup("html", <Page4_Interactive1 />)}
             style={{ overflow: "visible" }}
           >
-            <image
+            <image className="svg-img"
               href={arrowBtn}
               x="0"
               y="0"
@@ -233,7 +237,7 @@ const Page4 = ({ openPopup }) => {
             onClick={() => openPopup("html", <Page4_vocabulary />)}
             style={{ overflow: "visible" }}
           >
-            <image
+            <image className="svg-img"
               href={audioBtn}
               x="0"
               y="0"
@@ -267,7 +271,7 @@ const Page4 = ({ openPopup }) => {
             }
             style={{ overflow: "visible" }}
           >
-            <image
+            <image className="svg-img"
               href={arrowBtn}
               x="0"
               y="0"

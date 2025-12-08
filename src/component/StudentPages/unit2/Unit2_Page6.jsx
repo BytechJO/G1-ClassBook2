@@ -18,8 +18,10 @@ const Unit2_Page6 = ({ openPopup }) => {
   ];
 
   return (
-    <div className="unit2-page-background">
-      <img src={page_6} />
+    <div className="page1-img-wrapper"
+          
+          style={{ backgroundImage: `url(${page_6})` }}>
+      {/* <img src={page_6} /> */}
 
       <div
         className="click-icon-unit2-page6-1 hover:scale-110 transition"
@@ -34,7 +36,7 @@ const Unit2_Page6 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image href={arrowBtn} x="0" y="0" width="90" height="90" />
+          <image className="svg-img" href={arrowBtn} x="0" y="0" width="90" height="90" />
         </svg>
       </div>
 
@@ -61,7 +63,7 @@ const Unit2_Page6 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image href={audioBtn} x="0" y="0" width="90" height="90" />
+          <image className="svg-img" href={audioBtn} x="0" y="0" width="90" height="90" />
         </svg>
       </div>
 
@@ -78,7 +80,7 @@ const Unit2_Page6 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image href={arrowBtn} x="0" y="0" width="90" height="90" />
+          <image className="svg-img" href={arrowBtn} x="0" y="0" width="90" height="90" />
         </svg>
       </div>
     </div>

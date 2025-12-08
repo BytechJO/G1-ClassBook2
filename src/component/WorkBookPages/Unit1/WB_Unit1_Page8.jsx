@@ -4,7 +4,7 @@ import song from "../../../assets/unit1/sounds/pg9-song-all.mp3";
 import audioBtn from "../../../assets/unit1/imgs/Page 01/Audio btn.svg";
 import arrowBtn from "../../../assets/unit1/imgs/Page 01/Arrow.svg";
 import AudioWithCaption from "../../AudioWithCaption";
-import "./WB_Unit1_Page8.css"
+import "./WB_Unit1_Page8.css";
 const WB_Unit1_Page8 = ({ openPopup }) => {
   const audioRef = useRef(null);
   const captionsExample = [
@@ -21,9 +21,12 @@ const WB_Unit1_Page8 = ({ openPopup }) => {
   ];
 
   return (
-    <div className="page_9-background">
-      <img src={page_4} />
-       <div
+    <div
+      className="page1-img-wrapper"
+      style={{ backgroundImage: `url(${page_4})` }}
+    >
+      {/* <img src={page_4} /> */}
+      <div
         className="wb-unit1-p8-q1 hover:scale-110 transition"
         style={{ overflow: "visible" }}
       >
@@ -31,10 +34,10 @@ const WB_Unit1_Page8 = ({ openPopup }) => {
           width="22"
           height="22"
           viewBox="0 0 90 90"
-          onClick={() => openPopup("exercise", { startIndex: 9})}
+          onClick={() => openPopup("exercise", { startIndex: 9 })}
           style={{ overflow: "visible" }}
         >
-          <image
+          <image className="svg-img"
             href={arrowBtn}
             x="0"
             y="0"
@@ -44,7 +47,7 @@ const WB_Unit1_Page8 = ({ openPopup }) => {
           />
         </svg>
       </div>
-     
+
       <div
         className="wb-unit1-p8-q2 hover:scale-110 transition"
         style={{ overflow: "visible" }}
@@ -53,10 +56,10 @@ const WB_Unit1_Page8 = ({ openPopup }) => {
           width="22"
           height="22"
           viewBox="0 0 90 90"
-          onClick={() => openPopup("exercise", { startIndex: 10})}
+          onClick={() => openPopup("exercise", { startIndex: 10 })}
           style={{ overflow: "visible" }}
         >
-          <image
+          <image className="svg-img"
             href={arrowBtn}
             x="0"
             y="0"
@@ -77,7 +80,7 @@ const WB_Unit1_Page8 = ({ openPopup }) => {
           onClick={() => openPopup("exercise", { startIndex: 11 })}
           style={{ overflow: "visible" }}
         >
-          <image
+          <image className="svg-img"
             href={arrowBtn}
             x="0"
             y="0"

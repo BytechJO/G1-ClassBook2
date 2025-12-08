@@ -101,13 +101,17 @@ const Page5 = ({ openPopup }) => {
     }
   };
   return (
-    <div className="page_5-background" style={{ position: "relative" }}>
+    <div
+      className="page1-img-wrapper"
+      onClick={handleImageClick}
+      style={{ backgroundImage: `url(${page_5})` }}
+    >
       <audio ref={audioRef} style={{ display: "none" }} />
-      <img
+      {/* <img
         src={page_5}
         onClick={handleImageClick}
         style={{ display: "block" }}
-      />
+      /> */}
 
       {areas.map((area, index) => {
         const isActive = activeAreaIndex === area.sound;
@@ -172,7 +176,7 @@ const Page5 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image
+          <image className="svg-img"
             href={audioBtn}
             x="0"
             y="0"
@@ -208,7 +212,7 @@ const Page5 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image href={audioBtn} x="0" y="0" width="90" height="90" />
+          <image className="svg-img" href={audioBtn} x="0" y="0" width="90" height="90" />
         </svg>
       </div>
       <div
@@ -235,7 +239,7 @@ const Page5 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image href={arrowBtn} x="0" y="0" width="90" height="90" />
+          <image className="svg-img" href={arrowBtn} x="0" y="0" width="90" height="90" />
         </svg>
       </div>
     </div>

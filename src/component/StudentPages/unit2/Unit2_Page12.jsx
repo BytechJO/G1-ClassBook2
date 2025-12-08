@@ -39,12 +39,14 @@ const Unit2_Page12 = () => {
   };
 
   return (
-    <div className="page_2-background">
-      <img
+    <div className="page1-img-wrapper"
+          onClick={handleImageClick}
+          style={{ backgroundImage: `url(${page25})` }}>
+      {/* <img
         src={page25}
         style={{ display: "block" }}
         onClick={handleImageClick}
-      />
+      /> */}
 
       {clickableAreas.map((area, index) => (
         <div

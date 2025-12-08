@@ -67,7 +67,7 @@ export default function WB_Unit1_Page4_Q1() {
   };
 
   return (
-    <div className="page8-wrapper">
+    <div className="page8-wrapper" style={{padding:"30px"}}>
       <div className="div-forall" style={{ width: "60%" }}>
         {/* العنوان */}
         <h3 className="header-title-page8">

@@ -108,7 +108,7 @@ const handleStartDotClick = (e) => {
   };
 
   return (
-    <div className="matching-wrapper">
+    <div className="matching-wrapper" style={{padding:"30px"}}>
       <div className="matching-scale">
         <h5 className="header-title-page8">
           <span className="ex-A">B</span>Read and match.

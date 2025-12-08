@@ -9,8 +9,10 @@ import arrowBtn from "../../../assets/unit1/imgs/Page 01/Arrow.svg";
 const Unit2_Page7 = ({ openPopup }) => {
   const [activePopup, setActivePopup] = useState(null);
   return (
-    <div className="unit2-page-background">
-      <img src={page_7} />
+    <div className="page1-img-wrapper"
+   
+          style={{ backgroundImage: `url(${page_7})` }}>
+      {/* <img src={page_7} /> */}
 
       <div
         className="click-icon-unit2-page7-1 hover:scale-110 transition"
@@ -25,7 +27,7 @@ const Unit2_Page7 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image href={arrowBtn} x="0" y="0" width="90" height="90" />
+          <image className="svg-img" href={arrowBtn} x="0" y="0" width="90" height="90" />
         </svg>
       </div>
 
@@ -42,7 +44,7 @@ const Unit2_Page7 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image href={arrowBtn} x="0" y="0" width="90" height="90" />
+          <image className="svg-img" href={arrowBtn} x="0" y="0" width="90" height="90" />
         </svg>
       </div>
       <div
@@ -58,7 +60,7 @@ const Unit2_Page7 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image href={arrowBtn} x="0" y="0" width="90" height="90" />
+          <image className="svg-img" href={arrowBtn} x="0" y="0" width="90" height="90" />
         </svg>
       </div>
     </div>
