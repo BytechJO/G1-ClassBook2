@@ -42,8 +42,8 @@ export default function LeftSidebar({ isOpen, close, units, goToPage }) {
                     }`}
                 >
                   <div className="flex justify-between items-center">
-                    <span className="font-medium">{u.label}</span>
-                    <span>{openUnit === u.id ? "−" : "+"}</span>
+                    <span className="font-medium text-[#430f68]">{u.label}</span>
+                    <span className="font-medium text-[#430f68]">{openUnit === u.id ? "−" : "+"}</span>
                   </div>
                 </div>
 

@@ -200,7 +200,6 @@ export default function Book() {
   };
 
   const nextPage = () => {
- 
     // =============== Posters → always single ===============
     if (activeTab === "poster" || activeTab === "flash") {
       if (pageIndex < pages.length - 1) {
@@ -247,7 +246,6 @@ export default function Book() {
   };
 
   const prevPage = () => {
-    
     // Posters → always one page
     if (activeTab === "poster" || activeTab === "flash") {
       if (pageIndex > 0) setPageIndex(pageIndex - 1);
@@ -306,13 +304,29 @@ export default function Book() {
   // ===========================================================
   //                 📌 UNITS LIST
   // ===========================================================
-  const units = [
-    { id: 1, label: "Unit 1", start: 4, pages: 6 },
-    { id: 2, label: "Unit 2", start: 10, pages: 12 },
-    { id: 3, label: "Unit 3", start: 22, pages: 9 },
-    { id: 4, label: "Unit 4", start: 30, pages: 10 },
-    { id: 5, label: "Unit 5", start: 40, pages: 10 },
-    { id: 6, label: "Unit 6", start: 50, pages: 10 },
+
+  const studentUnits = [
+    { id: 1, label: "Student Unit 1", start: 4, pages: 6 },
+    { id: 2, label: "Student Unit 2", start: 10, pages: 12 },
+    { id: 3, label: "Student Unit 3", start: 22, pages: 9 },
+    { id: 4, label: "Student Unit 4", start: 30, pages: 10 },
+    { id: 5, label: "Student Unit 5", start: 40, pages: 10 },
+    { id: 6, label: "Student Unit 6", start: 50, pages: 10 },
+  ];
+
+  const workbookUnits = [
+    { id: 1, label: "Workbook Unit 1", start: 2, pages: 6 },
+    { id: 2, label: "Workbook Unit 2", start: 8, pages: 10 },
+  ];
+
+  const teacherUnits = [{ id: 1, label: "Teacher Unit 1", start: 1, pages: 5 }];
+
+  const flashUnits = [
+    { id: 1, label: "Flashcards", start: 1, pages: flashPages.length },
+  ];
+
+  const posterUnits = [
+    { id: 1, label: "Posters", start: 1, pages: posterPages.length },
   ];
 
   // ===========================================================
@@ -338,7 +352,13 @@ export default function Book() {
     { id: "flash", label: "Flashcards" },
     { id: "poster", label: "Posters" },
   ];
-
+  const sidebarUnits = {
+    student: studentUnits,
+    work: workbookUnits,
+    teacher: teacherUnits,
+    flash: flashUnits,
+    poster: posterUnits,
+  }[activeTab];
   // ===========================================================
   //                 📌 RENDER
   // ===========================================================
@@ -472,7 +492,7 @@ export default function Book() {
       <LeftSidebar
         isOpen={leftBarOpen}
         close={() => setLeftBarOpen(false)}
-        units={units}
+        units={sidebarUnits} // ← داتا التاب الصحيح
         goToPage={goToPage}
       />
 
