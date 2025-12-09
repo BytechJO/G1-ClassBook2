@@ -19,6 +19,12 @@ img {
 button {
   cursor: pointer;
 }
+
+.bookInfo-div{
+      display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
 /* من 1024px وفوق → ديسكتوب */
 @media (max-width: 780px) {
   body {

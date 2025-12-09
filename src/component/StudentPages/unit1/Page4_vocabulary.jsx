@@ -11,6 +11,11 @@ import { TbMessageCircle } from "react-icons/tb";
 import vocabulary from "../../../assets/unit1/sounds/Pg4_Vocabulary_Adult Lady.mp3";
 import { FaPlay, FaPause } from "react-icons/fa";
 import "../../../index.css";
+import sound1 from "../../../assets/unit1/sounds/pg4-vocabulary-1-goodbye.mp3";
+import sound4 from "../../../assets/unit1/sounds/pg4-vocabulary-4-hello..mp3";
+import sound5 from "../../../assets/unit1/sounds/pg4-vocabulary-5-good morning.mp3";
+import sound2 from "../../../assets/unit1/sounds/pg4-vocabulary-2-how are you.mp3";
+import sound3 from "../../../assets/unit1/sounds/pg4-vocabulary-3-fine thank you.mp3";
 
 const Page4_vocabulary = () => {
   const mainAudioRef = useRef(null);
@@ -53,10 +58,10 @@ const Page4_vocabulary = () => {
   // ================================
   const wordTimings = [
     { start: 2.8, end: 5.0 }, // Goodbye
-    { start: 5.1, end: 7.0 }, // How are you
-    { start: 7.1, end: 10.5 }, // Fine thank you
-    { start: 10.6, end: 12.1 }, // Hello
-    { start: 12.2, end: 15.0 }, // Good morning
+    { start: 5.1, end: 7.2 }, // How are you
+    { start: 7.25, end: 10.5 }, // Fine thank you
+    { start: 10.6, end: 12.35 }, // Hello
+    { start: 12.37, end: 15.0 }, // Good morning
   ];
 
   // ================================
@@ -133,26 +138,37 @@ const Page4_vocabulary = () => {
     }
   };
 
-  // ================================
-  // ✔ Play single word only
-  // ================================
-  const playSingleWord = (index) => {
-    const audio = mainAudioRef.current;
-    if (!audio) return;
+    const wordAudios = [sound1, sound2, sound3, sound4, sound5];
+ const playWordAudio = (index) => {
+  // أوقفي الأوديو الرئيسي
+  mainAudioRef.current.pause();
 
-    const { start, end } = wordTimings[index];
+  // أوقفي أي كلمة شغالة
+  wordRefs.current.forEach((ref) => {
+    if (ref.current) {
+      ref.current.pause();
+      ref.current.currentTime = 0;
+    }
+  });
 
-    audio.currentTime = start;
-    audio.play();
-    setIsPlaying(true);
+  const audio = wordRefs.current[index].current;
+  if (!audio) return;
 
-    const stopInterval = setInterval(() => {
-      if (audio.currentTime >= end) {
-        audio.pause();
-        clearInterval(stopInterval);
-      }
-    }, 40);
+  // تشغيل الصوت من البداية
+  audio.currentTime = 0;
+  audio.play();
+
+  // 🔥 فعل الأنيميشن على طول فترة التشغيل
+  setClickedIndex(index);
+
+  // 🔥 عند انتهاء الصوت -> أطفئ الأنيميشن
+  audio.onended = () => {
+    setClickedIndex(null);
   };
+};
+
+ const wordRefs = useRef(wordAudios.map(() => React.createRef()));
+
 
   const nums = [num1, num2, num3, num4, num5];
 
@@ -305,11 +321,7 @@ const Page4_vocabulary = () => {
                   ? "active"
                   : ""
               }
-              onClick={() => {
-                setClickedIndex(i);
-                playSingleWord(i);
-                setTimeout(() => setClickedIndex(null), 500);
-              }}
+              onClick={() => playWordAudio(i)}
             >
               {i + 1} {text}
             </h6>
@@ -338,6 +350,9 @@ const Page4_vocabulary = () => {
         {/* Background */}
         <img src={backgroundImage} style={{ height: "75vh" }} />
       </div>
+        {wordAudios.map((src, i) => (
+  <audio key={i} ref={wordRefs.current[i]} src={src} />
+))}
     </div>
   );
 };

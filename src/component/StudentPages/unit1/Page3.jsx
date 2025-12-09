@@ -20,7 +20,7 @@ const Page3 = ({ goToUnit }) => {
     },
     {
       title: "Unit 8",
-      startIndex:64,
+      startIndex: 64,
       top: "46%",
       left: "14%",
       width: "20%",
@@ -54,16 +54,16 @@ const Page3 = ({ goToUnit }) => {
     const xPercent = ((x / rect.width) * 100).toFixed(2);
     const yPercent = ((y / rect.height) * 100).toFixed(2);
 
-    console.log(`🟢 top: "${yPercent}%", left: "${xPercent}%"`);
-
     // اختياري: تنقل للوحدة 3 كمثال عند أي نقرة
     // goToUnit(22);
   };
   return (
-    <div className="page1-img-wrapper"
-          ref={imgRef}
-            onClick={handleClick}
-          style={{ backgroundImage: `url(${page3})` }}>
+    <div
+      className="page1-img-wrapper"
+      ref={imgRef}
+      onClick={handleClick}
+      style={{ backgroundImage: `url(${page3})` }}
+    >
       {/* <img
         src={page3}
         alt="Book Index"

@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 
-export default function LeftSidebar({ isOpen, close, units, goToPage }) {
+export default function LeftSidebar({ isOpen, close, units, goToPage, book }) {
   const [openUnit, setOpenUnit] = useState(null);
 
   const toggleUnit = (unitId) => {
@@ -10,53 +11,70 @@ export default function LeftSidebar({ isOpen, close, units, goToPage }) {
   return (
     <>
       <div
-        className={`fixed left-0 bottom-0 w-64 h-full bg-white shadow-xl rounded-tr-2xl 
-        transition-transform duration-300 z-[99999]
+        className={`fixed left-0 bottom-0 w-70 h-full bg-white shadow-xl 
+        rounded-tr-2xl transition-transform duration-300 z-[99999]
         ${isOpen ? "translate-y-0" : "translate-y-full"}`}
       >
         {/* HEADER */}
         <div className="p-4 border-b flex justify-between items-center">
           <h2 className="text-xl text-[#430f68] font-semibold">Menu</h2>
-          <button onClick={close} className="text-2xl">✕</button>
+          <button onClick={close} className="text-2xl">
+            ✕
+          </button>
         </div>
+        {book && (
+          <div className="bookInfo-div text-center mb-4">
+            <img src={book.cover} className="w-28 mx-auto rounded shadow" style={{height:"130px",width:"auto"}} />
+
+            <h3 className="text-lg font-semibold text-[#430f68] mt-2">
+              {book.title}
+               <p className="text-sm text-gray-500">{book.pages} pages</p>
+            </h3>
+
+           
+
+            <div className="border-b border-gray-200 my-3"></div>
+          </div>
+        )}
 
         {/* CONTENT WITH SCROLL */}
-        <div className="h-[calc(100%-70px)] overflow-y-auto px-3 py-2">
+        <div className="h-[calc(100%-70px)] overflow-y-auto px-2 py-0">
           {/* TITLE */}
-          <h3 className="text-lg font-semibold text-[#430f68] mt-4 mb-2">
+          {/* <h3 className="text-lg font-semibold text-[#430f68] mt-4 mb-2">
             Units 📘
-          </h3>
+          </h3> */}
 
           {/* UNITS LIST */}
-          <ul className="space-y-2">
+          <ul className="space-y-1">
             {units.map((u) => (
-              <li key={u.id}>
+              <li
+                key={u.id}
+                className="border-b border-gray-300 last:border-none"
+              >
                 {/* UNIT BUTTON */}
                 <div
                   onClick={() => toggleUnit(u.id)}
-                  className={`p-3 rounded-lg cursor-pointer transition 
-                    ${
-                      openUnit === u.id
-                        ? "bg-[#eedeff] text-[#430f68]"
-                        : "bg-purple-100 hover:bg-purple-200"
-                    }`}
+                  className="flex justify-between items-center py-3 px-2 cursor-pointer select-none"
                 >
-                  <div className="flex justify-between items-center">
-                    <span className="font-medium text-[#430f68]">{u.label}</span>
-                    <span className="font-medium text-[#430f68]">{openUnit === u.id ? "−" : "+"}</span>
-                  </div>
+                  <span className="text-gray-700 font-medium">{u.label}</span>
+
+                  {openUnit === u.id ? (
+                    <IoChevronUp size={20} className="text-blue-500" />
+                  ) : (
+                    <IoChevronDown size={20} className="text-gray-500" />
+                  )}
                 </div>
 
-                {/* PAGES */}
+                {/* DROPDOWN PAGES */}
                 {openUnit === u.id && (
-                  <ul className="ml-4 mt-2 space-y-1">
+                  <ul className="ml-4 mb-2 space-y-1">
                     {Array.from({ length: u.pages }).map((_, i) => {
                       const pageNumber = u.start + i;
 
                       return (
                         <li
                           key={pageNumber}
-                          className="p-2 bg-purple-50 rounded hover:bg-purple-200 cursor-pointer"
+                          className="py-1 px-2 text-gray-600 hover:text-blue-600 cursor-pointer transition"
                           onClick={() => {
                             goToPage(pageNumber);
                             close();
@@ -74,12 +92,8 @@ export default function LeftSidebar({ isOpen, close, units, goToPage }) {
         </div>
       </div>
 
-      {/* OVERLAY */}
       {isOpen && (
-        <div
-          onClick={close}
-          className="fixed inset-0 bg-black/40 z-[99998]"
-        />
+        <div onClick={close} className="fixed inset-0 bg-black/40 z-[99998]" />
       )}
     </>
   );

@@ -119,7 +119,6 @@ export default function WorkBookNavigator({ startIndex = 0 }) {
         style={{
           display: "flex",
           width: "100%",
-          marginBottom: "30px",
           gap: "20px",
           justifyContent: "flex-start",
           backgroundColor: "#430f68",
@@ -132,8 +131,7 @@ export default function WorkBookNavigator({ startIndex = 0 }) {
               display: "flex",
               alignItems: "center",
               color: "white",
-              fontSize: "16px",
-              fontWeight: "500",
+              fontSize: "14px",
               cursor: "pointer",
             }}
           >
@@ -148,7 +146,7 @@ export default function WorkBookNavigator({ startIndex = 0 }) {
             >
               <image href={back} x="0" y="0" width="90" height="90" />
             </svg>{" "}
-            Previous Exercise
+            Previous activity
           </button>
         ) : (
           <button
@@ -156,8 +154,7 @@ export default function WorkBookNavigator({ startIndex = 0 }) {
               display: "flex",
               alignItems: "center",
               color: "white",
-              fontSize: "16px",
-              fontWeight: "500",
+              fontSize: "14px",
               cursor: "pointer",
             }}
           >
@@ -172,7 +169,7 @@ export default function WorkBookNavigator({ startIndex = 0 }) {
             >
               <image href={back} x="0" y="0" width="90" height="90" />
             </svg>{" "}
-            Previous Exercise
+            Previous activity
           </button>
         )}
 
@@ -182,12 +179,11 @@ export default function WorkBookNavigator({ startIndex = 0 }) {
             display: "flex",
             alignItems: "center",
             color: "white",
-            fontSize: "16px",
-            fontWeight: "500",
+            fontSize: "14px",
             cursor: "pointer",
           }}
         >
-          Next Exercise
+          Next activity
           <svg
             width="25"
             height="25"

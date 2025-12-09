@@ -1,4 +1,3 @@
-
 //===================== unit 1 pages
 import Page1 from "../StudentPages/unit1/Page1";
 import Page2 from "../StudentPages/unit1/Page2";
@@ -49,12 +48,12 @@ import Unit4_Reading_P1 from "../StudentPages/unit4/Unit4_Reading_P1";
 import Unit4_Reading_P2 from "../StudentPages/unit4/Unit4_Reading_P2";
 
 //================== unit 5 pages
-// import Unit5_Page1 from "../StudentPages/unit5/Unit5_Page1";
-// import Unit5_Page2 from "../StudentPages/unit5/Unit5_Page2";
-// import Unit5_Page3 from "../StudentPages/unit5/Unit5_Page3";
-// import Unit5_Page4 from "../StudentPages/unit5/Unit5_Page4";
-// import Unit5_Page5 from "../StudentPages/unit5/Unit5_Page5";
-// import Unit5_Page6 from "../StudentPages/unit5/Unit5_Page6";
+import Unit5_Page1 from "../StudentPages/unit5/Unit5_Page1";
+import Unit5_Page2 from "../StudentPages/unit5/Unit5_Page2";
+import Unit5_Page3 from "../StudentPages/unit5/Unit5_Page3";
+import Unit5_Page4 from "../StudentPages/unit5/Unit5_Page4";
+import Unit5_Page5 from "../StudentPages/unit5/Unit5_Page5";
+import Unit5_Page6 from "../StudentPages/unit5/Unit5_Page6";
 
 //================== unit 6 pages
 // import Unit6_Page1 from "../StudentPages/unit6/Unit6_Page1";
@@ -109,7 +108,7 @@ import Unit4_Reading_P2 from "../StudentPages/unit4/Unit4_Reading_P2";
 // import Unit10_Page5 from "../StudentPages/unit10/Unit10_Page5";
 // import Unit10_Page6 from "../StudentPages/unit10/Unit10_Page6";
 
-export const studentPages = (openPopup, goToUnit) =>  [
+export const studentPages = (openPopup, goToUnit) => [
   <Page1 />,
   <Page2 goToUnit={goToUnit} />,
   <Page3 goToUnit={goToUnit} />,

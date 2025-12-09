@@ -55,8 +55,7 @@ const Page2 = ({ goToUnit }) => {
     const xPercent = ((x / rect.width) * 100).toFixed(2);
     const yPercent = ((y / rect.height) * 100).toFixed(2);
 
-    console.log(`🟢 top: "${yPercent}%", left: "${xPercent}%"`);
-
+   
     // اختياري: تنقل للوحدة 3 كمثال عند أي نقرة
     // goToUnit(22);
   };

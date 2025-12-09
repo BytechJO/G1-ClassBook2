@@ -118,7 +118,6 @@ export default function LessonNavigator({ startIndex = 0 }) {
         style={{
           display: "flex",
           width: "100%",
-          marginBottom: "30px",
           gap: "20px",
           justifyContent: "flex-start",
           backgroundColor: "#430f68",
@@ -131,23 +130,22 @@ export default function LessonNavigator({ startIndex = 0 }) {
               display: "flex",
               alignItems: "center",
               color: "white",
-              fontSize: "16px",
-              fontWeight: "500",
+              fontSize: "14px",
               cursor: "pointer",
             }}
           >
             <svg
-              width="20"
-              height="20"
+              width="15"
+              height="15"
               viewBox="0 0 90 90"
               style={{
-              padding: "10px",
+              padding: "12px",
             }}
               className="nav-btn w-10 h-10 rounded-full transition"
             >
               <image href={back} x="0" y="0" width="90" height="90" />
             </svg>{" "}
-            Previous Exercise
+            Previous activity 
           </button>
         ) : (
           <button
@@ -155,23 +153,22 @@ export default function LessonNavigator({ startIndex = 0 }) {
               display: "flex",
               alignItems: "center",
               color: "white",
-              fontSize: "16px",
-              fontWeight: "500",
+              fontSize: "14px",
               cursor: "pointer",
             }}
           >
             <svg
-              width="20"
-              height="20"
+              width="15"
+              height="15"
               viewBox="0 0 90 90"
               style={{
-              padding: "10px",
+              padding: "12px",
             }}
               className="nav-btn w-10 h-10 rounded-full transition"
             >
               <image href={back} x="0" y="0" width="90" height="90" />
             </svg>{" "}
-            Previous Exercise
+            Previous activity 
           </button>
         )}
 
@@ -181,18 +178,17 @@ export default function LessonNavigator({ startIndex = 0 }) {
             display: "flex",
             alignItems: "center",
             color: "white",
-            fontSize: "16px",
-            fontWeight: "500",
+            fontSize: "14px",
             cursor: "pointer",
           }}
         >
-          Next Exercise
+          Next activity 
           <svg
-            width="20"
-            height="20"
+          width="15"
+              height="15"
             viewBox="0 0 90 90"
             style={{
-              padding: "10px",
+              padding: "12px",
             }}
             className="nav-btn w-10 h-10 rounded-full transition"
           >

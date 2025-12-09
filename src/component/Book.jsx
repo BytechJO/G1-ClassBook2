@@ -5,7 +5,12 @@ import TopNavbar from "./Book/Navbar/TopNavbar";
 import BottomBar from "./Book/Navbar/BottomBar";
 import LeftSidebar from "./Book/Sidebars/LeftSidebar";
 import RightSidebar from "./Book/Sidebars/RightSidebar";
-
+//=== cover img ===
+import workbookCover from "../assets/U1 WB/U1/Pages from cover right W.B New Int copy.pdf.png";
+import stbookCover from "../assets/unit1/imgs/Pages from cover right SbEd copy.pdf.png";
+import teacherBookCover from "../assets/Right TB/Right International TB G1_Page_001.png";
+import fcBookCover from "../assets/Right 1 FC/img/right 1 (flashcard) New_Page_01.png";
+import posterBookCover from "../assets/Right Grammar Poster/img/R1 Grammar poster_Page_01.png";
 // === VIEWERS ===
 import FlashCardViewer from "./FlashCardPages/FlashCardPages";
 import PosterViewer from "./PosterGrammerPages/PosterGrammerPages";
@@ -306,20 +311,24 @@ export default function Book() {
   // ===========================================================
 
   const studentUnits = [
-    { id: 1, label: "Student Unit 1", start: 4, pages: 6 },
-    { id: 2, label: "Student Unit 2", start: 10, pages: 12 },
-    { id: 3, label: "Student Unit 3", start: 22, pages: 9 },
-    { id: 4, label: "Student Unit 4", start: 30, pages: 10 },
-    { id: 5, label: "Student Unit 5", start: 40, pages: 10 },
-    { id: 6, label: "Student Unit 6", start: 50, pages: 10 },
+    { id: 1, label: "Unit 1", start: 4, pages: 6 },
+    { id: 2, label: "Unit 2", start: 10, pages: 6 },
+    { id: 3, label: "Review 1 and 2", start: 16, pages: 6 },
+    // { id: 4, label: "Student Unit 3", start: 22, pages: 6 },
+    // { id: 5, label: "Student Unit 4", start: 30, pages: 6 },
+    // { id: 6, label: "Review 3 and 4", start: 36, pages: 6 },
+    // { id: 7, label: "Student Unit 5", start: 40, pages: 10 },
+    // { id: 8, label: "Student Unit 6", start: 50, pages: 10 },
   ];
 
   const workbookUnits = [
-    { id: 1, label: "Workbook Unit 1", start: 2, pages: 6 },
-    { id: 2, label: "Workbook Unit 2", start: 8, pages: 10 },
+    { id: 1, label: "Unit 1", start: 2, pages: 7 },
+    // { id: 2, label: "Unit 2", start: 8, pages: 10 },
   ];
 
-  const teacherUnits = [{ id: 1, label: "Teacher Unit 1", start: 1, pages: 256 }];
+  const teacherUnits = [
+    { id: 1, label: "Teacher Unit 1", start: 1, pages: 256 },
+  ];
 
   const flashUnits = [
     { id: 1, label: "Flashcards", start: 1, pages: flashPages.length },
@@ -359,6 +368,44 @@ export default function Book() {
     flash: flashUnits,
     poster: posterUnits,
   }[activeTab];
+
+  const studentBookInfo = {
+    cover: stbookCover,
+    title: "Student book Level 1",
+    pages: 100,
+  };
+
+  const workbookInfo = {
+    cover: workbookCover,
+    title: "Workbook Level 1",
+    pages: 100,
+  };
+
+  const teacherInfo = {
+    cover: teacherBookCover,
+    title: "Teacher's Book Level 1",
+    pages: 256,
+  };
+
+  const flashInfo = {
+    cover: fcBookCover,
+    title: "Flashcards",
+    pages: flashPages.length,
+  };
+
+  const posterInfo = {
+    cover: fcBookCover,
+    title: "Posters Pack",
+    pages: posterPages.length,
+  };
+  const bookInfoSelector = {
+    student: studentBookInfo,
+    work: workbookInfo,
+    teacher: teacherInfo,
+    flash: flashInfo,
+    poster: posterInfo,
+  };
+
   // ===========================================================
   //                 📌 RENDER
   // ===========================================================
@@ -494,6 +541,7 @@ export default function Book() {
         close={() => setLeftBarOpen(false)}
         units={sidebarUnits} // ← داتا التاب الصحيح
         goToPage={goToPage}
+        book={bookInfoSelector[activeTab]} // ← 🔥 أهم سطر
       />
 
       {/* ===================== RIGHT SIDEBAR ===================== */}

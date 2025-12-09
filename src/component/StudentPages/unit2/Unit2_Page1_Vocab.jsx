@@ -11,9 +11,16 @@ import num4 from "../../../assets/img_unit2/imgs/Num4.svg";
 import num5 from "../../../assets/img_unit2/imgs/Num5.svg";
 import num6 from "../../../assets/img_unit2/imgs/Num6.svg";
 import num7 from "../../../assets/img_unit2/imgs/Num7.svg";
+import sound1 from "../../../assets/img_unit2/sounds-unit2/U2-01.mp3";
+import sound2 from "../../../assets/img_unit2/sounds-unit2/U2-02.mp3";
+import sound3 from "../../../assets/img_unit2/sounds-unit2/U2-03.mp3";
+import sound4 from "../../../assets/img_unit2/sounds-unit2/U2-04.mp3";
+import sound5 from "../../../assets/img_unit2/sounds-unit2/U2-05.mp3";
+import sound6 from "../../../assets/img_unit2/sounds-unit2/U2-06.mp3";
+import sound7 from "../../../assets/img_unit2/sounds-unit2/U2-07.mp3";
 import { TbMessageCircle } from "react-icons/tb";
 import { IoMdSettings } from "react-icons/io";
-import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
+import { FaPlay, FaPause } from "react-icons/fa";
 const Unit2_Page1_Vocab = () => {
   const mainAudioRef = useRef(null);
   const clickAudioRef = useRef(null);
@@ -36,6 +43,7 @@ const Unit2_Page1_Vocab = () => {
 
   const [showCaption, setShowCaption] = useState(false);
 
+
   // ================================
   // ✔ Captions Array
   // ================================
@@ -51,13 +59,13 @@ const Unit2_Page1_Vocab = () => {
   ];
   // 🎵 فترات الكلمات داخل الأوديو الرئيسي
   const wordTimings = [
-    { start: 3.2, end: 5.0 }, // party hat
-    { start: 5.1, end: 7.2 }, // jellow
-    { start: 7.3, end: 9.9 }, // cake
-    { start: 9.92, end: 12.7 }, // Hello
-    { start: 12.8, end: 15.2 }, // Good morning
-    { start: 15.3, end: 17.0 },
-    { start: 17.1, end: 19.3 },
+    { start: 3.2, end: 5.15 }, // party hat
+    { start: 5.22, end: 7.2 }, // jellow
+    { start: 7.23, end: 9.43 }, // cake
+    { start: 9.43, end: 12.25 }, // Hello
+    { start: 12.27, end: 15.05 }, // Good morning
+    { start: 15.04, end: 17.13 },
+    { start: 17.15, end: 19.26 },
   ];
 
   // ================================
@@ -140,33 +148,45 @@ const Unit2_Page1_Vocab = () => {
       setIsPlaying(false);
     }
   };
-  // ================================
-  // ✔ Play single word only
-  // ================================
-  const playSingleWord = (index) => {
-    const audio = mainAudioRef.current;
-    if (!audio) return;
+   const wordAudios = [sound1, sound2, sound3, sound4, sound5, sound6, sound7];
+ const playWordAudio = (index) => {
+  // أوقفي الأوديو الرئيسي
+  mainAudioRef.current.pause();
 
-    const { start, end } = wordTimings[index];
+  // أوقفي أي كلمة شغالة
+  wordRefs.current.forEach((ref) => {
+    if (ref.current) {
+      ref.current.pause();
+      ref.current.currentTime = 0;
+    }
+  });
 
-    audio.currentTime = start;
-    audio.play();
-    setIsPlaying(true);
+  const audio = wordRefs.current[index].current;
+  if (!audio) return;
 
-    const stopInterval = setInterval(() => {
-      if (audio.currentTime >= end) {
-        audio.pause();
-        clearInterval(stopInterval);
-      }
-    }, 40);
+  // تشغيل الصوت من البداية
+  audio.currentTime = 0;
+  audio.play();
+
+  // 🔥 فعل الأنيميشن على طول فترة التشغيل
+  setClickedIndex(index);
+
+  // 🔥 عند انتهاء الصوت -> أطفئ الأنيميشن
+  audio.onended = () => {
+    setClickedIndex(null);
   };
+};
+
+
   const nums = [num1, num2, num3, num4, num5, num6, num7];
+ const wordRefs = useRef(wordAudios.map(() => React.createRef()));
 
   return (
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <div className="audio-popup-vocab-container"
+      <div
+        className="audio-popup-vocab-container"
         style={{
           width: "30%",
           display: "flex",
@@ -317,13 +337,7 @@ const Unit2_Page1_Vocab = () => {
                   ? "active"
                   : ""
               }
-              onClick={() => {
-                setClickedIndex(i);
-
-                playSingleWord(i); // 🔥 تشغيل كلمة واحدة فقط
-
-                setTimeout(() => setClickedIndex(null), 500);
-              }}
+             onClick={() => playWordAudio(i)}
             >
               {i + 1} {text}
             </h6>
@@ -356,6 +370,10 @@ const Unit2_Page1_Vocab = () => {
           style={{ height: "75vh" }}
         />
       </div>
+      {wordAudios.map((src, i) => (
+  <audio key={i} ref={wordRefs.current[i]} src={src} />
+))}
+
     </div>
   );
 };
