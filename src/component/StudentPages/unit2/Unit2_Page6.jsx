@@ -18,9 +18,10 @@ const Unit2_Page6 = ({ openPopup }) => {
   ];
 
   return (
-    <div className="page1-img-wrapper"
-          
-          style={{ backgroundImage: `url(${page_6})` }}>
+    <div
+      className="page1-img-wrapper"
+      style={{ backgroundImage: `url(${page_6})` }}
+    >
       {/* <img src={page_6} /> */}
 
       <div
@@ -31,12 +32,17 @@ const Unit2_Page6 = ({ openPopup }) => {
           width="22"
           height="22"
           viewBox="0 0 90 90"
-          onClick={() =>
-            openPopup("exercise", { startIndex: 10 })
-          }
+          onClick={() => openPopup("exercise", { startIndex: 10 })}
           style={{ overflow: "visible" }}
         >
-          <image className="svg-img" href={arrowBtn} x="0" y="0" width="90" height="90" />
+          <image
+            className="svg-img"
+            href={arrowBtn}
+            x="0"
+            y="0"
+            width="90"
+            height="90"
+          />
         </svg>
       </div>
 
@@ -49,8 +55,9 @@ const Unit2_Page6 = ({ openPopup }) => {
           height="22"
           viewBox="0 0 90 90"
           onClick={() =>
-          openPopup(
-            "audio",    <div
+            openPopup(
+              "audio",
+              <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -63,7 +70,14 @@ const Unit2_Page6 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image className="svg-img" href={audioBtn} x="0" y="0" width="90" height="90" />
+          <image
+            className="svg-img"
+            href={audioBtn}
+            x="0"
+            y="0"
+            width="90"
+            height="90"
+          />
         </svg>
       </div>
 
@@ -75,12 +89,17 @@ const Unit2_Page6 = ({ openPopup }) => {
           width="22"
           height="22"
           viewBox="0 0 90 90"
-          onClick={() =>
-            openPopup("exercise", { startIndex: 11 })
-          }
+          onClick={() => openPopup("exercise", { startIndex: 11 })}
           style={{ overflow: "visible" }}
         >
-          <image className="svg-img" href={arrowBtn} x="0" y="0" width="90" height="90" />
+          <image
+            className="svg-img"
+            href={arrowBtn}
+            x="0"
+            y="0"
+            width="90"
+            height="90"
+          />
         </svg>
       </div>
     </div>

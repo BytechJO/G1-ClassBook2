@@ -140,7 +140,7 @@ const Unit3_Page5_Q4 = () => {
         }}
       >
         <h5 className="header-title-page8">
-          <span className="letter-of-Q"> C</span>Write the sentence.
+          <span className="ex-A"> C</span>Write the sentence.
         </h5>
 
         <div className="unit3-q4-alphabet-box">

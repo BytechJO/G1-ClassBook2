@@ -1,28 +1,35 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Review3_Page1_Q2.css";
-import table from "../../assets/unit4/imgs/U4P34EXEB-01.svg";
-import dish from "../../assets/unit4/imgs/U4P34EXEB-02.svg";
-import tiger from "../../assets/unit4/imgs/U4P34EXEB-03.svg";
-import duck from "../../assets/unit4/imgs/U4P34EXEB-04.svg";
-import ValidationAlert from "../Popup/ValidationAlert";
+import table from "../../../assets/unit4/imgs/U4P34EXEB-01.svg";
+import dish from "../../../assets/unit4/imgs/U4P34EXEB-02.svg";
+import tiger from "../../../assets/unit4/imgs/U4P34EXEB-03.svg";
+import duck from "../../../assets/unit4/imgs/U4P34EXEB-04.svg";
+import ValidationAlert from "../../Popup/ValidationAlert";
+
 const Review3_Page1_Q2 = () => {
   const [lines, setLines] = useState([]);
   const containerRef = useRef(null);
   let startPoint = null;
-  const [wrongWords, setWrongWords] = useState([]); // ⭐ تم التعديل هون
+  const [wrongWords, setWrongWords] = useState([]);
   const [wrongInputs, setWrongInputs] = useState([]);
+  const [locked, setLocked] = useState(false);
+  const [firstDot, setFirstDot] = useState(null);
+  const [showAnswer, setShowAnswer] = useState(false);
+
   const correctMatches = [
     { word: "your book open.", image: "img2" },
     { word: "a line make.", image: "img3" },
     { word: "close book your.", image: "img4" },
     { word: "pencil take your out.", image: "img1" },
   ];
+
   const [userInputs, setUserInputs] = useState({
     1: "Open your book.",
     2: "",
     3: "",
     4: "",
   });
+
   const correctSentences = {
     1: "open your book.",
     2: "make a line.",
@@ -30,62 +37,61 @@ const Review3_Page1_Q2 = () => {
     4: "take out your pencil.",
   };
 
-  const handleDotDown = (e) => {
-    startPoint = e.target;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = startPoint.getBoundingClientRect().left - rect.left + 8;
-    const y = startPoint.getBoundingClientRect().top - rect.top + 8;
+  // ============================
+  // 1️⃣ الضغط على النقطة الأولى (start-dot)
+  // ============================
+  const handleStartDotClick = (e) => {
+    if (showAnswer || locked) return;
 
-    setLines((prev) => [...prev, { x1: x, y1: y, x2: x, y2: y }]);
-    window.addEventListener("mousemove", followMouse);
-    window.addEventListener("mouseup", stopDrawingLine);
+    const rect = containerRef.current.getBoundingClientRect();
+
+    const word = e.target.dataset.word || null;
+    const image = e.target.dataset.image || null;
+
+    const alreadyUsed = lines.some((line) => line.word === word);
+    if (alreadyUsed) return;
+
+    setFirstDot({
+      word,
+      image,
+      x: e.target.getBoundingClientRect().left - rect.left + 8,
+      y: e.target.getBoundingClientRect().top - rect.top + 8,
+    });
   };
 
-  const followMouse = (e) => {
-    const rect = containerRef.current.getBoundingClientRect();
-    setLines((prev) => [
-      ...prev.slice(0, -1),
-      {
-        x1: startPoint.getBoundingClientRect().left - rect.left + 8,
-        y1: startPoint.getBoundingClientRect().top - rect.top + 8,
-        x2: e.clientX - rect.left,
-        y2: e.clientY - rect.top,
-      },
-    ]);
-  };
-
-  const stopDrawingLine = (e) => {
-    window.removeEventListener("mousemove", followMouse);
-    window.removeEventListener("mouseup", stopDrawingLine);
-
-    const endDot = document.elementFromPoint(e.clientX, e.clientY);
-
-    if (!endDot || !endDot.classList.contains("end-dot2")) {
-      setLines((prev) => prev.slice(0, -1));
-      return;
-    }
+  // ============================
+  // 2️⃣ الضغط على النقطة الثانية (end-dot)
+  // ============================
+  const handleEndDotClick = (e) => {
+    if (showAnswer || locked) return;
+    if (!firstDot) return;
 
     const rect = containerRef.current.getBoundingClientRect();
+
+    const endWord = e.target.dataset.word || null;
+    const endImage = e.target.dataset.image || null;
+
     const newLine = {
-      x1: startPoint.getBoundingClientRect().left - rect.left + 8,
-      y1: startPoint.getBoundingClientRect().top - rect.top + 8,
-      x2: endDot.getBoundingClientRect().left - rect.left + 8,
-      y2: endDot.getBoundingClientRect().top - rect.top + 8,
-      word: startPoint.dataset.letter,
-      image: endDot.dataset.image,
+      x1: firstDot.x,
+      y1: firstDot.y,
+      x2: e.target.getBoundingClientRect().left - rect.left + 8,
+      y2: e.target.getBoundingClientRect().top - rect.top + 8,
+      word: firstDot.word || endWord,
+      image: firstDot.image || endImage,
     };
 
-    setLines((prev) => [...prev.slice(0, -1), newLine]);
+    setLines((prev) => [...prev, newLine]);
+    setFirstDot(null);
   };
 
   const checkAnswers = () => {
-    // يجب أن يكون الطالب كاتب الثلاث جمل
+    if (showAnswer || locked) return;
+
     if (!userInputs[2] || !userInputs[3] || !userInputs[4]) {
       ValidationAlert.info("Oops!", "Please complete all sentences.");
       return;
     }
 
-    // يجب أن تكون كل الخطوط الأربعة مرسومة
     if (lines.length < 4) {
       ValidationAlert.info("Oops!", "Please match all pairs before checking.");
       return;
@@ -94,8 +100,7 @@ const Review3_Page1_Q2 = () => {
     let sentenceCorrect = 0;
     let lineCorrect = 0;
 
-    // فحص الجمل (ما عدا رقم 1)
-    let wrongInputs = [];
+    let wrongInputsTemp = [];
 
     Object.keys(correctSentences).forEach((key) => {
       if (key === "1") return;
@@ -104,11 +109,11 @@ const Review3_Page1_Q2 = () => {
       const correctAnswer = correctSentences[key];
 
       if (userAnswer === correctAnswer) sentenceCorrect++;
-      else wrongInputs.push(key);
+      else wrongInputsTemp.push(key);
     });
-    setWrongInputs(wrongInputs);
 
-    // فحص الخطوط
+    setWrongInputs(wrongInputsTemp);
+
     let wrongLines = [];
 
     lines.forEach((line) => {
@@ -120,12 +125,11 @@ const Review3_Page1_Q2 = () => {
       else wrongLines.push(line.word);
     });
 
-    // إجمالي النقاط (كل سؤال 2 نقاط × 4)
     const totalScore = 7;
     const userScore = sentenceCorrect + lineCorrect;
 
-    // لتحديد العلامات الحمراء
     setWrongWords([...wrongLines]);
+    setLocked(true);
 
     let color =
       userScore === totalScore ? "green" : userScore === 0 ? "red" : "orange";
@@ -174,40 +178,54 @@ const Review3_Page1_Q2 = () => {
               <div>
                 <div className="word-with-dot2">
                   <span className="span-num2">1</span>
-                  <span className="word-text2-review3-p1-q2">
+                  <span
+                    className="word-text2-review3-p1-q2"
+                    onClick={() => document.getElementById("dot-open").click()}
+                    style={{ cursor: "pointer" }}
+                  >
                     your book open.
                   </span>
-                  {wrongWords.includes("your book open.") && ( // ⭐ تم التعديل هون
+                  {wrongWords.includes("your book open.") && (
                     <span className="error-mark-review3-p1-q2">✕</span>
                   )}
                   <div className="dot-wrapper2">
                     <div
                       className="dot2 start-dot2"
-                      data-letter="your book open."
-                      onMouseDown={handleDotDown}
+                      id="dot-open"
+                      data-word="your book open."
+                      onClick={handleStartDotClick}
                     ></div>
                   </div>
                 </div>
+
                 <input
                   className="unscramble-input"
                   type="text"
                   value={userInputs[1]}
-                  onChange={(e) => {
-                    setUserInputs((prev) => ({ ...prev, 1: e.target.value }));
-                  }}
+                  onChange={(e) =>
+                    setUserInputs((prev) => ({ ...prev, 1: e.target.value }))
+                  }
                   style={{ color: "red" }}
                   readOnly
                 />
               </div>
+
               <div className="img-with-dot2">
                 <div className="dot-wrapper2">
-                  <div className="dot2 end-dot2" data-image="img1"></div>
+                  <div
+                    className="dot2 end-dot2"
+                    data-image="img1"
+                    id="dot-img1"
+                    onClick={handleEndDotClick}
+                  ></div>
                 </div>
+
                 <img
                   src={table}
                   className="matched-img2"
                   alt=""
-                  style={{ height: "100px", width: "auto" }}
+                  onClick={() => document.getElementById("dot-img1").click()}
+                  style={{ cursor: "pointer", height: "100px", width: "auto" }}
                 />
               </div>
             </div>
@@ -217,18 +235,26 @@ const Review3_Page1_Q2 = () => {
               <div>
                 <div className="word-with-dot2">
                   <span className="span-num2">2</span>
-                  <span className="word-text2-review3-p1-q2">a line make.</span>
-                  {wrongWords.includes("a line make.") && ( // ⭐ تم التعديل هون
+                  <span
+                    className="word-text2-review3-p1-q2"
+                    onClick={() => document.getElementById("dot-line").click()}
+                    style={{ cursor: "pointer" }}
+                  >
+                    a line make.
+                  </span>
+                  {wrongWords.includes("a line make.") && (
                     <span className="error-mark-review3-p1-q2">✕</span>
                   )}
                   <div className="dot-wrapper2">
                     <div
                       className="dot2 start-dot2"
-                      data-letter="a line make."
-                      onMouseDown={handleDotDown}
+                      data-word="a line make."
+                      id="dot-line"
+                      onClick={handleStartDotClick}
                     ></div>
                   </div>
                 </div>
+
                 <input
                   className="unscramble-input"
                   type="text"
@@ -242,15 +268,23 @@ const Review3_Page1_Q2 = () => {
                   <span className="input-error-x">✕</span>
                 )}
               </div>
+
               <div className="img-with-dot2">
                 <div className="dot-wrapper2">
-                  <div className="dot2 end-dot2" data-image="img2"></div>
+                  <div
+                    className="dot2 end-dot2"
+                    data-image="img2"
+                    id="dot-img2"
+                    onClick={handleEndDotClick}
+                  ></div>
                 </div>
+
                 <img
                   src={dish}
                   className="matched-img2"
                   alt=""
-                  style={{ height: "100px", width: "auto" }}
+                  onClick={() => document.getElementById("dot-img2").click()}
+                  style={{ cursor: "pointer", height: "100px", width: "auto" }}
                 />
               </div>
             </div>
@@ -260,20 +294,27 @@ const Review3_Page1_Q2 = () => {
               <div>
                 <div className="word-with-dot2">
                   <span className="span-num2">3</span>
-                  <span className="word-text2-review3-p1-q2">
+                  <span
+                    className="word-text2-review3-p1-q2"
+                    onClick={() => document.getElementById("dot-close").click()}
+                    style={{ cursor: "pointer" }}
+                  >
                     close book your.
                   </span>
-                  {wrongWords.includes("close book your.") && ( // ⭐ تم التعديل هون
+                  {wrongWords.includes("close book your.") && (
                     <span className="error-mark-review3-p1-q2">✕</span>
                   )}
+
                   <div className="dot-wrapper2">
                     <div
                       className="dot2 start-dot2"
-                      data-letter="close book your."
-                      onMouseDown={handleDotDown}
+                      id="dot-close"
+                      data-word="close book your."
+                      onClick={handleStartDotClick}
                     ></div>
                   </div>
                 </div>
+
                 <input
                   className="unscramble-input"
                   type="text"
@@ -287,15 +328,23 @@ const Review3_Page1_Q2 = () => {
                   <span className="input-error-x">✕</span>
                 )}
               </div>
+
               <div className="img-with-dot2">
                 <div className="dot-wrapper2">
-                  <div className="dot2 end-dot2" data-image="img3"></div>
+                  <div
+                    className="dot2 end-dot2"
+                    data-image="img3"
+                    id="dot-img3"
+                    onClick={handleEndDotClick}
+                  ></div>
                 </div>
+
                 <img
                   src={duck}
                   className="matched-img2"
                   alt=""
-                  style={{ height: "100px", width: "auto" }}
+                  onClick={() => document.getElementById("dot-img3").click()}
+                  style={{ cursor: "pointer", height: "100px", width: "auto" }}
                 />
               </div>
             </div>
@@ -305,20 +354,29 @@ const Review3_Page1_Q2 = () => {
               <div>
                 <div className="word-with-dot2">
                   <span className="span-num2">4</span>
-                  <span className="word-text2-review3-p1-q2">
+                  <span
+                    className="word-text2-review3-p1-q2"
+                    onClick={() =>
+                      document.getElementById("dot-pencil").click()
+                    }
+                    style={{ cursor: "pointer" }}
+                  >
                     pencil take your out.
                   </span>
-                  {wrongWords.includes("pencil take your out.") && ( // ⭐ تم التعديل هون
+                  {wrongWords.includes("pencil take your out.") && (
                     <span className="error-mark-review3-p1-q2">✕</span>
                   )}
+
                   <div className="dot-wrapper2">
                     <div
                       className="dot2 start-dot2"
-                      data-letter="pencil take your out."
-                      onMouseDown={handleDotDown}
+                      id="dot-pencil"
+                      data-word="pencil take your out."
+                      onClick={handleStartDotClick}
                     ></div>
                   </div>
                 </div>
+
                 <input
                   className="unscramble-input"
                   type="text"
@@ -332,15 +390,23 @@ const Review3_Page1_Q2 = () => {
                   <span className="input-error-x">✕</span>
                 )}
               </div>
+
               <div className="img-with-dot2">
                 <div className="dot-wrapper2">
-                  <div className="dot2 end-dot2" data-image="img4"></div>
+                  <div
+                    className="dot2 end-dot2"
+                    data-image="img4"
+                    id="dot-img4"
+                    onClick={handleEndDotClick}
+                  ></div>
                 </div>
+
                 <img
                   src={tiger}
                   className="matched-img2"
                   alt=""
-                  style={{ height: "100px", width: "auto" }}
+                  onClick={() => document.getElementById("dot-img4").click()}
+                  style={{ cursor: "pointer", height: "100px", width: "auto" }}
                 />
               </div>
             </div>
@@ -352,6 +418,7 @@ const Review3_Page1_Q2 = () => {
             </svg>
           </div>
         </div>
+
         <div className="action-buttons-container">
           <button
             onClick={() => {
@@ -363,11 +430,59 @@ const Review3_Page1_Q2 = () => {
                 4: "",
               });
               setWrongWords([]);
+              setWrongInputs([]);
+              setShowAnswer(false);
+              setLocked(false);
             }}
             className="try-again-button"
           >
             Start Again ↻
           </button>
+
+          <button
+            onClick={() => {
+              const rect = containerRef.current.getBoundingClientRect();
+
+              const getDotPosition = (selector) => {
+                const el = document.querySelector(selector);
+                if (!el) return { x: 0, y: 0 };
+                const r = el.getBoundingClientRect();
+                return {
+                  x: r.left - rect.left + 8,
+                  y: r.top - rect.top + 8,
+                };
+              };
+
+              // 1️⃣ إنشاء الخطوط الصحيحة
+              const finalLines = correctMatches.map((line) => ({
+                ...line,
+                x1: getDotPosition(`[data-word="${line.word}"]`).x,
+                y1: getDotPosition(`[data-word="${line.word}"]`).y,
+                x2: getDotPosition(`[data-image="${line.image}"]`).x,
+                y2: getDotPosition(`[data-image="${line.image}"]`).y,
+              }));
+
+              setLines(finalLines);
+
+              // 2️⃣ تعبئة جميع الإجابات الصحيحة في inputs
+              setUserInputs({
+                1: "Open your book.",
+                2: correctSentences["2"],
+                3: correctSentences["3"],
+                4: correctSentences["4"],
+              });
+
+              // 3️⃣ منع التعديل على كل شيء (قفل inputs + منع الرسم)
+              setLocked(true);
+              setShowAnswer(true);
+              setWrongWords([]);
+              setWrongInputs([]);
+            }}
+            className="show-answer-btn swal-continue"
+          >
+            Show Answer
+          </button>
+
           <button onClick={checkAnswers} className="check-button2">
             Check Answer ✓
           </button>

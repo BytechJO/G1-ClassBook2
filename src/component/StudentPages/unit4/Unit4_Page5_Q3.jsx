@@ -8,6 +8,8 @@ export default function Unit4_Page5_Q3() {
   const [wrongWords, setWrongWords] = useState([]);
   const [firstDot, setFirstDot] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
+  // ⭐⭐⭐ NEW: منع الرسم بعد Check Answer
+  const [locked, setLocked] = useState(false);
   const correctMatches = [
     { word1: "It’s a red", word2: "square." },
     { word1: "It’s a blue", word2: "triangle." },
@@ -18,8 +20,15 @@ export default function Unit4_Page5_Q3() {
   // ⭐ Click to Connect Logic
   // ==========================
   const handleStartDotClick = (e) => {
-    const rect = containerRef.current.getBoundingClientRect();
+    if (showAnswer || locked) return; // ⭐ NEW: لا تسمح بالرسم عند القفل
 
+    const rect = containerRef.current.getBoundingClientRect();
+    const word = e.target.dataset.letter;
+
+    // ⭐⭐⭐ NEW: منع رسم أكثر من خط من نفس الصورة
+    const alreadyUsed = lines.some((line) => line.word === word);
+    if (alreadyUsed) return;
+    // -----------------------------------------------------
     setFirstDot({
       word: e.target.dataset.letter,
       x: e.target.getBoundingClientRect().left - rect.left + 8,
@@ -28,6 +37,7 @@ export default function Unit4_Page5_Q3() {
   };
 
   const handleEndDotClick = (e) => {
+    if (showAnswer || locked) return; // ⭐ NEW
     if (!firstDot) return;
 
     const rect = containerRef.current.getBoundingClientRect();
@@ -47,7 +57,7 @@ export default function Unit4_Page5_Q3() {
   };
 
   const checkAnswers = () => {
-    if (showAnswer) return;
+    if (showAnswer || locked) return; // ⭐ NEW: لا يمكن إعادة التحقق
     // 1️⃣ إذا في خطوط ناقصة
     if (lines.length < correctMatches.length) {
       ValidationAlert.info(
@@ -70,6 +80,7 @@ export default function Unit4_Page5_Q3() {
     });
 
     setWrongWords(wrong); // ⭐ تم التعديل هون
+    setLocked(true); // ⭐⭐⭐ NEW: أقفل الرسم بعد الضغط على Check Answer
     // 3️⃣ تحديد اللون حسب النتيجة
     const color =
       correctCount === total ? "green" : correctCount === 0 ? "red" : "orange";
@@ -119,6 +130,7 @@ export default function Unit4_Page5_Q3() {
     // 2️⃣ وضع الخطوط
     setLines(correctLines);
     setShowAnswer(true);
+    setLocked(true); // ⭐ NEW: ممنوع الرسم بعد Show Answer
     // 3️⃣ إخفاء علامات الإكس
     setWrongWords([]);
   };
@@ -144,7 +156,7 @@ export default function Unit4_Page5_Q3() {
       >
         <h5 className="header-title-page8">
           {" "}
-          <span className="letter-of-Q">B</span> Read, look, and match.
+          <span className="ex-A">B</span> Read, look, and match.
         </h5>
 
         <div className="matching-wrapper2" ref={containerRef}>
@@ -153,16 +165,21 @@ export default function Unit4_Page5_Q3() {
             {["It’s a red", "It’s a blue", "It’s a brown"].map((word, i) => (
               <div className="word-row2" key={i}>
                 <span className="num2">{i + 1}</span>
-                <span className="word-text3" style={{ width: "141px" }}>
+                <span
+                  className="word-text3"
+                  onClick={() => document.getElementById(`dot-${word}`).click()}
+                  style={{ width: "141px", cursor: "pointer" }}
+                >
                   {word}
                 </span>
                 <div
                   className="dot5 start-dot5"
                   data-letter={word}
+                  id={`dot-${word}`}
                   onClick={handleStartDotClick}
                 ></div>
                 {wrongWords.includes(word) && (
-                  <span className="error-mark4">✕</span>
+                  <span className="error-mark4-u2-p18-q2">✕</span>
                 )}
               </div>
             ))}
@@ -174,9 +191,11 @@ export default function Unit4_Page5_Q3() {
                 <div
                   className="dot5 end-dot5"
                   data-image={word}
+                   id={`dot-${word}`}
                   onClick={handleEndDotClick}
                 ></div>
-                <span className="word-text3">{word}</span>
+                <span className="word-text3"  onClick={() => document.getElementById(`dot-${word}`).click()}
+                  style={{ cursor: "pointer" }}>{word}</span>
               </div>
             ))}
           </div>
@@ -201,6 +220,7 @@ export default function Unit4_Page5_Q3() {
           onClick={() => {
             setLines([]);
             setWrongWords([]);
+            setLocked(false); // ⭐⭐⭐ NEW: إعادة فتح الرسم
           }}
           className="try-again-button"
         >

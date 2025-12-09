@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import img1 from "../../assets/unit4/imgs/U4P36EXEB-01.svg";
-import img2 from "../../assets/unit4/imgs/U4P36EXEB-02.svg";
-import img3 from "../../assets/unit3/imgs3/P27exeE-03.svg";
-import ValidationAlert from "../Popup/ValidationAlert";
+import img1 from "../../../assets/unit4/imgs/U4P36EXEB-01.svg";
+import img2 from "../../../assets/unit4/imgs/U4P36EXEB-02.svg";
+import img3 from "../../../assets/unit3/imgs3/P27exeE-03.svg";
+import ValidationAlert from "../../Popup/ValidationAlert";
 import "./Review4_Page1_Q2.css";
 
 const Review4_Page1_Q2 = () => {
@@ -27,19 +27,20 @@ const Review4_Page1_Q2 = () => {
 
   const [answers, setAnswers] = useState({});
   const [results, setResults] = useState({});
+  const [locked, setLocked] = useState(false); // ⭐ NEW — قفل التعديل
 
-  // -------------------------
-  // اختيار جواب واحد فقط لكل سؤال
-  // -------------------------
   const handleSelect = (qId, idx) => {
+    if (locked) return; // ⭐ NEW — منع التعديل بعد Show Answer
+
     setAnswers({
       ...answers,
-      [qId]: idx, // نخزن رقم الخيار المختار
+      [qId]: idx,
     });
-    setResults({})
+    setResults({});
   };
 
   const checkAnswers = () => {
+      if (locked) return; // ⭐ NEW — منع التعديل بعد Show Answer
     const temp = {};
     let correctCount = 0;
     let total = questions.length;
@@ -76,13 +77,37 @@ const Review4_Page1_Q2 = () => {
       </span>
     </div>
   `;
+
     if (correctCount === total) ValidationAlert.success(scoreMessage);
     else if (correctCount === 0) ValidationAlert.error(scoreMessage);
     else ValidationAlert.warning(scoreMessage);
+
+    setLocked(true); // ⭐ NEW — منع التعديل بعد Check
   };
+
   const reset = () => {
     setAnswers({});
     setResults({});
+    setLocked(false); // ⭐ NEW — إعادة التعديل
+  };
+
+  // ⭐⭐⭐ NEW — showAnswer
+  const showAnswer = () => {
+    const correctSelections = {};
+
+    questions.forEach((q) => {
+      const correctIdx = q.items.findIndex((item) => item.correct === "✓");
+      correctSelections[q.id] = correctIdx;
+    });
+
+    setAnswers(correctSelections);
+    setResults(() => {
+      const res = {};
+      questions.forEach((q) => (res[q.id] = "correct"));
+      return res;
+    });
+
+    setLocked(true); // قفل التعديل
   };
 
   return (
@@ -149,6 +174,12 @@ const Review4_Page1_Q2 = () => {
         <button onClick={reset} className="try-again-button">
           Start Again ↻
         </button>
+
+        {/* ⭐⭐⭐ NEW BUTTON */}
+        <button onClick={showAnswer} className="show-answer-btn swal-continue">
+          Show Answer 
+        </button>
+
         <button onClick={checkAnswers} className="check-button2">
           Check Answer ✓
         </button>

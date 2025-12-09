@@ -79,7 +79,7 @@ const Unit4_Page6_Q2 = () => {
         }}
       >
         <h5 className="header-title-page8">
-          <span className="letter-of-Q">E</span>Read and draw.
+          <span className="ex-A">E</span>Read and draw.
         </h5>
 
         <div className="unit4-q2-p6-table">

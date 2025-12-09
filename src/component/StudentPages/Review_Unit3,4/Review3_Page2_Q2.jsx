@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Review3_Page2_Q2.css";
-import ValidationAlert from "../Popup/ValidationAlert";
+import ValidationAlert from "../../Popup/ValidationAlert";
+
 const Review3_Page2_Q2 = () => {
   const sentences = [
     { word1: "hot", word2: "sun", word3: "sat", num: 1 },
@@ -20,16 +21,21 @@ const Review3_Page2_Q2 = () => {
 
   const [circledWords, setCircledWords] = useState({});
   const [checked, setChecked] = useState(false);
+  const [locked, setLocked] = useState(false); // ⭐ NEW — يمنع التعديل بعد Show Answer
 
   const handleWordClick = (sIndex, wIndex) => {
+    if (locked) return; // ⭐ منع التغيير عند القفل
+
     setCircledWords((prev) => ({
       ...prev,
-      [sIndex]: [wIndex], // 🟢 كل جملة لها اختيار واحد فقط
+      [sIndex]: [wIndex],
     }));
-    setChecked(false)
+
+    setChecked(false);
   };
 
   const checkAnswers = () => {
+    if (locked) return; // ⭐ منع التغيير عند القفل
     if (Object.keys(circledWords).length < sentences.length) {
       ValidationAlert.info("Oops!", "Please circle at least one mistake.");
       return;
@@ -52,6 +58,20 @@ const Review3_Page2_Q2 = () => {
     if (studentCorrect === totalCorrect) ValidationAlert.success(scoreMessage);
     else if (studentCorrect === 0) ValidationAlert.error(scoreMessage);
     else ValidationAlert.warning(scoreMessage);
+
+    setLocked(true); // ⭐ NEW — يمنع التعديل بعد Check Answer
+  };
+
+  const showAnswer = () => {
+    const correctSelections = {};
+
+    Object.keys(correct).forEach((sIndex) => {
+      correctSelections[sIndex] = correct[sIndex]; // ضع الدوائر على الإجابات الصحيحة فقط
+    });
+
+    setCircledWords(correctSelections);
+    setChecked(false); // إزالة الأخطاء
+    setLocked(true);   // قفل التعديل
   };
 
   return (
@@ -74,7 +94,9 @@ const Review3_Page2_Q2 = () => {
         }}
       >
         <div className="review3-p2-q2-content-container">
-          <h5 className="header-title-page8">E Circle the <span style={{ color: "red" }}>short a</span> words.</h5>
+          <h5 className="header-title-page8">
+            E Circle the <span style={{ color: "red" }}>short a</span> words.
+          </h5>
 
           <div className="review3-p2-q2-sentence-container2">
             {sentences.map((sentence, sIndex) => (
@@ -117,11 +139,18 @@ const Review3_Page2_Q2 = () => {
             onClick={() => {
               setCircledWords({});
               setChecked(false);
+              setLocked(false); // ⭐ فتح التعديل من جديد
             }}
             className="try-again-button"
           >
             Start Again ↻
           </button>
+
+          {/* ⭐⭐⭐ تمت إضافة زر Show Answer */}
+          <button onClick={showAnswer} className="show-answer-btn swal-continue">
+            Show Answer 
+          </button>
+
           <button onClick={checkAnswers} className="check-button2">
             Check Answer ✓
           </button>

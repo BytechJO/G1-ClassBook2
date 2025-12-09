@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import page_4 from "../../../assets/unit3/imgs3/Right 1 Unit 03 Let's Go to School4.jpg";
+import page_4 from "../../../assets/unit3/imgs3/right1-unit3-page4.jpg";
 import "./Unit3_Page4.css";
 import CD23_pg25_Grammar2_AdultLady from "../../../assets/unit3/sound3/U3P25RG2.mp3";
 import sound1 from "../../../assets/unit3/sound3/Pg25_2.1_Adult Lady.mp3";
@@ -12,7 +12,7 @@ import video from "../../../assets/unit3/sound3/p25.mp4";
 import AudioWithCaption from "../../AudioWithCaption";
 import audioBtn from "../../../assets/unit1/imgs/Page 01/Audio btn.svg";
 import arrowBtn from "../../../assets/unit1/imgs/Page 01/Arrow.svg";
-import pauseBtn from "../../../assets/unit1/imgs/Page 01/Right Video Button.svg";
+import pauseBtn from "../../../assets/unit1/imgs/Right Video Button.svg";
 
 const Unit3_Page4 = ({ openPopup }) => {
   const audioRef = useRef(null);
@@ -58,12 +58,16 @@ const Unit3_Page4 = ({ openPopup }) => {
   };
 
   return (
-    <div className="unit3-page-background" style={{ position: "relative" }}>
-      <img
+    <div
+      className="page1-img-wrapper"
+      onClick={handleImageClick}
+      style={{ backgroundImage: `url(${page_4})` }}
+    >
+      {/* <img
         src={page_4}
         style={{ display: "block" }}
         onClick={handleImageClick}
-      />
+      /> */}
       {clickableAreas.map((area, index) => (
         <div
           key={index}
@@ -92,68 +96,92 @@ const Unit3_Page4 = ({ openPopup }) => {
         ></div>
       ))}
 
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() =>
-          openPopup(
-            "audio",
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignContent: "center",
-              }}
-            >
-              <AudioWithCaption
-                src={CD23_pg25_Grammar2_AdultLady}
-                captions={captionsExample}
-              />
-            </div>
-          )
-        }
+      <div
         className="headset-icon-CD-unit3-page4-1 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
       >
-        <image href={audioBtn} x="0" y="0" width="60" height="60" />
-      </svg>
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() =>
-          openPopup(
-            "video",
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignContent: "center",
-                alignItems: "center",
-                height: "100%",
-                width: "100%",
-              }}
-            >
-              <video
-                autoPlay
-                controls
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 90 90"
+          onClick={() =>
+            openPopup(
+              "audio",
+              <div
                 style={{
-                  width: "auto",
-                  height: "80%",
-                  objectFit: "fill",
-                  borderRadius: "20px",
-                  display: "block",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center",
                 }}
               >
-                <source src={video} type="video/mp4" />
-              </video>
-            </div>
-          )
-        }
-        className="pauseBtn-icon-CD-unit3-page4-1  hover:scale-110 transition"
+                <AudioWithCaption
+                  src={CD23_pg25_Grammar2_AdultLady}
+                  captions={captionsExample}
+                />
+              </div>
+            )
+          }
+          style={{ overflow: "visible" }}
+        >
+          <image
+            className="svg-img"
+            href={audioBtn}
+            x="0"
+            y="0"
+            width="90"
+            height="90"
+          />
+        </svg>
+      </div>
+      <div
+        className="pauseBtn-icon-CD-unit3-page4-1 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
       >
-        <image href={pauseBtn} x="0" y="0" width="60" height="60" />
-      </svg>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 90 90"
+          onClick={() =>
+            openPopup(
+              "video",
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center",
+                  alignItems: "center",
+                  height: "100%",
+                  width: "100%",
+                }}
+              >
+                <video
+                  autoPlay
+                  controls
+                  style={{
+                    width: "auto",
+                    height: "80%",
+                    objectFit: "fill",
+                    borderRadius: "20px",
+                    display: "block",
+                  }}
+                >
+                  <source src={video} type="video/mp4" />
+                </video>
+              </div>
+            )
+          }
+          style={{ overflow: "visible" }}
+        >
+          <image
+            href={pauseBtn}
+            className="svg-img"
+            x="0"
+            y="0"
+            width="90"
+            height="90"
+          />
+        </svg>
+      </div>
       <audio ref={audioRef} style={{ display: "none" }} />
     </div>
   );

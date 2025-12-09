@@ -8,7 +8,6 @@ import { lessons } from "./LessonData";
 export default function LessonNavigator({ startIndex = 0 }) {
   const [index, setIndex] = useState(startIndex);
   const CurrentLesson = lessons[index].component;
-
   const handleNext = () => {
     const lesson = lessons[index];
     if (lesson.lastOfUnit && lesson.unit % 2 === 0) {

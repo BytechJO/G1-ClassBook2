@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import img1 from "../../assets/unit4/imgs/U4P34EXEC-01.svg";
-import img2 from "../../assets/unit4/imgs/U4P34EXEC-02.svg";
-import img3 from "../../assets/unit4/imgs/U4P34EXEC-03.svg";
-import ValidationAlert from "../Popup/ValidationAlert";
+import img1 from "../../../assets/unit4/imgs/U4P34EXEC-01.svg";
+import img2 from "../../../assets/unit4/imgs/U4P34EXEC-02.svg";
+import img3 from "../../../assets/unit4/imgs/U4P34EXEC-03.svg";
+import ValidationAlert from "../../Popup/ValidationAlert";
 import "./Review3_Page1_Q3.css";
 
 const Review3_Page1_Q3 = () => {
@@ -35,16 +35,17 @@ const Review3_Page1_Q3 = () => {
 
   const [answers, setAnswers] = useState({});
   const [results, setResults] = useState({});
+  const [locked, setLocked] = useState(false); // ⭐ NEW: إغلاق التعديل بعد Show Answer
 
-  // -------------------------
-  // اختيار جواب واحد فقط لكل سؤال
-  // -------------------------
+  // اختيار جواب واحد فقط
   const handleSelect = (qId, idx) => {
+    if (locked) return; // ⭐ منع التعديل عند الإغلاق
+
     setAnswers({
       ...answers,
-      [qId]: idx, // نخزن رقم الخيار المختار
+      [qId]: idx,
     });
-    setResults({})
+    setResults({});
   };
 
   const checkAnswers = () => {
@@ -60,8 +61,7 @@ const Review3_Page1_Q3 = () => {
         return;
       }
 
-      const isCorrect =
-        q.items[chosenIndex].correct.toLowerCase() === "✓";
+      const isCorrect = q.items[chosenIndex].correct.toLowerCase() === "✓";
 
       temp[q.id] = isCorrect ? "correct" : "wrong";
 
@@ -79,19 +79,40 @@ const Review3_Page1_Q3 = () => {
       correctCount === total ? "green" : correctCount === 0 ? "red" : "orange";
 
     const scoreMessage = `
-    <div style="font-size:20px; text-align:center;">
-      <span style="color:${color}; font-weight:bold;">
-        Score: ${correctCount} / ${total}
-      </span>
-    </div>
-  `;
-   if (correctCount === total) ValidationAlert.success(scoreMessage);
+      <div style="font-size:20px; text-align:center;">
+        <span style="color:${color}; font-weight:bold;">
+          Score: ${correctCount} / ${total}
+        </span>
+      </div>
+    `;
+
+    if (correctCount === total) ValidationAlert.success(scoreMessage);
     else if (correctCount === 0) ValidationAlert.error(scoreMessage);
     else ValidationAlert.warning(scoreMessage);
-  }
+
+    setLocked(true); // ⭐ إغلاق التعديل بعد check answer
+  };
+
   const reset = () => {
     setAnswers({});
     setResults({});
+    setLocked(false); // ⭐ إعادة فتح التعديل
+  };
+
+  // ⭐⭐⭐ NEW: Show Answer function
+  const showAnswer = () => {
+    const correctSelections = {};
+
+    questions.forEach((q) => {
+      const correctIndex = q.items.findIndex(
+        (item) => item.correct === "✓"
+      );
+      correctSelections[q.id] = correctIndex;
+    });
+
+    setAnswers(correctSelections); // تعبئة الإجابات الصحيحة
+    setResults({}); // حذف أي أخطاء
+    setLocked(true); // إغلاق التعديل
   };
 
   return (
@@ -114,7 +135,9 @@ const Review3_Page1_Q3 = () => {
         }}
       >
         <div className="review3-p1-q3-wrapper">
-          <h4 className="header-title-page8">C Read and write <span style={{color:"red"}}>✓</span> </h4>
+          <h4 className="header-title-page8">
+            C Read and write <span style={{ color: "red" }}>✓</span>
+          </h4>
 
           <div className="review3-p1-q3-grid">
             {questions.map((q) => (
@@ -135,11 +158,11 @@ const Review3_Page1_Q3 = () => {
                           readOnly
                           value={isSelected ? "✓" : ""}
                           onFocus={() => handleSelect(q.id, idx)}
-                          className={`review3-p1-q3-input`}
+                          className="review3-p1-q3-input"
                         />
 
                         {isWrong && (
-                          <span className="review3-p1-q3-x">X</span>
+                          <span className="review3-p1-q3-x">✕</span>
                         )}
                       </div>
                     </div>
@@ -155,6 +178,12 @@ const Review3_Page1_Q3 = () => {
         <button onClick={reset} className="try-again-button">
           Start Again ↻
         </button>
+
+        {/* ⭐⭐⭐ NEW BUTTON */}
+        <button onClick={showAnswer} className="show-answer-btn swal-continue">
+          Show Answer 
+        </button>
+
         <button onClick={checkAnswers} className="check-button2">
           Check Answer ✓
         </button>

@@ -1,5 +1,5 @@
-import page_5 from "../../../assets/unit3/imgs3/Right 1 Unit 03 Let's Go to School5.jpg";
-import audioBtn from "../../../assets/unit1/imgs/Page 01/Audio btn.svg"
+import page_5 from "../../../assets/unit3/imgs3/right1-unit3-page5.jpg";
+import audioBtn from "../../../assets/unit1/imgs/Page 01/Audio btn.svg";
 import arrowBtn from "../../../assets/unit1/imgs/Page 01/Arrow.svg";
 import pauseBtn from "../../../assets/unit1/imgs/Page 01/Right Video Button.svg";
 import "./Unit3_Page5.css";
@@ -9,8 +9,10 @@ import Unit3_Page5_Q3 from "./Unit3_Page5_Q3";
 import Unit3_Page5_Q4 from "./Unit3_Page5_Q4";
 const Unit3_Page5 = ({ openPopup }) => {
   return (
-    <div className="unit2-page-background">
-      <img src={page_5} />
+    <div   className="page1-img-wrapper"
+          // onClick={handleImageClick}
+          style={{ backgroundImage: `url(${page_5})` }}>
+      {/* <img src={page_5} /> */}
 
       <svg
         width="30"

@@ -1,39 +1,25 @@
 import React, { useState } from "react";
-import deer from "../../assets/unit4/imgs/U4P34EXEA-01.svg";
-import duck from "../../assets/unit4/imgs/U4P34EXEA-02.svg";
-import taxi from "../../assets/unit4/imgs/U4P34EXEA-03.svg";
-import tiger from "../../assets/unit4/imgs/U4P34EXEA-04.svg";
-import ValidationAlert from "../Popup/ValidationAlert";
+import deer from "../../../assets/unit4/imgs/U4P34EXEA-01.svg";
+import duck from "../../../assets/unit4/imgs/U4P34EXEA-02.svg";
+import taxi from "../../../assets/unit4/imgs/U4P34EXEA-03.svg";
+import tiger from "../../../assets/unit4/imgs/U4P34EXEA-04.svg";
+import ValidationAlert from "../../Popup/ValidationAlert";
 import "./Review3_Page1_Q1.css";
+
 const Review3_Page1_Q1 = () => {
   const data = [
-    {
-      word: "Quiet!",
-      src: deer,
-      num: "3",
-    },
-    {
-      word: "Close your book.",
-      src: duck,
-      num: "4",
-    },
-    {
-      word: "Make a line.",
-      src: taxi,
-      num: "1",
-    },
-    {
-      word: "Listen!",
-      src: tiger,
-      num: "2",
-    },
+    { word: "Quiet!", src: deer, num: "3" },
+    { word: "Close your book.", src: duck, num: "4" },
+    { word: "Make a line.", src: taxi, num: "1" },
+    { word: "Listen!", src: tiger, num: "2" }
   ];
 
   const [answers, setAnswers] = useState(data.map(() => ({ number: "" })));
-
   const [wrongNumbers, setWrongNumbers] = useState(data.map(() => false));
+  const [locked, setLocked] = useState(false); // ⭐ يمنع الإدخال بعد show answer
 
   const updateAnswer = (index, field, value) => {
+    if (locked) return; // ⭐ منع التعديل أثناء القفل
     setAnswers((prev) =>
       prev.map((a, i) =>
         i === index ? { ...a, [field]: value.toLowerCase() } : a
@@ -45,18 +31,15 @@ const Review3_Page1_Q1 = () => {
   const reset = () => {
     setAnswers(data.map(() => ({ number: "" })));
     setWrongNumbers(data.map(() => false));
+    setLocked(false); // ⭐ إعادة فتح الإدخال
   };
 
   const checkAnswers = () => {
     if (answers.some((a) => a.number === "")) {
-      ValidationAlert.info(
-        "Oops!",
-        "Please complete all answers before checking."
-      );
+      ValidationAlert.info("Oops!", "Please complete all answers before checking.");
       return;
     }
 
-    let correctLetters = 0;
     let correctNumbers = 0;
 
     answers.forEach((a, i) => {
@@ -67,7 +50,6 @@ const Review3_Page1_Q1 = () => {
     let score = correctNumbers;
 
     const numberWrongs = answers.map((a, i) => a.number !== data[i].num);
-
     setWrongNumbers(numberWrongs);
 
     let color =
@@ -82,6 +64,21 @@ const Review3_Page1_Q1 = () => {
     if (score === totalPoints) ValidationAlert.success(scoreMessage);
     else if (score === 0) ValidationAlert.error(scoreMessage);
     else ValidationAlert.warning(scoreMessage);
+
+    setLocked(true); // ⭐ يمنع التعديل بعد check answer
+  };
+
+  // ⭐⭐⭐ NEW: Show Answer
+  const showAnswer = () => {
+    // 1️⃣ تعبئة الإجابات الصحيحة كلها
+    const correctInputs = data.map((item) => ({ number: item.num }));
+    setAnswers(correctInputs);
+
+    // 2️⃣ إزالة جميع علامات الخطأ
+    setWrongNumbers(data.map(() => false));
+
+    // 3️⃣ قفل الإدخال بالكامل
+    setLocked(true);
   };
 
   return (
@@ -89,7 +86,7 @@ const Review3_Page1_Q1 = () => {
       <div className="page8-content">
         <header className="header-title-page8">A Look and number.</header>
 
-        {/* ✅ الصور */}
+        {/* الصور */}
         <div
           className="exercise-image-div-review3-p1-q1"
           style={{
@@ -100,25 +97,19 @@ const Review3_Page1_Q1 = () => {
           }}
         >
           {data.map((item, index) => (
-            <>
-              <img
-                key={index}
-                src={item.src}
-                className="exercise-image-review3-p1-q1"
-              />
-            </>
+            <img
+              key={index}
+              src={item.src}
+              className="exercise-image-review3-p1-q1"
+            />
           ))}
         </div>
 
-        {/* ✅ مربعات الأرقام + علامة الخطأ  */}
-        <div
-          className="exercise-container"
-          style={{
-            marginTop: "20px",
-          }}
-        >
+        {/* مربعات الإدخال */}
+        <div className="exercise-container" style={{ marginTop: "20px" }}>
           {data.map((item, index) => (
             <div
+              key={index}
               style={{
                 display: "flex",
                 flexDirection: "row",
@@ -128,7 +119,6 @@ const Review3_Page1_Q1 = () => {
               }}
             >
               <div
-                key={index}
                 className="exercise-item-review3-p1-q1"
                 style={{ position: "relative" }}
               >
@@ -137,6 +127,7 @@ const Review3_Page1_Q1 = () => {
                   maxLength="1"
                   className="missing-input"
                   value={answers[index].number}
+                  readOnly={locked} // ⭐ يمنع التعديل بعد show answer
                   onChange={(e) =>
                     updateAnswer(index, "number", e.target.value)
                   }
@@ -162,19 +153,26 @@ const Review3_Page1_Q1 = () => {
                       border: "2px solid white",
                     }}
                   >
-                    X
+                    ✕
                   </div>
                 )}
               </div>
+
               <span>{item.word}</span>
             </div>
           ))}
         </div>
       </div>
+
       <div className="action-buttons-container">
         <button onClick={reset} className="try-again-button">
           Start Again ↻
         </button>
+
+        <button onClick={showAnswer} className="show-answer-btn swal-continue">
+          Show Answer 
+        </button>
+
         <button onClick={checkAnswers} className="check-button2">
           Check Answer ✓
         </button>

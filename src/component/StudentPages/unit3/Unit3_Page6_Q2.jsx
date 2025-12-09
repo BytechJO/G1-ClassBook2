@@ -111,7 +111,7 @@ const Unit3_Page6_Q2 = () => {
         }}
       >
         <h5 className="header-title-page8">
-          <span className="letter-of-Q">E</span> Read, look, and choose
+          <span className="ex-A">E</span> Read, look, and choose
           <span style={{ color: "red" }}> ✓ </span> or
           <span style={{ color: "red" }}> ✗</span>.
         </h5>

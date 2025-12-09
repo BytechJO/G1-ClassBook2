@@ -39,15 +39,17 @@ const Unit3_Page1_Vocab = () => {
   // ✔ Captions Array
   // ================================
   const captions = [
-    { start: 0, end: 3.1, text: "Page 10, Unit 2, Vocabulary." },
-    { start: 3.12, end: 5.15, text: " 1. Party Hat. " },
-    { start: 5.17, end: 7.16, text: "2. Jello." },
-    { start: 7.18, end: 9.27, text: "3. Cake. " },
-    { start: 9.29, end: 12.2, text: "4. Happy Birthday." },
-    { start: 12.22, end: 15.07, text: " 5. Balloons." },
-    { start: 15.09, end: 17.13, text: " 6. Present. " },
-    { start: 17.15, end: 19.26, text: "7.card" },
+    { start: 0, end: 3.1, text: "Page 22, Unit 3, Vocabulary." },
+    { start: 3.12, end: 5.15, text: " 1. numbers" },
+    { start: 5.17, end: 7.16, text: "2. Close your book." },
+    { start: 7.18, end: 9.27, text: "3. Open your book" },
+    { start: 9.29, end: 12.2, text: "4. Make a line." },
+    { start: 12.22, end: 15.07, text: " 5. Listen!" },
+    { start: 15.09, end: 17.13, text: " 6. Quiet!" },
+    { start: 17.15, end: 19.26, text: "7.Take out your pencil." },
   ];
+
+
   // 🎵 فترات الكلمات داخل الأوديو الرئيسي
   const wordTimings = [
     { start: 3.9, end: 6.2 }, // party hat

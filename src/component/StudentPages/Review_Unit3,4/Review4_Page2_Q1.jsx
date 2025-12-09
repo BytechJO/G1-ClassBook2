@@ -1,17 +1,19 @@
-import React, { useState ,useEffect,useRef} from "react";
-import ValidationAlert from "../Popup/ValidationAlert";
+import React, { useState, useEffect, useRef } from "react";
+import ValidationAlert from "../../Popup/ValidationAlert";
 import "./Review4_Page2_Q1.css";
-import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
-import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
+import pauseBtn from "../../../assets/unit1/imgs/Right Video Button.svg";
+import { FaPlay, FaPause } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { CgPlayPauseO } from "react-icons/cg";
-import sound1 from "../../assets/unit4/sounds/U4P37EXEE.mp3";
-import img1 from "../../assets/unit4/imgs/U4P37EEXEE-01-01.svg"
-import img2 from "../../assets/unit4/imgs/U4P37EEXEE-01-02.svg"
-import img3 from "../../assets/unit4/imgs/U4P37EEXEE-02-01.svg"
-import img4 from "../../assets/unit4/imgs/U4P37EEXEE-02-02.svg"
-import img5 from "../../assets/unit4/imgs/U4P37EEXEE-03-01.svg"
-import img6 from "../../assets/unit4/imgs/U4P37EEXEE-03-02.svg"
+import sound1 from "../../../assets/unit4/sounds/U4P37EXEE.mp3";
+import img1 from "../../../assets/unit4/imgs/U4P37EEXEE-01-01.svg";
+import img2 from "../../../assets/unit4/imgs/U4P37EEXEE-01-02.svg";
+import img3 from "../../../assets/unit4/imgs/U4P37EEXEE-02-01.svg";
+import img4 from "../../../assets/unit4/imgs/U4P37EEXEE-02-02.svg";
+import img5 from "../../../assets/unit4/imgs/U4P37EEXEE-03-01.svg";
+import img6 from "../../../assets/unit4/imgs/U4P37EEXEE-03-02.svg";
+import { TbMessageCircle } from "react-icons/tb";
+
 const data = [
   {
     parts: [
@@ -73,22 +75,48 @@ const Review4_Page2_Q1 = () => {
   const [wrongInputs, setWrongInputs] = useState([]);
   const audioRef = useRef(null);
   const [showResult, setShowResult] = useState(false);
+  const stopAtSecond = 9;
+  const [paused, setPaused] = useState(false);
   // إعدادات الصوت
   const [showSettings, setShowSettings] = useState(false);
   const [volume, setVolume] = useState(1);
-  const [activeSpeed, setActiveSpeed] = useState(1);
   const settingsRef = useRef(null);
   const [forceRender, setForceRender] = useState(0);
   const [showContinue, setShowContinue] = useState(false);
-  // زر الكابشن
-  const [isMuted, setIsMuted] = useState(false);
-  const stopAtSecond = 8;
-  const [paused, setPaused] = useState(false);
-  const handleChange = (value, qIndex, blankIndex) => {
-    const updated = [...answers];
-    updated[qIndex][blankIndex] = value.toLowerCase();
-    setAnswers(updated);
-    setWrongInputs([])
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [current, setCurrent] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [showCaption, setShowCaption] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  // ================================
+  // ✔ Captions Array
+  // ================================
+  const captions = [
+    {
+      start: 0,
+      end: 4.23,
+      text: "Page 8. Right Activities. Exercise A, number 1. ",
+    },
+    {
+      start: 4.25,
+      end: 8.28,
+      text: "Listen and write the missing letters. Number the pictures.  ",
+    },
+    { start: 8.3, end: 11.05, text: "1-tiger." },
+    { start: 11.07, end: 13.12, text: "2-taxi." },
+    { start: 13.14, end: 15.14, text: "3-duck." },
+    { start: 15.16, end: 17.13, text: "4-deer." },
+  ];
+
+  // ================================
+  // ✔ Update caption highlight
+  // ================================
+  const updateCaption = (time) => {
+    const index = captions.findIndex(
+      (cap) => time >= cap.start && time <= cap.end
+    );
+    setActiveIndex(index);
   };
   useEffect(() => {
     const audio = audioRef.current;
@@ -101,44 +129,54 @@ const Review4_Page2_Q1 = () => {
       if (audio.currentTime >= stopAtSecond) {
         audio.pause();
         setPaused(true);
+        setIsPlaying(false);
         setShowContinue(true);
         clearInterval(interval);
       }
-    }, 250);
+    }, 100);
 
-    // ⚡⚡ هنا الإضافة الوحيدة
+    // عند انتهاء الأوديو يرجع يبطل أنيميشن + يظهر Continue
     const handleEnded = () => {
-      audio.currentTime = 0; // يرجع لأول ثانية
-      audio.pause(); // يوقف
-      setPaused(true); // زر البلاي يصير Play
-      setShowContinue(true); // يظهر زر Continue
-      // setActiveIndex(null); // يشيل الأنيميشن عن الكلمات
+      const audio = audioRef.current;
+      audio.currentTime = 0; // ← يرجع للبداية
+      setIsPlaying(false);
+      setPaused(false);
+      setActiveIndex(null);
+      setShowContinue(true);
     };
 
-    const handleClickOutside = (e) => {
-      if (settingsRef.current && !settingsRef.current.contains(e.target)) {
-        setShowSettings(false);
-      }
-    };
+    audio.addEventListener("ended", handleEnded);
 
-    // audio.addEventListener("timeupdate", handleTimeUpdate);
-    audio.addEventListener("ended", handleEnded); // 👈 الإضافة
-    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      // audio.removeEventListener("timeupdate", handleTimeUpdate);
-      audio.removeEventListener("ended", handleEnded); // 👈 تنظيف الإضافة
-      document.removeEventListener("mousedown", handleClickOutside);
       clearInterval(interval);
+      audio.removeEventListener("ended", handleEnded);
     };
   }, []);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setForceRender((prev) => prev + 1);
     }, 1000); // كل ثانية
+    if (activeIndex === -1 || activeIndex === null) return;
 
+    const el = document.getElementById(`caption-${activeIndex}`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
     return () => clearInterval(timer);
-  }, []);
+  }, [activeIndex]);
+  const [locked, setLocked] = useState(false); // ⭐ NEW — قفل التعديل بعد Show Answer
+
+  const handleChange = (value, qIndex, blankIndex) => {
+    if (locked) return; // ⭐ NEW — لا تعديل بعد Show Answer
+
+    const newAnswers = [...answers];
+    newAnswers[qIndex][blankIndex] = value;
+    setAnswers(newAnswers);
+    setWrongInputs([]);
+  };
   const checkAnswers = () => {
+    if (locked) return; // ⭐ NEW — لا تعديل بعد Show Answer
     // 1) افحص إذا في أي خانة فاضية
     const hasEmpty = answers.some((arr) =>
       arr.some((val) => val.trim() === "")
@@ -186,7 +224,7 @@ const Review4_Page2_Q1 = () => {
       </span>
     </div>
   `;
-
+    setLocked(true); // ⭐ NEW — قفل التعديل بعد Check
     // 5) طباعة النتيجة
     if (correctCount === totalInputs) {
       ValidationAlert.success(scoreMessage);
@@ -196,179 +234,215 @@ const Review4_Page2_Q1 = () => {
       ValidationAlert.warning(scoreMessage);
     }
   };
+  // ⭐⭐⭐ NEW — Show Answer
+  const showAnswer = () => {
+    const correctFilled = data.map((d) => [...d.correct]);
+
+    setAnswers(correctFilled); // ضع الإجابات الصحيحة
+    setWrongInputs([]); // إزالة الأخطاء
+    setLocked(true); // قفل الحقول
+  };
+
   const togglePlay = () => {
     const audio = audioRef.current;
+
+    if (!audio) return;
 
     if (audio.paused) {
       audio.play();
       setPaused(false);
+      setIsPlaying(true);
     } else {
       audio.pause();
       setPaused(true);
+      setIsPlaying(false);
     }
   };
   return (
-    <div className="container-missing">
-      <h3 className="header-title-page8">
-        E Listen and write the missing letters.
-      </h3>
+    <div className="page8-wrapper">
       <div
+        className="div-forall"
         style={{
           display: "flex",
+          flexDirection: "column",
           justifyContent: "flex-start",
+          alignItems: "flex-start",
+          position: "relative",
+          width: "60%",
         }}
       >
-        <div className="audio-popup-vocab">
-          <div className="audio-inner-vocab">
-            {/* Play / Pause */}
-            <button
-              className="audio-play-btn"
-              style={{ height: "30px", width: "30px" }}
-              onClick={togglePlay}
-            >
-              {paused ? <FaPlay size={22} /> : <FaPause size={22} />}
-            </button>
+        <h3 className="header-title-page8">
+          E Listen and write the missing letters.
+        </h3>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "30px",
+            width: "100%",
+          }}
+        >
+          <div
+            className="audio-popup-read"
+            style={{
+              width: "50%",
+            }}
+          >
+            <div className="audio-inner player-ui">
+              <audio
+                ref={audioRef}
+                src={sound1}
+                onTimeUpdate={(e) => {
+                  const time = e.target.currentTime;
+                  setCurrent(time);
+                  updateCaption(time);
+                }}
+                onLoadedMetadata={(e) => setDuration(e.target.duration)}
+              ></audio>
+              {/* Play / Pause */}
+              {/* Play / Pause */}
+              {/* الوقت - السلايدر - الوقت */}
+              <div className="top-row">
+                <span className="audio-time">
+                  {new Date(current * 1000).toISOString().substring(14, 19)}
+                </span>
 
-            {/* Slider */}
-            <input
-              type="range"
-              min="0"
-              max={audioRef.current?.duration || 0}
-              value={audioRef.current?.currentTime || 0}
-              className="audio-slider"
-              onChange={(e) => {
-                if (!audioRef.current) return;
-                audioRef.current.currentTime = e.target.value;
-              }}
-            />
+                <input
+                  type="range"
+                  className="audio-slider"
+                  min="0"
+                  max={duration}
+                  value={current}
+                  onChange={(e) => {
+                    audioRef.current.currentTime = e.target.value;
+                    updateCaption(Number(e.target.value));
+                  }}
+                  style={{
+                    background: `linear-gradient(to right, #430f68 ${
+                      (current / duration) * 100
+                    }%, #d9d9d9ff ${(current / duration) * 100}%)`,
+                  }}
+                />
 
-            {/* Current Time */}
-            <span className="audio-time">
-              {new Date((audioRef.current?.currentTime || 0) * 1000)
-                .toISOString()
-                .substring(14, 19)}
-            </span>
-
-            {/* Total Time */}
-            <span className="audio-time">
-              {new Date((audioRef.current?.duration || 0) * 1000)
-                .toISOString()
-                .substring(14, 19)}
-            </span>
-
-            {/* Mute */}
-            <button
-              className="mute-btn-outside"
-              onClick={() => {
-                audioRef.current.muted = !audioRef.current.muted;
-                setIsMuted(!isMuted);
-              }}
-            >
-              {audioRef.current?.muted ? (
-                <FaVolumeMute size={22} color="#1d4f7b" />
-              ) : (
-                <FaVolumeUp size={22} color="#1d4f7b" />
-              )}
-            </button>
-            <div className="settings-wrapper" ref={settingsRef}>
-              <button
-                className={`settings-btn ${showSettings ? "active" : ""}`}
-                onClick={() => setShowSettings(!showSettings)}
-              >
-                <IoMdSettings size={22} color="#1d4f7b" />
-              </button>
-
-              {showSettings && (
-                <div className="settings-popup">
-                  <label>Volume</label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.05"
-                    value={volume}
-                    onChange={(e) => {
-                      setVolume(e.target.value);
-                      audioRef.current.volume = e.target.value;
-                    }}
-                  />
-
-                 
+                <span className="audio-time">
+                  {new Date(duration * 1000).toISOString().substring(14, 19)}
+                </span>
+              </div>
+              {/* الأزرار 3 أزرار بنفس السطر */}
+              <div className="bottom-row">
+                {/* فقاعة */}
+                <div
+                  className={`round-btn ${showCaption ? "active" : ""}`}
+                  style={{ position: "relative" }}
+                  onClick={() => setShowCaption(!showCaption)}
+                >
+                  <TbMessageCircle size={36} />
+                  <div
+                    className={`caption-inPopup ${showCaption ? "show" : ""}`}
+                    style={{ top: "100%", left: "10%" }}
+                  >
+                    {captions.map((cap, i) => (
+                      <p
+                        key={i}
+                        id={`caption-${i}`}
+                        className={`caption-inPopup-line2 ${
+                          activeIndex === i ? "active" : ""
+                        }`}
+                      >
+                        {cap.text}
+                      </p>
+                    ))}
+                  </div>
                 </div>
-              )}
+
+                {/* Play */}
+                <button className="play-btn2" onClick={togglePlay}>
+                  {isPlaying ? <FaPause size={26} /> : <FaPlay size={26} />}
+                </button>
+
+                {/* Settings */}
+                <div className="settings-wrapper" ref={settingsRef}>
+                  <button
+                    className={`round-btn ${showSettings ? "active" : ""}`}
+                    onClick={() => setShowSettings(!showSettings)}
+                  >
+                    <IoMdSettings size={36} />
+                  </button>
+
+                  {showSettings && (
+                    <div className="settings-popup">
+                      <label>Volume</label>
+                      <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value={volume}
+                        onChange={(e) => {
+                          setVolume(e.target.value);
+                          audioRef.current.volume = e.target.value;
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>{" "}
             </div>
           </div>
         </div>
-        <audio ref={audioRef}>
-          <source src={sound1} type="audio/mp3" />
-        </audio>
-      </div>
-      {data.map((item, qIndex) => (
-        <div className="row-missing" key={qIndex}>
-          <span className="num">{qIndex + 1}.</span>
+        {data.map((item, qIndex) => (
+          <div className="row-missing" key={qIndex}>
+            <span className="num">{qIndex + 1}.</span>
 
-          <div className="sentence-review4-p2-q1">
-            {item.parts.map((p, blankIndex) => (
-              <span
-                key={blankIndex}
-                className="sentence-part"
-                style={{ display: "flex", alignItems: "center" }}
-              >
-                {p.before}
+            <div className="sentence-review4-p2-q1">
+              {item.parts.map((p, blankIndex) => (
+                <span
+                  key={blankIndex}
+                  className="sentence-part"
+                  style={{ display: "flex", alignItems: "center" }}
+                >
+                  {p.before}
 
-                {/* الصورة بين before و input */}
-              
+                  <div className="input-wrapper">
+                    <input
+                      className="missing-input-review4-p2-q1"
+                      maxLength="2"
+                      value={answers[qIndex][blankIndex]}
+                      onChange={(e) =>
+                        handleChange(e.target.value, qIndex, blankIndex)
+                      }
+                      readOnly={locked} // ⭐ NEW — منع التعديل بعد Show Answer
+                    />
+                    {wrongInputs.includes(`${qIndex}-${blankIndex}`) && (
+                      <span className="wrong-icon-review4-p2-q1">✕</span>
+                    )}
+                  </div>
 
-                <div className="input-wrapper">
-                  <input
-                    className="missing-input-review4-p2-q1"
-                    maxLength="2"
-                    value={answers[qIndex][blankIndex]}
-                    onChange={(e) =>
-                      handleChange(e.target.value, qIndex, blankIndex)
-                    }
-                  />
-                  {wrongInputs.includes(`${qIndex}-${blankIndex}`) && (
-                    <span className="wrong-icon-review4-p2-q1">✕</span>
-                  )}
-                </div>
-
-                {p.after}
+                  {p.after}
                   <img src={p.middleImg} className="middle-img" alt="" />
-              </span>
-            ))}
-
-            {/* <img src={item.img2} alt="" className="img-missing" /> */}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
       <div className="action-buttons-container">
         <button
           className="try-again-button"
           onClick={() => {
             setAnswers(data.map((d) => Array(d.correct.length).fill("")));
             setWrongInputs([]);
+            setLocked(false); // ⭐ NEW — فتح التعديل من جديد
           }}
         >
           Start Again ↻
         </button>
-        {showContinue && (
-          <button className="play-btn swal-continue" onClick={togglePlay}>
-            {paused ? (
-              <>
-                Continue
-                <svg width="20" height="20" viewBox="0 0 30 30">
-                  <image href={pauseBtn} x="0" y="0" width="30" height="30" />
-                </svg>
-              </>
-            ) : (
-              <>
-                Pause
-                <CgPlayPauseO size={20} style={{ color: "red" }} />
-              </>
-            )}
-          </button>
-        )}
+
+        {/* ⭐⭐⭐ NEW BUTTON */}
+        <button onClick={showAnswer} className="show-answer-btn swal-continue">
+          Show Answer
+        </button>
+
         <button className="check-button2" onClick={checkAnswers}>
           Check Answers ✓
         </button>

@@ -18,12 +18,19 @@ import repeat1 from "../../../assets/unit4/imgs/listen and repeat 02.svg";
 import repeat2 from "../../../assets/unit4/imgs/listen and repeat 03.svg";
 import read from "../../../assets/unit1/imgs/P1 listen and repeat 01.svg";
 import Rabbit from "../../../assets/img_unit2/imgs/Rabbit.svg";
-import audioBtn from "../../../assets/unit1/imgs/Page 01/Audio btn.svg"
+import audioBtn from "../../../assets/unit1/imgs/Page 01/Audio btn.svg";
 import arrowBtn from "../../../assets/unit1/imgs/Page 01/Arrow.svg";
+import pauseBtn from "../../../assets/unit1/imgs/Right Video Button.svg";
 import AudioWithCaption from "../../AudioWithCaption";
 import FourImagesWithAudio from "../../FourImagesWithAudio";
+import sound2_8 from "../../../assets/img_unit2/sounds-unit2/U2-07.mp3";
+
 import "./Unit4_Page2.css";
 const Unit4_Page2 = ({ openPopup }) => {
+  const [activeAreaIndex, setActiveAreaIndex] = useState(null);
+  const [hoveredAreaIndex, setHoveredAreaIndex] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
   const activeData = [
     {
       page: "1",
@@ -58,7 +65,7 @@ const Unit4_Page2 = ({ openPopup }) => {
     new Audio(Pg29_1_2_Lolo),
   ];
   const captionsExample = [
-    { start: 0, end: 3.10, text: "Page 29, my picture. " },
+    { start: 0, end: 3.1, text: "Page 29, my picture. " },
     {
       start: 3.13,
       end: 7.13,
@@ -73,7 +80,7 @@ const Unit4_Page2 = ({ openPopup }) => {
     { start: 15.15, end: 19.15, text: " It is green, blue, brown and yellow." },
     { start: 19.18, end: 21.17, text: "I like my picture. " },
   ];
- const captions = [
+  const captions = [
     { start: 0, end: 3.26, text: " Page 5. Listen, read, and repeat. " },
     { start: 3.28, end: 5.15, text: "Hello. How are you? " },
     { start: 5.17, end: 7.13, text: "Fine, thank you. " },
@@ -83,68 +90,189 @@ const Unit4_Page2 = ({ openPopup }) => {
     { start: 0, end: 3.19, text: " Page 5. Listen and read along. " },
     { start: 3.21, end: 7.22, text: "T. Table. Taxi. Tiger." },
   ];
-  return (
-    <div className="unit4-page-background" style={{ position: "relative" }}>
-      <img src={page_2} />
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 90 90"
-        onClick={() =>
-          openPopup(
-          "audio",  <AudioWithCaption
-              src={soundMyPicture}
-              captions={captionsExample}
-            />
-          )
-        }
-        className="headset-icon-CD-unit4-page2-1 hover:scale-110 transition"
-      >
-        <image href={audioBtn} x="0" y="0" width="90" height="90" />
-      </svg>
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 90 90"
-        onClick={() =>
-          openPopup(
-           "html", <FourImagesWithAudio
-              images={[read, repeat1, repeat2]}
-              audioSrc={soundListen}
-              checkpoints={[0, 4.6, 6.21]}
-              popupOpen={true}
-              titleQ={`Listen, read, and repeat.`}
-              audioArr={imageSounds2}
-              captions={captions}
-            />
-          )
-        }
-        className="headset-icon-CD-unit4-page2-2 hover:scale-110 transition"
-      >
-        <image href={audioBtn} x="0" y="0" width="90" height="90" />
-      </svg>
 
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 90 90"
-        onClick={() =>
-          openPopup(
-           "html",  <FourImagesWithAudio
-              images={[Rabbit, img1, img2, img3, img4]}
-              audioSrc={CD28Pg29_Instruction1_AdultLady}
-              checkpoints={[0, 4.05, 5.1, 6.13, 7.03]}
-              popupOpen={true}
-              titleQ={"Listen and read along."}
-              audioArr={imageSounds}
-              captions={captions2}
-            />
-          )
+  const areas = [
+    // الصوت الأول – المنطقة الأساسية
+    { x1: 29.2, y1: 34.5, sound: 1, isPrimary: true },
+
+    // الصوت الأول – منطقة إضافية
+    { x1: 21.2, y1: 25.06, x2: 34.3, y2: 42.8, sound: 1, isPrimary: false },
+
+  ];
+  const sounds = {
+    1: sound2_8,
+  };
+
+  const handleImageClick = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
+    const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
+    console.log("X%:", xPercent.toFixed(2), "Y%:", yPercent.toFixed(2));
+  };
+  const playSound = (path) => {
+    if (audioRef.current) {
+      audioRef.current.src = path;
+      audioRef.current.play();
+      setIsPlaying(true);
+      setHoveredAreaIndex(null); // إزالة الهايلايت عند بدء الصوت
+
+      audioRef.current.onended = () => {
+        setIsPlaying(false);
+        setHoveredAreaIndex(null);
+        setActiveAreaIndex(null); // مسح الهايلايت بعد انتهاء الصوت
+      };
+    }
+  };
+  return (
+    <div
+      className="page1-img-wrapper"
+      onClick={handleImageClick}
+      style={{ backgroundImage: `url(${page_2})` }}
+    >
+      <audio ref={audioRef} style={{ display: "none" }} />
+      {/* <img src={page_2} /> */}
+      {areas.map((area, index) => {
+        const isActive = activeAreaIndex === area.sound;
+
+        // ============================
+        // 1️⃣ المنطقة الأساسية → دائرة تظهر فقط عندما تكون Active
+        // ============================
+        if (area.isPrimary) {
+          return (
+            <div
+              key={index}
+              className={`circle-area ${isActive ? "active" : ""}`}
+              style={{
+                left: `${area.x1}%`,
+                top: `${area.y1}%`,
+              }}
+              onClick={() => {
+                setActiveAreaIndex(area.sound);
+                playSound(sounds[area.sound]);
+              }}
+            ></div>
+          );
         }
-        className="click-icon-unit4-page2-1 hover:scale-110 transition"
+
+        // ============================
+        // 2️⃣ المناطق الفرعية → مربعات داكنة مخفية ولازم
+        //    عند الضغط عليها → تفعّل الدائرة الأساسية
+        // ============================
+        return (
+          <div
+            key={index}
+            className="clickable-area"
+            style={{
+              position: "absolute",
+              left: `${area.x1}%`,
+              top: `${area.y1}%`,
+              width: `${area.x2 - area.x1}%`,
+              height: `${area.y2 - area.y1}%`,
+            }}
+            onClick={() => {
+              setActiveAreaIndex(area.sound); // 👈 يفعل الدائرة فوق الرقم
+              playSound(sounds[area.sound]);
+            }}
+          ></div>
+        );
+      })}
+      <div
+        className="headset-icon-CD-unit4-page2-1 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
       >
-        <image href={arrowBtn} x="0" y="0" width="90" height="90" />
-      </svg>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 90 90"
+          onClick={() =>
+            openPopup(
+              "audio",
+              <AudioWithCaption
+                src={soundMyPicture}
+                captions={captionsExample}
+              />
+            )
+          }
+          style={{ overflow: "visible" }}
+        >
+          <image
+            className="svg-img"
+            href={audioBtn}
+            x="0"
+            y="0"
+            width="90"
+            height="90"
+          />
+        </svg>
+      </div>
+      <div
+        className="headset-icon-CD-unit4-page2-2 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
+      >
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 90 90"
+          onClick={() =>
+            openPopup(
+              "html",
+              <FourImagesWithAudio
+                images={[read, repeat1, repeat2]}
+                audioSrc={soundListen}
+                checkpoints={[0, 4.6, 6.21]}
+                popupOpen={true}
+                titleQ={`Listen, read, and repeat.`}
+                audioArr={imageSounds2}
+                captions={captions}
+              />
+            )
+          }
+          style={{ overflow: "visible" }}
+        >
+          <image
+            className="svg-img"
+            href={audioBtn}
+            x="0"
+            y="0"
+            width="90"
+            height="90"
+          />
+        </svg>
+      </div>
+      <div
+        className="click-icon-unit4-page2-1 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
+      >
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 90 90"
+          onClick={() =>
+            openPopup(
+              "html",
+              <FourImagesWithAudio
+                images={[Rabbit, img1, img2, img3, img4]}
+                audioSrc={CD28Pg29_Instruction1_AdultLady}
+                checkpoints={[0, 4.05, 5.1, 6.13, 7.03]}
+                popupOpen={true}
+                titleQ={"Listen and read along."}
+                audioArr={imageSounds}
+                captions={captions2}
+              />
+            )
+          }
+          style={{ overflow: "visible" }}
+        >
+          <image
+            href={arrowBtn}
+            className="svg-img"
+            x="0"
+            y="0"
+            width="90"
+            height="90"
+          />
+        </svg>
+      </div>
     </div>
   );
 };

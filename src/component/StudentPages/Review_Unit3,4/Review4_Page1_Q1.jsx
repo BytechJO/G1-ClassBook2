@@ -1,44 +1,50 @@
 import React, { useState } from "react";
-import conversation from "../../assets/unit4/imgs/U4P36EXEA-01.svg";
-import conversation2 from "../../assets/unit4/imgs/U4P36EXEA-02.svg";
-import ValidationAlert from "../Popup/ValidationAlert";
-import "./Review4_Page1_Q1.css"
+import conversation from "../../../assets/unit4/imgs/U4P36EXEA-01.svg";
+import conversation2 from "../../../assets/unit4/imgs/U4P36EXEA-02.svg";
+import ValidationAlert from "../../Popup/ValidationAlert";
+import "./Review4_Page1_Q1.css";
+
 const Review4_Page1_Q1 = () => {
-  // ✅ الإحداثيات كلها نسب مئوية (نسبة من الصورة)
   const clickableAreas = [
     { x: 73, y: 10.5, w: 24.8, h: 11 },
     { x: 72, y: 52.5, w: 25.8, h: 11 },
-    { x: 44, y: 52.5, w: 16.8, h: 11 }, // غيّري هاي الأرقام حسب ما بدك
+    { x: 45, y: 52.5, w: 13.8, h: 11 },
   ];
+
   const correctAnswers = ["blue", "red", "is this"];
+
   const [inputs, setInputs] = useState(Array(clickableAreas.length).fill(""));
   const [wrongInputs, setWrongInputs] = useState([]);
+  const [locked, setLocked] = useState(false); // ⭐ NEW — يمنع التعديل بعد Show Answer
+
   const handleInputChange = (value, index) => {
+    if (locked) return; // ⭐ NEW — قفل الإدخال
     const updated = [...inputs];
     updated[index] = value;
     setInputs(updated);
-    setWrongInputs([])
+    setWrongInputs([]);
   };
 
   const handleCheck = () => {
-    // 1️⃣ فحص الحقول الفارغة
+      if (locked) return; // ⭐ NEW — قفل الإدخال
     if (inputs.some((value) => value.trim() === "")) {
       ValidationAlert.info("Please complete all answers.");
       return;
     }
 
-    // 2️⃣ مقارنة الإجابات
     const results = inputs.map((value, index) => {
       return value
         .trim()
         .toLowerCase()
         .includes(correctAnswers[index].toLowerCase());
     });
+
     const wrong = results
       .map((r, i) => (r ? null : i))
       .filter((v) => v !== null);
 
-    setWrongInputs(wrong); // حفظ الإنپوتات الغلط
+    setWrongInputs(wrong);
+
     const correctCount = results.filter((r) => r === true).length;
     const wrongCount = results.length - correctCount;
 
@@ -56,7 +62,7 @@ const Review4_Page1_Q1 = () => {
       </span>
     </div>
   `;
-    // 4️⃣ الحالات المختلفة
+
     if (correctCount === results.length) {
       ValidationAlert.success(scoreMessage);
     } else if (wrongCount === results.length) {
@@ -64,18 +70,27 @@ const Review4_Page1_Q1 = () => {
     } else {
       ValidationAlert.warning(scoreMessage);
     }
+
+    setLocked(true); // ⭐ NEW — بعد الفحص يمنع الكتابة
   };
 
   const handleReset = () => {
     setInputs(Array(clickableAreas.length).fill(""));
-    setWrongInputs([])
+    setWrongInputs([]);
+    setLocked(false); // ⭐ NEW — إعادة فتح الإدخال
+  };
+
+  // ⭐⭐⭐ NEW — Show Answer
+  const showAnswer = () => {
+    setInputs(correctAnswers); // تعبئة الإجابات الصحيحة
+    setWrongInputs([]);        // إزالة الأخطاء
+    setLocked(true);           // قفل التعديل
   };
 
   return (
     <div
       style={{
         display: "flex",
-
         justifyContent: "center",
       }}
     >
@@ -93,14 +108,13 @@ const Review4_Page1_Q1 = () => {
           A Look, read, and write.
         </h5>
 
-        {/* ✅ الصورة هي المرجع */}
         <div
           style={{
             position: "relative",
             width: "100%",
             marginTop: "30px",
             maxWidth: "900px",
-            aspectRatio: "3 / 1", // نسبة الصورة
+            aspectRatio: "3 / 1",
           }}
         >
           <img
@@ -121,12 +135,14 @@ const Review4_Page1_Q1 = () => {
               objectFit: "contain",
             }}
           />
+
           {clickableAreas.map((area, index) => (
             <>
               <input
                 key={index}
                 value={inputs[index]}
                 onChange={(e) => handleInputChange(e.target.value, index)}
+                readOnly={locked} // ⭐ NEW — منع التعديل
                 style={{
                   position: "absolute",
                   top: `${area.y}%`,
@@ -140,13 +156,12 @@ const Review4_Page1_Q1 = () => {
               />
               {wrongInputs.includes(index) && (
                 <div
-                className="wrong-icon-review4-p1-q1"
+                  className="wrong-icon-review4-p1-q1"
                   style={{
                     position: "absolute",
                     top: `calc(${area.y}% - 1.5%)`,
                     left: `calc(${area.x}% + ${area.w}% - 4%)`,
                     color: "white",
-                  
                   }}
                 >
                   ✕
@@ -156,10 +171,15 @@ const Review4_Page1_Q1 = () => {
           ))}
         </div>
       </div>
-      {/* Buttons */}
+
       <div className="action-buttons-container">
         <button onClick={handleReset} className="try-again-button">
           Start Again ↻
+        </button>
+
+        {/* ⭐⭐⭐ NEW BUTTON */}
+        <button onClick={showAnswer} className="show-answer-btn swal-continue">
+          Show Answer 
         </button>
 
         <button onClick={handleCheck} className="check-button2">

@@ -5,7 +5,7 @@
   position: absolute;
   transform: translate(-50%, -50%);
   cursor: pointer;
-  position: absolute;
+  
   /* background-color: #6bcff6;
   border-radius: 20px;
   border: rgb(255, 255, 255) solid 2px; */
@@ -28,7 +28,7 @@
 }
 
 .click-icon-unit3-page1-2 {
-  bottom: 11.5%;
+  bottom: 11%;
   right: 39%;
 }
 

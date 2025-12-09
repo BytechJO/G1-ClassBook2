@@ -1,9 +1,9 @@
-import page_6 from "../../../assets/unit3/imgs3/Right 1 Unit 03 Let's Go to School6.jpg";
+import page_6 from "../../../assets/unit3/imgs3/right1-unit3-page6.jpg";
 import "./Unit3_Page6.css";
 import Unit3_Page6_Q2 from "./Unit3_Page6_Q2";
 import Unit3_Page6_Q3 from "./Unit3_Page6_Q3";
 import CD25_Pg27_Song_AdultLady from "../../../assets/unit3/sound3/U3P27LetsSing.mp3";
-import audioBtn from "../../../assets/unit1/imgs/Page 01/Audio btn.svg"
+import audioBtn from "../../../assets/unit1/imgs/Page 01/Audio btn.svg";
 import arrowBtn from "../../../assets/unit1/imgs/Page 01/Arrow.svg";
 import pauseBtn from "../../../assets/unit1/imgs/Page 01/Right Video Button.svg";
 import AudioWithCaption from "../../AudioWithCaption";
@@ -25,15 +25,15 @@ const Unit3_Page6 = ({ openPopup }) => {
   ];
 
   return (
-    <div className="unit2-page-background">
-      <img src={page_6} />
+    <div   className="page1-img-wrapper"
+      // onClick={handleImageClick}
+      style={{ backgroundImage: `url(${page_6})` }}>
+      {/* <img src={page_6} /> */}
       <svg
         width="30"
         height="30"
         viewBox="0 0 60 60"
-        onClick={() =>
-          openPopup("exercise", { startIndex: 29 })
-        }
+        onClick={() => openPopup("exercise", { startIndex: 29 })}
         className="click-icon-unit3-page6-2 hover:scale-110 transition"
       >
         <image href={arrowBtn} x="0" y="0" width="60" height="60" />
@@ -43,9 +43,7 @@ const Unit3_Page6 = ({ openPopup }) => {
         width="30"
         height="30"
         viewBox="0 0 60 60"
-        onClick={() =>
-         openPopup("exercise", { startIndex: 30 })
-        }
+        onClick={() => openPopup("exercise", { startIndex: 30 })}
         className="click-icon-unit3-page6-3  hover:scale-110 transition"
       >
         <image href={arrowBtn} x="0" y="0" width="60" height="60" />
@@ -56,7 +54,8 @@ const Unit3_Page6 = ({ openPopup }) => {
         viewBox="0 0 90 90"
         onClick={() =>
           openPopup(
-           "audio", <div
+            "audio",
+            <div
               style={{
                 display: "flex",
                 justifyContent: "center",

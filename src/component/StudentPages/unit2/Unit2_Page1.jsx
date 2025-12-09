@@ -109,6 +109,7 @@ const Unit2_Page1 = ({ openPopup }) => {
   return (
     <div
       className="page1-img-wrapper"
+      onClick={handleImageClick}
       style={{ backgroundImage: `url(${page_1})` }}
     >
       <audio ref={audioRef} style={{ display: "none" }} />
@@ -187,7 +188,14 @@ const Unit2_Page1 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image  className="svg-img" href={audioBtn} x="0" y="0" width="90" height="90" />
+          <image
+            className="svg-img"
+            href={audioBtn}
+            x="0"
+            y="0"
+            width="90"
+            height="90"
+          />
         </svg>
       </div>
 
@@ -209,7 +217,14 @@ const Unit2_Page1 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image className="svg-img" href={arrowBtn} x="0" y="0" width="90" height="90" />
+          <image
+            className="svg-img"
+            href={arrowBtn}
+            x="0"
+            y="0"
+            width="90"
+            height="90"
+          />
         </svg>
       </div>
       <div
@@ -230,7 +245,14 @@ const Unit2_Page1 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image className="svg-img" href={arrowBtn} x="0" y="0" width="90" height="90" />
+          <image
+            className="svg-img"
+            href={arrowBtn}
+            x="0"
+            y="0"
+            width="90"
+            height="90"
+          />
         </svg>
       </div>
       <div
@@ -251,7 +273,14 @@ const Unit2_Page1 = ({ openPopup }) => {
           }
           style={{ overflow: "visible" }}
         >
-          <image className="svg-img" href={arrowBtn} x="0" y="0" width="90" height="90" />
+          <image
+            className="svg-img"
+            href={arrowBtn}
+            x="0"
+            y="0"
+            width="90"
+            height="90"
+          />
         </svg>
       </div>
     </div>

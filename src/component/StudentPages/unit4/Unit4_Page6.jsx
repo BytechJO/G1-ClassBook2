@@ -3,6 +3,7 @@ import "./Unit4_Page6.css";
 import song from "../../../assets/unit4/sounds/U4P33Song.mp3";
 import audioBtn from "../../../assets/unit1/imgs/Page 01/Audio btn.svg";
 import arrowBtn from "../../../assets/unit1/imgs/Page 01/Arrow.svg";
+import pauseBtn from "../../../assets/unit1/imgs/Right Video Button.svg";
 import AudioWithCaption from "../../AudioWithCaption";
 import Unit4_Page6_Q2 from "./Unit4_Page6_Q2";
 const Unit4_Page6 = ({ openPopup }) => {
@@ -26,8 +27,10 @@ const Unit4_Page6 = ({ openPopup }) => {
   ];
 
   return (
-    <div className="unit4-page-background" style={{ position: "relative" }}>
-      <img src={page_6} />
+    <div   className="page1-img-wrapper"
+          // onClick={handleImageClick}
+          style={{ backgroundImage: `url(${page_6})` }}>
+      {/* <img src={page_6} /> */}
       <svg
         width="30"
         height="30"

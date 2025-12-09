@@ -8,7 +8,7 @@
 
 .fv-item {
   text-align: center;
-  border: 2px solid gray;
+  /* border: 2px solid gray; */
   border-radius: 10px;
   width: 100%;
   justify-content: center;
@@ -35,6 +35,8 @@
     cursor: pointer;
     padding: 4px 10px;
     border-radius: 50%;
+    height: 50px;
+    width: 50px;
     transition: 0.2s;
     display: flex;
     border: 2px solid transparent;
@@ -42,6 +44,9 @@
     justify-content: center;
 }
 
+.selected-review4-p2-q2{
+  border-color: darkblue;
+}
 .fv-option:hover {
   transform: scale(1.2);
 }

@@ -1,15 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
-import CD13_Pg14_Instruction1_AdultLady from "../../assets/img_unit2/sounds-unit2/CD13.Pg14_Instruction1_Adult Lady.mp3";
-import ValidationAlert from "../Popup/ValidationAlert";
+import CD13_Pg14_Instruction1_AdultLady from "../../../assets/img_unit2/sounds-unit2/CD13.Pg14_Instruction1_Adult Lady.mp3";
+import ValidationAlert from "../../Popup/ValidationAlert";
 import "./Review4_Page2_Q3.css";
-import img1 from "../../assets/unit4/imgs/U4P37EXEG-01.svg";
-import img2 from "../../assets/unit4/imgs/U4P37EXEG-02.svg";
-import img3 from "../../assets/unit4/imgs/U4P37EXEG-03.svg";
-import img4 from "../../assets/unit4/imgs/U4P37EXEG-04.svg";
+import img1 from "../../../assets/unit4/imgs/U4P37EXEG-01.svg";
+import img2 from "../../../assets/unit4/imgs/U4P37EXEG-02.svg";
+import img3 from "../../../assets/unit4/imgs/U4P37EXEG-03.svg";
+import img4 from "../../../assets/unit4/imgs/U4P37EXEG-04.svg";
 const Review4_Page2_Q3 = () => {
   const [answers, setAnswers] = useState(Array(4).fill(null));
   const [showResult, setShowResult] = useState(false);
-
+  // ⭐ NEW — لمنع الطالب من التعديل بعد Show Answer
+  const [locked, setLocked] = useState(false);
   // 🔥 الداتا المطابقة للصورة
   const items = [
     {
@@ -35,13 +36,15 @@ const Review4_Page2_Q3 = () => {
   ];
 
   const handleSelect = (qIndex, optionIndex) => {
+    if (locked) return; // ⭐ NEW — يمنع التعديل بعد Show Answer
     const newAns = [...answers];
     newAns[qIndex] = optionIndex;
     setAnswers(newAns);
-    setShowResult(false)
+    setShowResult(false);
   };
 
   const checkAnswers = () => {
+    if (locked) return; // ⭐ NEW — يمنع التعديل بعد Show Answer
     if (answers.includes(null)) {
       ValidationAlert.info("Oops!", "Please circle all words first.");
       return;
@@ -69,13 +72,23 @@ const Review4_Page2_Q3 = () => {
     else ValidationAlert.warning(msg);
 
     setShowResult(true);
+    setLocked(true); // ⭐ NEW — قفل التعديل بعد Check Answer
   };
 
   const reset = () => {
     setAnswers(Array(items.length).fill(null));
     setShowResult(false);
+    setLocked(false); // ⭐ NEW — فتح التعديل من جديد
   };
 
+  // ⭐⭐⭐ NEW — showAnswer function
+  const showAnswer = () => {
+    const correct = items.map((q) => q.correctIndex);
+
+    setAnswers(correct); // ضع الإجابات الصحيحة
+    setShowResult(true); // فعّل حالة ظهور ✓ و X
+    setLocked(true); // امنع التعديل بعد Show Answer
+  };
   return (
     <div
       style={{
@@ -104,15 +117,33 @@ const Review4_Page2_Q3 = () => {
               className="question-box-review3-p2-q3"
               style={{ width: "100%" }}
             >
-              <div className="img-div-review3-p2-q3">
-                {" "}
-                <img
-                  src={q.img}
-                  className="q3-image-review3-p2-q3"
-                  style={{ height: "120px", width: "auto" }}
-                />
+              <div
+                style={{
+                  display: "flex",
+                  gap: "13px",
+                  flexDirection: "row",
+                  alignItems: "flex-start",
+                  width:"100%",
+                  justifyContent:"center"
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "25px",
+                    color: "darkblue",
+                    fontWeight: "600",
+                  }}
+                >
+                  {i + 1}
+                </span>
+                <div className="img-div-review3-p2-q3">
+                  <img
+                    src={q.img}
+                    className="q3-image-review3-p2-q3"
+                    style={{ height: "120px", width: "auto" }}
+                  />
+                </div>
               </div>
-
               <div className="options-row-review3-p2-q3">
                 {q.options.map((word, optIndex) => {
                   const isSelected = answers[i] === optIndex;
@@ -150,6 +181,10 @@ const Review4_Page2_Q3 = () => {
       <div className="action-buttons-container">
         <button className="try-again-button" onClick={reset}>
           Start Again ↻
+        </button>
+        {/* ⭐⭐⭐ NEW — زر Show Answer */}
+        <button className="show-answer-btn swal-continue" onClick={showAnswer}>
+          Show Answer
         </button>
 
         <button className="check-button2" onClick={checkAnswers}>

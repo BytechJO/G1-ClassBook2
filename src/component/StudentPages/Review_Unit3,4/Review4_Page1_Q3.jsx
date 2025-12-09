@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./Review4_Page1_Q3.css";
-import ValidationAlert from "../Popup/ValidationAlert";
-import img1 from "../../assets/unit4/imgs/U4P36EXEC-01.svg"
-import img2 from "../../assets/unit4/imgs/U4P36EXEC-02.svg"
-import img3 from "../../assets/unit4/imgs/U4P36EXEC-03.svg"
-import img4 from "../../assets/unit4/imgs/U4P36EXEC-04.svg"
+import ValidationAlert from "../../Popup/ValidationAlert";
+import img1 from "../../../assets/unit4/imgs/U4P36EXEC-01.svg";
+import img2 from "../../../assets/unit4/imgs/U4P36EXEC-02.svg";
+import img3 from "../../../assets/unit4/imgs/U4P36EXEC-03.svg";
+import img4 from "../../../assets/unit4/imgs/U4P36EXEC-04.svg";
+
 const shapesData = [
   { id: 1, shape: "circle", img: img1 },
   { id: 2, shape: "square", img: img2 },
@@ -17,30 +18,32 @@ const options = ["triangle", "circle", "square", "rectangle"];
 const Review4_Page1_Q3 = () => {
   const [answers, setAnswers] = useState({});
   const [checked, setChecked] = useState(false);
+  const [locked, setLocked] = useState(false); // ⭐ NEW — قفل التعديل
 
   const handleSelect = (rowId, option) => {
+    if (locked) return; // ⭐ NEW — منع التعديل بعد Show Answer
     setAnswers((prev) => ({
       ...prev,
       [rowId]: option,
     }));
-    setChecked(false)
+    setChecked(false);
   };
 
   const checkAnswers = () => {
+     if (locked) return; // ⭐ NEW — منع التعديل بعد Show Answer
     if (Object.keys(answers).length < shapesData.length) {
       ValidationAlert.info("Please choose an answer for each shape.");
       return;
     }
+
     let score = 0;
 
-    // نحسب عدد الإجابات الصحيحة
     shapesData.forEach((row) => {
-      if (answers[row.id] === row.shape) {
-        score++;
-      }
+      if (answers[row.id] === row.shape) score++;
     });
+
     setChecked(true);
-    // لتفعيل إظهار علامات الصح والغلط
+
     let color =
       score === shapesData.length ? "green" : score === 0 ? "red" : "orange";
 
@@ -52,23 +55,29 @@ const Review4_Page1_Q3 = () => {
     </div>
   `;
 
-    // كلهم صح
-    if (score === shapesData.length) {
-      ValidationAlert.success(scoreMessage);
-    }
-
-    // كلهم غلط
-    else if (score === 0) {
-      ValidationAlert.error(scoreMessage);
-    }
-
-    // نص بنص أو أي نتيجة أخرى
+    if (score === shapesData.length) ValidationAlert.success(scoreMessage);
+    else if (score === 0) ValidationAlert.error(scoreMessage);
     else ValidationAlert.warning(scoreMessage);
+
+    setLocked(true); // ⭐ NEW — منع التعديل بعد Check
   };
 
   const reset = () => {
     setAnswers({});
     setChecked(false);
+    setLocked(false); // ⭐ NEW — إعادة فتح التعديل
+  };
+
+  // ⭐⭐⭐ NEW — Show Answer
+  const showAnswer = () => {
+    const correctSelections = {};
+    shapesData.forEach((row) => {
+      correctSelections[row.id] = row.shape; // الإجابة الصحيحة
+    });
+
+    setAnswers(correctSelections);
+    setChecked(true); // إظهار ✓ و X الصحيحة فقط
+    setLocked(true); // قفل التعديل
   };
 
   return (
@@ -92,8 +101,9 @@ const Review4_Page1_Q3 = () => {
       >
         <div className="table-wrapper-review4-p1-q3">
           <h4 className="header-title-page8">
-           C Look and write <span style={{ color: "red" }}>✓</span>.{" "}
+            C Look and write <span style={{ color: "red" }}>✓</span>.
           </h4>
+
           <table className="shapes-table-wrapper-review4-p1-q3">
             <thead>
               <tr>
@@ -129,10 +139,8 @@ const Review4_Page1_Q3 = () => {
                         }`}
                         onClick={() => handleSelect(row.id, opt)}
                       >
-                        {/* علامة ✓ مباشرة عند الاختيار */}
                         {selected && <span className="correct-mark">✓</span>}
 
-                        {/* دائرة حمراء + X في الزاوية */}
                         {isWrong && <div className="wrong-badge">✕</div>}
                       </td>
                     );
@@ -143,10 +151,17 @@ const Review4_Page1_Q3 = () => {
           </table>
         </div>
       </div>
+
       <div className="action-buttons-container">
         <button className="try-again-button" onClick={reset}>
           Start Again ↻
         </button>
+
+        {/* ⭐⭐⭐ NEW BUTTON */}
+        <button onClick={showAnswer} className="show-answer-btn swal-continue">
+          Show Answer 
+        </button>
+
         <button className="check-button2" onClick={checkAnswers}>
           Check Answer ✓
         </button>

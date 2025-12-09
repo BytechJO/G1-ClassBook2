@@ -15,26 +15,27 @@ import Pg31_5_1_Sarah from "../../../assets/unit4/sounds/Pg31_5.1_Sarah.mp3";
 import Pg31_5_2_Jack from "../../../assets/unit4/sounds/Pg31_5.2_Jack.mp3";
 import video from "../../../assets/unit4/sounds/p31.mp4";
 import AudioWithCaption from "../../AudioWithCaption";
-import audioBtn from "../../../assets/unit1/imgs/Page 01/Audio btn.svg"
-import pauseBtn from "../../../assets/unit1/imgs/Page 01/Right Video Button.svg";
+import audioBtn from "../../../assets/unit1/imgs/Page 01/Audio btn.svg";
+import arrowBtn from "../../../assets/unit1/imgs/Page 01/Arrow.svg";
+import pauseBtn from "../../../assets/unit1/imgs/Right Video Button.svg";
 const Unit4_Page4 = ({ openPopup }) => {
   const audioRef = useRef(null);
-    const [hoveredAreaIndex, setHoveredAreaIndex] = useState(null);
-      const [isPlaying, setIsPlaying] = useState(false);
-      const [activeAreaIndex, setActiveAreaIndex] = useState(null);
+  const [hoveredAreaIndex, setHoveredAreaIndex] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [activeAreaIndex, setActiveAreaIndex] = useState(null);
   const captionsExample = [
     { start: 0, end: 4.18, text: "Page 31, exercise 2, Right Grammar. " },
-    { start: 4.21, end: 6.00, text: "What shape is it? " },
+    { start: 4.21, end: 6.0, text: "What shape is it? " },
     { start: 6.03, end: 7.07, text: "It's a circle." },
-    { start: 7.10, end: 8.15, text: "Is it a triangle?" },
+    { start: 7.1, end: 8.15, text: "Is it a triangle?" },
     { start: 8.18, end: 10.07, text: "Yes, it is." },
-    { start: 10.10, end: 12.00, text: "No, it isn't. " },
+    { start: 10.1, end: 12.0, text: "No, it isn't. " },
     { start: 12.03, end: 14.09, text: "Is it a triangle? " },
     { start: 14.12, end: 16.12, text: "No, it isn't. It's a circle. " },
     { start: 18.17, end: 18.13, text: "What shape is it?" },
-    { start: 20.13, end: 20.10, text: "It's a rectangle. " },
-     { start: 20.13, end: 23.19, text: "Is it a triangle on the swing set? " },
-    { start: 23.22, end: 25.20, text: "Yes, it is." },
+    { start: 20.13, end: 20.1, text: "It's a rectangle. " },
+    { start: 20.13, end: 23.19, text: "Is it a triangle on the swing set? " },
+    { start: 23.22, end: 25.2, text: "Yes, it is." },
   ];
   const clickableAreas = [
     { x1: 8.3, y1: 10.5, x2: 29.5, y2: 14.0, sound: Pg31_2_1_AdultLady },
@@ -46,10 +47,10 @@ const Unit4_Page4 = ({ openPopup }) => {
     { x1: 16.49, y1: 52.8, x2: 41.6, y2: 56.18, sound: Pg31_3_2_Hansel },
     { x1: 54.8, y1: 20.98, x2: 76.2, y2: 24.5, sound: Pg31_4_1_Helen },
     { x1: 67.2, y1: 50.6, x2: 85.62, y2: 53.6, sound: Pg31_4_2_Stella },
-    { x1: 6.36, y1: 64.5, x2: 42.7, y2: 67.6, sound: Pg31_5_1_Sarah },
-    { x1: 45.12, y1: 72.93, x2: 56.59, y2: 76.19, sound: Pg31_5_2_Jack },
+    { x1: 6.36, y1: 64.5, x2: 42.7, y2: 68.6, sound: Pg31_5_1_Sarah },
+    { x1: 45.12, y1: 72.93, x2: 56.59, y2: 76.5, sound: Pg31_5_2_Jack },
   ];
- const handleImageClick = (e) => {
+  const handleImageClick = (e) => {
     const rect = e.target.getBoundingClientRect();
     const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
     const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
@@ -70,16 +71,20 @@ const Unit4_Page4 = ({ openPopup }) => {
     }
   };
   return (
-    <div className="unit4-page-background" style={{ position: "relative" }}>
-      <img
+    <div
+      className="page1-img-wrapper"
+      onClick={handleImageClick}
+      style={{ backgroundImage: `url(${page_4})` }}
+    >
+      {/* <img
         src={page_4}
         style={{ display: "block" }}
         onClick={handleImageClick}
-      />
+      /> */}
       {clickableAreas.map((area, index) => (
         <div
           key={index}
-           className={`clickable-area ${
+          className={`clickable-area ${
             hoveredAreaIndex === index || activeAreaIndex === index
               ? "highlight"
               : ""
@@ -91,7 +96,7 @@ const Unit4_Page4 = ({ openPopup }) => {
             width: `${area.x2 - area.x1}%`,
             height: `${area.y2 - area.y1}%`,
           }}
-           onClick={() => {
+          onClick={() => {
             setActiveAreaIndex(index); // لتثبيت الهايلايت أثناء الصوت
             playSound(area.sound);
           }}
@@ -104,66 +109,92 @@ const Unit4_Page4 = ({ openPopup }) => {
         ></div>
       ))}
 
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() =>
-          openPopup(
-           "audio", <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignContent: "center",
-              }}
-            >
-              <AudioWithCaption
-                src={CD30_Pg31_Grammar2_AdultLady}
-                captions={captionsExample}
-              />
-            </div>
-          )
-        }
+      <div
         className="headset-icon-CD-unit4-page4-1 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
       >
-        <image href={audioBtn} x="0" y="0" width="60" height="60" />
-      </svg>
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() =>
-          openPopup(
-           "video", <div
-              style={{
-               display: "flex",
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 90 90"
+          onClick={() =>
+            openPopup(
+              "audio",
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center",
+                }}
+              >
+                <AudioWithCaption
+                  src={CD30_Pg31_Grammar2_AdultLady}
+                  captions={captionsExample}
+                />
+              </div>
+            )
+          }
+          style={{ overflow: "visible" }}
+        >
+          <image
+            className="svg-img"
+            href={audioBtn}
+            x="0"
+            y="0"
+            width="90"
+            height="90"
+          />
+        </svg>
+      </div>
+      <div
+        className="pauseBtn-icon-CD-unit4-page4-1 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
+      >
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 90 90"
+          onClick={() =>
+            openPopup(
+              "video",
+              <div
+                style={{
+                  display: "flex",
                   justifyContent: "center",
                   alignContent: "center",
                   alignItems: "center",
                   height: "100%",
                   width: "100%",
-              }}
-            >
-              <video
-                 autoPlay
+                }}
+              >
+                <video
+                  autoPlay
                   controls
                   style={{
                     width: "auto",
                     height: "80%",
                     objectFit: "fill",
                     borderRadius: "20px",
-                     display: "block"
+                    display: "block",
                   }}
-              >
-                <source src={video} type="video/mp4" />
-              </video>
-            </div>
-          )
-        }
-        className="pauseBtn-icon-CD-unit4-page4-1  hover:scale-110 transition"
-      >
-        <image href={pauseBtn} x="0" y="0" width="60" height="60" />
-      </svg>
+                >
+                  <source src={video} type="video/mp4" />
+                </video>
+              </div>
+            )
+          }
+          style={{ overflow: "visible" }}
+        >
+          <image
+            href={pauseBtn}
+            className="svg-img"
+            x="0"
+            y="0"
+            width="90"
+            height="90"
+          />
+        </svg>
+      </div>
       <audio ref={audioRef} style={{ display: "none" }} />
     </div>
   );

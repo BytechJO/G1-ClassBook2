@@ -16,7 +16,7 @@
 
 .shortA-options {
   display: flex;
-  gap: 40px;
+  /* gap: 40px; */
   justify-content: flex-start;
 }
 

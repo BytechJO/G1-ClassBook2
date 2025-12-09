@@ -129,7 +129,7 @@ const Unit4_Page5_Q1 = () => {
         }}
       >
         <h5 className="header-title-page8">
-          <span className="letter-of-Q">A</span>{" "}
+          <span className="ex-A">A</span>{" "}
           <span style={{ color: "purple" }}>1</span> Look, circle, and write.
         </h5>
 

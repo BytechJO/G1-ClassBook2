@@ -33,7 +33,9 @@ const Unit3_Page5_Q2 = () => {
   const [duration, setDuration] = useState(0);
   const [showCaption, setShowCaption] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
-
+  const [activeIndex, setActiveIndex] = useState(null);
+  // ✅ نسمح فقط باختيار إجابة واحدة
+  const [selected, setSelected] = useState([]);  
   const correctData = ["1", "2", "4"];
   const options = [
     { img: img1, num: "1" },
@@ -44,8 +46,36 @@ const Unit3_Page5_Q2 = () => {
     { img: img6, num: "6" },
   ];
 
-  // ✅ نسمح فقط باختيار إجابة واحدة
-  const [selected, setSelected] = useState([]);
+
+  // ================================
+  // ✔ Captions Array
+  // ================================
+  const captions = [
+    {
+      start: 0,
+      end: 4.23,
+      text: "Page 8. Right Activities. Exercise A, number 1. ",
+    },
+    {
+      start: 4.25,
+      end: 8.28,
+      text: "Listen and write the missing letters. Number the pictures.  ",
+    },
+    { start: 8.3, end: 11.05, text: "1-tiger." },
+    { start: 11.07, end: 13.12, text: "2-taxi." },
+    { start: 13.14, end: 15.14, text: "3-duck." },
+    { start: 15.16, end: 17.13, text: "4-deer." },
+  ];
+
+  // ================================
+  // ✔ Update caption highlight
+  // ================================
+  const updateCaption = (time) => {
+    const index = captions.findIndex(
+      (cap) => time >= cap.start && time <= cap.end
+    );
+    setActiveIndex(index);
+  };
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -68,8 +98,8 @@ const Unit3_Page5_Q2 = () => {
       const audio = audioRef.current;
       audio.currentTime = 0; // ← يرجع للبداية
       setIsPlaying(false);
-      setActiveIndex(null);
       setPaused(false);
+      setActiveIndex(null);
       setShowContinue(true);
     };
 
@@ -84,9 +114,15 @@ const Unit3_Page5_Q2 = () => {
     const timer = setInterval(() => {
       setForceRender((prev) => prev + 1);
     }, 1000); // كل ثانية
+    if (activeIndex === -1 || activeIndex === null) return;
 
+    const el = document.getElementById(`caption-${activeIndex}`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
     return () => clearInterval(timer);
-  }, []);
+  }, [activeIndex]);
+
   const handleSelect = (index) => {
     setSelected((prev) => {
       if (prev.includes(index)) {
@@ -200,7 +236,7 @@ const Unit3_Page5_Q2 = () => {
       }}
     >
       <div
-     className="div-forall"
+        className="div-forall"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -217,7 +253,7 @@ const Unit3_Page5_Q2 = () => {
             circle.
           </h5>
           <div
-             style={{
+            style={{
               display: "flex",
               justifyContent: "center",
               margin: "30px 0px",
@@ -272,8 +308,26 @@ const Unit3_Page5_Q2 = () => {
                 {/* الأزرار 3 أزرار بنفس السطر */}
                 <div className="bottom-row">
                   {/* فقاعة */}
-                  <div className={`round-btn ${showCaption ? "active" : ""}`}>
+                  <div  className={`round-btn ${showCaption ? "active" : ""}`}
+                    style={{ position: "relative" }}
+                    onClick={() => setShowCaption(!showCaption)}>
                     <TbMessageCircle size={36} />
+                       <div
+                      className={`caption-inPopup ${showCaption ? "show" : ""}`}
+                      style={{ top: "100%", left: "10%" }}
+                    >
+                      {captions.map((cap, i) => (
+                        <p
+                          key={i}
+                          id={`caption-${i}`}
+                          className={`caption-inPopup-line2 ${
+                            activeIndex === i ? "active" : ""
+                          }`}
+                        >
+                          {cap.text}
+                        </p>
+                      ))}
+                    </div>
                   </div>
 
                   {/* Play */}

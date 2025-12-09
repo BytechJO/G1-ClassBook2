@@ -428,7 +428,7 @@ const Page8_Q1 = () => {
                       border: "2px solid white",
                     }}
                   >
-                    X
+                    ✕
                   </div>
                 )}
               </div>
@@ -499,7 +499,7 @@ const Page8_Q1 = () => {
                         border: "2px solid white",
                       }}
                     >
-                      X
+                      ✕
                     </div>
                   )}
                 </div>{" "}
