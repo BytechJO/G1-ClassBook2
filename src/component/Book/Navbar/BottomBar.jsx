@@ -78,7 +78,7 @@ export default function BottomBar({
                 e.key === "Enter" && goToPage(Number(e.target.value))
               }
               className="w-10 text-center outline-none text-[#430f68] text-sm"
-              placeholder={pageIndex+1}
+              placeholder={pageIndex + 1}
             />
             <span className="text-[#430f68] text-sm">| {totalPages}</span>
           </>
@@ -98,7 +98,7 @@ export default function BottomBar({
       </div>
 
       {/* VIEW MODES */}
-      {!isMobile && (
+      {!isMobile && activeTab !== "poster" && activeTab !== "flash" && (
         <>
           <button onClick={() => setViewMode("single")}>
             <img
@@ -124,7 +124,7 @@ export default function BottomBar({
 
       {/* RIGHT SIDEBAR */}
       <button className="absolute right-3" onClick={icons.openRightSidebar}>
-        <icons.keyIcon size={18} color="#430f68" />
+        <icons.keyIcon size={24} color="#430f68" />
       </button>
     </footer>
   );

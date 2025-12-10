@@ -17,21 +17,27 @@ export default function LeftSidebar({ isOpen, close, units, goToPage, book }) {
       >
         {/* HEADER */}
         <div className="p-4 border-b flex justify-between items-center">
-          <h2 className="text-xl text-[#430f68] font-semibold">Menu</h2>
+          <h2 className="text-xl text-[#430f68] font-semibold">
+            Table of Contents
+          </h2>
           <button onClick={close} className="text-2xl">
             ✕
           </button>
         </div>
         {book && (
           <div className="bookInfo-div text-center mb-4">
-            <img src={book.cover} className="w-28 mx-auto rounded shadow" style={{height:"130px",width:"auto"}} />
+            {book.cover && (
+              <img
+                src={book.cover}
+                className="w-28 mx-auto rounded shadow"
+                style={{ height: "130px", width: "auto" }}
+              />
+            )}
 
             <h3 className="text-lg font-semibold text-[#430f68] mt-2">
               {book.title}
-               <p className="text-sm text-gray-500">{book.pages} pages</p>
+              <p className="text-sm text-gray-500">{book.pages} pages</p>
             </h3>
-
-           
 
             <div className="border-b border-gray-200 my-3"></div>
           </div>

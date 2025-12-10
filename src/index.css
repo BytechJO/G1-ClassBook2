@@ -20,10 +20,11 @@ button {
   cursor: pointer;
 }
 
-.bookInfo-div{
-      display: flex;
-    flex-direction: row;
-    margin: 20px;
+.bookInfo-div {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+  flex-wrap: wrap;
 }
 /* من 1024px وفوق → ديسكتوب */
 @media (max-width: 780px) {
@@ -116,14 +117,17 @@ img {
 }
 
 .num-img,
+.num-img-posterVocab,
 .vocab_container h6 {
   transition: transform 0.4s ease, color 0.4s ease;
 }
 
-.num-img.active {
+.num-img.active,
+.num-img-posterVocab.active {
   transform: scale(1.4);
   filter: drop-shadow(0 0 6px gold);
 }
+
 .vocab_container h6 {
   transition: transform 0.2s ease, color 0.2s;
   cursor: pointer;
@@ -995,14 +999,14 @@ img {
     width: 60% !important;
   }
   .circle-area {
-    width: 31px;
-    height: 34px;
+    width: 27px;
+    height: 29px;
   }
 }
 @media (max-width: 768px) {
   .circle-area {
-    width: 29px;
-    height: 29px;
+    width: 23px;
+    height: 25px;
   }
 }
 @media (max-width: 600px) {

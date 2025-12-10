@@ -9,7 +9,7 @@ export default function RightSidebar({ isOpen, close, menu }) {
         ${isOpen ? "translate-y-0" : "translate-y-full"}`}
       >
         <div className="p-4 border-b flex justify-between">
-          <h2 className="text-xl text-[#430f68] font-semibold">Icons Keyword</h2>
+          <h2 className="text-xl text-[#430f68] font-semibold">Icon Key</h2>
           <button onClick={close}>✕</button>
         </div>
 
