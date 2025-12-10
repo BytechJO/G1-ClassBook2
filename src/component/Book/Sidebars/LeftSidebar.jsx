@@ -32,7 +32,7 @@ export default function LeftSidebar({ isOpen, close, units, goToPage, book }) {
               <img
                 src={book.cover}
                 className="w-28 mx-auto rounded shadow"
-                style={{ height: "130px", width: "auto" }}
+                style={{ height: "118px", width: "auto" }}
               />
             )}
 
