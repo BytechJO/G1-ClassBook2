@@ -29,19 +29,22 @@ const Unit5_Page6_Q3 = () => {
 
   const [answers, setAnswers] = useState({});
   const [results, setResults] = useState({});
+  const [showAnswer, setShowAnswer] = useState(false);
 
   // -------------------------
   // اختيار جواب واحد فقط لكل سؤال
   // -------------------------
   const handleSelect = (qId, idx) => {
+    if (showAnswer) return; // ❌ ممنوع التعديل بعد Show Answer
     setAnswers({
       ...answers,
       [qId]: idx, // نخزن رقم الخيار المختار
     });
-    setResults({})
+    setResults({});
   };
 
   const checkAnswers = () => {
+    if (showAnswer) return; // ❌ ممنوع التعديل بعد Show Answer
     const temp = {};
     let correctCount = 0;
     let total = questions.length;
@@ -85,6 +88,21 @@ const Unit5_Page6_Q3 = () => {
   const reset = () => {
     setAnswers({});
     setResults({});
+    setShowAnswer(false); // ← مهم جداً
+  };
+  const handleShowAnswer = () => {
+    const correctAnswers = {};
+
+    questions.forEach((q) => {
+      const correctIndex = q.items.findIndex(
+        (item) => item.correct.toLowerCase() === "✓"
+      );
+      correctAnswers[q.id] = correctIndex;
+    });
+
+    setAnswers(correctAnswers);
+    setResults({});
+    setShowAnswer(true);
   };
 
   return (
@@ -94,6 +112,7 @@ const Unit5_Page6_Q3 = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        padding: "30px",
       }}
     >
       <div
@@ -108,7 +127,7 @@ const Unit5_Page6_Q3 = () => {
       >
         <div className="review3-p1-q3-wrapper">
           <h4 className="header-title-page8">
-            <span className="letter-of-Q"> F</span> Look, read, and write
+            <span className="ex-A"> F</span> Look, read, and write
             <span style={{ color: "red" }}>✓</span>.{" "}
           </h4>
 
@@ -122,7 +141,12 @@ const Unit5_Page6_Q3 = () => {
                     alignItems: "center",
                   }}
                 >
-                   <span className="Unit5-P6-Q3-text">{q.id}</span>
+                  <span
+                    className="Unit5-P6-Q3-text"
+                    style={{ color: "darkblue" }}
+                  >
+                    {q.id}
+                  </span>
                   <img src={q.image} alt="" className="Unit5-P6-Q3-img" />
                   <span className="Unit5-P6-Q3-text">{q.text}</span>
                 </div>
@@ -142,10 +166,14 @@ const Unit5_Page6_Q3 = () => {
                             value={isSelected ? "✓" : ""}
                             onFocus={() => handleSelect(q.id, idx)}
                             className={`review3-p1-q3-input`}
+                            disabled={showAnswer}
+                            style={{
+                              cursor: showAnswer ? "not-allowed" : "pointer",
+                            }}
                           />
 
-                          {isWrong && (
-                            <span className="review3-p1-q3-x">X</span>
+                          {!showAnswer && isWrong && (
+                            <span className="review3-p1-q3-x">✕</span>
                           )}
                         </div>
                       </div>
@@ -161,6 +189,13 @@ const Unit5_Page6_Q3 = () => {
       <div className="action-buttons-container">
         <button onClick={reset} className="try-again-button">
           Start Again ↻
+        </button>
+         {/* ⭐⭐⭐ NEW — زر Show Answer */}
+        <button
+          onClick={handleShowAnswer}
+          className="show-answer-btn swal-continue"
+        >
+          Show Answer
         </button>
         <button onClick={checkAnswers} className="check-button2">
           Check Answer ✓

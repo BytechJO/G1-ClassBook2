@@ -27,42 +27,52 @@ const Unit4_Page6 = ({ openPopup }) => {
   ];
 
   return (
-    <div   className="page1-img-wrapper"
-          // onClick={handleImageClick}
-          style={{ backgroundImage: `url(${page_6})` }}>
+    <div
+      className="page1-img-wrapper"
+      // onClick={handleImageClick}
+      style={{ backgroundImage: `url(${page_6})` }}
+    >
       {/* <img src={page_6} /> */}
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() => openPopup("exercise", { startIndex: 35 })}
+      <div
         className="click-icon-unit4-page6-3  hover:scale-110 transition"
+        style={{ overflow: "visible" }}
       >
-        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
-      </svg>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 60 60"
+          onClick={() => openPopup("exercise", { startIndex: 35 })}
+        >
+          <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+        </svg>
+      </div>
 
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 90 90"
-        onClick={() =>
-          openPopup(
-            "audio",
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignContent: "center",
-              }}
-            >
-              <AudioWithCaption src={song} captions={captionsExample} />
-            </div>
-          )
-        }
+      <div
         className="headset-icon-CD-unit4-page6-1 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
       >
-        <image href={audioBtn} x="0" y="0" width="90" height="90" />
-      </svg>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 90 90"
+          onClick={() =>
+            openPopup(
+              "audio",
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center",
+                }}
+              >
+                <AudioWithCaption src={song} captions={captionsExample} />
+              </div>
+            )
+          }
+        >
+          <image href={audioBtn} x="0" y="0" width="90" height="90" />
+        </svg>
+      </div>
     </div>
   );
 };

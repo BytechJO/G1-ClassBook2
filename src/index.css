@@ -565,6 +565,7 @@ img {
   transition: transform 0.2s ease, font-size 0.2s ease;
 }
 .page8-wrapper {
+  padding: 30px;
   width: 100%;
   display: flex;
   justify-content: center;

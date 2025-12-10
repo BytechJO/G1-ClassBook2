@@ -1,5 +1,7 @@
 import page_5 from "../../../assets/unit6/imgs/Right 1 Unit 06 Can We Go to the Park5.jpg";
-import arrowBtn from "../../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
+import audioBtn from "../../../assets/unit1/imgs/Page 01/Audio btn.svg";
+import arrowBtn from "../../../assets/unit1/imgs/Page 01/Arrow.svg";
+import pauseBtn from "../../../assets/unit1/imgs/Right Video Button.svg";
 import "./Unit6_Page5.css";
 import Unit6_Page5_Q1 from "./Unit6_Page5_Q1";
 import Unit6_Page5_Q2 from "./Unit6_Page5_Q2";
@@ -8,74 +10,69 @@ import Unit6_Page5_Q3 from "./Unit6_Page5_Q3";
 import Unit6_Page5_Q4 from "./Unit6_Page5_Q4";
 const Unit6_Page5 = ({ openPopup }) => {
   return (
-    <div className="unit5-page-background" >
-      <img src={page_5} />
-
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() =>
-          openPopup(
-            <>
-              <Unit6_Page5_Q1 />
-            </>,
-            false
-          )
-        }
+    <div
+      className="page1-img-wrapper"
+      // onClick={handleImageClick}
+      style={{ backgroundImage: `url(${page_5})` }}
+    >
+      {/* <img src={page_5} /> */}
+      <div
         className="click-icon-unit6-page5-1 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
       >
-        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
-      </svg>
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() =>
-          openPopup(
-            <>
-              <Unit6_Page5_Q2 />
-            </>,
-            false
-          )
-        }
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 60 60"
+          style={{ overflow: "visible" }}
+          onClick={() => openPopup("exercise", { startIndex: 55 })}
+        >
+          <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+        </svg>
+      </div>
+      <div
         className="click-icon-unit6-page5-2  hover:scale-110 transition"
+        style={{ overflow: "visible" }}
       >
-        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
-      </svg>
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() =>
-          openPopup(
-            <>
-              <Unit6_Page5_Q3 />
-            </>,
-            false
-          )
-        }
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 60 60"
+          style={{ overflow: "visible" }}
+          onClick={() => openPopup("exercise", { startIndex: 56 })}
+        >
+          <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+        </svg>
+      </div>
+      <div
         className="click-icon-unit6-page5-3 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
       >
-        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
-      </svg>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 60 60"
+          style={{ overflow: "visible" }}
+          onClick={() => openPopup("exercise", { startIndex: 57 })}
+        >
+          <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+        </svg>
+      </div>
 
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() =>
-          openPopup(
-            <>
-              <Unit6_Page5_Q4 />
-            </>,
-            false
-          )
-        }
+      <div
         className="click-icon-unit6-page5-4 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
       >
-        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
-      </svg>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 60 60"
+          style={{ overflow: "visible" }}
+          onClick={() => openPopup("exercise", { startIndex: 58 })}
+        >
+          <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+        </svg>
+      </div>
     </div>
   );
 };

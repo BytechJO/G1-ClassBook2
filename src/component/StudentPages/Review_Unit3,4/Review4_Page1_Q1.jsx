@@ -91,7 +91,7 @@ const Review4_Page1_Q1 = () => {
     <div
       style={{
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "center",padding:"30px"
       }}
     >
       <div

@@ -26,14 +26,17 @@ const Unit5_Page5_Q3 = () => {
   const [answers, setAnswers] = useState(Array(data.length).fill(""));
   const [score, setScore] = useState(null);
   const [wrongInputs, setWrongInputs] = useState([]);
+  const [showAnswer, setShowAnswer] = useState(false);
+
   const handleChange = (value, index) => {
     const newAnswers = [...answers];
     newAnswers[index] = value;
     setAnswers(newAnswers);
-    setWrongInputs([])
+    setWrongInputs([]);
   };
 
   const checkAnswers = () => {
+    if (showAnswer) return;
     if (answers.some((a) => a.trim() === "")) {
       ValidationAlert.info("Please fill in all blanks before checking!");
       return;
@@ -75,11 +78,20 @@ const Unit5_Page5_Q3 = () => {
       ValidationAlert.warning(scoreMessage);
     }
   };
+  const handleShowAnswer = () => {
+    // املئي الإجابات الصحيحة كلها
+    const correctAnswers = data.map((item) => item.correct);
+
+    setAnswers(correctAnswers);
+    setWrongInputs([]); // ما في غلط بعد show answer
+    setShowAnswer(true);
+  };
 
   const reset = () => {
     setAnswers(Array(data.length).fill(""));
     setScore(null);
-     setWrongInputs([])
+    setWrongInputs([]);
+    setShowAnswer(false); // 🔥 مهم
   };
 
   return (
@@ -89,6 +101,7 @@ const Unit5_Page5_Q3 = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        padding: "30px",
       }}
     >
       <div
@@ -103,8 +116,9 @@ const Unit5_Page5_Q3 = () => {
       >
         <div className="component-wrapper">
           <h3 className="header-title-page8">
-             <span className="ex-A">B</span>
-            Label the things in the classroom..</h3>
+            <span className="ex-A">B</span>
+            Label the things in the classroom..
+          </h3>
           <div className="content-unit5-p5-q3">
             <img
               src={deer}
@@ -124,7 +138,16 @@ const Unit5_Page5_Q3 = () => {
                     margin: "20px",
                   }}
                 >
-                  <span className="q-number" style={{color:"#0d47a1" ,fontWeight:"600"}}>{index + 1}.</span>
+                  <span
+                    className="q-number"
+                    style={{
+                      color: "#0d47a1",
+                      fontWeight: "600",
+                      fontSize: "20px",
+                    }}
+                  >
+                    {index + 1}
+                  </span>
 
                   <div
                     className="question-text"
@@ -139,9 +162,10 @@ const Unit5_Page5_Q3 = () => {
                       className="q-input"
                       value={answers[index]}
                       onChange={(e) => handleChange(e.target.value, index)}
+                      disabled={showAnswer} // 🔥 لا تسمح بالكتابة بعد Show Answer
                     />
                     {/* ❌ علامة الخطأ */}
-                    {wrongInputs.includes(index) && (
+                    {!showAnswer&& wrongInputs.includes(index) && (
                       <span className="wrong-icon-review6-p1-q3">✕</span>
                     )}
                   </div>
@@ -154,6 +178,13 @@ const Unit5_Page5_Q3 = () => {
       <div className="action-buttons-container">
         <button className="try-again-button" onClick={reset}>
           Start Again ↻
+        </button>
+        {/* ⭐⭐⭐ NEW — زر Show Answer */}
+        <button
+          onClick={handleShowAnswer}
+          className="show-answer-btn swal-continue"
+        >
+          Show Answer
         </button>
         <button className="check-button2" onClick={checkAnswers}>
           Check Answers ✓

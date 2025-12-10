@@ -32,8 +32,10 @@ export default function Unit5_Page5_Q2() {
   const [answers, setAnswers] = useState({});
   const [score, setScore] = useState(null);
   const [submitted, setSubmitted] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
 
   const handleSelect = (qId, value) => {
+    if (showAnswer) return; // 🔥 يمنع الضغط بعد إظهار الحل
     setAnswers((prev) => {
       const current = prev[qId] || [];
 
@@ -53,6 +55,7 @@ export default function Unit5_Page5_Q2() {
   };
 
   const handleCheck = () => {
+    if (showAnswer) return; // 🔥 يمنع الضغط بعد إظهار الحل
     // فحص إذا الطالب مختار على الأقل إجابة من السؤال الأول
     if (!answers[data[0].id] || answers[data[0].id].length === 0) {
       ValidationAlert.info("Please select at least one picture in question 1.");
@@ -103,11 +106,24 @@ export default function Unit5_Page5_Q2() {
     }
     setSubmitted(true);
   };
+  const handleShowAnswer = () => {
+    const correctAnswersObj = {};
+
+    data.forEach((q) => {
+      correctAnswersObj[q.id] = [...q.correct]; // نضع كل الإجابات الصحيحة
+    });
+
+    setAnswers(correctAnswersObj);
+    setShowAnswer(true);
+
+
+  };
 
   const handleReset = () => {
     setAnswers({});
     setSubmitted(false);
     setScore(null);
+    setShowAnswer(false); // 🔥 إلغاء وضع Show Answer
   };
 
   return (
@@ -117,6 +133,7 @@ export default function Unit5_Page5_Q2() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        padding: "30px",
       }}
     >
       <div
@@ -164,7 +181,7 @@ export default function Unit5_Page5_Q2() {
                     >
                       <img src={img.src} alt="" />
                       {/* علامة X تظهر فقط عند الغلط */}
-                      {isWrong && (
+                      {!showAnswer && isWrong && (
                         <div className="wrong-mark-Unit5_Page5_Q2 ">✕</div>
                       )}
                     </div>
@@ -178,6 +195,13 @@ export default function Unit5_Page5_Q2() {
       <div className="action-buttons-container">
         <button className="try-again-button" onClick={handleReset}>
           Start Again ↻
+        </button>
+        {/* ⭐⭐⭐ NEW — زر Show Answer */}
+        <button
+          onClick={handleShowAnswer}
+          className="show-answer-btn swal-continue"
+        >
+          Show Answer
         </button>
         <button onClick={handleCheck} className="check-button2">
           Check Answer ✓

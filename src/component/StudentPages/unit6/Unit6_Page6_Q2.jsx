@@ -3,6 +3,7 @@ import bat from "../../../assets/unit6/imgs/U6P51EXEE-01.svg";
 import cap from "../../../assets/unit6/imgs/U6P51EXEE-02.svg";
 import ValidationAlert from "../../Popup/ValidationAlert";
 import "./Unit6_Page6_Q2.css";
+
 const Unit6_Page6_Q2 = () => {
   const items = [
     { img: bat, correct: "can", correctInput: "can swim.", input: "She" },
@@ -16,9 +17,11 @@ const Unit6_Page6_Q2 = () => {
 
   const [selected, setSelected] = useState(["", ""]);
   const [answers, setAnswers] = useState(["", ""]);
+  const [locked, setLocked] = useState(false);
   const [wrongInputs, setWrongInputs] = useState([]);
   const [showResult, setShowResult] = useState(false);
   const handleSelect = (value, index) => {
+    if (locked) return; // 🔒 لا تعديل بعد show answer
     const newSel = [...selected];
     newSel[index] = value;
     setSelected(newSel);
@@ -26,6 +29,7 @@ const Unit6_Page6_Q2 = () => {
   };
 
   const handleInput = (value, index) => {
+    if (locked) return; // 🔒 لا تعديل بعد show answer
     const newAns = [...answers];
     newAns[index] = value;
     setAnswers(newAns);
@@ -37,9 +41,25 @@ const Unit6_Page6_Q2 = () => {
     setAnswers(["", ""]);
     setWrongInputs([]);
     setShowResult(false);
+    setLocked(false); // 🔒 قفل كل شيء
+  };
+  const showAnswers = () => {
+    // حط الدوائر الصح
+    const correctCircles = items.map((item) => item.correct);
+
+    // حط الكتابة الصحيحة
+    const correctTexts = items.map((item) => item.correctInput);
+
+    setSelected(correctCircles);
+    setAnswers(correctTexts);
+    setWrongInputs([]);
+    setShowResult(false);
+
+    setLocked(true); // 🔒 قفل كل شيء
   };
 
   const checkAnswers = () => {
+    if (locked) return;
     // 1) التشييك إذا في دائرة مش مختارة
     if (selected.some((s) => s === "")) {
       ValidationAlert.info("Please choose a circle (f or v) for all items!");
@@ -99,6 +119,7 @@ const Unit6_Page6_Q2 = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        padding: "30px",
       }}
     >
       <div
@@ -112,15 +133,27 @@ const Unit6_Page6_Q2 = () => {
         }}
       >
         <h5 className="header-title-page8">
-          <span className="letter-of-Q">E</span> Look, circle, and write.
+          <span className="ex-A">E</span> Look, circle, and write.
         </h5>
 
         <div className="question-grid-unit6-page6-q2">
           {items.map((item, i) => (
             <div className="question-box-unit4-page5-q1" key={i}>
-              <span style={{fontSize:"22px" ,fontWeight:"600" ,color:"#1d4f7b"}}>{i+1}</span>
+              <span
+                style={{
+                  fontSize: "22px",
+                  fontWeight: "600",
+                  color: "#1d4f7b",
+                }}
+              >
+                {i + 1}
+              </span>
               <div className="img-option-unit6-p6-q2">
-                <img src={item.img} className="q-img-unit4-page5-q1" style={{height:"auto",width:"200px"}} />
+                <img
+                  src={item.img}
+                  className="q-img-unit4-page5-q1"
+                  style={{ height: "auto", width: "200px" }}
+                />
 
                 {/* f / v choices */}
                 <div className="choices-unit6-page6-q2 ">
@@ -129,38 +162,40 @@ const Unit6_Page6_Q2 = () => {
                       className={`circle-choice-unit6-page6-q2  ${
                         selected[i] === "can" ? "active" : ""
                       }`}
-                      onClick={() => handleSelect("can", i)}
+                      onClick={() => !locked && handleSelect("can", i)}
                     >
                       can
                     </div>
 
                     {/* X فوق دائرة f إذا كانت غلط */}
-                    {showResult &&
+                    {!locked &&
+                      showResult &&
                       selected[i] === "can" &&
                       selected[i] !== item.correct && (
                         <div className="wrong-mark">✕</div>
                       )}
                   </div>
-               
-                <div className="circle-wrapper">
-                  <div
-                    className={`circle-choice-unit6-page6-q2 ${
-                      selected[i] === "can't" ? "active" : ""
-                    }`}
-                    onClick={() => handleSelect("can't", i)}
-                  >
-                    can't
-                  </div>
 
-                  {/* X فوق دائرة v إذا كانت غلط */}
-                  {showResult &&
-                    selected[i] === "can't" &&
-                    selected[i] !== item.correct && (
-                      <div className="wrong-mark">✕</div>
-                    )}
+                  <div className="circle-wrapper">
+                    <div
+                      className={`circle-choice-unit6-page6-q2 ${
+                        selected[i] === "can't" ? "active" : ""
+                      }`}
+                      onClick={() => !locked && handleSelect("can't", i)}
+                    >
+                      can't
+                    </div>
+
+                    {/* X فوق دائرة v إذا كانت غلط */}
+                    {!locked &&
+                      showResult &&
+                      selected[i] === "can't" &&
+                      selected[i] !== item.correct && (
+                        <div className="wrong-mark">✕</div>
+                      )}
+                  </div>
                 </div>
               </div>
- </div>
               {/* writing input */}
               <div className="input-wrapper-unit6-p6-q2">
                 {item.input}
@@ -168,11 +203,13 @@ const Unit6_Page6_Q2 = () => {
                   type="text"
                   className="write-input-unit4-page5-q1"
                   value={answers[i]}
+                  disabled={locked}
                   onChange={(e) => handleInput(e.target.value, i)}
                 />
 
                 {/* X فوق الإنبت إذا كانت الكلمة غلط */}
-                {showResult &&
+                {!locked &&
+                  showResult &&
                   answers[i].trim() !== "" &&
                   answers[i].trim().toLowerCase() !==
                     item.correctInput.toLowerCase() &&
@@ -187,6 +224,10 @@ const Unit6_Page6_Q2 = () => {
       <div className="action-buttons-container">
         <button onClick={resetAll} className="try-again-button">
           Start Again ↻
+        </button>
+        {/* ⭐⭐⭐ NEW — زر Show Answer */}
+        <button onClick={showAnswers} className="show-answer-btn swal-continue">
+          Show Answer
         </button>
         <button onClick={checkAnswers} className="check-button2">
           Check Answer ✓

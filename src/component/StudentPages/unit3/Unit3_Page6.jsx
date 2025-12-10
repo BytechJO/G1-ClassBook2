@@ -25,55 +25,71 @@ const Unit3_Page6 = ({ openPopup }) => {
   ];
 
   return (
-    <div   className="page1-img-wrapper"
+    <div
+      className="page1-img-wrapper"
       // onClick={handleImageClick}
-      style={{ backgroundImage: `url(${page_6})` }}>
+      style={{ backgroundImage: `url(${page_6})` }}
+    >
       {/* <img src={page_6} /> */}
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() => openPopup("exercise", { startIndex: 29 })}
-        className="click-icon-unit3-page6-2 hover:scale-110 transition"
-      >
-        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
-      </svg>
 
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() => openPopup("exercise", { startIndex: 30 })}
+      <div
+        className="click-icon-unit3-page6-2 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
+      >
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 60 60"
+          onClick={() => openPopup("exercise", { startIndex: 29 })}
+        >
+          <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+        </svg>
+      </div>
+
+      <div
         className="click-icon-unit3-page6-3  hover:scale-110 transition"
+        style={{ overflow: "visible" }}
       >
-        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
-      </svg>
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 90 90"
-        onClick={() =>
-          openPopup(
-            "audio",
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignContent: "center",
-              }}
-            >
-              <AudioWithCaption
-                src={CD25_Pg27_Song_AdultLady}
-                captions={captionsExample}
-              />
-            </div>,
-            true
-          )
-        }
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 60 60"
+          onClick={() => openPopup("exercise", { startIndex: 30 })}
+        >
+          <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+        </svg>
+      </div>
+
+      <div
         className="headset-icon-CD-unit3-page6-1 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
       >
-        <image href={audioBtn} x="0" y="0" width="90" height="90" />
-      </svg>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 90 90"
+          onClick={() =>
+            openPopup(
+              "audio",
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center",
+                }}
+              >
+                <AudioWithCaption
+                  src={CD25_Pg27_Song_AdultLady}
+                  captions={captionsExample}
+                />
+              </div>,
+              true
+            )
+          }
+        >
+          <image href={audioBtn} x="0" y="0" width="90" height="90" />
+        </svg>
+      </div>
     </div>
   );
 };

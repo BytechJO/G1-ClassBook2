@@ -9,8 +9,10 @@ const Unit6_Page5_Q3 = () => {
   const correctAnswers = ["fly a kite", "fish", "ride a bike", "climb a tree"];
   const [answers, setAnswers] = useState(["", "", "", ""]);
   const [wrongInputs, setWrongInputs] = useState([]);
+  const [locked, setLocked] = useState(false);
 
   const handleChange = (value, index) => {
+    if (locked) return; // 🔒 ممنوع التعديل بعد Show Answer
     const newAnswers = [...answers];
     newAnswers[index] = value.toLowerCase();
     setAnswers(newAnswers);
@@ -18,6 +20,7 @@ const Unit6_Page5_Q3 = () => {
   };
 
   const checkAnswers = () => {
+    if (locked) return;
     if (answers.some((ans) => ans.trim() === "")) {
       ValidationAlert.info("Please fill in all the blanks before checking!");
       return;
@@ -54,10 +57,16 @@ const Unit6_Page5_Q3 = () => {
       ValidationAlert.warning(scoreMessage);
     }
   };
+  const showAnswers = () => {
+    setAnswers(correctAnswers); // ضع كل الإجابات الصحيحة
+    setWrongInputs([]); // اخفاء الأخطاء
+    setLocked(true); // 🔒 قفل التعديل
+  };
 
   const reset = () => {
     setAnswers(["", "", "", ""]);
     setWrongInputs([]);
+    setLocked(false); // ⬅ مهم
   };
 
   return (
@@ -68,6 +77,7 @@ const Unit6_Page5_Q3 = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        padding: "30px",
       }}
     >
       <div
@@ -80,7 +90,7 @@ const Unit6_Page5_Q3 = () => {
         }}
       >
         <h5 className="header-title-page8">
-          <span className="letter-of-Q">B</span>Read, look, and write.
+          <span className="ex-A">B</span>Read, look, and write.
         </h5>
         <div
           className="row-content10-unit3-page6-q1"
@@ -99,8 +109,9 @@ const Unit6_Page5_Q3 = () => {
                   className="q-input-unit3-page6-q1"
                   onChange={(e) => handleChange(e.target.value, 0)}
                   value={answers[0]}
+                  disabled={locked}
                 />
-                {wrongInputs.includes(0) && (
+                {!locked && wrongInputs.includes(0) && (
                   <span className="error-mark-input">✕</span>
                 )}
               </div>
@@ -123,8 +134,9 @@ const Unit6_Page5_Q3 = () => {
                   className="q-input-unit3-page6-q1"
                   onChange={(e) => handleChange(e.target.value, 1)}
                   value={answers[1]}
+                  disabled={locked}
                 />{" "}
-                {wrongInputs.includes(1) && (
+                {!locked && wrongInputs.includes(1) && (
                   <span className="error-mark-input">✕</span>
                 )}
               </div>
@@ -147,8 +159,9 @@ const Unit6_Page5_Q3 = () => {
                   className="q-input-unit3-page6-q1"
                   onChange={(e) => handleChange(e.target.value, 2)}
                   value={answers[2]}
+                  disabled={locked}
                 />{" "}
-                {wrongInputs.includes(2) && (
+                {!locked && wrongInputs.includes(2) && (
                   <span className="error-mark-input">✕</span>
                 )}
               </div>
@@ -171,8 +184,9 @@ const Unit6_Page5_Q3 = () => {
                   className="q-input-unit3-page6-q1"
                   onChange={(e) => handleChange(e.target.value, 3)}
                   value={answers[3]}
+                  disabled={locked}
                 />{" "}
-                {wrongInputs.includes(3) && (
+                {!locked && wrongInputs.includes(3) && (
                   <span className="error-mark-input">✕</span>
                 )}
               </div>
@@ -183,6 +197,10 @@ const Unit6_Page5_Q3 = () => {
       <div className="action-buttons-container">
         <button onClick={reset} className="try-again-button">
           Start Again ↻
+        </button>
+        {/* ⭐⭐⭐ NEW — زر Show Answer */}
+        <button onClick={showAnswers} className="show-answer-btn swal-continue">
+          Show Answer
         </button>
         <button onClick={checkAnswers} className="check-button2">
           Check Answer ✓

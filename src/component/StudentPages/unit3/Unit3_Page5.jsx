@@ -9,56 +9,68 @@ import Unit3_Page5_Q3 from "./Unit3_Page5_Q3";
 import Unit3_Page5_Q4 from "./Unit3_Page5_Q4";
 const Unit3_Page5 = ({ openPopup }) => {
   return (
-    <div   className="page1-img-wrapper"
-          // onClick={handleImageClick}
-          style={{ backgroundImage: `url(${page_5})` }}>
+    <div
+      className="page1-img-wrapper"
+      // onClick={handleImageClick}
+      style={{ backgroundImage: `url(${page_5})` }}
+    >
       {/* <img src={page_5} /> */}
-
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() =>
-           openPopup("exercise", { startIndex: 25 })
-        }
+      <div
         className="click-icon-unit3-page5-1 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
       >
-        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
-      </svg>
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() =>
-         openPopup("exercise", { startIndex: 26 })
-        }
-        className="click-icon-unit3-page5-2  hover:scale-110 transition"
-      >
-        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
-      </svg>
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() =>
-          openPopup("exercise", { startIndex: 27 })
-        }
-        className="click-icon-unit3-page5-3 hover:scale-110 transition"
-      >
-        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
-      </svg>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 60 60"
+          onClick={() => openPopup("exercise", { startIndex: 25 })}
+        >
+          <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+        </svg>
+      </div>
 
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() =>
-          openPopup("exercise", { startIndex: 28 })
-        }
-        className="click-icon-unit3-page5-4 hover:scale-110 transition"
+      <div
+        className="click-icon-unit3-page5-2  hover:scale-110 transition"
+        style={{ overflow: "visible" }}
       >
-        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
-      </svg>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 60 60"
+          onClick={() => openPopup("exercise", { startIndex: 26 })}
+        >
+          <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+        </svg>
+      </div>
+
+      <div
+        className="click-icon-unit3-page5-3 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
+      >
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 60 60"
+          onClick={() => openPopup("exercise", { startIndex: 27 })}
+        >
+          <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+        </svg>
+      </div>
+
+      <div
+        className="click-icon-unit3-page5-4 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
+      >
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 60 60"
+          onClick={() => openPopup("exercise", { startIndex: 28 })}
+          className="click-icon-unit3-page5-4 hover:scale-110 transition"
+        >
+          <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+        </svg>
+      </div>
     </div>
   );
 };

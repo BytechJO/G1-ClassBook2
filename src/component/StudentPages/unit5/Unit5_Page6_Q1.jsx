@@ -8,6 +8,8 @@ import ValidationAlert from "../../Popup/ValidationAlert";
 const Unit5_Page6_Q1 = () => {
   const [answers, setAnswers] = useState([]);
   const [wrongWords, setWrongWords] = useState([]); // ⭐ تم التعديل هون
+  const [showAnswer, setShowAnswer] = useState(false);
+
   const correctMatches = [
     { input: "book", num: "input1" },
     { input: "this", num: "input2" },
@@ -18,6 +20,7 @@ const Unit5_Page6_Q1 = () => {
   ];
 
   const handleChange = (e) => {
+     if (showAnswer) return; // منع التعديل عند show answer
     const { id, value } = e.target;
     console.log(id, value);
 
@@ -33,10 +36,11 @@ const Unit5_Page6_Q1 = () => {
 
       return updated;
     });
-    setWrongWords([])
+    setWrongWords([]);
   };
 
   const checkAnswers = () => {
+     if (showAnswer) return; // منع التعديل عند show answer
     // تأكد إنو الطالب وصل كل الأزواج
 
     let correctCount = 0;
@@ -87,6 +91,19 @@ const Unit5_Page6_Q1 = () => {
       ValidationAlert.warning(scoreMessage);
     }
   };
+const handleShowAnswer = () => {
+  // بناء الإجابات الصحيحة بناءً على correctMatches
+  const filled = correctMatches.map((item) => ({
+    input: item.input,
+    num: item.num,
+  }));
+
+  setAnswers(filled);
+  setWrongWords([]); // الخطأ يختفي
+  setShowAnswer(true);
+
+
+};
 
   return (
     <div
@@ -95,6 +112,7 @@ const Unit5_Page6_Q1 = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        padding: "30px",
       }}
     >
       <div
@@ -109,14 +127,17 @@ const Unit5_Page6_Q1 = () => {
       >
         <div className="unit2-page9-q1-container">
           <h5 className="header-title-page8">
-            <span className="letter-of-Q"> D</span>Look and read. Complete the
-            question and answer.
+            <span className="ex-A"> D</span>Look and read. Complete the question
+            and answer.
           </h5>
 
           <div className="content-container-unit5-p6-q1">
             <div className="section-one-unit5-p6-q1">
-              <span>1</span> <img src={img1} className="img-unit5-p6-q1" />
-              <div className="content-input-unit5-p6-q1">
+              <span className="Unit5-P6-Q3-text"style={{color:"darkblue"}}>1</span> <img src={img1} className="img-unit5-p6-q1" />
+              <div
+                className="content-input-unit5-p6-q1"
+                style={{ fontSize: "20px", fontWeight: "500" }}
+              >
                 <input
                   type="text"
                   value={"What’s this?"}
@@ -128,7 +149,7 @@ const Unit5_Page6_Q1 = () => {
                     type="text"
                     value={"This is a"}
                     readOnly
-                    style={{ pointerEvents: "none", width: "70px" }}
+                    style={{ pointerEvents: "none", width: "77px" }}
                   />
                   <div style={{ position: "relative" }}>
                     <input
@@ -138,6 +159,7 @@ const Unit5_Page6_Q1 = () => {
                         answers.find((a) => a.num === "input1")?.input || ""
                       }
                       id="input1"
+                      disabled={showAnswer}
                       onChange={handleChange}
                     />
                     {wrongWords.includes(answers[0]?.num) && (
@@ -149,8 +171,11 @@ const Unit5_Page6_Q1 = () => {
             </div>
 
             <div className="section-two-unit5-p6-q1">
-              <span>2</span> <img src={img2} className="img-unit5-p6-q1" />
-              <div className="content-input-unit5-p6-q1">
+              <span className="Unit5-P6-Q3-text" style={{color:"darkblue"}}>2</span> <img src={img2} className="img-unit5-p6-q1" />
+              <div
+                className="content-input-unit5-p6-q1"
+                style={{ fontSize: "20px", fontWeight: "500" }}
+              >
                 <div style={{ position: "relative", display: "flex" }}>
                   <input
                     type="text"
@@ -163,6 +188,7 @@ const Unit5_Page6_Q1 = () => {
                     className="answer-input-unit5-p6-q1"
                     value={answers.find((a) => a.num === "input2")?.input || ""}
                     id="input2"
+                    disabled={showAnswer}
                     onChange={handleChange}
                   />
                   {wrongWords.includes(answers[1]?.num) && (
@@ -176,6 +202,7 @@ const Unit5_Page6_Q1 = () => {
                     className="answer-input-unit5-p6-q1"
                     value={answers.find((a) => a.num === "input3")?.input || ""}
                     id="input3"
+                    disabled={showAnswer}
                     onChange={handleChange}
                   />
                   {wrongWords.includes(answers[2]?.num) && (
@@ -192,8 +219,11 @@ const Unit5_Page6_Q1 = () => {
             </div>
 
             <div className="section-three-unit5-p6-q1">
-              <span>3</span> <img src={img3} className="img-unit5-p6-q1" />
-              <div className="content-input-unit5-p6-q1">
+              <span className="Unit5-P6-Q3-text" style={{color:"darkblue"}}>3</span> <img src={img3} className="img-unit5-p6-q1" />
+              <div
+                className="content-input-unit5-p6-q1"
+                style={{ fontSize: "20px", fontWeight: "500" }}
+              >
                 <input
                   type="text"
                   value={"Is this a pencil?"}
@@ -206,6 +236,7 @@ const Unit5_Page6_Q1 = () => {
                     className="answer-input-unit5-p6-q1"
                     value={answers.find((a) => a.num === "input4")?.input || ""}
                     id="input4"
+                    disabled={showAnswer}
                     onChange={handleChange}
                   />
                   {wrongWords.includes(answers[3]?.num) && (
@@ -215,14 +246,18 @@ const Unit5_Page6_Q1 = () => {
               </div>
             </div>
             <div className="section-four-unit5-p6-q1">
-              <span>4</span> <img src={img4} className="img-unit5-p6-q1" />
-              <div className="content-input-unit5-p6-q1">
+              <span className="Unit5-P6-Q3-text" style={{color:"darkblue"}}>4</span> <img src={img4} className="img-unit5-p6-q1" />
+              <div
+                className="content-input-unit5-p6-q1"
+                style={{ fontSize: "20px", fontWeight: "500" }}
+              >
                 <div style={{ position: "relative", display: "flex" }}>
                   <input
                     type="text"
                     className="answer-input-unit5-p6-q1"
                     value={answers.find((a) => a.num === "input5")?.input || ""}
                     id="input5"
+                    disabled={showAnswer}
                     onChange={handleChange}
                   />
                   {wrongWords.includes(answers[4]?.num) && (
@@ -247,10 +282,11 @@ const Unit5_Page6_Q1 = () => {
                     className="answer-input-unit5-p6-q1"
                     value={answers.find((a) => a.num === "input6")?.input || ""}
                     id="input6"
+                    disabled={showAnswer}
                     onChange={handleChange}
                   />
 
-                  {wrongWords.includes(answers[5]?.num) && (
+                  {!showAnswer && wrongWords.includes(answers[5]?.num) && (
                     <span className="error-mark-input1">✕</span>
                   )}
                 </div>
@@ -263,11 +299,19 @@ const Unit5_Page6_Q1 = () => {
             onClick={() => {
               setAnswers([]);
               setWrongWords([]);
+              setShowAnswer(false); // <<< مهم
             }}
             className="try-again-button"
           >
             Start Again ↻
           </button>
+           {/* ⭐⭐⭐ NEW — زر Show Answer */}
+        <button
+          onClick={handleShowAnswer}
+          className="show-answer-btn swal-continue"
+        >
+          Show Answer
+        </button>
           <button onClick={checkAnswers} className="check-button2">
             Check Answer ✓
           </button>

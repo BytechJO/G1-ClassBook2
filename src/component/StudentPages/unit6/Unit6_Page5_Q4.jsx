@@ -42,10 +42,13 @@ const Unit6_Page5_Q4 = () => {
   const [bigInput, setBigInput] = useState("");
   const [bigInputWrong, setBigInputWrong] = useState(false);
   const [wrongInputs, setWrongInputs] = useState([]); // ⭐ تم التعديل هون
+  const [showAnswer, setShowAnswer] = useState(false);
+ 
   const [letters, setLetters] = useState(
     questionGroups.map((group) => group.map(() => ""))
   );
   const handleInputChange = (value, groupIndex, letterIndex) => {
+       if (showAnswer) return;
     const updated = [...letters];
     updated[groupIndex][letterIndex] = value.toLowerCase();
     setLetters(updated);
@@ -55,50 +58,51 @@ const Unit6_Page5_Q4 = () => {
   // const fullSentence = "This is a ruler";
 
   const handleCheckAnswers = () => {
- // 1️⃣ check empty fields
-const hasEmpty = letters.some((group) =>
-  group.some((letter) => letter === "")
-);
-if (hasEmpty) {
-  ValidationAlert.info(
-    "Oops!",
-    "Please complete all fields before checking."
-  );
-  return;
-}
-
-// 2️⃣ count correct inputs
-let correctCount = 0;
-let total = letters.flat().length + 1; // +1 for big input
-let wrong = [];
-
-// --- check big input ---
-let isBigCorrect = true;
-
-if (bigInput.trim() === "") {
-  isBigCorrect = false;
-  setBigInputWrong(true);
-} else {
-  isBigCorrect = true;
-  setBigInputWrong(false);
-  correctCount++; // big input is correct if not empty
-}
-
-// --- check small inputs ---
-for (let g = 0; g < letters.length; g++) {
-  for (let l = 0; l < letters[g].length; l++) {
-    const letter = letters[g][l];
-    const correctNum = data.find((d) => d.letter === letter)?.number;
-
-    if (correctNum === questionGroups[g][l]) {
-      correctCount++;
-    } else {
-      wrong.push(`${g}-${l}`);
+       if (showAnswer) return;
+    // 1️⃣ check empty fields
+    const hasEmpty = letters.some((group) =>
+      group.some((letter) => letter === "")
+    );
+    if (hasEmpty) {
+      ValidationAlert.info(
+        "Oops!",
+        "Please complete all fields before checking."
+      );
+      return;
     }
-  }
-}
 
-setWrongInputs(wrong);
+    // 2️⃣ count correct inputs
+    let correctCount = 0;
+    let total = letters.flat().length + 1; // +1 for big input
+    let wrong = [];
+
+    // --- check big input ---
+    let isBigCorrect = true;
+
+    if (bigInput.trim() === "") {
+      isBigCorrect = false;
+      setBigInputWrong(true);
+    } else {
+      isBigCorrect = true;
+      setBigInputWrong(false);
+      correctCount++; // big input is correct if not empty
+    }
+
+    // --- check small inputs ---
+    for (let g = 0; g < letters.length; g++) {
+      for (let l = 0; l < letters[g].length; l++) {
+        const letter = letters[g][l];
+        const correctNum = data.find((d) => d.letter === letter)?.number;
+
+        if (correctNum === questionGroups[g][l]) {
+          correctCount++;
+        } else {
+          wrong.push(`${g}-${l}`);
+        }
+      }
+    }
+
+    setWrongInputs(wrong);
 
     // 3️⃣ تحديد اللون حسب السكور
     const color =
@@ -125,6 +129,28 @@ setWrongInputs(wrong);
       ValidationAlert.warning(scoreMessage);
     }
   };
+ const handleShowAnswer = () => {
+    // 1) جهزي مصفوفة الحروف الصحيحة
+    const correctLetters = questionGroups.map((group) =>
+      group.map((num) => {
+        const item = data.find((d) => d.number === num);
+        return item ? item.letter : "";
+      })
+    );
+
+    // 2) ضعي الإجابات الصحيحة
+    setLetters(correctLetters);
+
+    // 3) امسحي الأخطاء
+    setWrongInputs([]);
+
+    // 4) اتركي big input فاضي كما طلبتِ
+    setBigInput("");
+    setBigInputWrong(false);
+
+    // 5) فعّلي وضع show answer
+    setShowAnswer(true);
+  };
 
   return (
     <div
@@ -134,6 +160,7 @@ setWrongInputs(wrong);
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        padding: "30px",
       }}
     >
       <div
@@ -147,7 +174,7 @@ setWrongInputs(wrong);
         }}
       >
         <h5 className="header-title-page8">
-          <span className="letter-of-Q"> C</span>Answer the question..
+          <span className="ex-A"> C</span>Answer the question..
         </h5>
 
         <div className="unit3-q4-alphabet-box">
@@ -189,7 +216,7 @@ setWrongInputs(wrong);
                           )
                         }
                       />
-                      {wrongInputs.includes(`${groupIndex}-${letterIndex}`) && (
+                      {!showAnswer && wrongInputs.includes(`${groupIndex}-${letterIndex}`) && (
                         <span className="error-mark1-unit4-page5-q4">✕</span> // ⭐ تم التعديل هون
                       )}
                     </div>
@@ -212,7 +239,7 @@ setWrongInputs(wrong);
                 onChange={(e) => setBigInput(e.target.value.toLowerCase())}
               />
 
-              {bigInputWrong && (
+              {!showAnswer && bigInputWrong && (
                 <span className="error-mark1-unit4-page5-q4">✕</span>
               )}
             </div>
@@ -226,10 +253,18 @@ setWrongInputs(wrong);
             setWrongInputs([]);
             setBigInputWrong(false);
             setBigInput("");
+             setShowAnswer(false);
           }}
           className="try-again-button"
         >
           Start Again ↻
+        </button>
+         {/* ⭐⭐⭐ NEW — زر Show Answer */}
+        <button
+          onClick={handleShowAnswer}
+          className="show-answer-btn swal-continue"
+        >
+          Show Answer
         </button>
         <button onClick={handleCheckAnswers} className="check-button2">
           Check Answer ✓
