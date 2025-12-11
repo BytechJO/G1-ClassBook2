@@ -35,15 +35,18 @@ const Unit7_Page5_Q4 = () => {
   const questionGroups = [
     [1, 18, 5], // are
     [25, 15, 21], // you
-    [8, 1, 16, 16, 25],//happy
+    [8, 1, 16, 16, 25], //happy
   ];
   const [bigInput, setBigInput] = useState("");
   const [bigInputWrong, setBigInputWrong] = useState(false);
   const [wrongInputs, setWrongInputs] = useState([]); // ⭐ تم التعديل هون
+  const [showAnswer, setShowAnswer] = useState(false);
+
   const [letters, setLetters] = useState(
     questionGroups.map((group) => group.map(() => ""))
   );
   const handleInputChange = (value, groupIndex, letterIndex) => {
+    if (showAnswer) return;
     const updated = [...letters];
     updated[groupIndex][letterIndex] = value.toLowerCase();
     setLetters(updated);
@@ -53,6 +56,7 @@ const Unit7_Page5_Q4 = () => {
   const fullSentence = "No, I’m not. I’m sad";
 
   const handleCheckAnswers = () => {
+    if (showAnswer) return;
     // 1️⃣ التحقق من وجود فراغات
     const hasEmpty = letters.some((group) =>
       group.some((letter) => letter === "")
@@ -116,6 +120,28 @@ const Unit7_Page5_Q4 = () => {
       ValidationAlert.warning(scoreMessage);
     }
   };
+  const handleShowAnswer = () => {
+    // 1) جهزي مصفوفة الحروف الصحيحة
+    const correctLetters = questionGroups.map((group) =>
+      group.map((num) => {
+        const item = data.find((d) => d.number === num);
+        return item ? item.letter : "";
+      })
+    );
+
+    // 2) ضعي الإجابات الصحيحة
+    setLetters(correctLetters);
+
+    // 3) امسحي الأخطاء
+    setWrongInputs([]);
+
+    // 4) اتركي big input فاضي كما طلبتِ
+    setBigInput("");
+    setBigInputWrong(false);
+
+    // 5) فعّلي وضع show answer
+    setShowAnswer(true);
+  };
 
   return (
     <div
@@ -125,6 +151,7 @@ const Unit7_Page5_Q4 = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        padding: "30px",
       }}
     >
       <div
@@ -138,7 +165,7 @@ const Unit7_Page5_Q4 = () => {
         }}
       >
         <h5 className="header-title-page8">
-          <span className="letter-of-Q"> C</span>Answer the question..
+          <span className="ex-A"> C</span>Answer the question..
         </h5>
 
         <div className="unit3-q4-alphabet-box">
@@ -173,16 +200,21 @@ const Unit7_Page5_Q4 = () => {
                         maxLength={1}
                         value={letters[groupIndex][letterIndex]}
                         onChange={(e) =>
+                          !showAnswer &&
                           handleInputChange(
                             e.target.value,
                             groupIndex,
                             letterIndex
                           )
                         }
+                        disabled={showAnswer}
                       />
-                      {wrongInputs.includes(`${groupIndex}-${letterIndex}`) && (
-                        <span className="error-mark1-unit4-page5-q4">✕</span> // ⭐ تم التعديل هون
-                      )}
+                      {!showAnswer &&
+                        wrongInputs.includes(
+                          `${groupIndex}-${letterIndex}`
+                        ) && (
+                          <span className="error-mark1-unit4-page5-q4">✕</span> // ⭐ تم التعديل هون
+                        )}
                     </div>
                   </div>
                 ))}
@@ -204,7 +236,7 @@ const Unit7_Page5_Q4 = () => {
                 onChange={(e) => setBigInput(e.target.value.toLowerCase())}
               />
 
-              {bigInputWrong && (
+              {!showAnswer && bigInputWrong && (
                 <span className="error-mark1-unit4-page5-q4">✕</span>
               )}
             </div>
@@ -218,10 +250,18 @@ const Unit7_Page5_Q4 = () => {
             setWrongInputs([]);
             setBigInputWrong(false);
             setBigInput("");
+            setShowAnswer(false);
           }}
           className="try-again-button"
         >
           Start Again ↻
+        </button>
+        {/* ⭐⭐⭐ NEW — زر Show Answer */}
+        <button
+          onClick={handleShowAnswer}
+          className="show-answer-btn swal-continue"
+        >
+          Show Answer
         </button>
         <button onClick={handleCheckAnswers} className="check-button2">
           Check Answer ✓

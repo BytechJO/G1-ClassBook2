@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Review6_Page2_Q3.css";
-import ValidationAlert from "../Popup/ValidationAlert";
+import ValidationAlert from "../../Popup/ValidationAlert";
 const Review6_Page2_Q3 = () => {
   const sentences = [
     { word1: "pit", word2: "chip", word3: "top", num: 1 },

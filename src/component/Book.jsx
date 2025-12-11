@@ -132,6 +132,48 @@ export default function Book() {
     }
   }, [activeTab, isMobile]);
 
+  // ==========================
+  // 📌 Adjust pageIndex when switching to SPREAD mode
+  // ==========================
+  useEffect(() => {
+    if (viewMode !== "spread") return;
+
+    const currentPage = pageIndex + 1;
+
+    // ====== ALL TABS EXCEPT WORKBOOK ======
+    if (activeTab !== "work") {
+      if (currentPage % 2 === 1) {
+        // فردية → خليها تعرض مع الصفحة السابقة
+        const leftPage = currentPage - 1;
+        if (leftPage >= 1) {
+          setPageIndex(leftPage - 1);
+        }
+      } else {
+        // زوجية → خليها يسار وتعرض التالية يمين
+        setPageIndex(currentPage - 1);
+      }
+      return;
+    }
+
+    // ====== WORKBOOK SPECIAL LOGIC ======
+    if (currentPage === 1) {
+      setPageIndex(0);
+      return;
+    }
+    if (currentPage === 2) {
+      setPageIndex(1);
+      return;
+    }
+
+    if (currentPage % 2 === 1) {
+      // فردية → لازم تظهر يمين في الورك بوك
+      setPageIndex(currentPage - 1);
+    } else {
+      // زوجية → لازم تظهر يسار في الورك بوك
+      setPageIndex(currentPage - 2);
+    }
+  }, [viewMode]);
+
   // ===========================================================
   //                 📌 PAGE NAVIGATION
   // ===========================================================
@@ -335,6 +377,8 @@ export default function Book() {
     { id: 7, label: "Unit 5", start: 40, pages: 6 },
     { id: 8, label: "Unit 6", start: 46, pages: 6 },
     { id: 9, label: "Review 5 and 6", start: 52, pages: 6 },
+    { id: 10, label: "Unit 7", start: 58, pages: 6 },
+    { id: 11, label: "Unit 8", start: 64, pages: 6 },
   ];
 
   const workbookUnits = [

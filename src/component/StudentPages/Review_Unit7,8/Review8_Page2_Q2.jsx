@@ -1,9 +1,9 @@
 import React, { useState, useRef } from "react";
-import img1 from "../../assets/unit6/imgs/U6P55EXEE-01.svg";
-import img2 from "../../assets/unit6/imgs/U6P55EXEE-02.svg";
-import img3 from "../../assets/unit6/imgs/U6P55EXEE-03.svg";
-import img4 from "../../assets/unit6/imgs/U6P55EXEE-04.svg";
-import img5 from "../../assets/unit6/imgs/U6P55EXEE-05.svg";
+import img1 from "../../../assets/unit6/imgs/U6P55EXEE-01.svg";
+import img2 from "../../../assets/unit6/imgs/U6P55EXEE-02.svg";
+import img3 from "../../../assets/unit6/imgs/U6P55EXEE-03.svg";
+import img4 from "../../../assets/unit6/imgs/U6P55EXEE-04.svg";
+import img5 from "../../../assets/unit6/imgs/U6P55EXEE-05.svg";
 import ValidationAlert from "../Popup/ValidationAlert";
 import "./Review6_Page2_Q2.css";
 

@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import "./Unit8_Page5_Q1.css";
 import ValidationAlert from "../../Popup/ValidationAlert";
-// import img1 from "../../assets/zipper.png";
-// import img2 from "../../assets/sock.png";
-// import img3 from "../../assets/zoo.png";
-// import img4 from "../../assets/zebra.png";
 
 const data = [
   {
@@ -20,11 +16,12 @@ const data = [
 
 const Unit8_Page5_Q1 = () => {
   const [inputs, setInputs] = useState(Array(data.length).fill(""));
-  const [wrongInputs, setWrongInputs] = useState(
-    Array(data.length).fill(false)
-  );
+  const [wrongInputs, setWrongInputs] = useState(Array(data.length).fill(false));
+  const [showAnswer, setShowAnswer] = useState(false); // ⭐ NEW
 
   const checkAnswers = () => {
+        if (showAnswer) return; // ❌ ممنوع التعديل بعد Show Answer
+
     if (inputs.some((val) => val.trim() === "")) {
       ValidationAlert.info(
         "Oops!",
@@ -39,9 +36,9 @@ const Unit8_Page5_Q1 = () => {
     data.forEach((item, index) => {
       if (inputs[index].toLowerCase() === item.answer) {
         correctCount++;
-        wrongFlags[index] = false; // صح
+        wrongFlags[index] = false;
       } else {
-        wrongFlags[index] = true; // غلط
+        wrongFlags[index] = true;
       }
     });
 
@@ -52,12 +49,12 @@ const Unit8_Page5_Q1 = () => {
       correctCount === total ? "green" : correctCount === 0 ? "red" : "orange";
 
     const scoreMessage = `
-    <div style="font-size: 20px; margin-top: 10px; text-align:center;">
-      <span style="color:${color}; font-weight:bold;">
-        Score: ${correctCount} / ${total}
-      </span>
-    </div>
-  `;
+      <div style="font-size: 20px; text-align:center;">
+        <span style="color:${color}; font-weight:bold;">
+          Score: ${correctCount} / ${total}
+        </span>
+      </div>
+    `;
 
     if (correctCount === total) ValidationAlert.success(scoreMessage);
     else if (correctCount === 0) ValidationAlert.error(scoreMessage);
@@ -65,10 +62,25 @@ const Unit8_Page5_Q1 = () => {
   };
 
   const handleChange = (value, index) => {
+    if (showAnswer) return; // ❌ ممنوع التعديل بعد Show Answer
+
     const updated = [...inputs];
     updated[index] = value;
     setInputs(updated);
     setWrongInputs(Array(data.length).fill(false));
+  };
+
+  const handleShowAnswer = () => {
+    const correct = data.map((item) => item.answer);
+    setInputs(correct); // ⭐ تعبئة الإجابة الصحيحة
+    setWrongInputs(Array(data.length).fill(false));
+    setShowAnswer(true);
+  };
+
+  const reset = () => {
+    setInputs(Array(data.length).fill(""));
+    setWrongInputs(Array(data.length).fill(false));
+    setShowAnswer(false);
   };
 
   return (
@@ -78,6 +90,7 @@ const Unit8_Page5_Q1 = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        padding: "30px",
       }}
     >
       <div
@@ -92,7 +105,7 @@ const Unit8_Page5_Q1 = () => {
       >
         <div className="unscramble-container">
           <h3 className="header-title-page8">
-            <span className="letter-of-Q">A</span>{" "}
+            <span className="ex-A">A</span>{" "}
             <span style={{ color: "purple" }}>1</span> Look, unscramble, and
             write.
           </h3>
@@ -104,37 +117,45 @@ const Unit8_Page5_Q1 = () => {
                   <img src={item.img} alt="" />
                 </div>
 
-                <p className="scrambled-word">{item.scrambled}</p>
+                <p className="scrambled-word"   style={{fontSize:"22px"}}>{item.scrambled}</p>
 
                 <div className="input-row">
-                  <span className="num">{index + 1}</span>
+                  <span className="num"   style={{fontSize:"22px"}}>{index + 1}</span>
+
                   <div className="input-wrapper">
                     <input
                       type="text"
+                  style={{fontSize:"22px"}}
                       value={inputs[index]}
                       onChange={(e) => handleChange(e.target.value, index)}
                       className="text-input"
+                      disabled={showAnswer} // ⭐ NEW
                     />
-                    {/* إظهار الإكس إذا كانت الإجابة خاطئة */}
-                    {wrongInputs[index] && <div className="error-icon">✕</div>}
+
+                    {/* ❌ علامة الخطأ */}
+                    {wrongInputs[index] && !showAnswer && (
+                      <div className="error-icon">✕</div>
+                    )}
                   </div>
-                  <span className="pattern">{item.pattern}</span>
+
+                  <span className="pattern"   style={{fontSize:"22px"}}>{item.pattern}</span>
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </div>{" "}
+      </div>
+
+      {/* ⭐ BUTTONS */}
       <div className="action-buttons-container">
-        <button
-          onClick={() => {
-            setWrongInputs(Array(data.length).fill(false));
-            setInputs(Array(data.length).fill(""));
-          }}
-          className="try-again-button"
-        >
+        <button onClick={reset} className="try-again-button">
           Start Again ↻
         </button>
+
+        <button onClick={handleShowAnswer} className="show-answer-btn swal-continue">
+          Show Answer 
+        </button>
+
         <button onClick={checkAnswers} className="check-button2">
           Check Answer ✓
         </button>

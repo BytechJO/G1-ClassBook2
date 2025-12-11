@@ -1,12 +1,9 @@
 import page_6 from "../../../assets/unit8/imgs/Right G1- Class Book_00069.jpg";
 import "./Unit8_Page6.css";
-import Unit8_Page6_Q1 from "./Unit8_Page6_Q1";
-// import Unit6_Page6_Q2 from "./Unit6_Page6_Q2";
-import Unit8_Page6_Q3 from "./Unit8_Page6_Q3";
-import arrowBtn from "../../../assets/unit1/imgs/Right Arrow Button ....-01.svg";
-import audioBtn from "../../../assets/unit1/imgs/Right Audio Button 2.svg";
-
-
+import audioBtn from "../../../assets/unit1/imgs/Page 01/Audio btn.svg";
+import arrowBtn from "../../../assets/unit1/imgs/Page 01/Arrow.svg";
+import song from "../../../assets/unit8/sound/CD65.Pg69_Song_Adult Lady.mp3"
+import AudioWithCaption from "../../AudioWithCaption";
 const Unit8_Page6 = ({ openPopup }) => {
   const captionsExample = [
     { start: 0, end: 4.24, text: "Page 27, exercise G. Let's sing! " },
@@ -24,66 +21,70 @@ const Unit8_Page6 = ({ openPopup }) => {
   ];
 
   return (
-    <div className="unit8-page-background">
-      <img src={page_6} />
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() =>
-          openPopup(
-            <>
-              <Unit8_Page6_Q1 />
-            </>,
-            false
-          )
-        }
-        className="click-icon-unit8-page6-2 hover:scale-110 transition"
-      >
-        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
-      </svg>
+    <div
+      className="page1-img-wrapper"
+      // onClick={handleImageClick}
+      style={{ backgroundImage: `url(${page_6})` }}
+    >
+      {/* <img src={page_6} /> */}
 
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 60 60"
-        onClick={() =>
-          openPopup(
-            <>
-              <Unit8_Page6_Q3 />
-            </>,
-            false
-          )
-        }
+      <div
+        className="click-icon-unit8-page6-2 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
+      >
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 60 60"
+          style={{ overflow: "visible" }}
+          onClick={() => openPopup("exercise", { startIndex: 83 })}
+        >
+          <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+        </svg>
+      </div>
+
+      <div
         className="click-icon-unit8-page6-3  hover:scale-110 transition"
+        style={{ overflow: "visible" }}
       >
-        <image href={arrowBtn} x="0" y="0" width="60" height="60" />
-      </svg>
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 90 90"
-        onClick={() =>
-          openPopup(
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignContent: "center",
-              }}
-            >
-              {/* <AudioWithCaption
-                src={CD25_Pg27_Song_AdultLady}
-                captions={captionsExample}
-              /> */}
-            </div>,
-            true
-          )
-        }
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 60 60"
+          style={{ overflow: "visible" }}
+          onClick={() => openPopup("exercise", { startIndex: 84 })}
+        >
+          <image href={arrowBtn} x="0" y="0" width="60" height="60" />
+        </svg>
+      </div>
+
+      <div
         className="headset-icon-CD-unit8-page6-1 hover:scale-110 transition"
+        style={{ overflow: "visible" }}
       >
-        <image href={audioBtn} x="0" y="0" width="90" height="90" />
-      </svg>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 60 60"
+          onClick={() =>
+            openPopup(
+              "audio",
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center",
+                }}
+              >
+                <AudioWithCaption src={song} captions={captionsExample} />
+              </div>
+            )
+          }
+          style={{ overflow: "visible" }}
+        >
+          <image href={audioBtn} x="0" y="0" width="60" height="60" />
+        </svg>
+      </div>
     </div>
   );
 };

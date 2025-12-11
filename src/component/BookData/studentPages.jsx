@@ -41,7 +41,7 @@ import Unit4_Page6 from "../StudentPages/unit4/Unit4_Page6";
 
 //=================== Review3,4
 import Review3_Page1 from "../StudentPages/Review_Unit3,4/Review3_Page1";
-import Review3_Page2 from "../StudentPages/Review_Unit3,4/Review3_Page2 ";
+import Review3_Page2 from "../StudentPages/Review_Unit3,4/Review3_Page2";
 import Review4_Page1 from "../StudentPages/Review_Unit3,4/Review4_Page1";
 import Review4_Page2 from "../StudentPages/Review_Unit3,4/Review4_Page2";
 import Unit4_Reading_P1 from "../StudentPages/unit4/Unit4_Reading_P1";
@@ -72,26 +72,26 @@ import Unit6_Reading_P1 from "../StudentPages/unit6/Unit6_Reading_P1";
 import Unit6_Reading_P2 from "../StudentPages/unit6/Unit6_Reading_P2";
 
 //================ Unit7
-// import Unit7_Page1 from "../StudentPages/unit7/Unit7_Page1";
-// import Unit7_Page2 from "../StudentPages/unit7/Unit7_Page2";
-// import Unit7_Page3 from "../StudentPages/unit7/Unit7_Page3";
-// import Unit7_Page4 from "../StudentPages/unit7/Unit7_Page4";
-// import Unit7_Page5 from "../StudentPages/unit7/Unit7_Page5";
-// import Unit7_Page6 from "../StudentPages/unit7/Unit7_Page6";
+import Unit7_Page1 from "../StudentPages/unit7/Unit7_Page1";
+import Unit7_Page2 from "../StudentPages/unit7/Unit7_Page2";
+import Unit7_Page3 from "../StudentPages/unit7/Unit7_Page3";
+import Unit7_Page4 from "../StudentPages/unit7/Unit7_Page4";
+import Unit7_Page5 from "../StudentPages/unit7/Unit7_Page5";
+import Unit7_Page6 from "../StudentPages/unit7/Unit7_Page6";
 
 //=============== unit8
-// import Unit8_Page1 from "../StudentPages/unit8/Unit8_Page1";
-// import Unit8_Page2 from "../StudentPages/unit8/Unit8_Page2";
-// import Unit8_Page3 from "../StudentPages/unit8/Unit8_Page3";
-// import Unit8_Page4 from "../StudentPages/unit8/Unit8_Page4";
-// import Unit8_Page5 from "../StudentPages/unit8/Unit8_Page5";
-// import Unit8_Page6 from "../StudentPages/unit8/Unit8_Page6";
+import Unit8_Page1 from "../StudentPages/unit8/Unit8_Page1";
+import Unit8_Page2 from "../StudentPages/unit8/Unit8_Page2";
+import Unit8_Page3 from "../StudentPages/unit8/Unit8_Page3";
+import Unit8_Page4 from "../StudentPages/unit8/Unit8_Page4";
+import Unit8_Page5 from "../StudentPages/unit8/Unit8_Page5";
+import Unit8_Page6 from "../StudentPages/unit8/Unit8_Page6";
 
 //================ review 7,8
-// import Review7_Page1 from "../StudentPages/Review_Unit7,8/Review7_Page1";
-// import Review7_Page2 from "../StudentPages/Review_Unit7,8/Review7_Page2";
-// import Review8_Page1 from "../StudentPages/Review_Unit7,8/Review8_Page1";
-// import Review8_Page2 from "../StudentPages/Review_Unit7,8/Review8_Page2";
+import Review7_Page1 from "../StudentPages/Review_Unit7,8/Review7_Page1";
+import Review7_Page2 from "../StudentPages/Review_Unit7,8/Review7_Page2";
+import Review8_Page1 from "../StudentPages/Review_Unit7,8/Review8_Page1";
+import Review8_Page2 from "../StudentPages/Review_Unit7,8/Review8_Page2";
 //================== Unit 9
 // import Unit9_Page1 from "../StudentPages/unit9/Unit9_Page1";
 // import Unit9_Page2 from "../StudentPages/unit9/Unit9_Page2";
@@ -166,23 +166,23 @@ export const studentPages = (openPopup, goToUnit) => [
   <Review6_Page2 openPopup={openPopup} />,
   <Unit6_Reading_P1 openPopup={openPopup} />,
   <Unit6_Reading_P2 openPopup={openPopup} />,
-  // <Unit7_Page1 openPopup={openPopup} />,
-  // <Unit7_Page2 openPopup={openPopup} />,
-  // <Unit7_Page3 openPopup={openPopup} />,
-  // <Unit7_Page4 openPopup={openPopup} />,
-  // <Unit7_Page5 openPopup={openPopup} />,
-  // <Unit7_Page6 openPopup={openPopup} />,
-  // <Unit8_Page1 openPopup={openPopup} />,
-  // <Unit8_Page2 openPopup={openPopup} />,
-  // <Unit8_Page3 openPopup={openPopup} />,
-  // <Unit8_Page4 openPopup={openPopup} />,
-  // <Unit8_Page5 openPopup={openPopup} />,
-  // <Unit8_Page6 openPopup={openPopup} />,
+  <Unit7_Page1 openPopup={openPopup} />,
+  <Unit7_Page2 openPopup={openPopup} />,
+  <Unit7_Page3 openPopup={openPopup} />,
+  <Unit7_Page4 openPopup={openPopup} />,
+  <Unit7_Page5 openPopup={openPopup} />,
+  <Unit7_Page6 openPopup={openPopup} />,
+  <Unit8_Page1 openPopup={openPopup} />,
+  <Unit8_Page2 openPopup={openPopup} />,
+  <Unit8_Page3 openPopup={openPopup} />,
+  <Unit8_Page4 openPopup={openPopup} />,
+  <Unit8_Page5 openPopup={openPopup} />,
+  <Unit8_Page6 openPopup={openPopup} />,
   // should chang to review for unit 7+8
-  // <Review7_Page1 openPopup={openPopup} />,
-  // <Review7_Page2 openPopup={openPopup} />,
-  // <Review8_Page1 openPopup={openPopup} />,
-  // <Review8_Page2 openPopup={openPopup} />,
+  <Review7_Page1 openPopup={openPopup} />,
+  <Review7_Page2 openPopup={openPopup} />,
+  <Review8_Page1 openPopup={openPopup} />,
+  <Review8_Page2 openPopup={openPopup} />,
   // <Unit6_Reading_P1 openPopup={openPopup} />,
   // <Unit6_Reading_P2 openPopup={openPopup} />,
   // <Unit9_Page1 openPopup={openPopup} />,

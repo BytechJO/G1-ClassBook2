@@ -53,7 +53,7 @@
   background: red;
   border-radius: 50%;
   cursor: pointer;
-  pointer-events: auto !important;
+  /* pointer-events: auto !important; */
 }
 
 .end-dot22-unit7-p6-q2 {
@@ -102,13 +102,7 @@
   -moz-user-select: none;
 }
 
-.match-wrapper2 img,
-.match-words-row2,
-.match-images-row2,
-.word-box2,
-.img-box2 {
-  pointer-events: none; /* يمنع الكبس عليها */
-}
+
 
 /* ⭐ تم إضافتها */
 .error-mark-img-unit7-p6-q2 {

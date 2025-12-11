@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Review6_Page2_Q1.css";
-import sound from "../../assets/unit6/sounds/CD50.Pg53_Instruction1_Adult Lady.mp3";
-import pauseBtn from "../../assets/unit1/imgs/Right Video Button.svg";
+import sound from "../../../assets/unit6/sounds/CD50.Pg53_Instruction1_Adult Lady.mp3";
+import pauseBtn from "../../../assets/unit1/imgs/Right Video Button.svg";
 import { IoMdSettings } from "react-icons/io";
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
-import ValidationAlert from "../Popup/ValidationAlert";
+import ValidationAlert from "../../Popup/ValidationAlert";
 
 const data = [
   {

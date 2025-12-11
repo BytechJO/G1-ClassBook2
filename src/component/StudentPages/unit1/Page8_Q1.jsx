@@ -268,7 +268,6 @@ const Page8_Q1 = () => {
                   onLoadedMetadata={(e) => setDuration(e.target.duration)}
                 ></audio>
                 {/* Play / Pause */}
-                {/* Play / Pause */}
                 {/* الوقت - السلايدر - الوقت */}
                 <div className="top-row">
                   <span className="audio-time">

@@ -1,72 +1,59 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import "./Unit8_Page5_Q4.css";
 import ValidationAlert from "../../Popup/ValidationAlert";
-
+import img from "../../../assets/unit5/imgs/U5P44EXEC.svg";
 const Unit8_Page5_Q4 = () => {
   const data = [
-    { letter: "a", number: 1 },
-    { letter: "b", number: 2 },
-    { letter: "c", number: 3 },
-    { letter: "d", number: 4 },
-    { letter: "e", number: 5 },
-    { letter: "f", number: 6 },
-    { letter: "g", number: 7 },
-    { letter: "h", number: 8 },
-    { letter: "i", number: 9 },
-    { letter: "j", number: 10 },
-    { letter: "k", number: 11 },
-    { letter: "l", number: 12 },
-    { letter: "m", number: 13 },
-    { letter: "n", number: 14 },
-    { letter: "o", number: 15 },
-    { letter: "p", number: 16 },
-    { letter: "q", number: 17 },
-    { letter: "r", number: 18 },
-    { letter: "s", number: 19 },
-    { letter: "t", number: 20 },
-    { letter: "u", number: 21 },
-    { letter: "v", number: 22 },
-    { letter: "w", number: 23 },
-    { letter: "x", number: 24 },
-    { letter: "y", number: 25 },
-    { letter: "z", number: 26 },
+    { letter: "a", number: 1 }, { letter: "b", number: 2 }, { letter: "c", number: 3 },
+    { letter: "d", number: 4 }, { letter: "e", number: 5 }, { letter: "f", number: 6 },
+    { letter: "g", number: 7 }, { letter: "h", number: 8 }, { letter: "i", number: 9 },
+    { letter: "j", number: 10 }, { letter: "k", number: 11 }, { letter: "l", number: 12 },
+    { letter: "m", number: 13 }, { letter: "n", number: 14 }, { letter: "o", number: 15 },
+    { letter: "p", number: 16 }, { letter: "q", number: 17 }, { letter: "r", number: 18 },
+    { letter: "s", number: 19 }, { letter: "t", number: 20 }, { letter: "u", number: 21 },
+    { letter: "v", number: 22 }, { letter: "w", number: 23 }, { letter: "x", number: 24 },
+    { letter: "y", number: 25 }, { letter: "z", number: 26 },
   ];
 
   const questionGroups = [
-    [18, 1, 9, 19, 5], //Raise
-    [25, 15, 21, 18], //your
-    [8, 1, 14, 4], // hand
+    [18, 1, 9, 19, 5], // Raise
+    [25, 15, 21, 18],  // your
+    [8, 1, 14, 4],     // hand
   ];
-  const [wrongInputs, setWrongInputs] = useState([]); // ⭐ تم التعديل هون
+
+  const [wrongInputs, setWrongInputs] = useState([]);
+  const [showAnswer, setShowAnswer] = useState(false); // ⭐ NEW
   const [letters, setLetters] = useState(
     questionGroups.map((group) => group.map(() => ""))
   );
-  const handleInputChange = (value, groupIndex, letterIndex) => {
+
+  const handleInputChange = (value, g, l) => {
+    if (showAnswer) return; // ⭐ منع الكتابة في وضع Show Answer
+
     const updated = [...letters];
-    updated[groupIndex][letterIndex] = value.toLowerCase();
+    updated[g][l] = value.toLowerCase();
     setLetters(updated);
+    setWrongInputs([]);
   };
 
   const formedWords = letters.map((group) => group.join(""));
-  const fullSentence = formedWords.join(" ");
 
   const handleCheckAnswers = () => {
-    // 1️⃣ التحقق من وجود فراغات
+        if (showAnswer) return; // ⭐ منع الكتابة في وضع Show Answer
+
     const hasEmpty = letters.some((group) =>
       group.some((letter) => letter === "")
     );
+
     if (hasEmpty) {
-      ValidationAlert.info(
-        "Oops!",
-        "Please complete all fields before checking."
-      );
+      ValidationAlert.info("Oops!", "Please complete all fields before checking.");
       return;
     }
 
-    // 2️⃣ حساب عدد الصحيحة
     let correctCount = 0;
     let total = letters.flat().length;
-    let wrong = []; // ⭐ تم التعديل هون
+    let wrong = [];
+
     for (let g = 0; g < letters.length; g++) {
       for (let l = 0; l < letters[g].length; l++) {
         const letter = letters[g][l];
@@ -75,118 +62,132 @@ const Unit8_Page5_Q4 = () => {
         if (correctNum === questionGroups[g][l]) {
           correctCount++;
         } else {
-          wrong.push(`${g}-${l}`); // ⭐ تم التعديل هون
+          wrong.push(`${g}-${l}`);
         }
       }
     }
-    setWrongInputs(wrong); // ⭐ تم التعديل هون
-    // 3️⃣ تحديد اللون حسب السكور
+
+    setWrongInputs(wrong);
+
     const color =
       correctCount === total ? "green" : correctCount === 0 ? "red" : "orange";
 
-    // 4️⃣ رسالة النتيجة
     const scoreMessage = `
-    <div style="font-size: 20px; margin-top: 10px; text-align:center;">
-      <span style="color:${color}; font-weight:bold;">
-        Score: ${correctCount} / ${total}
-      </span>
-    </div>
-  `;
+      <div style="font-size: 20px; margin-top: 10px; text-align:center;">
+        <span style="color:${color}; font-weight:bold;">
+          Score: ${correctCount} / ${total}
+        </span>
+      </div>
+    `;
 
-    // 5️⃣ عرض الرسالة حسب الحالة
-    if (correctCount === total) {
-      ValidationAlert.success(scoreMessage);
-    } else if (correctCount === 0) {
-      ValidationAlert.error(scoreMessage);
-    } else {
-      ValidationAlert.warning(scoreMessage);
-    }
+    if (correctCount === total) ValidationAlert.success(scoreMessage);
+    else if (correctCount === 0) ValidationAlert.error(scoreMessage);
+    else ValidationAlert.warning(scoreMessage);
+  };
+
+  // ⭐⭐⭐ SHOW ANSWER FUNCTION
+  const handleShowAnswer = () => {
+    const filled = questionGroups.map((group) =>
+      group.map((num) => {
+        const match = data.find((d) => d.number === num);
+        return match ? match.letter : "";
+      })
+    );
+
+    setLetters(filled);
+    setWrongInputs([]);
+    setShowAnswer(true);
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
-      <div className="container8">
+    <div style={{ display: "flex", justifyContent: "center", padding: "30px" }}>
+      <div className="div-forall" style={{ width: "60%" }}>
+
         <h5 className="header-title-page8">
-          <span className="letter-of-Q"> C</span>Write the sentence.
+          <span className="ex-A"> C</span>Write the sentence.
         </h5>
 
-        <div className="alphabet-box">
-          <div className="row">
+   
+
+          {/* Alphabet Table */}
+      
+        <div className="unit3-q4-alphabet-box">
+          <div className="unit3-q4-row">
             {data.map((c, i) => (
-              <div className="letter-char">
-                <div className="data">
-                  <span key={i} className="cell1">
+              <div className="unit3-q4-letter-char">
+                <div className="unit3-q4-data">
+                  <span key={i} className="unit3-q4-cell">
                     {c.letter}
                   </span>
                 </div>
-                <div className="data">
-                  <span key={i} className="cell1 number">
+                <div className="unit3-q4-data">
+                  <span key={i} className="unit3-q4-cell number">
                     {c.number}
                   </span>
                 </div>
               </div>
             ))}
           </div>
-
+          {/* Inputs */}
           <div className="words">
-            {questionGroups.map((group, groupIndex) => (
-              <div className="word-group" key={groupIndex}>
-                {group.map((num, letterIndex) => (
-                  <div className="input-h6" key={letterIndex}>
-                    <h6
-                      className="unit1-page8-q4-nums"
-                      style={{ fontSize: "25px" }}
-                    >
-                      {num}
-                    </h6>
+            {questionGroups.map((group, g) => (
+              <div className="word-group" key={g}>
+                {group.map((num, l) => (
+                  <div className="input-h6" key={l}>
+                    <h6 className="unit1-page8-q4-nums"style={{ fontSize: "20px" }}>{num}</h6>
+
                     <div className="input-wrapper">
-                      {" "}
-                      {/* ⭐ تم التعديل هون */}
                       <input
                         className="inputs"
                         maxLength={1}
-                        value={letters[groupIndex][letterIndex]}
-                        onChange={(e) =>
-                          handleInputChange(
-                            e.target.value,
-                            groupIndex,
-                            letterIndex
-                          )
-                        }
+                        value={letters[g][l]}
+                        onChange={(e) => handleInputChange(e.target.value, g, l)}
                       />
-                      {wrongInputs.includes(`${groupIndex}-${letterIndex}`) && (
-                        <span className="error-mark1">✕</span> // ⭐ تم التعديل هون
+
+                      {wrongInputs.includes(`${g}-${l}`) && (
+                        <span className="error-mark1">✕</span>
                       )}
                     </div>
+
                   </div>
                 ))}
               </div>
             ))}
+             <img src={img} style={{ height: "100px", width: "130px" }} />
           </div>
 
+          {/* Sentence */}
           <div className="sentence">
             {formedWords.map((word, i) => (
-              <span key={i} className="sentence-word">
-                {word}
-              </span>
+              <span key={i} className="sentence-word">{word}</span>
             ))}
           </div>
         </div>
-        <div className="action-buttons-container">
-          <button
-            onClick={() => {
-              setLetters(questionGroups.map((group) => group.map(() => "")));
-              setWrongInputs([]);
-            }}
-            className="try-again-button"
-          >
-            Start Again ↻
-          </button>
-          <button onClick={handleCheckAnswers} className="check-button2">
-            Check Answer ✓
-          </button>
-        </div>
+
       </div>
+
+      {/* Buttons */}
+      <div className="action-buttons-container">
+        <button
+          onClick={() => {
+            setLetters(questionGroups.map((g) => g.map(() => "")));
+            setWrongInputs([]);
+            setShowAnswer(false);
+          }}
+          className="try-again-button"
+        >
+          Start Again ↻
+        </button>
+
+        <button onClick={handleShowAnswer} className="show-answer-btn swal-continue">
+          Show Answer
+        </button>
+
+        <button onClick={handleCheckAnswers} className="check-button2">
+          Check Answer ✓
+        </button>
+      </div>
+
     </div>
   );
 };

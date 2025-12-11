@@ -71,9 +71,10 @@ const Unit7_Page6_Q3 = () => {
   return (
     <div
       style={{
-        display: "flex",
-
+       display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
+        alignItems: "center",padding:"30px"
       }}
     >
       <div
@@ -87,7 +88,7 @@ const Unit7_Page6_Q3 = () => {
         }}
       >
         <h5 className="header-title-page8" id="ex-d">
-        <span className="letter-of-Q">F</span> Look, read, and write.
+        <span className="ex-A">F</span> Look, read, and write.
         </h5>
 
         {/* ✅ الصورة هي المرجع */}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import deer from "../../assets/unit6/imgs/U6P54EXEC-01.svg";
-import ValidationAlert from "../Popup/ValidationAlert";
+import deer from "../../../assets/unit6/imgs/U6P54EXEC-01.svg";
+import ValidationAlert from "../../Popup/ValidationAlert";
 import "./Review6_Page1_Q3.css"
 
 const data = [

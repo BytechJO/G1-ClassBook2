@@ -2,35 +2,22 @@ import React, { useState } from "react";
 import deer from "../../../assets/unit6/imgs/U6P54EXEC-01.svg";
 import ValidationAlert from "../../Popup/ValidationAlert";
 
-
 const data = [
-  {
-    question: "",
-    correct: "head",
-  },
-  {
-    question: "",
-    correct: "eye",
-  },
-  {
-    question: "",
-    correct: "nose",
-  },
-  {
-    question: "",
-    correct: "arm",
-  },
-  {
-    question: "",
-    correct: "leg",
-  },
+  { question: "", correct: "head" },
+  { question: "", correct: "eye" },
+  { question: "", correct: "nose" },
+  { question: "", correct: "arm" },
+  { question: "", correct: "leg" },
 ];
 
 const Unit8_Page6_Q1 = () => {
   const [answers, setAnswers] = useState(Array(data.length).fill(""));
-  const [score, setScore] = useState(null);
   const [wrongInputs, setWrongInputs] = useState([]);
+  const [showAnswer, setShowAnswer] = useState(false); // ⭐ NEW
+
   const handleChange = (value, index) => {
+    if (showAnswer) return; // ⭐ منع التعديل عند Show Answer
+
     const newAnswers = [...answers];
     newAnswers[index] = value;
     setAnswers(newAnswers);
@@ -38,24 +25,26 @@ const Unit8_Page6_Q1 = () => {
   };
 
   const checkAnswers = () => {
+    if (showAnswer) return; // ⭐ منع التعديل عند Show Answer
+
     if (answers.some((a) => a.trim() === "")) {
       ValidationAlert.info("Please fill in all blanks before checking!");
       return;
     }
 
-    const correctCount = answers.filter(
-      (ans, i) => ans.trim().toLowerCase() === data[i].correct.toLowerCase()
-    ).length;
+    let correctCount = 0;
     let wrong = [];
 
     answers.forEach((ans, i) => {
-      if (ans.trim().toLowerCase() !== data[i].correct.toLowerCase()) {
-        wrong.push(i); // خزن رقم السؤال الغلط
+      if (ans.trim().toLowerCase() === data[i].correct.toLowerCase()) {
+        correctCount++;
+      } else {
+        wrong.push(i);
       }
     });
 
     setWrongInputs(wrong);
-    setScore(correctCount);
+
     let color =
       correctCount === data.length
         ? "green"
@@ -64,25 +53,30 @@ const Unit8_Page6_Q1 = () => {
         : "orange";
 
     const scoreMessage = `
-    <div style="font-size:20px; text-align:center;">
-      <span style="color:${color}; font-weight:bold;">
-        Score: ${correctCount} / ${data.length}
-      </span>
-    </div>
-  `;
+      <div style="font-size:20px; text-align:center;">
+        <span style="color:${color}; font-weight:bold;">
+          Score: ${correctCount} / ${data.length}
+        </span>
+      </div>
+    `;
 
-    if (correctCount === data.length) {
-      ValidationAlert.success(scoreMessage);
-    } else if (correctCount === 0) {
-      ValidationAlert.error(scoreMessage);
-    } else {
-      ValidationAlert.warning(scoreMessage);
-    }
+    if (correctCount === data.length) ValidationAlert.success(scoreMessage);
+    else if (correctCount === 0) ValidationAlert.error(scoreMessage);
+    else ValidationAlert.warning(scoreMessage);
   };
 
   const reset = () => {
     setAnswers(Array(data.length).fill(""));
     setWrongInputs([]);
+    setShowAnswer(false); // ⭐ إعادة التفعيل الطبيعي
+  };
+
+  // ⭐⭐⭐ SHOW ANSWER FUNCTION
+  const showCorrectAnswers = () => {
+    const correctList = data.map((item) => item.correct);
+    setAnswers(correctList);
+    setWrongInputs([]);
+    setShowAnswer(true);
   };
 
   return (
@@ -92,6 +86,7 @@ const Unit8_Page6_Q1 = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        padding: "30px",
       }}
     >
       <div
@@ -105,13 +100,16 @@ const Unit8_Page6_Q1 = () => {
         }}
       >
         <div className="component-wrapper">
-          <h3 className="header-title-page8"><span className="letter-of-Q"> D</span> Look and write.</h3>
+          <h3 className="header-title-page8">
+            <span className="ex-A"> D</span> Look and write.
+          </h3>
+
           <div className="content-unit5-p5-q3">
             <div className="group-input-unit5-p5-q3">
               {data.map((item, index) => (
                 <div
-                  className="question-row"
                   key={index}
+                  className="question-row"
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -130,21 +128,14 @@ const Unit8_Page6_Q1 = () => {
                     {index + 1}.
                   </span>
 
-                  <div
-                    className="question-text"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      position: "relative",
-                    }}
-                  >
+                  <div className="question-text" style={{ position: "relative" }}>
                     <input
                       type="text"
                       className="q-input"
                       value={answers[index]}
                       onChange={(e) => handleChange(e.target.value, index)}
                     />
-                    {/* ❌ علامة الخطأ */}
+
                     {wrongInputs.includes(index) && (
                       <span className="wrong-icon-review6-p1-q3">✕</span>
                     )}
@@ -152,6 +143,7 @@ const Unit8_Page6_Q1 = () => {
                 </div>
               ))}
             </div>
+
             <img
               src={deer}
               className="shape-img-unit5-p5-q3"
@@ -161,10 +153,17 @@ const Unit8_Page6_Q1 = () => {
           </div>
         </div>
       </div>
+
       <div className="action-buttons-container">
         <button className="try-again-button" onClick={reset}>
           Start Again ↻
         </button>
+
+        {/* ⭐ زر الشو أنسر */}
+        <button className="show-answer-btn swal-continue" onClick={showCorrectAnswers}>
+          Show Answer 
+        </button>
+
         <button className="check-button2" onClick={checkAnswers}>
           Check Answers ✓
         </button>

@@ -1,101 +1,186 @@
-import React, { useState } from "react";
-import "./Review5_Page2_Q3.css";
-import ValidationAlert from "../Popup/ValidationAlert";
-import img1 from "../../assets/unit6/imgs/U6P53EXEF-01.svg";
-import img2 from "../../assets/unit6/imgs/U6P53EXEF-02.svg";
-const Review5_Page2_Q3 = () => {
-  // ===============================
-  // 🔵 1) الأسئلة (كلها داخل نفس الكومبونينت)
-  // ===============================
-  const questions = [
-    {
-      id: 1,
-      parts: [
-        { type: "text", value: "The" },
-        { type: "blank", options: ["girl", "key"] },
-        { type: "text", value: "is in the" },
-        { type: "blank", options: ["kitchen", "garden"] },
-        { type: "text", value: "." },
-      ],
-      correct: ["girl", "garden"],
-      image: img1,
-    },
+import React, { useState, useRef, useEffect } from "react";
+import CD13_Pg14_Instruction1_AdultLady from "../../../assets/img_unit2/sounds-unit2/CD13.Pg14_Instruction1_Adult Lady.mp3";
+import ValidationAlert from "../../Popup/ValidationAlert";
+import "./Review7_Page2_Q3.css";
+import sound1 from "../../../assets/unit5/sounds/U5P44EXEA1.mp3";
+import bat from "../../../assets/unit5/imgs/U5P44EXEA1-01.svg";
+import box from "../../../assets/unit5/imgs/U5P44EXEA1-02.svg";
+import bucket from "../../../assets/unit5/imgs/U5P44EXEA1-03.svg";
+import boat from "../../../assets/unit5/imgs/U5P44EXEA1-04.svg";
+import pauseBtn from "../../../assets/unit1/imgs/Right Video Button.svg";
+import { TbMessageCircle } from "react-icons/tb";
+import { FaPlay, FaPause } from "react-icons/fa";
+import { IoMdSettings } from "react-icons/io";
+const Review7_Page2_Q3 = () => {
+  const [answers, setAnswers] = useState([null, null, null, null]);
+  const audioRef = useRef(null);
+  const [showResult, setShowResult] = useState(false);
+  const stopAtSecond = 10.8;
+  const [paused, setPaused] = useState(false);
+  const [locked, setLocked] = useState(false); // ⭐ NEW — قفل التعديل بعد Show Answer
 
+  // إعدادات الصوت
+  const [showSettings, setShowSettings] = useState(false);
+  const [volume, setVolume] = useState(1);
+  const settingsRef = useRef(null);
+  const [forceRender, setForceRender] = useState(0);
+  const [showContinue, setShowContinue] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [current, setCurrent] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [showCaption, setShowCaption] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const items = [
+    { img: bat, correct: "w" },
+    { img: box, correct: "h" },
+    { img: bucket, correct: "w" },
+    { img: boat, correct: "h" },
+    { img: bucket, correct: "w" },
+    { img: boat, correct: "h" },
+  ];
+  // ================================
+  // ✔ Captions Array
+  // ================================
+  const captions = [
     {
-      id: 2,
-      parts: [
-        { type: "text", value: "The" },
-        { type: "blank", options: ["key", "kite"] },
-        { type: "text", value: "is" },
-        { type: "blank", options: ["girl", "green"] },
-        { type: "text", value: "." },
-      ],
-      correct: ["kite", "green"],
-      image: img2,
+      start: 0,
+      end: 4.23,
+      text: "Page 8. Right Activities. Exercise A, number 1. ",
     },
+    {
+      start: 4.25,
+      end: 8.28,
+      text: "Listen and write the missing letters. Number the pictures.  ",
+    },
+    { start: 8.3, end: 11.05, text: "1-tiger." },
+    { start: 11.07, end: 13.12, text: "2-taxi." },
+    { start: 13.14, end: 15.14, text: "3-duck." },
+    { start: 15.16, end: 17.13, text: "4-deer." },
   ];
 
-  // ===============================
-  // 🔵 2) حفظ اختيارات الطالب
-  // ===============================
-  const [answers, setAnswers] = useState(
-    questions.map((q) => q.parts.map((p) => (p.type === "blank" ? null : null)))
-  );
-  const [showResult, setShowResult] = useState(false);
-  // ===============================
-  // 🔵 3) الضغط على خيار
-  // ===============================
-  const handleSelect = (qIndex, blankIndex, option) => {
-    const updated = [...answers];
-    updated[qIndex][blankIndex] = option;
-    setAnswers(updated);
-    setShowResult(false);
+  // ================================
+  // ✔ Update caption highlight
+  // ================================
+  const updateCaption = (time) => {
+    const index = captions.findIndex(
+      (cap) => time >= cap.start && time <= cap.end
+    );
+    setActiveIndex(index);
+  };
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.currentTime = 0;
+    audio.play();
+
+    const interval = setInterval(() => {
+      if (audio.currentTime >= stopAtSecond) {
+        audio.pause();
+        setPaused(true);
+        setIsPlaying(false);
+        setShowContinue(true);
+        clearInterval(interval);
+      }
+    }, 100);
+
+    // عند انتهاء الأوديو يرجع يبطل أنيميشن + يظهر Continue
+    const handleEnded = () => {
+      const audio = audioRef.current;
+      audio.currentTime = 0; // ← يرجع للبداية
+      setIsPlaying(false);
+      setPaused(false);
+      setActiveIndex(null);
+      setShowContinue(true);
+    };
+
+    audio.addEventListener("ended", handleEnded);
+
+    return () => {
+      clearInterval(interval);
+      audio.removeEventListener("ended", handleEnded);
+    };
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setForceRender((prev) => prev + 1);
+    }, 1000); // كل ثانية
+    if (activeIndex === -1 || activeIndex === null) return;
+
+    const el = document.getElementById(`caption-${activeIndex}`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    return () => clearInterval(timer);
+  }, [activeIndex]);
+
+  const handleSelect = (index, value) => {
+    if (locked) return; // ⭐ NEW — منع التعديل بعد Show Answer
+    const newAnswers = [...answers];
+    newAnswers[index] = value;
+    setAnswers(newAnswers);
   };
 
-  // ===============================
-  // 🔵 4) فحص الإجابات
-  // ===============================
   const checkAnswers = () => {
-    // تحقق إذا الطالب ما اختار ولا شيء
-    const selectedCount = answers.flat().filter((a) => a !== null).length;
-    if (selectedCount === 0) {
-      ValidationAlert.info("");
+    if (locked) return; // ⭐ NEW — منع التعديل بعد Show Answer
+    if (answers.includes(null)) {
+      ValidationAlert.info("Oops!", "Please answer all items first.");
       return;
     }
 
-    let correct = 0;
-    let total = 0;
+    const correctCount = answers.filter(
+      (a, i) => a?.toLowerCase() === items[i].correct?.toLowerCase()
+    ).length;
 
-    questions.forEach((q, qIndex) => {
-      q.correct.forEach((correctAns, blankIndex) => {
-        total++;
-        if (answers[qIndex][blankIndex] === correctAns) {
-          correct++;
-        }
-      });
-    });
-
+    const total = items.length;
     const color =
-      correct === total ? "green" : correct === 0 ? "red" : "orange";
+      correctCount === total ? "green" : correctCount === 0 ? "red" : "orange";
 
     const scoreMessage = `
-    <div style="font-size: 20px; margin-top: 10px; text-align:center;">
-      <span style="color:${color}; font-weight:bold;">
-        Score: ${correct} / ${total}
-      </span>
-    </div>
-  `;
-
-    if (correct === total) ValidationAlert.success(scoreMessage);
-    else if (correct === 0) ValidationAlert.error(scoreMessage);
+      <div style="font-size: 20px; text-align:center; margin-top: 8px;">
+        <span style="color:${color}; font-weight:bold;">
+          Score: ${correctCount} / ${total}
+        </span>
+      </div>
+    `;
+    setLocked(true); // ⭐ NEW — قفل التعديل بعد Check
+    if (correctCount === total) ValidationAlert.success(scoreMessage);
+    else if (correctCount === 0) ValidationAlert.error(scoreMessage);
     else ValidationAlert.warning(scoreMessage);
 
-    setShowResult(true);
+    setTimeout(() => setShowResult(true), 200);
   };
 
-  // ===============================
-  // 🔵 JSX
-  // ===============================
+  const resetAnswers = () => {
+    setAnswers(Array(items.length).fill(null));
+    setShowResult(false);
+    setLocked(false); // ⭐ NEW — إعادة فتح التعديل
+  };
+  // ⭐⭐⭐ NEW — Show Answer
+  const showAnswer = () => {
+    const correctFilled = items.map((item) => item.correct);
+
+    setAnswers(correctFilled); // ضع الإجابات الصحيحة
+    setShowResult(true); // إظهار النتيجة
+    setLocked(true); // قفل الخيارات
+  };
+  const togglePlay = () => {
+    const audio = audioRef.current;
+
+    if (!audio) return;
+
+    if (audio.paused) {
+      audio.play();
+      setPaused(false);
+      setIsPlaying(true);
+    } else {
+      audio.pause();
+      setPaused(true);
+      setIsPlaying(false);
+    }
+  };
   return (
     <div
       style={{
@@ -103,107 +188,219 @@ const Review5_Page2_Q3 = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        padding: "30px",
       }}
     >
       <div
-        className="div-forall"
         style={{
           display: "flex",
           flexDirection: "column",
-          gap: "30px",
           width: "60%",
           justifyContent: "flex-start",
         }}
       >
-        <h3 className="header-title-page8">F Look, read, and circle.</h3>
         <div>
-          {questions.map((q, qIndex) => (
-            <div className="question-row-review5-p2-q3" key={q.id}>
-              <div className="sentence-review5-p2-q3">
-                <span
-                  className="header-title-page8"
-                  style={{
-                    color: "#2c5287",
-                    fontWeight: "700",
-                    fontSize: "20px",
-                  }}
-                >
-                  {q.id}
+          <h5 className="header-title-page8">
+            F Listen and circle the{" "}
+            <span style={{ color: "red" }}>beginning sound.</span>
+          </h5>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            margin: "30px 0px",
+            width: "100%",
+          }}
+        >
+          <div
+            className="audio-popup-read"
+            style={{
+              width: "50%",
+            }}
+          >
+            <div className="audio-inner player-ui">
+              <audio
+                ref={audioRef}
+                src={sound1}
+                onTimeUpdate={(e) => {
+                  const time = e.target.currentTime;
+                  setCurrent(time);
+                  updateCaption(time);
+                }}
+                onLoadedMetadata={(e) => setDuration(e.target.duration)}
+              ></audio>
+              {/* Play / Pause */}
+              {/* Play / Pause */}
+              {/* الوقت - السلايدر - الوقت */}
+              <div className="top-row">
+                <span className="audio-time">
+                  {new Date(current * 1000).toISOString().substring(14, 19)}
                 </span>
-                {q.parts.map((part, pIndex) => {
-                  if (part.type === "text") {
-                    return (
-                      <span
-                        key={pIndex}
-                        className="sentence-text-review5-p2-q3"
-                      >
-                        {part.value}
-                      </span>
-                    );
-                  }
 
-                  if (part.type === "blank") {
-                    // blank index == ترتيب هذا الفراغ بين باقي الفراغات
-                    const actualBlankIndex = q.parts
-                      .filter((p) => p.type === "blank")
-                      .indexOf(part);
+                <input
+                  type="range"
+                  className="audio-slider"
+                  min="0"
+                  max={duration}
+                  value={current}
+                  onChange={(e) => {
+                    audioRef.current.currentTime = e.target.value;
+                    updateCaption(Number(e.target.value));
+                  }}
+                  style={{
+                    background: `linear-gradient(to right, #430f68 ${
+                      (current / duration) * 100
+                    }%, #d9d9d9ff ${(current / duration) * 100}%)`,
+                  }}
+                />
 
-                    return (
-                      <span
-                        key={pIndex}
-                        className="blank-options-review5-p2-q3"
-                      >
-                        {part.options.map((opt, optIndex) => {
-                          const isSelected =
-                            answers[qIndex][actualBlankIndex] === opt;
-                          const isWrongSelected =
-                            showResult &&
-                            isSelected &&
-                            opt !== q.correct[actualBlankIndex];
-
-                          return (
-                            <div key={optIndex} className="option-wrapper">
-                              <span
-                                className={`option-word-review5-p2-q3 ${
-                                  isSelected ? "selected2" : ""
-                                }`}
-                                onClick={() =>
-                                  handleSelect(qIndex, actualBlankIndex, opt)
-                                }
-                              >
-                                {opt}
-                              </span>
-
-                              {isWrongSelected && (
-                                <div className="wrong-mark">✕</div>
-                              )}
-                            </div>
-                          );
-                        })}
-                      </span>
-                    );
-                  }
-                })}
+                <span className="audio-time">
+                  {new Date(duration * 1000).toISOString().substring(14, 19)}
+                </span>
               </div>
+              {/* الأزرار 3 أزرار بنفس السطر */}
+              <div className="bottom-row">
+                {/* فقاعة */}
+                <div
+                  className={`round-btn ${showCaption ? "active" : ""}`}
+                  style={{ position: "relative" }}
+                  onClick={() => setShowCaption(!showCaption)}
+                >
+                  <TbMessageCircle size={36} />
+                  <div
+                    className={`caption-inPopup ${showCaption ? "show" : ""}`}
+                    style={{ top: "100%", left: "10%" }}
+                  >
+                    {captions.map((cap, i) => (
+                      <p
+                        key={i}
+                        id={`caption-${i}`}
+                        className={`caption-inPopup-line2 ${
+                          activeIndex === i ? "active" : ""
+                        }`}
+                      >
+                        {cap.text}
+                      </p>
+                    ))}
+                  </div>
+                </div>
 
-              <img src={q.image} className="question-img-review5-p2-q3" />
+                {/* Play */}
+                <button className="play-btn2" onClick={togglePlay}>
+                  {isPlaying ? <FaPause size={26} /> : <FaPlay size={26} />}
+                </button>
+
+                {/* Settings */}
+                <div className="settings-wrapper" ref={settingsRef}>
+                  <button
+                    className={`round-btn ${showSettings ? "active" : ""}`}
+                    onClick={() => setShowSettings(!showSettings)}
+                  >
+                    <IoMdSettings size={36} />
+                  </button>
+
+                  {showSettings && (
+                    <div className="settings-popup">
+                      <label>Volume</label>
+                      <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value={volume}
+                        onChange={(e) => {
+                          setVolume(e.target.value);
+                          audioRef.current.volume = e.target.value;
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>{" "}
             </div>
-          ))}
+          </div>
+        </div>
+        <div
+          className="imgFeild"
+          style={{
+            display: "flex",
+            gap: "13px",
+            flexDirection: "column",
+          }}
+        >
+          <div className="wh-container-review7-p2-q3">
+            {items.map((item, index) => (
+              <div className="gk-item" key={index}>
+                <div style={{ display: "flex", gap: "20px" }}>
+                  <span
+                    className="q-number"
+                    style={{
+                      color: "#2c5287",
+                      fontSize: "20px",
+                      fontWeight: "700",
+                    }}
+                  >
+                    {index + 1}
+                  </span>
+                  <img src={item.img} className="gk-image" />
+                </div>
+
+                <div className="gk-options">
+                  {/* B OPTION */}
+                  <span
+                    className={`gk-option 
+                    ${answers[index] === "h" ? "selected" : ""}
+                    ${
+                      showResult &&
+                      answers[index] === "h" &&
+                      answers[index] !== item.correct
+                        ? "wrong-answer"
+                        : ""
+                    }`}
+                    onClick={() => handleSelect(index, "h")}
+                  >
+                    h
+                    {showResult &&
+                      answers[index] === "h" &&
+                      answers[index] !== item.correct && (
+                        <span className="wrong-x">✕</span>
+                      )}
+                  </span>
+
+                  {/* P OPTION */}
+                  <span
+                    className={`gk-option 
+                    ${answers[index] === "w" ? "selected" : ""}
+                    ${
+                      showResult &&
+                      answers[index] === "w" &&
+                      answers[index] !== item.correct
+                        ? "wrong-answer"
+                        : ""
+                    }`}
+                    onClick={() => handleSelect(index, "w")}
+                  >
+                    w
+                    {showResult &&
+                      answers[index] === "w" &&
+                      answers[index] !== item.correct && (
+                        <span className="wrong-x">✕</span>
+                      )}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <div className="action-buttons-container">
-        <button
-          className="try-again-button"
-          onClick={() => {
-            setAnswers(
-              questions.map((q) =>
-                q.parts.map((p) => (p.type === "blank" ? null : null))
-              )
-            );
-            setShowResult(false);
-          }}
-        >
+        <button onClick={resetAnswers} className="try-again-button">
           Start Again ↻
+        </button>
+        {/* ⭐⭐⭐ NEW — زر Show Answer */}
+        <button onClick={showAnswer} className="show-answer-btn swal-continue">
+          Show Answer
         </button>
         <button onClick={checkAnswers} className="check-button2">
           Check Answer ✓
@@ -213,4 +410,4 @@ const Review5_Page2_Q3 = () => {
   );
 };
 
-export default Review5_Page2_Q3;
+export default Review7_Page2_Q3;

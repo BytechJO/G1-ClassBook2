@@ -1,48 +1,63 @@
 import React, { useState } from "react";
-import bat from "../../assets/unit6/imgs/U6P53EXED-01.svg";
-import cap from "../../assets/unit6/imgs/U6P53EXED-02.svg";
-import ant from "../../assets/unit6/imgs/U6P53EXED-03.svg";
-import dad from "../../assets/unit6/imgs/U6P53EXED-04.svg";
-import ValidationAlert from "../Popup/ValidationAlert";
-import "./Review5_Page2_Q1.css";
-const Review5_Page2_Q1 = () => {
+import bat from "../../../assets/unit4/imgs/U4P32ExeA1-01.svg";
+import cap from "../../../assets/unit4/imgs/U4P32ExeA1-02.svg";
+import ant from "../../../assets/unit4/imgs/U4P32ExeA1-03.svg";
+import dad from "../../../assets/unit4/imgs/U4P32ExeA1-04.svg";
+import ValidationAlert from "../../Popup/ValidationAlert";
+import "./Review7_Page2_Q1.css";
+const Review7_Page2_Q1 = () => {
   const items = [
-    { img: bat, correct: "g", correctInput: "girl" },
-    { img: cap, correct: "k", correctInput: "kitchen" },
-    { img: ant, correct: "k", correctInput: "key" },
-    { img: dad, correct: "g", correctInput: "garden" },
+    { img: bat, correct: "w", correctInput: "window" },
+    { img: cap, correct: "h", correctInput: "hat" },
+    { img: ant, correct: "h", correctInput: "hand" },
   ];
 
-  const [answers, setAnswers] = useState(["", "", "", ""]);
-  const [selected, setSelected] = useState(["", "", "", ""]);
-
+  const [selected, setSelected] = useState(["", "", ""]);
+  const [answers, setAnswers] = useState(["", "", ""]);
   const [wrongInputs, setWrongInputs] = useState([]);
   const [showResult, setShowResult] = useState(false);
+  const [showCorrect, setShowCorrect] = useState(false);
+
   const handleSelect = (value, index) => {
+    if (showCorrect) return;
     const newSel = [...selected];
     newSel[index] = value;
     setSelected(newSel);
     setShowResult(false);
   };
+  const showAnswers = () => {
+    const correctCircles = items.map((item) => item.correct);
+    const correctInputs = items.map((item) => item.correctInput);
+
+    setSelected(correctCircles);
+    setAnswers(correctInputs);
+
+    setWrongInputs([]);
+    setShowResult(true);
+    setShowCorrect(true);
+  };
 
   const handleInput = (value, index) => {
+    if (showCorrect) return;
     const newAns = [...answers];
     newAns[index] = value;
     setAnswers(newAns);
     setShowResult(false);
-    setWrongInputs([]);
   };
+
   const resetAll = () => {
-    setSelected(["", "", "", ""]);
-    setAnswers(["", "", "", ""]);
+    setSelected(["", "", ""]);
+    setAnswers(["", "", ""]);
     setWrongInputs([]);
     setShowResult(false);
+    setShowCorrect(false);
   };
 
   const checkAnswers = () => {
+    if (showCorrect) return;
     // 1) التشييك إذا في دائرة مش مختارة
     if (selected.some((s) => s === "")) {
-      ValidationAlert.info("Please choose a circle (f or v) for all items!");
+      ValidationAlert.info("Please choose a circle (w or h) for all items!");
       return;
     }
 
@@ -58,7 +73,7 @@ const Review5_Page2_Q1 = () => {
     items.forEach((item, i) => {
       const circleCorrect = selected[i] === item.correct;
       const inputCorrect =
-        answers[i].toLowerCase() === item.correctInput[0].toLowerCase();
+        answers[i].trim().toLowerCase() === item.correctInput.toLowerCase();
 
       // نقطة للدائرة + نقطة للكتابة
       if (circleCorrect) score++;
@@ -99,6 +114,7 @@ const Review5_Page2_Q1 = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        padding: "30px",
       }}
     >
       <div
@@ -112,40 +128,30 @@ const Review5_Page2_Q1 = () => {
         }}
       >
         <h5 className="header-title-page8">
-          D Does it begin with <span style={{ color: "red" }}>g </span>or
-          <span style={{ color: "red" }}>k </span> ? Circle and write.
+          D Does it begin with <span style={{ color: "red" }}>h </span>or{" "}
+          <span style={{ color: "red" }}>w</span>? Look, circle, and write.
         </h5>
 
-        <div className="question-grid-unit4-page5-q1">
+        <div className="question-grid-review7-p2-q1">
           {items.map((item, i) => (
             <div className="question-box-unit4-page5-q1" key={i}>
-              <div style={{display:"flex"}}>
-                <span
-                  style={{
-                    color: "#2c5287",
-                    fontWeight: "700",
-                    fontSize: "20px",
-                  }}
-                >
-                  {i + 1}
-                </span>
-                <img src={item.img} className="q-img-unit4-page5-q1" />
-              </div>
-              {/* g/ v choices */}
+              <img src={item.img} className="q-img-unit4-page5-q1" />
+
+              {/* f / v choices */}
               <div className="choices-unit4-page5-q1">
                 <div className="circle-wrapper">
                   <div
-                    className={`circle-choice-review5-page2-q1 ${
-                      selected[i] === "g" ? "active" : ""
-                    }`}
-                    onClick={() => handleSelect("g", i)}
+                    className={`circle-choice-unit4-page5-q1 ${
+                      selected[i] === "h" ? "active" : ""
+                    } ${showCorrect ? "correct-color" : ""}`}
+                    onClick={() => handleSelect("h", i)}
                   >
-                    g
+                    h
                   </div>
 
                   {/* X فوق دائرة f إذا كانت غلط */}
                   {showResult &&
-                    selected[i] === "g" &&
+                    selected[i] === "w" &&
                     selected[i] !== item.correct && (
                       <div className="wrong-mark">✕</div>
                     )}
@@ -153,17 +159,17 @@ const Review5_Page2_Q1 = () => {
 
                 <div className="circle-wrapper">
                   <div
-                    className={`circle-choice-review5-page2-q1 ${
-                      selected[i] === "k" ? "active" : ""
-                    }`}
-                    onClick={() => handleSelect("k", i)}
+                    className={`circle-choice-unit4-page5-q1 ${
+                      selected[i] === "w" ? "active" : ""
+                    } ${showCorrect ? "correct-color" : ""}`}
+                    onClick={() => handleSelect("w", i)}
                   >
-                    k
+                    w
                   </div>
 
                   {/* X فوق دائرة v إذا كانت غلط */}
                   {showResult &&
-                    selected[i] === "k" &&
+                    selected[i] === "w" &&
                     selected[i] !== item.correct && (
                       <div className="wrong-mark">✕</div>
                     )}
@@ -171,27 +177,37 @@ const Review5_Page2_Q1 = () => {
               </div>
 
               {/* writing input */}
-              <div key={item.id} className="word-row-review5-p2-q1">
+              <div className="input-wrapper">
                 <input
                   type="text"
-                  maxLength={1}
+                  className={`write-input-unit4-page5-q1 ${
+                    showCorrect ? "correct-color" : ""
+                  }`}
                   value={answers[i]}
                   onChange={(e) => handleInput(e.target.value, i)}
-                  className="first-letter-input-review5-p2-q1"
                 />
-                {showResult && (
-                  <div className="wrong-mark-review5-p2-q1">✕</div>
-                )}
-                <span className="rest-word">{item.correctInput.slice(1)}</span>
+
+                {/* X فوق الإنبت إذا كانت الكلمة غلط */}
+                {showResult &&
+                  answers[i].trim() !== "" &&
+                  answers[i].trim().toLowerCase() !==
+                    item.correctInput.toLowerCase() &&
+                  wrongInputs.includes(i) && (
+                    <div className="wrong-mark">✕</div>
+                  )}
               </div>
             </div>
           ))}
         </div>
-      </div>
+      </div>{" "}
       <div className="action-buttons-container">
         <button onClick={resetAll} className="try-again-button">
           Start Again ↻
         </button>
+        <button onClick={showAnswers} className="show-answer-btn">
+          Show Answer
+        </button>
+
         <button onClick={checkAnswers} className="check-button2">
           Check Answer ✓
         </button>
@@ -200,4 +216,4 @@ const Review5_Page2_Q1 = () => {
   );
 };
 
-export default Review5_Page2_Q1;
+export default Review7_Page2_Q1;
