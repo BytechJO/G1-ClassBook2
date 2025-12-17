@@ -1,0 +1,4 @@
+.content-container-wb-unit3-p4-q2{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}

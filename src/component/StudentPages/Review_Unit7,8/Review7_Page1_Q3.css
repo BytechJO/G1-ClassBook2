@@ -1,6 +1,12 @@
-.word-box2-review6-p1-q3{
+.word-box2-review6-p1-q3 {
   font-size: 18px;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.options-row-review7-p1-q3 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }

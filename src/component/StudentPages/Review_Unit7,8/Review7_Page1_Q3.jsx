@@ -131,7 +131,7 @@ const Review7_Page1_Q3 = () => {
                   />
                 </div>
 
-                <div className="options-row-unit7-p5-q1">
+                <div className="options-row-review7-p1-q3">
                   {q.options.map((word, optIndex) => {
                     const isSelected = answers[i] === optIndex;
                     const isCorrect = optIndex === q.correctIndex;
@@ -157,7 +157,7 @@ const Review7_Page1_Q3 = () => {
                           position: "relative",
                         }}
                       >
-                        {word}
+                       <span style={{fontWeight:"900",fontSize:"20px",marginRight:"7px"}}>{word[0]}</span> {word.slice(1)}
 
                         {showResult &&
                           isSelected &&

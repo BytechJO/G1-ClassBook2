@@ -1,0 +1,6 @@
+.word-with-dot2-wb-u2-p2-q1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+}

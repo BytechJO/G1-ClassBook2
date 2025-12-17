@@ -1,0 +1,33 @@
+.word-text2-wb-unit2-p4-q2 {
+    flex: 1;
+    font-size: 18px;
+    font-weight: 700;
+    background: #ffffff;
+    border-radius: 9px;
+    font-size: 18px;
+    /* min-width: 100px; */
+    text-align: center;
+    border: 2px solid #000000;
+    width: 200px;
+      
+}
+
+.error-mark8-wb-unit2-p4-q2 {
+    width: 25px;
+    height: 25px;
+    border: 2px solid white;
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 8px;
+    vertical-align: middle;
+    position: absolute;
+    left: 20%;
+    top: 0%;
+    z-index: 99;
+}

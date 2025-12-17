@@ -366,7 +366,7 @@ const Review8_Page2_Q2 = () => {
               {options.map((letter) => (
                 <tr key={letter}>
                   <td className="img-cell-wrapper-review8-p2-q2">
-                    <strong>{letter}</strong>
+                    <strong style={{fontSize:"25px"}}>{letter}</strong>
                   </td>
 
                   {shapesData.map((item) => {

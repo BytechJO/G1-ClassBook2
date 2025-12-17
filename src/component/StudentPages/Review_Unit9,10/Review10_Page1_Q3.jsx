@@ -39,6 +39,21 @@ const Review10_Page1_Q3 = () => {
   };
 
   const checkAnswers = () => {
+    if (showAnswers) return;
+    // ❌ فحص إذا في input فاضي
+    const hasEmptyInput = questions.some(
+      (q) =>
+        !inputs[`${q.id}_question`] || inputs[`${q.id}_question`].trim() === ""
+    );
+
+    if (hasEmptyInput) {
+      ValidationAlert.info(
+        "Oops!",
+        "Please answer all the questions before checking."
+      );
+      return;
+    }
+
     let wrongTemp = {};
     let score = 0;
     const total = questions.length * 2;
@@ -60,14 +75,20 @@ const Review10_Page1_Q3 = () => {
     setWrong(wrongTemp);
 
     const color = score === total ? "green" : score === 0 ? "red" : "orange";
-
-    ValidationAlert.info(`
+    const msg = `
     <div style="font-size:20px;text-align:center;">
       <span style="color:${color};font-weight:bold">
         Score: ${score} / ${total}
       </span>
     </div>
-  `);
+  `;
+    if (total === score) {
+      return ValidationAlert.success(msg);
+    } else if (score === 0) {
+      return ValidationAlert.error(msg);
+    } else {
+      return ValidationAlert.warning(msg);
+    }
   };
 
   // ⭐ Show Correct Answers
@@ -92,13 +113,16 @@ const Review10_Page1_Q3 = () => {
         <div className="content-container-P9-Q3">
           {questions.map((q, index) => (
             <div key={q.id} className="section-one11-review10-p1-q3">
-              <div style={{ display: "flex",width:"100%" ,height:"100%"}}>
-                
-                <div className="input-container-review10-p1-q3" >
+              <div style={{ display: "flex", width: "100%", height: "100%" }}>
+                <div className="input-container-review10-p1-q3">
                   <div style={{ display: "flex" }}>
-                  <span className="num2">{index + 1}</span>
-                  <input readOnly value={q.scramble} className="answer-input-review10-p1-q3"/>
-</div>
+                    <span className="num2">{index + 1}</span>
+                    <input
+                      readOnly
+                      value={q.scramble}
+                      className="answer-input-review10-p1-q3"
+                    />
+                  </div>
                   {/* Unscramble input */}
                   <div style={{ position: "relative" }}>
                     <input
@@ -119,7 +143,7 @@ const Review10_Page1_Q3 = () => {
                 {/* Scramble */}
                 <img src={q.img} className="p9-q1-img2" />
                 {/* Answer input */}
-                <div style={{ position: "relative" ,width:"100%"}}>
+                <div style={{ position: "relative", width: "100%" }}>
                   <input
                     type="text"
                     name={`${q.id}_answer`}

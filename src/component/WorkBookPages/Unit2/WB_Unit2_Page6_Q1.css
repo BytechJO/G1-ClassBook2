@@ -1,0 +1,11 @@
+.wb-unit2-p6-q1-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 6px 0;
+}
+
+.wb-unit2-p6-q1-text {
+    font-size: 20px;
+    font-weight: 500;
+}

@@ -355,11 +355,18 @@ const Review9_Page2_Q2 = () => {
               </p>
 
               <div className="unit10-p1-q2-flex">
-                <img
-                  src={q.image}
-                  alt=""
-                  className="unit6-p1-q1-question-img"
-                />
+                <div style={{display:"flex"}}>
+                  <img 
+                    src={q.image}
+                    alt=""
+                    className="unit10-p5-q2-question-img"
+                  />
+                  <img
+                    src={q.image}
+                    alt=""
+                    className="unit10-p5-q2-question-img"
+                  />
+                </div>
 
                 <div className="unit10-p1-q2-options-box">
                   {/* خيار الصح */}

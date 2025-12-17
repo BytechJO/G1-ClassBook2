@@ -1,0 +1,32 @@
+.row-content10-wb-unit2-page3-q2 {
+    display: grid;
+    /* margin-bottom: 55px; */
+    gap: 22px;
+    /* margin-top: 20px; */
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+}
+
+.q-img-wb-unit2-page3-q2 {
+    width: auto;
+    height: 130px;
+}
+
+.error-mark-input-wb-unit2-page3-q2 {
+    position: absolute;
+    top: 3px;
+    right: -10px;
+    width: 26px;
+    height: 26px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 999999;
+    border: 2px solid white;
+}

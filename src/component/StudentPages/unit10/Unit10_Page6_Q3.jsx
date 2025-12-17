@@ -40,14 +40,6 @@ const Unit10_Page6_Q3 = () => {
     const validAnswers = items.map((item) => normalize(item.value));
     const normalizedSelected = normalize(selectedImage);
 
-    // 3️⃣ لازم الكلمة تكون من الخيارات فقط
-    if (!validAnswers.includes(normalizedAnswer)) {
-      ValidationAlert.error(
-        "Your answer must be one of these words:<br/>milk, bread, apple, ice cream, chicken"
-      );
-      return;
-    }
-
     setChecked(true);
 
     let score = 0;
@@ -66,6 +58,11 @@ const Unit10_Page6_Q3 = () => {
       </span>
     </div>
   `;
+    // 3️⃣ لازم الكلمة تكون من الخيارات فقط
+    if (!validAnswers.includes(normalizedAnswer)) {
+      ValidationAlert.error(msg);
+      return;
+    }
 
     score === 1 ? ValidationAlert.success(msg) : ValidationAlert.error(msg);
   };
