@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import ValidationAlert from "../../Popup/ValidationAlert";
 import "./Unit8_Page5_Q3.css";
-import img1 from "../../../assets/unit6/imgs/U6P54EXEA-01.svg";
-import img2 from "../../../assets/unit6/imgs/U6P54EXEA-02.svg";
-import img3 from "../../../assets/unit6/imgs/U6P54EXEA-03.svg";
-import img4 from "../../../assets/unit6/imgs/U6P54EXEA-04.svg";
+import img1 from "../../../assets/unit8/imgs/U8P68EXEB-01.svg";
+import img2 from "../../../assets/unit8/imgs/U8P68EXEB-02.svg";
+import img3 from "../../../assets/unit8/imgs/U8P68EXEB-03.svg";
+import img4 from "../../../assets/unit8/imgs/U8P68EXEB-04.svg";
 
 const Unit8_Page5_Q3 = () => {
   const [answers, setAnswers] = useState(Array(4).fill(null));
@@ -86,12 +86,12 @@ const Unit8_Page5_Q3 = () => {
           <span className="ex-A"> B</span> Read, look, and circle.
         </h5>
 
-        <div className="container-review6-p1-q1">
+        <div className="container-review6-unit8-p5-q3">
           {items.map((q, i) => (
             <div key={i} className="question-box-unit8-p5-q3">
               
               <div style={{ display: "flex", gap: "10px",
-                            flexDirection: "row", alignItems: "center", width: "80%" }}>
+                            flexDirection: "row", alignItems: "center"}}>
                 <span style={{ color: "#2c5287", fontSize: "20px", fontWeight: "700" }}>
                   {i + 1}
                 </span>
@@ -102,7 +102,7 @@ const Unit8_Page5_Q3 = () => {
                 <img src={q.img} className="q3-image-review6-p1-q1"
                      style={{ height: "130px", width: "auto" }} />
 
-                <div className="options-row-unit8-p5-q3">
+                <div className="options-row-unit8-p5-q3 ">
                   {q.options.map((word, optIndex) => {
                     const isSelected = answers[i] === optIndex;
                     const isCorrect = optIndex === q.correctIndex;
@@ -111,7 +111,7 @@ const Unit8_Page5_Q3 = () => {
                       <p
                         key={optIndex}
                         className={`
-                          option-word-review6-p1-q1
+                          option-word-unit8-p5-q3
                           ${isSelected ? "selected3" : ""}
                           ${showResult && isSelected && !isCorrect ? "wrong" : ""}
                           ${showResult && isCorrect ? "correct" : ""}

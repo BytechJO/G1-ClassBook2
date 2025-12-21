@@ -109,6 +109,11 @@ const WB_Unit4_Page2_Q1 = () => {
 
     setShowAnswer(true); // 🔒 يقفل الكتابة
     setWrongInputs([]); // يشيل الإكسات
+      setShapeColors({
+    1: "red",
+    2: "red",
+    3: "red",
+  })
   };
 
   const handleReset = () => {
@@ -120,6 +125,11 @@ const WB_Unit4_Page2_Q1 = () => {
       q3: "",
     });
     setShowAnswer(false);
+    setShapeColors({
+    1: "#ffffff",
+    2: "#ffffff",
+    3: "#ffffff",
+  })
   };
 
   return (
@@ -143,7 +153,7 @@ const WB_Unit4_Page2_Q1 = () => {
         }}
       >
         <h5 className="header-title-page8" id="ex-d">
-          <span className="ex-A">B</span> Read, look, and answer.
+          <span className="ex-A">C</span>Look, read, and write. Color.
         </h5>
         <div
           className="color-pallet-wb-unit4-p2-q1"

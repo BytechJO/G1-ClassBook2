@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import backgroundImage from "../../../assets/img_unit2/imgs/02-03 New copy.jpg";
-import page2_2 from "../../../assets/img_unit2/imgs/unit2 vocab-3CQVwmCm.jpg";
+import backgroundImage from "../../../assets/unit8/imgs/G1_U8 _Pg_64-65 copy.jpg";
+import page2_2 from "../../../assets/unit3/imgs3/vocabimg_unit3-ClZR6yN5.jpg";
 import vocabulary from "../../../assets/img_unit2/sounds-unit2/Pg10_Vocabulary_Adult Lady.mp3";
 import "./Unit8_Page1.css";
 import { CgPlayPauseO } from "react-icons/cg";
@@ -12,7 +12,7 @@ import num5 from "../../../assets/img_unit2/imgs/Num5.svg";
 import num6 from "../../../assets/img_unit2/imgs/Num6.svg";
 import num7 from "../../../assets/img_unit2/imgs/Num7.svg";
 import num8 from "../../../assets/unit4/imgs/Num8.svg";
-import num9 from "../../../assets/img_unit2/imgs/Num7.svg";
+import num9 from "../../../assets/unit7/img/Num9.svg";
 import sound1 from "../../../assets/img_unit2/sounds-unit2/U2-01.mp3";
 import sound2 from "../../../assets/img_unit2/sounds-unit2/U2-02.mp3";
 import sound3 from "../../../assets/img_unit2/sounds-unit2/U2-03.mp3";
@@ -58,6 +58,8 @@ const Unit8_Page1_Vocab = () => {
     { start: 9.29, end: 12.2, text: "4. Happy Birthday." },
     { start: 12.22, end: 15.07, text: " 5. Balloons." },
     { start: 15.09, end: 17.13, text: " 6. Present. " },
+    { start: 17.15, end: 19.26, text: "7.card" }, 
+    { start: 17.15, end: 19.26, text: "7.card" },
     { start: 17.15, end: 19.26, text: "7.card" },
   ];
   // 🎵 فترات الكلمات داخل الأوديو الرئيسي
@@ -68,6 +70,8 @@ const Unit8_Page1_Vocab = () => {
     { start: 9.43, end: 12.25 }, // Hello
     { start: 12.27, end: 15.05 }, // Good morning
     { start: 15.04, end: 17.13 },
+    { start: 17.15, end: 19.26 },
+     { start: 15.04, end: 17.13 },
     { start: 17.15, end: 19.26 },
   ];
 
@@ -180,7 +184,7 @@ const Unit8_Page1_Vocab = () => {
     };
   };
 
-  const nums = [num1, num2, num3, num4, num5, num6, num7,num8,num8];
+  const nums = [num1, num2, num3, num4, num5, num6, num7,num8,num9];
   const wordRefs = useRef(wordAudios.map(() => React.createRef()));
 
   return (

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./Review7_Page1_Q1.css";
 import ValidationAlert from "../../Popup/ValidationAlert";
-// import imgDown1 from "../../../assets/unit7/imgs/down1.png";
-// import imgDown2 from "../../../assets/unit7/imgs/down2.png";
-// import imgDown3 from "../../../assets/unit7/imgs/down3.png";
+import imgDown1 from "../../../assets/unit8/imgs/U8P70EXEA-01.svg";
+import imgDown2 from "../../../assets/unit8/imgs/U8P70EXEA-02.svg";
+import imgDown3 from "../../../assets/unit8/imgs/U8P70EXEA-03.svg";
 
-// import imgAcross1 from "../../../assets/unit7/imgs/across1.png";
-// import imgAcross2 from "../../../assets/unit7/imgs/across2.png";
-// import imgAcross3 from "../../../assets/unit7/imgs/across3.png";
+import imgAcross1 from "../../../assets/unit8/imgs/U8P70EXEA-04.svg";
+import imgAcross2 from "../../../assets/unit8/imgs/U8P70EXEA-05.svg";
+import imgAcross3 from "../../../assets/unit8/imgs/U8P70EXEA-06.svg";
 
 const crosswordStructure = [
   // Row 1 (10 columns)
@@ -216,17 +216,17 @@ export default function Review7_Page1_Q1() {
 
                 <div className="img-item-review7-p1-q1">
                   <span className="num">1</span>
-                  <img src="./{imgDown1}" alt="down1" />
+                  <img src={imgDown1} alt="down1" />
                 </div>
 
                 <div className="img-item-review7-p1-q1">
                   <span className="num">2</span>
-                  <img src="./{imgDown2}" alt="down2" />
+                  <img src={imgDown2} alt="down2" />
                 </div>
 
                 <div className="img-item-review7-p1-q1">
                   <span className="num">3</span>
-                  <img src="./{imgDown3}" alt="down3" />
+                  <img src={imgDown3} alt="down3" />
                 </div>
               </div>
 
@@ -235,17 +235,17 @@ export default function Review7_Page1_Q1() {
 
                 <div className="img-item-review7-p1-q1">
                   <span className="num">2</span>
-                  <img src="./{imgAcross1}" alt="across2" />
+                  <img src={imgAcross1} alt="across2" />
                 </div>
 
                 <div className="img-item-review7-p1-q1">
                   <span className="num">3</span>
-                  <img src="./{imgAcross2}" alt="across3" />
+                  <img src={imgAcross2} alt="across3" />
                 </div>
 
                 <div className="img-item-review7-p1-q1">
                   <span className="num">4</span>
-                  <img src="./{imgAcross3}" alt="across4" />
+                  <img src={imgAcross3} alt="across4" />
                 </div>
               </div>
             </div>

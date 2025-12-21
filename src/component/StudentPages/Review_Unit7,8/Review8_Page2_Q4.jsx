@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./Review8_Page2_Q4.css";
 import ValidationAlert from "../../Popup/ValidationAlert";
-import img1 from "../../../assets/unit6/imgs/U6P53EXEF-01.svg";
-import img2 from "../../../assets/unit6/imgs/U6P53EXEF-02.svg";
+import img1 from "../../../assets/unit8/imgs/U8P73EXEG-01.svg";
+import img2 from "../../../assets/unit8/imgs/U8P73EXEG-02.svg";
 const Review8_Page2_Q4 = () => {
   // ===============================
   // 🔵 1) الأسئلة (كلها داخل نفس الكومبونينت)
@@ -144,7 +144,7 @@ const Review8_Page2_Q4 = () => {
                   >
                     {q.id}
                   </span>
-                  <img src={q.image} className="question-img-review5-p2-q3" />
+                  <img src={q.image} className="question-img-review5-p2-q3" style={{width:"300px"}} />
                 </div>
                 <div style={{ display: "flex", width: "100%" ,justifyContent:"space-around",alignItems:"center"}}>
                   {q.parts.map((part, pIndex) => {

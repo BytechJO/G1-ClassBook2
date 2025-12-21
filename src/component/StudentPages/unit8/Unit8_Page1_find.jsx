@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import find_img from "../../../assets/img_unit2/imgs/02-03 New copy.jpg";
+import find_img from "../../../assets/unit8/imgs/G1_U8 _Pg_64-65 copy.jpg";
 import Rabbit from "../../../assets/img_unit2/imgs/Rabbit.svg";
 import ValidationAlert from "../../Popup/ValidationAlert";
-import MySVG from "../../../assets/img_unit2/imgs/U2P10 highlight.svg";
+import MySVG from "../../../assets/unit8/imgs/U8P64 highlight.svg";
 
 const Unit8_Page1_find = () => {
   const [clickedPoint, setClickedPoint] = useState(null);
@@ -10,16 +10,17 @@ const Unit8_Page1_find = () => {
   const [showAnswer, setShowAnswer] = useState(false);
   // ✅ منطقة المطعم (بالنسب المئوية)
   const targetArea = {
-    x1: 18,
-    y1: 69,
-    x2: 24,
-    y2: 74,
+    x1: 34.58,
+    y1: 23.20,
+    x2: 36.64,
+    y2: 26.92,
   };
 
   const handleImageClick = (e) => {
     const rect = e.target.getBoundingClientRect();
     const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
     const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
+    console.log("x:", xPercent, " y:", yPercent);
 
     setClickedPoint({
       x: xPercent,
@@ -78,7 +79,7 @@ const Unit8_Page1_find = () => {
         >
           <img src={Rabbit} style={{ height: "50px", width: "auto" }} />{" "}
           <h5 className="header-title-page8">
-            I need your help. Can you help me find the boat in the picture?
+            I need your help. Can you help me f ind Jack’s ear in the picture?
           </h5>
         </div>
         <div style={{ position: "relative", display: "inline-block" }}>
@@ -93,7 +94,6 @@ const Unit8_Page1_find = () => {
             }}
             onClick={handleImageClick}
           />
-
           {/* ✅ الدائرة الحمراء في مكان الكبس */}
           {clickedPoint && (
             <div
@@ -110,7 +110,6 @@ const Unit8_Page1_find = () => {
               }}
             ></div>
           )}
-
           {/* ✅ تلوين المنطقة الصحيحة إذا الجواب صح */}
           {(checkResult === "success" || showAnswer) && (
             <img
@@ -118,12 +117,12 @@ const Unit8_Page1_find = () => {
               alt="answer highlight"
               style={{
                 position: "absolute",
-                top: `67%`,
-                left: `18.5%`,
-                height: `7%`,
+                top: `23.5%`,
+                left: `35%`,
+                height: `4%`,
                 pointerEvents: "none",
               }}
-            /> 
+            />
           )}
         </div>
       </div>

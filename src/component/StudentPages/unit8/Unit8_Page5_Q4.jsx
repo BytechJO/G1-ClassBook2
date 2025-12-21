@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Unit8_Page5_Q4.css";
 import ValidationAlert from "../../Popup/ValidationAlert";
-import img from "../../../assets/unit5/imgs/U5P44EXEC.svg";
+import img from "../../../assets/unit8/imgs/U8P68EXEC.svg";
 const Unit8_Page5_Q4 = () => {
   const data = [
     { letter: "a", number: 1 }, { letter: "b", number: 2 }, { letter: "c", number: 3 },

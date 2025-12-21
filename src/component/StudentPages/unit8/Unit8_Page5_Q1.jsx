@@ -1,26 +1,31 @@
 import React, { useState } from "react";
 import "./Unit8_Page5_Q1.css";
 import ValidationAlert from "../../Popup/ValidationAlert";
-
+import img1 from "../../../assets/unit8/imgs/U8P68EXEA1-01.svg";
+import img2 from "../../../assets/unit8/imgs/U8P68EXEA1-02.svg";
+import img3 from "../../../assets/unit8/imgs/U8P68EXEA1-03.svg";
+import img4 from "../../../assets/unit8/imgs/U8P68EXEA1-04.svg";
 const data = [
   {
-    img: "./img1.gpg",
+    img: img1,
     scrambled: "perpzi",
     answer: "zipp",
     pattern: "er",
   },
-  { img: "./img2.gpg", scrambled: "ksoc", answer: "so", pattern: "ck" },
-  { img: "./img3.gpg", scrambled: "ozo", answer: "z", pattern: "oo" },
-  { img: "./img4.gpg", scrambled: "beazr", answer: "ze", pattern: "bra" },
+  { img: img2, scrambled: "ksoc", answer: "so", pattern: "ck" },
+  { img: img3, scrambled: "ozo", answer: "z", pattern: "oo" },
+  { img: img4, scrambled: "beazr", answer: "ze", pattern: "bra" },
 ];
 
 const Unit8_Page5_Q1 = () => {
   const [inputs, setInputs] = useState(Array(data.length).fill(""));
-  const [wrongInputs, setWrongInputs] = useState(Array(data.length).fill(false));
+  const [wrongInputs, setWrongInputs] = useState(
+    Array(data.length).fill(false)
+  );
   const [showAnswer, setShowAnswer] = useState(false); // ⭐ NEW
 
   const checkAnswers = () => {
-        if (showAnswer) return; // ❌ ممنوع التعديل بعد Show Answer
+    if (showAnswer) return; // ❌ ممنوع التعديل بعد Show Answer
 
     if (inputs.some((val) => val.trim() === "")) {
       ValidationAlert.info(
@@ -117,15 +122,19 @@ const Unit8_Page5_Q1 = () => {
                   <img src={item.img} alt="" />
                 </div>
 
-                <p className="scrambled-word"   style={{fontSize:"22px"}}>{item.scrambled}</p>
+                <p className="scrambled-word" style={{ fontSize: "22px" }}>
+                  {item.scrambled}
+                </p>
 
                 <div className="input-row">
-                  <span className="num"   style={{fontSize:"22px"}}>{index + 1}</span>
+                  <span className="num" style={{ fontSize: "22px" }}>
+                    {index + 1}
+                  </span>
 
                   <div className="input-wrapper">
                     <input
                       type="text"
-                  style={{fontSize:"22px"}}
+                      style={{ fontSize: "22px" }}
                       value={inputs[index]}
                       onChange={(e) => handleChange(e.target.value, index)}
                       className="text-input"
@@ -138,7 +147,9 @@ const Unit8_Page5_Q1 = () => {
                     )}
                   </div>
 
-                  <span className="pattern"   style={{fontSize:"22px"}}>{item.pattern}</span>
+                  <span className="pattern" style={{ fontSize: "22px" }}>
+                    {item.pattern}
+                  </span>
                 </div>
               </div>
             ))}
@@ -152,8 +163,11 @@ const Unit8_Page5_Q1 = () => {
           Start Again ↻
         </button>
 
-        <button onClick={handleShowAnswer} className="show-answer-btn swal-continue">
-          Show Answer 
+        <button
+          onClick={handleShowAnswer}
+          className="show-answer-btn swal-continue"
+        >
+          Show Answer
         </button>
 
         <button onClick={checkAnswers} className="check-button2">

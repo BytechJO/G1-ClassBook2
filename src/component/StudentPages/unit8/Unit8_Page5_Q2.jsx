@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import img1 from "../../../assets/img_unit2/imgs/33.jpg";
-import img2 from "../../../assets/img_unit2/imgs/34.jpg";
-import img3 from "../../../assets/img_unit2/imgs/35.jpg";
-import img4 from "../../../assets/img_unit2/imgs/36.jpg";
-import img5 from "../../../assets/img_unit2/imgs/37.jpg";
+import img1 from "../../../assets/unit8/imgs/U8P68EXEA2-01.svg";
+import img2 from "../../../assets/unit8/imgs/U8P68EXEA2-02.svg";
+import img3 from "../../../assets/unit8/imgs/U8P68EXEA2-03.svg";
+import img4 from "../../../assets/unit8/imgs/U8P68EXEA2-04.svg";
+// import img5 from "../../../assets/unit8/imgs/U8P68EXEA2-05.svg";
 import sound1 from "../../../assets/unit1/sounds/P17QF.mp3";
 import ValidationAlert from "../../Popup/ValidationAlert";
 import "./Unit8_Page5_Q2.css";

@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import page_2 from "../../../assets/unit8/imgs/Right 1 Unit 08 At the Soccer Match2.jpg";
-import img1 from "../../../assets/img_unit2/imgs/p.svg";
-import img2 from "../../../assets/img_unit2/imgs/pencil.svg";
-import img3 from "../../../assets/img_unit2/imgs/pink.svg";
-import img4 from "../../../assets/img_unit2/imgs/pizza.svg";
+import img1 from "../../../assets/unit8/imgs/Z.svg";
+import img2 from "../../../assets/unit8/imgs/zoo.svg";
+import img3 from "../../../assets/unit8/imgs/zebra.svg";
+import img4 from "../../../assets/unit8/imgs/zipper.svg";
 import Rabbit from "../../../assets/img_unit2/imgs/Rabbit.svg";
 import soundListen from "../../../assets/img_unit2/sounds-unit2/cd10pg11-instruction1-adult-lady_inMDacHf.mp3";
 import Pg11_1_1_Bebo from "../../../assets/unit8/sound/Pg65_1.1_Bebo.mp3";
 import Pg11_1_1_Stella from "../../../assets/unit8/sound/Pg65_1.1_Jack.mp3";
 import Pg11_1_2_Lolo_Take from "../../../assets/unit8/sound/Pg65_1.2_Lolo.mp3";
-import repeat1 from "../../../assets/img_unit2/imgs/listen and repeat 02.svg";
-import repeat2 from "../../../assets/img_unit2/imgs/listen and repeat 03.svg";
+import repeat1 from "../../../assets/unit8/imgs/listen and repeat 02.svg";
+import repeat2 from "../../../assets/unit8/imgs/listen and repeat 03.svg";
 import Pg11_2_1_AdultLady from "../../../assets/unit8/sound/Pg65_2.1_Adult Lady.mp3";
 import Pg11_2_2_AdultLady from "../../../assets/unit8/sound/Pg65_2.2_Adult Lady.mp3";
 import Pg11_2_3_AdultLady from "../../../assets/unit8/sound/Pg65_2.3_Adult Lady.mp3";
@@ -84,7 +84,7 @@ const Unit8_Page2 = ({ openPopup }) => {
     { x1: 11.5, y1: 54.5, sound: 3, isPrimary: true },
 
     // // // // الصوت الثاني – الإضافية
-    { x1:9.48, y1: 57.63, x2: 48.3, y2: 59.7, sound: 3, isPrimary: false },
+    { x1: 9.48, y1: 57.63, x2: 48.3, y2: 59.7, sound: 3, isPrimary: false },
   ];
   const sounds = {
     1: sound1,

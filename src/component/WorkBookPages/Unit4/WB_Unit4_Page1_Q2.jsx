@@ -4,7 +4,7 @@ import cap from "../../../assets/unit6/imgs/U6P50EXEB-02.svg";
 import ant from "../../../assets/unit6/imgs/U6P50EXEB-03.svg";
 import dad from "../../../assets/unit6/imgs/U6P50EXEB-04.svg";
 import ValidationAlert from "../../Popup/ValidationAlert";
-// import "./WB_Unit2_Page3_Q2.css";
+import "./WB_Unit4_Page1_Q2.css";
 const WB_Unit4_Page1_Q2 = () => {
   const questions = [
     {
@@ -164,6 +164,7 @@ const WB_Unit4_Page1_Q2 = () => {
                     <span key={pIndex} style={{ position: "relative" }}>
                       <input
                         type="text"
+                      
                         className="inline-input-wb-unit4-p1-q2"
                         value={answers[qIndex][pIndex] || ""}
                         onChange={(e) =>

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import bat from "../../../assets/unit4/imgs/U4P32ExeA2-01.svg";
-import cap from "../../../assets/unit4/imgs/U4P32ExeA2-02.svg";
-import ant from "../../../assets/unit4/imgs/U4P32ExeA2-03.svg";
+import bat from "../../../assets/unit8/imgs/U8P73EXEF-01.svg";
+import cap from "../../../assets/unit8/imgs/U8P73EXEF-02.svg";
+import ant from "../../../assets/unit8/imgs/U8P73EXEF-03.svg";
+import img3 from "../../../assets/unit8/imgs/U8P73EXEF-04.svg";
 import ValidationAlert from "../../Popup/ValidationAlert";
 import "./Review8_Page2_Q3.css";
 
@@ -188,7 +189,7 @@ const Review8_Page2_Q3 = () => {
             >
               4
             </span>
-            <img src={ant} alt="" className="q-img-unit3-page6-q1" />
+            <img src={img3} alt="" className="q-img-unit3-page6-q1" />
            
             <div className="input-wrapper-review8-p1-q2">
               <input

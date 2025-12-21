@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import deer from "../../../assets/unit6/imgs/U6P54EXEC-01.svg";
+import deer from "../../../assets/unit8/imgs/U8P71EXEE.svg";
 import ValidationAlert from "../../Popup/ValidationAlert";
-
+import "./Review7_Page2_Q2.css"
 const data = [
   { question: "", correct: "house" },
   { question: "", correct: "hat" },
@@ -102,7 +102,7 @@ const Review7_Page2_Q2 = () => {
         <div className="component-wrapper">
           <h3 className="header-title-page8">E Look and write.</h3>
 
-          <div className="content-unit5-p5-q3">
+          <div className="content-review7-p2-q2">
             <div className="group-input-unit5-p5-q3">
               {data.map((item, index) => (
                 <div
@@ -149,7 +149,7 @@ const Review7_Page2_Q2 = () => {
               src={deer}
               className="shape-img-unit5-p5-q3"
               alt=""
-              style={{ height: "200px", width: "auto" }}
+              style={{ height: "240px", width: "auto" }}
             />
           </div>
         </div>

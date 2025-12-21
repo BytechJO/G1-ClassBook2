@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import find_img from "../../../assets/unit4/imgs/G1_U4_Pg_28-29 copy.jpg";
 import Rabbit from "../../../assets/img_unit2/imgs/Rabbit.svg";
 import ValidationAlert from "../../Popup/ValidationAlert";
+import MySVG from "../../../assets/unit4/imgs/U4P28 highlight.svg";
 const Unit4_Page1_find = () => {
   const [clickedPoint, setClickedPoint] = useState(null);
   const [checkResult, setCheckResult] = useState(null);
@@ -112,18 +113,17 @@ const Unit4_Page1_find = () => {
 
           {/* ✅ تلوين المنطقة الصحيحة إذا الجواب صح */}
           {(checkResult === "success" || showAnswer) && (
-            <div
+            <img
+              src={MySVG}
+              alt="answer highlight"
               style={{
                 position: "absolute",
-                top: `${targetArea.y1}%`,
-                left: `${targetArea.x1}%`,
-                width: `${targetArea.x2 - targetArea.x1}%`,
-                height: `${targetArea.y2 - targetArea.y1}%`,
-                backgroundColor: "rgba(0, 255, 0, 0.55)", // أخضر شفاف
-                borderRadius: "8px",
+                top: `5.5%`,
+                left: `53.5%`,
+                height: `21.5%`,
                 pointerEvents: "none",
               }}
-            ></div>
+            />
           )}
         </div>
       </div>

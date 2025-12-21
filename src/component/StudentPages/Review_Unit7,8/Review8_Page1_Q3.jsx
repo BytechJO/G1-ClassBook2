@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
-import img1 from "../../../assets/unit6/imgs/U6P51EXEF-01.svg";
-import img2 from "../../../assets/unit6/imgs/U6P51EXEF-02.svg";
-import img3 from "../../../assets/unit6/imgs/U6P51EXEF-03.svg";
+import img1 from "../../../assets/unit8/imgs/U8P72EXEC-01.svg";
+import img2 from "../../../assets/unit8/imgs/U8P72EXEC-02.svg";
+import img3 from "../../../assets/unit8/imgs/U8P72EXEC-03.svg";
 import ValidationAlert from "../../Popup/ValidationAlert";
 import "./Review8_Page1_Q3.css";
 

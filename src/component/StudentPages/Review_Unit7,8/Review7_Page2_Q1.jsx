@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import bat from "../../../assets/unit4/imgs/U4P32ExeA1-01.svg";
-import cap from "../../../assets/unit4/imgs/U4P32ExeA1-02.svg";
-import ant from "../../../assets/unit4/imgs/U4P32ExeA1-03.svg";
-import dad from "../../../assets/unit4/imgs/U4P32ExeA1-04.svg";
+import bat from "../../../assets/unit8/imgs/U8P71EXED-01.svg";
+import cap from "../../../assets/unit8/imgs/U8P71EXED-02.svg";
+import ant from "../../../assets/unit8/imgs/U8P71EXED-03.svg";
+
 import ValidationAlert from "../../Popup/ValidationAlert";
 import "./Review7_Page2_Q1.css";
 const Review7_Page2_Q1 = () => {

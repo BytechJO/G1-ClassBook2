@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
-import img1 from "../../../assets/unit1/imgs/Read and match 01.png";
-import img2 from "../../../assets/unit1/imgs/Read and match 02.png";
+import img1 from "../../../assets/unit8/imgs/U8P69EXEF-01.svg";
+import img2 from "../../../assets/unit8/imgs/U8P69EXEF-02.svg";
 
 import "./Unit8_Page6_Q3.css";
 import ValidationAlert from "../../Popup/ValidationAlert";
@@ -22,24 +22,23 @@ export default function Unit8_Page6_Q3() {
   // ============================
   // 1️⃣ الضغط على النقطة الأولى (start-dot)
   // ============================
-const handleStartDotClick = (e) => {
-  if (showAnswer || locked) return;
+  const handleStartDotClick = (e) => {
+    if (showAnswer || locked) return;
 
-  const word = e.target.dataset.letter;
+    const word = e.target.dataset.letter;
 
-  // ❌ منع خروج خط جديد من كلمة لها خط سابق
-  const alreadyUsed = lines.some((line) => line.word === word);
-  if (alreadyUsed) return;
+    // ❌ منع خروج خط جديد من كلمة لها خط سابق
+    const alreadyUsed = lines.some((line) => line.word === word);
+    if (alreadyUsed) return;
 
-  const rect = containerRef.current.getBoundingClientRect();
+    const rect = containerRef.current.getBoundingClientRect();
 
-  setFirstDot({
-    word,
-    x: e.target.getBoundingClientRect().left - rect.left + 8,
-    y: e.target.getBoundingClientRect().top - rect.top + 8,
-  });
-};
-
+    setFirstDot({
+      word,
+      x: e.target.getBoundingClientRect().left - rect.left + 8,
+      y: e.target.getBoundingClientRect().top - rect.top + 8,
+    });
+  };
 
   // ============================
   // 2️⃣ الضغط على النقطة الثانية (end-dot)
@@ -108,7 +107,7 @@ const handleStartDotClick = (e) => {
   };
 
   return (
-    <div className="matching-wrapper" style={{padding:"30px"}}>
+    <div className="matching-wrapper" style={{ padding: "30px" }}>
       <div className="matching-scale">
         <h5 className="header-title-page8">
           <span className="ex-A">F</span>Read and match.
@@ -228,16 +227,16 @@ const handleStartDotClick = (e) => {
 
       <div className="action-buttons-container">
         <button
-            onClick={() => {
-    setLines([]);
-    setWrongWords([]);
-    setFirstDot(null);
-    setShowAnswer(false);
-    setLocked(false);
+          onClick={() => {
+            setLines([]);
+            setWrongWords([]);
+            setFirstDot(null);
+            setShowAnswer(false);
+            setLocked(false);
 
-    // إعادة الرندر بالكامل
-    setResetKey(k => k + 1);
-  }}
+            // إعادة الرندر بالكامل
+            setResetKey((k) => k + 1);
+          }}
           className="try-again-button"
         >
           Start Again ↻
@@ -254,7 +253,14 @@ const handleStartDotClick = (e) => {
                 x2: 0,
                 y2: 0,
               },
-              { word: "Open your eye.", image: "img2", x1: 0, y1: 0, x2: 0, y2: 0 },
+              {
+                word: "Open your eye.",
+                image: "img2",
+                x1: 0,
+                y1: 0,
+                x2: 0,
+                y2: 0,
+              },
             ];
 
             const rect = containerRef.current.getBoundingClientRect();

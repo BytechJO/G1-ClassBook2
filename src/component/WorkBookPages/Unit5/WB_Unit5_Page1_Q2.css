@@ -1,0 +1,10 @@
+.sentence-wb-unit5-p1-q2 {
+    display: flex;
+    /* flex-wrap: wrap; */
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+    font-size: 22px;
+    justify-content: space-evenly;
+    flex-direction: row;
+}

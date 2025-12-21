@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import ValidationAlert from "../../Popup/ValidationAlert";
 import "./Review8_Page1_Q1.css";
-import img1 from "../../../assets/unit6/imgs/U6P54EXEA-01.svg";
-import img2 from "../../../assets/unit6/imgs/U6P54EXEA-02.svg";
-import img3 from "../../../assets/unit6/imgs/U6P54EXEA-03.svg";
-import img4 from "../../../assets/unit6/imgs/U6P54EXEA-04.svg";
+import img1 from "../../../assets/unit8/imgs/U8P72EXEA-01.svg";
+import img2 from "../../../assets/unit8/imgs/U8P72EXEA-02.svg";
+import img3 from "../../../assets/unit8/imgs/U8P72EXEA-03.svg";
+import img4 from "../../../assets/unit8/imgs/U8P72EXEA-04.svg";
+import img5 from "../../../assets/unit8/imgs/U8P72EXEA-05.svg";
 
 const Review8_Page1_Q1 = () => {
   const [answers, setAnswers] = useState(Array(4).fill(null));
@@ -16,7 +17,7 @@ const Review8_Page1_Q1 = () => {
     { img: img2, text: "", options: ["eye", "leg", "nose"], correctIndex: 1 },
     { img: img3, text: "", options: ["head", "nose", "leg"], correctIndex: 0 },
     { img: img4, text: "", options: ["arm", "eye", "head"], correctIndex: 1 },
-    { img: img4, text: "", options: ["nose", "arm", "eye"], correctIndex: 0 },
+    { img: img5, text: "", options: ["nose", "arm", "eye"], correctIndex: 0 },
   ];
 
   const handleSelect = (qIndex, optionIndex) => {

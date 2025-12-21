@@ -387,7 +387,10 @@ export default function Book() {
 
   const workbookUnits = [
     { id: 1, label: "Unit 1", start: 3, pages: 7 },
-    // { id: 2, label: "Unit 2", start: 8, pages: 10 },
+    { id: 2, label: "Unit 2", start: 9, pages: 6 },
+    { id: 3, label: "Unit 3", start: 15, pages: 6 },
+    { id: 4, label: "Unit 4", start: 21, pages: 6 },
+    { id: 5, label: "Unit 5", start: 27, pages: 6 },
   ];
 
   const teacherUnits = [

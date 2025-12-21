@@ -11,7 +11,32 @@
   top: 45.5%;
   left: 35%;
 }
+.wrong-x-circle-wb-u4-p5-q1{
 
+    position: absolute;
+    top: -28%;
+    right: -8px;
+    background: red;
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+    border: 2px solid white;
+}
+.word-bank-wb-u4-p5-q1 {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
 
 @media (max-width: 1024px) {
   .wb-unit4-p5-q1 {

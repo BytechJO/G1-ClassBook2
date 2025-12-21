@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import deer from "../../../assets/unit6/imgs/U6P54EXEC-01.svg";
+import deer from "../../../assets/unit8/imgs/U8P69EXED.svg";
 import ValidationAlert from "../../Popup/ValidationAlert";
 
 const data = [
@@ -148,7 +148,7 @@ const Unit8_Page6_Q1 = () => {
               src={deer}
               className="shape-img-unit5-p5-q3"
               alt=""
-              style={{ height: "200px", width: "auto" }}
+              style={{ height: "325px", width: "auto" }}
             />
           </div>
         </div>
