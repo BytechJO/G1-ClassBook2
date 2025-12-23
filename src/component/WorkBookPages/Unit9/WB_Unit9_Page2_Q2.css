@@ -1,0 +1,9 @@
+.container12-wb-unit9-p2-q1 {
+    margin: auto;
+    position: relative;
+    display: flex;
+    gap: 30px;
+    user-select: none;
+    margin-bottom: 30px;
+    flex-direction: column;
+}

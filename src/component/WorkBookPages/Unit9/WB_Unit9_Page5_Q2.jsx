@@ -1,0 +1,205 @@
+import React, { useState } from "react";
+import ValidationAlert from "../../Popup/ValidationAlert";
+
+import CatSvg from "../../../assets/unit7/img/U7P62EXEA1-01.svg";
+import HorseSvg from "../../../assets/unit7/img/U7P62EXEA1-01.svg";
+import DogSvg from "../../../assets/unit7/img/U7P62EXEA1-01.svg";
+
+import "./WB_Unit9_Page5_Q2.css";
+
+const WB_Unit9_Page5_Q2 = () => {
+  const items = [
+    {
+      Svg: CatSvg,
+      options: ["cat", "cow"],
+      correct: "cat",
+      position: "top-left",
+    },
+    {
+      Svg: HorseSvg,
+      options: ["horse", "chicken"],
+      correct: "horse",
+      position: "right",
+    },
+    {
+      Svg: DogSvg,
+      options: ["goat", "dog"],
+      correct: "dog",
+      position: "bottom-left",
+    },
+  ];
+
+  const [selected, setSelected] = useState(Array(items.length).fill(""));
+  const [colors, setColors] = useState(items.map(() => "white"));
+  const [locked, setLocked] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+  const [wrongChoices, setWrongChoices] = useState([]);
+
+  /* ================= COLOR ================= */
+
+  const toggleColor = (index) => {
+    if (locked) return;
+
+    const newColors = [...colors];
+    newColors[index] = newColors[index] === "white" ? "#FFD54F" : "white";
+
+    setColors(newColors);
+  };
+
+  /* ================= CIRCLE ================= */
+
+  const handleSelect = (value, index) => {
+    if (locked || showResult) return;
+    const newSel = [...selected];
+    newSel[index] = value;
+    setSelected(newSel);
+    setShowResult(false);
+  };
+
+  /* ================= CHECK ================= */
+
+  const checkAnswers = () => {
+    if (locked || showResult) return;
+
+    if (selected.some((s) => s === "")) {
+      ValidationAlert.info("Please circle the correct word!");
+      return;
+    }
+
+    let score = 0;
+    let wrongs = [];
+
+    items.forEach((item, i) => {
+      if (selected[i] === item.correct) {
+        score++;
+      } else {
+        wrongs.push(i); // ❌ هذا الاختيار غلط
+      }
+    });
+
+    setWrongChoices(wrongs);
+    setShowResult(true);
+
+    const total = items.length;
+    const color = score === total ? "green" : score === 0 ? "red" : "orange";
+
+    const scoreMessage = `
+    <div style="font-size:20px;text-align:center;">
+      <b style="color:${color}">Score: ${score} / ${total}</b>
+    </div>
+  `;
+
+    if (score === total) {
+      ValidationAlert.success(scoreMessage);
+    } else if (score === 0) {
+      ValidationAlert.error(scoreMessage);
+    } else {
+      ValidationAlert.warning(scoreMessage);
+    }
+  };
+
+  /* ================= SHOW ANSWER ================= */
+
+  const showAnswers = () => {
+    setSelected(items.map((item) => item.correct));
+    setColors(items.map(() => "#FFD54F"));
+    setWrongChoices([]);
+    setShowResult(false);
+    setLocked(true);
+  };
+
+  /* ================= RESET ================= */
+
+  const resetAll = () => {
+    setSelected(Array(items.length).fill(""));
+    setColors(items.map(() => "white"));
+    setWrongChoices([]);
+    setShowResult(false);
+    setLocked(false);
+  };
+
+  /* ================= JSX ================= */
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: "30px",
+      }}
+    >
+      <div
+        className="div-forall"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          width: "60%",
+        }}
+      >
+        <h4 className="header-title-page8">
+          <span className="ex-A">K</span> Color and circle.
+        </h4>
+
+        <div className="wb-unit9-qk-layout">
+          {items.map((item, i) => {
+            const SvgComponent = item.Svg;
+
+            return (
+              <div key={i} className={`wb-unit9-qk-item ${item.position}`}>
+                <div
+                  className="wb-unit9-qk-svg-wrapper"
+                  onClick={() => toggleColor(i)}
+                >
+                  {/* <SvgComponent
+                    className="wb-unit9-qk-svg"
+                    style={{ fill: colors[i] }}
+                  /> */}
+                  <img className="wb-unit9-qk-img" src={item.Svg} />
+                </div>
+
+                <div className="wb-unit9-qk-options">
+                  {item.options.map((opt, idx) => (
+                    <div
+                      key={idx}
+                      className={`wb-unit9-qk-option ${
+                        selected[i] === opt ? "active" : ""
+                      }`}
+                      onClick={() => handleSelect(opt, i)}
+                      style={{ position: "relative" }}
+                    >
+                      {opt}
+
+                      {showResult &&
+                        wrongChoices.includes(i) &&
+                        selected[i] === opt && (
+                          <div className="wb-unit9-qk-wrong-mark">✕</div>
+                        )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="action-buttons-container">
+        <button onClick={resetAll} className="try-again-button">
+          Start Again ↻
+        </button>
+
+        <button onClick={showAnswers} className="show-answer-btn swal-continue">
+          Show Answer
+        </button>
+
+        <button onClick={checkAnswers} className="check-button2">
+          Check Answer ✓
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default WB_Unit9_Page5_Q2;

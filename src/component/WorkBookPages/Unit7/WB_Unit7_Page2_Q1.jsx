@@ -26,7 +26,7 @@ const WB_Unit7_Page2_Q1 = () => {
   ];
 
   const [userInputs, setUserInputs] = useState({
-    1: "Open your book.",
+    1: "",
     2: "",
     3: "",
     4: "",
@@ -212,7 +212,7 @@ const WB_Unit7_Page2_Q1 = () => {
                     setUserInputs((prev) => ({ ...prev, 1: e.target.value }))
                   }
                   style={{ color: "red" }}
-                  readOnly
+                  
                 />
               </div>
 
@@ -552,7 +552,7 @@ const WB_Unit7_Page2_Q1 = () => {
             onClick={() => {
               setLines([]);
               setUserInputs({
-                1: "Open your book.",
+                1: "",
                 2: "",
                 3: "",
                 4: "",

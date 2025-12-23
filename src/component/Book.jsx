@@ -18,6 +18,7 @@ import PosterViewer from "./PosterGrammerPages/PosterGrammerPages";
 // === POPUP ===
 import Popup from "./Popup/Popup";
 import LessonNavigator from "./StudentPages/LessonNavigator";
+import teacherPdf from "../assets/Feedback Right- Interactive estudentbook G1.pdf";
 
 // === ASSETS ===
 import logo from "../assets/unit1/imgs/Page 01/PMAAlogo.svg";
@@ -393,6 +394,8 @@ export default function Book() {
     { id: 5, label: "Unit 5", start: 27, pages: 6 },
     { id: 6, label: "Unit 6", start: 33, pages: 6 },
     { id: 7, label: "Unit 7", start: 39, pages: 6 },
+    { id: 8, label: "Unit 8", start: 45, pages: 6 },
+    { id: 9, label: "Unit 9", start: 51, pages: 6 },
   ];
 
   const teacherUnits = [
@@ -507,6 +510,7 @@ export default function Book() {
         mobileTabsOpen={mobileTabsOpen}
         setMobileTabsOpen={setMobileTabsOpen}
         isMobile={isMobile}
+        teacherPdf={teacherPdf}   // 👈 جديد
       />
 
       {/* ===================== MAIN PAGE VIEW ===================== */}

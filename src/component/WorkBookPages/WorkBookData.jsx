@@ -10,6 +10,9 @@ import WB_Unit1_Page7_Q1 from "./Unit1/WB_Unit1_Page7_Q1";
 import WB_Unit1_Page8_Q1 from "./Unit1/WB_Unit1_Page8_Q1";
 import WB_Unit1_Page8_Q2 from "./Unit1/WB_Unit1_Page8_Q2";
 import WB_Unit1_Page8_Q3 from "./Unit1/WB_Unit1_Page8_Q3";
+import WB_Unit10_Page1_Q1 from "./Unit10/WB_Unit10_Page1_Q1";
+import WB_Unit10_Page1_Q2 from "./Unit10/WB_Unit10_Page1_Q2";
+import WB_Unit10_Page2_Q1 from "./Unit10/WB_Unit10_Page2_Q1";
 
 import WB_Unit2_Page1_Q1 from "./Unit2/WB_Unit2_Page1_Q1";
 import WB_Unit2_Page1_Q2 from "./Unit2/WB_Unit2_Page1_Q2";
@@ -102,6 +105,24 @@ import WB_Unit8_Page4_Q1 from "./Unit8/WB_Unit8_Page4_Q1";
 import WB_Unit8_Page4_Q2 from "./Unit8/WB_Unit8_Page4_Q2";
 import WB_Unit8_Page5_Q1 from "./Unit8/WB_Unit8_Page5_Q1";
 import WB_Unit8_Page5_Q2 from "./Unit8/WB_Unit8_Page5_Q2";
+import WB_Unit8_Page6_Q1 from "./Unit8/WB_Unit8_Page6_Q1";
+import WB_Unit8_Page6_Q2 from "./Unit8/WB_Unit8_Page6_Q2";
+import WB_Unit8_Page6_Q3 from "./Unit8/WB_Unit8_Page6_Q3";
+import WB_Unit9_Page1_Q1 from "./Unit9/WB_Unit9_Page1_Q1";
+import WB_Unit9_Page1_Q2 from "./Unit9/WB_Unit9_Page1_Q2";
+import WB_Unit9_Page2_Q1 from "./Unit9/WB_Unit9_Page2_Q1";
+import WB_Unit9_Page2_Q2 from "./Unit9/WB_Unit9_Page2_Q2";
+import WB_Unit9_Page2_Q3 from "./Unit9/WB_Unit9_Page2_Q3";
+import WB_Unit9_Page3_Q1 from "./Unit9/WB_Unit9_Page3_Q1";
+import WB_Unit9_Page3_Q2 from "./Unit9/WB_Unit9_Page3_Q2";
+import WB_Unit9_Page4_Q1 from "./Unit9/WB_Unit9_Page4_Q1";
+import WB_Unit9_Page4_Q2 from "./Unit9/WB_Unit9_Page4_Q2";
+import WB_Unit9_Page5_Q1 from "./Unit9/WB_Unit9_Page5_Q1";
+import WB_Unit9_Page5_Q2 from "./Unit9/WB_Unit9_Page5_Q2";
+import WB_Unit9_Page6_Q1 from "./Unit9/WB_Unit9_Page6_Q1";
+import WB_Unit9_Page6_Q2 from "./Unit9/WB_Unit9_Page6_Q2";
+import WB_Unit9_Page6_Q3 from "./Unit9/WB_Unit9_Page6_Q3";
+import WB_Unit9_Page6_Q4 from "./Unit9/WB_Unit9_Page6_Q4";
 
 export const workBookData = [
   { component: WB_Unit1_Page3_Q1, unit: 1 }, //0
@@ -207,5 +228,27 @@ export const workBookData = [
   { component: WB_Unit8_Page4_Q2, unit: 8 }, //93
   { component: WB_Unit8_Page5_Q1, unit: 8 }, //94
   { component: WB_Unit8_Page5_Q2, unit: 8 }, //95
+  { component: WB_Unit8_Page6_Q1, unit: 8 }, //96
+  { component: WB_Unit8_Page6_Q2, unit: 8 }, //97
+  { component: WB_Unit8_Page6_Q3, unit: 8, lastOfUnit: true }, //98
 
+  { component: WB_Unit9_Page1_Q1, unit: 9 }, //99
+  { component: WB_Unit9_Page1_Q2, unit: 9 }, //100
+  { component: WB_Unit9_Page2_Q1, unit: 9 }, //101
+  { component: WB_Unit9_Page2_Q2, unit: 9 }, //102
+  { component: WB_Unit9_Page2_Q3, unit: 9 }, //103
+  { component: WB_Unit9_Page3_Q1, unit: 9 }, //104
+  { component: WB_Unit9_Page3_Q2, unit: 9 }, //105
+  { component: WB_Unit9_Page4_Q1, unit: 9 }, //106
+  { component: WB_Unit9_Page4_Q2, unit: 9 }, //107
+  { component: WB_Unit9_Page5_Q1, unit: 9 }, //108
+  { component: WB_Unit9_Page5_Q2, unit: 9 }, //109
+  { component: WB_Unit9_Page6_Q1, unit: 9 }, //110
+  { component: WB_Unit9_Page6_Q2, unit: 9 }, //111
+  { component: WB_Unit9_Page6_Q3, unit: 9 }, //112
+  { component: WB_Unit9_Page6_Q4, unit: 9, lastOfUnit: true }, //113
+
+  { component: WB_Unit10_Page1_Q1, unit: 10 }, //114
+  { component: WB_Unit10_Page1_Q2, unit: 10 }, //115
+  { component: WB_Unit10_Page2_Q1, unit: 10 }, //116
 ];

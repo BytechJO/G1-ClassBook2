@@ -1,206 +1,239 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
+import bat from "../../../assets/unit6/imgs/U6P51EXEE-01.svg";
+import cap from "../../../assets/unit6/imgs/U6P51EXEE-02.svg";
 import ValidationAlert from "../../Popup/ValidationAlert";
-import "./WB_Unit7_Page6_Q3.css";
-import img1 from "../../../assets/unit4/imgs/U4P37EEXEE-01-01.svg";
-import img2 from "../../../assets/unit4/imgs/U4P37EEXEE-01-02.svg";
-import img3 from "../../../assets/unit4/imgs/U4P37EEXEE-02-01.svg";
-import img4 from "../../../assets/unit4/imgs/U4P37EEXEE-02-02.svg";
+import "./WB_Unit8_Page6_Q3.css";
 
-const data = [
-  {
-    parts: [
-      {
-        before: "My",
-        middleImg: img1,
-        blank: 1,
-        after: "",
-      },
-      {
-        before: "is on my",
-        middleImg: img2,
-        blank: 2,
-        after: ".",
-      },
-    ],
-    correct: ["hat", "hand"],
-  },
-  {
-    parts: [
-      {
-        before: "There is",
-        middleImg: img3,
-        blank: 1,
-        after: "",
-      },
-      {
-        before: "on the",
-        middleImg: img4,
-        blank: 2,
-        after: ".",
-      },
-    ],
-    correct: ["water", "window"],
-  },
-];
+const WB_Unit8_Page6_Q3 = () => {
+  const items = [
+    {
+      img: bat,
+      correct: "zebra",
+      correctInput: "zebra",
+      input: "",
+      options: ["zoo", "zebra"],
+    },
+    {
+      img: cap,
+      correct: "sun",
+      correctInput: "sun",
+      input: "",
+      options: ["sun", "sea"],
+    },
+    {
+      img: bat,
+      correct: "sock",
+      correctInput: "sock",
+      input: "",
+      options: ["sock", "sun"],
+    },
+    {
+      img: cap,
+      correct: "zipper",
+      correctInput: "zipper",
+      input: "",
+      options: ["zebra", "zipper"],
+    },
+  ];
 
-const WB_Unit7_Page6_Q3 = () => {
-  const [answers, setAnswers] = useState(
-    data.map((d) => Array(d.correct.length).fill(""))
-  );
+  const [selected, setSelected] = useState(Array(items.length).fill(""));
+  const [answers, setAnswers] = useState(Array(items.length).fill(""));
+
+  const [locked, setLocked] = useState(false);
   const [wrongInputs, setWrongInputs] = useState([]);
-  const [locked, setLocked] = useState(false); // ⭐ NEW — قفل التعديل بعد Show Answer
-
-  const handleChange = (value, qIndex, blankIndex) => {
-    if (locked) return; // ⭐ NEW — لا تعديل بعد Show Answer
-
-    const newAnswers = [...answers];
-    newAnswers[qIndex][blankIndex] = value;
-    setAnswers(newAnswers);
-    setWrongInputs([]);
+  const [showResult, setShowResult] = useState(false);
+  const handleSelect = (value, index) => {
+    if (locked) return; // 🔒 لا تعديل بعد show answer
+    const newSel = [...selected];
+    newSel[index] = value;
+    setSelected(newSel);
+    setShowResult(false);
   };
-  const checkAnswers = () => {
-    if (locked) return; // ⭐ NEW — لا تعديل بعد Show Answer
-    // 1) افحص إذا في أي خانة فاضية
-    const hasEmpty = answers.some((arr) =>
-      arr.some((val) => val.trim() === "")
-    );
 
-    if (hasEmpty) {
-      ValidationAlert.info("Please fill in all blanks before checking!");
+  const handleInput = (value, index) => {
+    if (locked ||showResult) return; // 🔒 لا تعديل بعد show answer
+    const newAns = [...answers];
+    newAns[index] = value;
+    setAnswers(newAns);
+    setShowResult(false);
+  };
+
+  const resetAll = () => {
+    setSelected(["", "","",""]);
+    setAnswers(["", "","",""]);
+    setWrongInputs([]);
+    setShowResult(false);
+    setLocked(false); // 🔒 قفل كل شيء
+  };
+  const showAnswers = () => {
+   
+    setSelected(items.map((item) => item.correct));
+    setAnswers(items.map((item) => item.correctInput));
+    setWrongInputs([]);
+    setShowResult(false);
+    setLocked(true);
+  };
+
+  const checkAnswers = () => {
+    if (locked ||showResult) return;
+    // 1) التشييك إذا في دائرة مش مختارة
+    if (selected.some((s) => s === "")) {
+      ValidationAlert.info("Please choose a circle (f or v) for all items!");
       return;
     }
 
-    // 2) اجمع كل الأخطاء
-    let wrong = [];
-    let correctCount = 0;
+    // 2) التشييك إذا في input فاضي
+    if (answers.some((a) => a.trim() === "")) {
+      ValidationAlert.info("Please fill in all the writing boxes!");
+      return;
+    }
 
-    answers.forEach((arr, qIndex) => {
-      arr.forEach((val, blankIndex) => {
-        if (val.trim() === data[qIndex].correct[blankIndex]) {
-          correctCount++; // صح
-        } else {
-          wrong.push(`${qIndex}-${blankIndex}`); // غلط
-        }
-      });
+    let wrong = [];
+    let score = 0;
+
+    items.forEach((item, i) => {
+      const circleCorrect = selected[i] === item.correct;
+      const inputCorrect =
+        answers[i].trim().toLowerCase() === item.correctInput.toLowerCase();
+
+      if (circleCorrect) score++;
+      if (inputCorrect) score++;
+
+      if (!circleCorrect || !inputCorrect) {
+        wrong.push(i);
+      }
     });
 
     setWrongInputs(wrong);
+    setShowResult(true);
 
-    // 3) احسب العدد الكلي للحقول
-    const totalInputs = data.reduce(
-      (acc, item) => acc + item.correct.length,
-      0
-    );
-
-    // 4) اختر اللون حسب السكور
-    let color =
-      correctCount === totalInputs
-        ? "green"
-        : correctCount === 0
-        ? "red"
-        : "orange";
+    const total = items.length * 2; // 8 نقاط
+    const color = score === total ? "green" : score === 0 ? "red" : "orange";
 
     const scoreMessage = `
-    <div style="font-size:20px; text-align:center;">
+    <div style="font-size: 20px; margin-top: 10px; text-align:center;">
       <span style="color:${color}; font-weight:bold;">
-        Score: ${correctCount} / ${totalInputs}
+        Score: ${score} / ${total}
       </span>
     </div>
   `;
-    setLocked(true); // ⭐ NEW — قفل التعديل بعد Check
-    // 5) طباعة النتيجة
-    if (correctCount === totalInputs) {
+
+    if (score === total) {
       ValidationAlert.success(scoreMessage);
-    } else if (correctCount === 0) {
+    } else if (score === 0) {
       ValidationAlert.error(scoreMessage);
     } else {
       ValidationAlert.warning(scoreMessage);
     }
   };
-  // ⭐⭐⭐ NEW — Show Answer
-  const showAnswer = () => {
-    const correctFilled = data.map((d) => [...d.correct]);
-
-    setAnswers(correctFilled); // ضع الإجابات الصحيحة
-    setWrongInputs([]); // إزالة الأخطاء
-    setLocked(true); // قفل الحقول
-  };
 
   return (
-    <div className="page8-wrapper">
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "30px",
+      }}
+    >
       <div
         className="div-forall"
         style={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-          position: "relative",
+          gap: "30px",
           width: "60%",
+          justifyContent: "flex-start",
         }}
       >
-        <h3 className="header-title-page8">
-          <span className="ex-A">C</span> Look and write. Then say.
-        </h3>
+        <h5 className="header-title-page8">
+          <span className="ex-A">C</span> Look, circle, and write.
+        </h5>
 
-        {data.map((item, qIndex) => (
-          <div className="row-missing" key={qIndex}>
-            <span className="num">{qIndex + 1}.</span>
+        <div className="question-grid-unit6-page6-q2">
+          {items.map((item, i) => (
+            <div className="question-box-wb-unit8-p6-q3" key={i}>
+              <div  style={{display:"flex",gap:"20px" }}>
+              <span
+                style={{
+                  fontSize: "22px",
+                  fontWeight: "600",
+                  color: "#1d4f7b",
+                }}
+              >
+                {i + 1}
+              </span>
+              <div className="img-option-wb-unit8-p6-q3">
+                <img
+                  src={item.img}
+                  className="q-img-unit4-page5-q1"
+                  style={{ height: "auto", width: "200px" }}
+                />
 
-            <div className="sentence-review10-p2-q3">
-              {item.parts.map((p, blankIndex) => (
-                <span
-                  key={blankIndex}
-                  className="sentence-part"
-                  style={{ display: "flex", alignItems: "center" }}
-                >
-                  {p.before}
+                {/* f / v choices */}
+                <div className="choices-unit6-page6-q2">
+                  {item.options.map((choice, idx) => (
+                    <div className="circle-wrapper" key={idx}>
+                      <div
+                        className={`circle-choice-unit6-page6-q2 ${
+                          selected[i] === choice ? "active" : ""
+                        }`}
+                        onClick={() => handleSelect(choice, i)}
+                      >
+                        {choice}
+                      </div>
 
-                  <div className="input-wrapper">
-                    <input
-                      className="missing-input-wb-unit7-p6-q3"
-                      value={answers[qIndex][blankIndex]}
-                      onChange={(e) =>
-                        handleChange(e.target.value, qIndex, blankIndex)
-                      }
-                      readOnly={locked} // ⭐ NEW — منع التعديل بعد Show Answer
-                    />
-                    {wrongInputs.includes(`${qIndex}-${blankIndex}`) && (
-                      <span className="wrong-icon-review4-p2-q1">✕</span>
-                    )}
-                  </div>
+                      {/* علامة الخطأ */}
+                      {!locked &&
+                        showResult &&
+                        selected[i] === choice &&
+                        choice !== item.correct && (
+                          <div className="wrong-mark">✕</div>
+                        )}
+                    </div>
+                  ))}
+                </div>
+              </div></div>
+              {/* writing input */}
+              <div className="input-wrapper-unit6-p6-q2">
+                {item.input}
+                <input
+                  type="text"
+                  className="write-input-unit4-page5-q1"
+                  value={answers[i]}
+                  disabled={locked}
+                  onChange={(e) => handleInput(e.target.value, i)}
+                />
 
-                  {p.after}
-                  <img src={p.middleImg} className="middle-img" alt="" />
-                </span>
-              ))}
+                {/* X فوق الإنبت إذا كانت الكلمة غلط */}
+                {!locked &&
+                  showResult &&
+                  answers[i].trim() !== "" &&
+                  answers[i].trim().toLowerCase() !==
+                    item.correctInput.toLowerCase() &&
+                  wrongInputs.includes(i) && (
+                    <div className="wrong-mark">✕</div>
+                  )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </div>{" "}
       <div className="action-buttons-container">
-        <button
-          className="try-again-button"
-          onClick={() => {
-            setAnswers(data.map((d) => Array(d.correct.length).fill("")));
-            setWrongInputs([]);
-            setLocked(false); // ⭐ NEW — فتح التعديل من جديد
-          }}
-        >
+        <button onClick={resetAll} className="try-again-button">
           Start Again ↻
         </button>
-
-        {/* ⭐⭐⭐ NEW BUTTON */}
-        <button onClick={showAnswer} className="show-answer-btn swal-continue">
+        {/* ⭐⭐⭐ NEW — زر Show Answer */}
+        <button onClick={showAnswers} className="show-answer-btn swal-continue">
           Show Answer
         </button>
-
-        <button className="check-button2" onClick={checkAnswers}>
-          Check Answers ✓
+        <button onClick={checkAnswers} className="check-button2">
+          Check Answer ✓
         </button>
       </div>
     </div>
   );
 };
 
-export default WB_Unit7_Page6_Q3;
+export default WB_Unit8_Page6_Q3;

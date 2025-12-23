@@ -1,3 +1,5 @@
+import downloadIcon from "../../../assets/unit1/imgs/Page 01/Download.svg";
+
 export default function TopNavbar({
   activeTab,
   setActiveTab,
@@ -7,6 +9,7 @@ export default function TopNavbar({
   mobileTabsOpen,
   setMobileTabsOpen,
   isMobile,
+  teacherPdf,
 }) {
   return (
     <nav className="w-full bg-white border-b shadow px-2 py-1 flex items-center justify-between relative">
@@ -34,9 +37,29 @@ export default function TopNavbar({
 
       {/* RIGHT */}
       <div className="flex items-center gap-4">
-        <span className="hidden lg:block text-[#430f68]">
-          Teacher Edition
-        </span>
+        {/* ✅ DOWNLOAD PDF — Teacher Only */}
+        {activeTab === "teacher" && (
+          <div className="tooltip-wrapper">
+            <svg
+              width="35"
+              height="35"
+              viewBox="0 0 90 90"
+              onClick={() => {
+                const link = document.createElement("a");
+                link.href = teacherPdf;
+                link.download = "Right-1-Teacher-Book.pdf";
+                link.click();
+              }}
+              className="cursor-pointer p-1 rounded-lg hover:bg-purple-100 transition"
+            >
+              <image href={downloadIcon} x="0" y="0" width="90" height="90" />
+            </svg>
+
+            <span className="tooltip-text">Download Teacher PDF</span>
+          </div>
+        )}
+
+        <span className="hidden lg:block text-[#430f68]">Teacher Edition</span>
 
         {isMobile && (
           <svg

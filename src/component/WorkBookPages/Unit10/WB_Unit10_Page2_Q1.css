@@ -1,0 +1,150 @@
+/* ================== WRAPPER ================== */
+.exercise-wrapper-wb-unit10-p2-q1 {
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+  font-family: "Arial", sans-serif;
+  color: #1d4f7b;
+}
+
+/* ================== TITLE ================== */
+.header-title-page8-wb-unit10-p2-q1 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.ex-A-wb-unit10-p2-q1 {
+  background: #6ec1e4;
+  color: white;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================== QUESTION ROW ================== */
+.question-row-wb-unit10-p2-q1 {
+  display: grid;
+  grid-template-columns: 30px 1fr 3fr 1fr 3fr;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+/* ================== NUMBER ================== */
+.num-wb-unit10-p2-q1 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* ================== IMAGE ================== */
+.question-row-wb-unit10-p2-q1 img {
+  width: 90px;
+  height: 150px;
+}
+
+/* ================== SPEECH BUBBLE ================== */
+.speech-wb-unit10-p2-q1 {
+  border: 2px solid #333;
+  border-radius: 14px;
+  padding: 10px 14px;
+  position: relative;
+  font-size: 16px;
+  line-height: 1.6;
+  background: white;
+}
+
+/* LEFT bubble tail */
+.question-row-wb-unit10-p2-q1 .speech-wb-unit10-p2-q1::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 22px;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 12px solid #333;
+}
+
+/* RIGHT bubble tail */
+.question-row-wb-unit10-p2-q1:nth-child(even)
+  .speech-wb-unit10-p2-q1::before {
+  left: auto;
+  right: -12px;
+  border-right: none;
+  border-left: 12px solid #333;
+}
+
+/* ================== INPUT LINE ================== */
+.line-input-wb-unit10-p2-q1 {
+  border: none;
+  border-bottom: 2px solid #333;
+  outline: none;
+  font-size: 16px;
+  min-width: 180px;
+  padding: 2px 4px;
+  background: transparent;
+}
+
+.line-input-wb-unit10-p2-q1.small-wb-unit10-p2-q1 {
+  min-width: 90px;
+  text-align: center;
+}
+
+.line-input-wb-unit10-p2-q1:disabled {
+  color: #1d4f7b;
+}
+
+/* ================== ACTION BUTTONS ================== */
+.action-buttons-container-wb-unit10-p2-q1 {
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.try-again-button-wb-unit10-p2-q1,
+.show-answer-btn-wb-unit10-p2-q1,
+.check-button2-wb-unit10-p2-q1 {
+  padding: 10px 18px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.try-again-button-wb-unit10-p2-q1 {
+  background: #f3f3f3;
+  color: #333;
+}
+
+.show-answer-btn-wb-unit10-p2-q1 {
+  background: #6ec1e4;
+  color: white;
+}
+
+.check-button2-wb-unit10-p2-q1 {
+  background: #1d4f7b;
+  color: white;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 900px) {
+  .question-row-wb-unit10-p2-q1 {
+    grid-template-columns: 30px 1fr;
+    gap: 10px;
+  }
+
+  .speech-wb-unit10-p2-q1::before {
+    display: none;
+  }
+}
